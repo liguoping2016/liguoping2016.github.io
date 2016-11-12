@@ -1,12 +1,567 @@
-extends partial/layout
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>前端小博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="为了学习前端知识">
+<meta property="og:type" content="website">
+<meta property="og:title" content="前端小博客">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="前端小博客">
+<meta property="og:description" content="为了学习前端知识">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端小博客">
+<meta name="twitter:description" content="为了学习前端知识">
+  
+    <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
 
-block header
-    include partial/header
+</head>
 
-block container
-    include mixins/posts
-    +home()
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="null" class="js-avatar">
+			
+		</a>
 
-block pagination
-    include mixins/paginator
-    +home()
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lgp</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">lgp</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="null" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lgp</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        
+  
+    <article id="post-React-native" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/12/React-native/">React native</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#React Native</p>
+<p>##安装<br><a href="http://brew.sh/" target="_blank" rel="external">Homebrew</a>，Mac系统的包管理器，用于安装NodeJS和一些其他必需的工具软件。</p>
+<pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre><p><a href="https://nodejs.org/en/" target="_blank" rel="external">Node</a></p>
+<pre><code>brew install node
+</code></pre><p><a href="http://reactnative.cn/docs/0.37/getting-started.html" target="_blank" rel="external">React Native</a>  命令</p>
+<pre><code>npm install -g yarn react-native-cli
+</code></pre><p>如果你看到EACCES: permission denied这样的权限报错，那么请参照上文的homebrew译注，修复/usr/local目录的所有权：</p>
+<pre><code>sudo chown -R `whoami` /usr/local
+</code></pre><p><a href="https://facebook.github.io/watchman/docs/install.html" target="_blank" rel="external">Watchman</a>  由Facebook提供的监视文件系统变更的工具</p>
+<pre><code>brew install watchman
+</code></pre><p>##测试安装<br>推荐使用WebStorm或Sublime Text来编写React Native应用</p>
+<pre><code>react-native init AwesomeProject
+cd AwesomeProject
+react-native run-ios
+</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/06/12/React-native/" class="archive-article-date">
+  	<time datetime="2016-06-12T06:07:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-12</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-about-javascript-gif" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/07/about-javascript-gif/">javascript gif</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#JavaScript</p>
+<p>####javaScript总结<br>javascript变量.gif</p>
+<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/TzogpE6Jx**lSkTamX0*oCdcEyUHWR3lQfwB0Rt9Z8U!/m/dHcBAAAAAAAA&amp;bo=8gORBgAAAAABB0Y!&amp;rf=photolist" alt=""></p>
+<p>javascript函数基础.gif</p>
+<p><img src="http://a2.qpic.cn/psb?/V114g1aN2g6PRw/H7UKcZ2DkURk6fUgLskz9chzAoWw7d1EM.BZ0v9FxYI!/m/dAkBAAAAAAAA&amp;bo=hgM0BgAAAAABB5c!&amp;rf=photolist" alt=""></p>
+<p>javascript流程控制.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/.D2wdl9wbOkaH0Gfwof7kh2C3DXNgKBaW4URL2a.yfE!/m/dAoBAAAAAAAA&amp;bo=gAIkBgAAAAABB4A!&amp;rf=photolist" alt=""></p>
+<p>javascript数据类型.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/tGqgTyic9FedB0MX93NZujWzuhqy6P*uteJRYfX96rs!/m/dAoBAAAAAAAA&amp;bo=gAIQCAAAAAABB7o!&amp;rf=photolist" alt=""></p>
+<p>javascript 数组.gif</p>
+<p><img src="http://a1.qpic.cn/psb?/V114g1aN2g6PRw/nCyxujKEXJdNXlotZCbO0QkVniIzeSQGI3RTGB2oRV0!/m/dHwBAAAAAAAA&amp;bo=gAJXBAAAAAABB*E!&amp;rf=photolist" alt=""></p>
+<p>javascript 运算符.gif</p>
+<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/ial92bpUZCz.sJLxTtlal9yzbJQu3sew2dgJ8qrA5Jg!/m/dI8AAAAAAAAA&amp;bo=gALBCgAAAAABB2k!&amp;rf=photolist" alt=""></p>
+<p>javascript 正则表达式.gif</p>
+<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/bsuh9gTiXx8E3fJbguj3UwR.m9775VlLTyD177PaWLk!/m/dHcBAAAAAAAA&amp;bo=gAINBgAAAAABB6k!&amp;rf=photolist" alt=""></p>
+<p>javascript 字符串函数.gif</p>
+<p><img src="http://a1.qpic.cn/psb?/V114g1aN2g6PRw/TNNJBCpKSPV*N1JlJFJEJGXX9N4p*WUNLLmywT2NoYg!/m/dHABAAAAAAAA&amp;bo=gALaBQAAAAABB30!&amp;rf=photolist" alt=""></p>
+<p>javascript Window对象.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/DTXRqVU1w8dsiW*leCv4hyG81Qi4FwkQUwOnvINpb7o!/m/dAoBAAAAAAAA&amp;bo=gAISBQAAAAABB7U!&amp;rf=photolist" alt=""></p>
+<p>javascript DOM基本操作.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/4L4mRVbRqLEBBB6lmXU0rDfdr0NSM87mDXFOgs6x0IQ!/m/dH4BAAAAAAAA&amp;bo=gALSCgAAAAABB3o!&amp;rf=photolist" alt=""></p>
+<p>希望这几张图能对你有所帮助</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/03/07/about-javascript-gif/" class="archive-article-date">
+  	<time datetime="2016-03-07T03:33:29.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-03-07</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-blog-building" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/04/blog-building/">blog building</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#GitHub博客搭建<br><strong>GitHub</strong>，上传<em>hexo</em>博客搭建过程</p>
+<h2 id="安装-nodeJS"><a href="#安装-nodeJS" class="headerlink" title="安装  nodeJS"></a>安装  nodeJS</h2><p>nodeJS官网网址:<a href="http://nodejs.org/en/" target="_blank" rel="external">http://nodejs.org/en/</a></p>
+<p>测试nodeJS是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node -v</div></pre></td></tr></table></figure></p>
+<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装  hexo"></a>安装  hexo</h2><p>####安装命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo -g</div></pre></td></tr></table></figure></p>
+<p>####测试nodeJS是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo</div></pre></td></tr></table></figure></p>
+<p>####创建目录并进入<br>初始化hexo目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init</div></pre></td></tr></table></figure></p>
+<p>启动本地服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
+<h2 id="GitGub账号一枚"><a href="#GitGub账号一枚" class="headerlink" title="GitGub账号一枚"></a>GitGub账号一枚</h2><p>####配置ssh-key<br>连续三次回测<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen</div></pre></td></tr></table></figure></p>
+<p>复制ssh-key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim~/.ssh/id rsa.pub</div></pre></td></tr></table></figure></p>
+<p>github设置ssh黏贴</p>
+<p>####配置github与本地机器验证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;&quot;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;&quot;</div></pre></td></tr></table></figure>
+<p>####新建博客域名仓库<br>用户名 .github.io</p>
+<p>##config<br>deplay字段</p>
+<p>type:git</p>
+<p>repo:域名仓库https地址</p>
+<p>##发布<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deplayer-git --save</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
+<p>##新建项目标题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bolog $ hexo project</div></pre></td></tr></table></figure></p>
+<p>进入source中找到该文件夹，进去Mou中书写格式（偏好设置）</p>
+<p>##在博客中设置主题背景<br>网址：<a href="http://www.zhihu.com/question/24422335/answer/46357100" target="_blank" rel="external">http://www.zhihu.com/question/24422335/answer/46357100</a></p>
+<p>####具体操作：</p>
+<ul>
+<li>命令终端找到themes文件</li>
+<li>终端命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone 主题网址</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例：git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="external">https://github.com/A-limon/pacman.git</a></p>
+<ul>
+<li>命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ls </div><div class="line">``` </div><div class="line">找到下载的文件夹，将其复制到_config.yml中，themes:复制名</div><div class="line">* 启动终端命令</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>hexo server<br>```<br>回到[发布]流程重新输入命令</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/02/04/blog-building/" class="archive-article-date">
+  	<time datetime="2016-02-04T03:17:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/19/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/01/19/hello-world/" class="archive-article-date">
+  	<time datetime="2016-01-19T03:17:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 lgp
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: true,
+		isPost: false,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
