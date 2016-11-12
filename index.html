@@ -1,10 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>前端小博客</title>
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="lgp">
+  
+  
   <meta name="description" content="为了学习前端知识">
 <meta property="og:type" content="website">
 <meta property="og:title" content="前端小博客">
@@ -15,63 +20,64 @@
 <meta name="twitter:title" content="前端小博客">
 <meta name="twitter:description" content="为了学习前端知识">
   
-    <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="前端小博客" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
   <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 </head>
+
 <body>
-  <div id="container">
-    <div class="mobile-nav-panel">
-	<i class="icon-reorder icon-large"></i>
-</div>
-<header id="header">
-	<h1 class="blog-title">
-		<a href="/">前端小博客</a>
-	</h1>
-	<nav class="nav">
-		<ul>
-			<li><a href="/">Home</a></li><li><a href="/archives">Archives</a></li>
-			<li><a id="nav-search-btn" class="nav-icon" title="Search"></a></li>
-			<li><a href="/atom.xml" id="nav-rss-link" class="nav-icon" title="RSS Feed"></a></li>
-		</ul>
-	</nav>
-	<div id="search-form-wrap">
-		<form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-	</div>
-</header>
-    <div id="main">
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">前端小博客</a></h1>
+    <p><a href="/"></a></p>
+  </div>
+  <nav class="nav">
+    <ul>
       
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content">
+
+
+
+
   
-    <article id="post-hello-world" class="post">
-	<footer class="entry-meta-header">
-		<span class="meta-elements date">
-			<a href="/2016/11/12/hello-world/" class="article-date">
-  <time datetime="2016-11-12T01:36:16.000Z" itemprop="datePublished">2016-11-12</time>
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/11/12/hello-world/">
+  <time datetime="2016-11-12T01:36:16.000Z">
+    2016-11-12
+  </time>
 </a>
-		</span>
-		<span class="meta-elements author">lgp</span>
-		<div class="commentscount">
-			
-		</div>
-	</footer>
-	
-	<header class="entry-header">
-		
+    
+    
   
-    <h1 itemprop="name" class="entry-title">
-      <a class="article-title" href="/2016/11/12/hello-world/">Hello World</a>
-    </h1>
+    <h1 class="title"><a href="/2016/11/12/hello-world/">Hello World</a></h1>
   
 
-	</header>
-	<div class="entry-content">
-		
-    	<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+  </header>
+  
+  <div class="entry">
+    
+      <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
@@ -82,55 +88,53 @@
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
     
-	</div>
-	<footer class="entry-footer">
-		<div class="entry-meta-footer">
-			<span class="category">
-				
-			</span>
-			<span class="tags">
-				
-			</span>
-		</div>
-	</footer>
-	
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
 </article>
 
 
-	<hr class="article-devider">
-
-
-
-  
   
 
-    </div>
-    <div class="mb-search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:yoursite.com">
-  </form>
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+
 </div>
-<footer id="footer">
-	<h1 class="footer-blog-title">
-		<a href="/">前端小博客</a>
-	</h1>
-	<span class="copyright">
-		&copy; 2016 lgp<br>
-		Modify from <a href="http://sanographix.github.io/tumblr/apollo/" target="_blank">Apollo</a> theme, designed by <a href="http://www.sanographix.net/" target="_blank">SANOGRAPHIX.NET</a><br>
-		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-	</span>
-</footer>
-    
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">lgp</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
 
 
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
 
-
-<script src="/js/script.js"></script>
-  </div>
 </body>
 </html>
