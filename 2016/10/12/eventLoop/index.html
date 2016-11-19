@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>eventLoop | 前端小博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="事件循环Node.js 事件循环一: 浅析理解事件循环系列第一步 浅析和总览
+多数的网站不需要大量计算，程序花费的时间主要集中在磁盘 I/O 和网络 I/O 上面
+SSD读取很快，但和CPU处理指令的速度比起来也不在一个数量级上，而且网络上一个数据包来回的时间更慢：一个数据包来回的延迟平均320ms(我网速慢，ping国内网站会更快)，这段时间内一个普通 cpu 执行几千万个周期应该没问题
+因此异">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eventLoop">
+<meta property="og:url" content="http://yoursite.com/2016/10/12/eventLoop/index.html">
+<meta property="og:site_name" content="前端小博客">
+<meta property="og:description" content="事件循环Node.js 事件循环一: 浅析理解事件循环系列第一步 浅析和总览
+多数的网站不需要大量计算，程序花费的时间主要集中在磁盘 I/O 和网络 I/O 上面
+SSD读取很快，但和CPU处理指令的速度比起来也不在一个数量级上，而且网络上一个数据包来回的时间更慢：一个数据包来回的延迟平均320ms(我网速慢，ping国内网站会更快)，这段时间内一个普通 cpu 执行几千万个周期应该没问题
+因此异">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/ping.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-00.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-01.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-03.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-04.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-05.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-06.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-08.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-09.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-10.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-11.png">
+<meta property="og:updated_time" content="2016-11-19T12:20:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="eventLoop">
+<meta name="twitter:description" content="事件循环Node.js 事件循环一: 浅析理解事件循环系列第一步 浅析和总览
+多数的网站不需要大量计算，程序花费的时间主要集中在磁盘 I/O 和网络 I/O 上面
+SSD读取很快，但和CPU处理指令的速度比起来也不在一个数量级上，而且网络上一个数据包来回的时间更慢：一个数据包来回的延迟平均320ms(我网速慢，ping国内网站会更快)，这段时间内一个普通 cpu 执行几千万个周期应该没问题
+因此异">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/ping.png">
+  
+    <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lgp</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">lgp</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lgp</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-eventLoop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      eventLoop
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h1><h2 id="Node-js-事件循环一-浅析"><a href="#Node-js-事件循环一-浅析" class="headerlink" title="Node.js 事件循环一: 浅析"></a>Node.js 事件循环一: 浅析</h2><pre><code>理解事件循环系列第一步 浅析和总览
+</code></pre><p>多数的网站不需要大量计算，程序花费的时间主要集中在磁盘 I/O 和网络 I/O 上面</p>
+<p>SSD读取很快，但和CPU处理指令的速度比起来也不在一个数量级上，而且网络上一个数据包来回的时间更慢：<br><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/ping.png" alt=""><br>一个数据包来回的延迟平均320ms(我网速慢，ping国内网站会更快)，这段时间内一个普通 cpu 执行几千万个周期应该没问题</p>
+<p>因此异步IO就要发挥作用了，比如用多线程，如果用 Java 去读一个文件，这是一个阻塞的操作，在等待数据返回的过程中什么也干不了，因此就开一个新的线程来处理文件读取，读取操作结束后再去通知主线程。</p>
+<p>这样虽然行得通，但是代码写起来比较麻烦。像 Node.js V8 这种无法开一个线程的怎么办？</p>
+<p>先看下面函数执行过程</p>
+<h3 id="栈-Stack"><a href="#栈-Stack" class="headerlink" title="栈 Stack"></a>栈 Stack</h3><p>当我们调用一个函数，它的地址、参数、局部变量都会压入到一个 stack 中</p>
+<pre><code>function fire() {
+    const result = sumSqrt(3, 4)
+    console.log(result);
+}
+function sumSqrt(x, y) {
+    const s1 = square(x)
+    const s2 = square(y)
+    const sum = s1 + s2;
+    return Math.sqrt(sum)
+}
+function square(x) {
+       return x * x;
+}
+
+fire()
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">下面的图都是用 keynote 做的 keynote地址</div></pre></td></tr></table></figure>
+<p>函数 fire 首先被调用</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-00.png" alt=""></p>
+<p>fire 调用 sumSqrt 函数 参数为3和4</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-01.png" alt=""></p>
+<p>之后调用 square 参数为 x, x==3</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-02.png" alt=""></p>
+<p>当 square 执行结束返回时，从 stack 中弹出，并将返回值赋值给 s1<br>s1加入到 sumSqrt 的 stack frame 中</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-03.png" alt=""></p>
+<p>以同样的方式调用下一个 square 函数</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-04.png" alt=""><br><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-05.png" alt=""></p>
+<p>在下一行的表达式中计算出 s1+s2 并赋值给 sum</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-06.png" alt=""></p>
+<p>之后调用 Math.sqrt 参数为sum</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-07.png" alt=""></p>
+<p>现在就剩下 sumSqrt 函数返回计算结果了</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-08.png" alt=""></p>
+<p>返回值赋值给 result</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-09.png" alt=""><br>在 console 中打印出 result</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-10.png" alt=""></p>
+<p>最终 fire 没有任何返回值 从stack中弹出 stack也清空了</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-11.png" alt=""></p>
+<p>当函数执行完毕后本地变量会从 stack 中弹出，这只有在使用 numbers string boolean 这种基本数据类型时才会发生。而对象、数组的值是存在于 heap(堆) 中的，stack 只存放了他们对应的指针。</p>
+<p>当函数之行结束从 stack 中弹出来时，只有对象的指针被弹出，而真正的值依然存在 heap 中，然后由垃圾回收器自动的清理回收。</p>
+<h3 id="事件循环-1"><a href="#事件循环-1" class="headerlink" title="事件循环"></a>事件循环</h3><p>通过一个例子来了解函数的执行顺序</p>
+<pre><code>&apos;use strict&apos;
+
+const express = require(&apos;express&apos;)
+const superagent = require(&apos;superagent&apos;)
+const app = express()
+
+app.get(&apos;/&apos;, getArticle)
+
+function getArticle(req, res) {
+       fetchArticle(req, res)
+    print()
+}
+
+const aids = [4564824, 4506868, 4767667, 4856099, 7456996];
+
+function fetchArticle(req, res) {
+    const aid = aids[Math.floor(Math.random() * aids.length)]
+    superagent.get(`http://news-at.zhihu.com/api/4/news/${aid}`)
+        .end((err, res) =&gt; {
+            if(err) {
+                console.log(&apos;error ......&apos;);
+                return res.status(500).send(&apos;an error ......&apos;)
+                }
+            const article = res.body
+            res.send(article)
+            console.log(&apos;Got an article&apos;)
+        })
+
+    console.log(&apos;Now is fetching an article&apos;)
+}
+
+function print(){
+    console.log(&apos;Print something&apos;)
+}
+
+
+app.listen(&apos;5000&apos;)
+</code></pre><p>请求 <a href="http://localhost:5000/" target="_blank" rel="external">http://localhost:5000/</a> 后打印出</p>
+<pre><code>Now is fetching an article
+
+Print something
+
+Got an article
+</code></pre><p>虽然 V8 是单线程的，但底层的 C++ API 却不是。这意味着当我们执行一些非阻塞的操作，Node会调用一些代码，与引擎里的js代码同时执行。一旦这个隐藏的线程收到了等待的返回值或者抛出一个异常，之前提供的回调函数就会执行。</p>
+<p>上面的说的Node调用的一些代码其实就是 <a href="https://github.com/libuv/libuv" target="_blank" rel="external">libuv</a>，一个开源的跨平台的异步 I/O 。最初就是为 Node.js 开发的，现在<a href="https://github.com/libuv/libuv/wiki/Projects-that-use-libuv" target="_blank" rel="external">很多项目</a>都在用</p>
+<h4 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h4><p>javascript 是单线程事件驱动的语言，那我们可以给时间添加监听器，当事件触发时，监听器就能执行回调函数。</p>
+<p>当我们去调用 <code>setTimeout</code> <code>http.get</code> <code>fs.readFile</code>, Node.js 会把这些定时器、http、IO操作发送给另一个线程以保证V8继续执行我们的代码。</p>
+<p>然而我们只有一个主线程和一个 call-stack ，这样当一个读取文件的操作还在执行时，有一个网络请求request过来，那这时他的回调就需要等stack变空才能执行。</p>
+<p>回调函数正在等待轮到自己执行所排的队就被称为任务队列(或者事件队列、消息队列)。每当主线程完成前一个任务，回调函数就会在一个无限循环圈里被调用，因此这个圈被称为事件循环。</p>
+<p>我们前面那个获取文章的例子的执行顺序就会如下：</p>
+<ol>
+<li>express 给 request 事件注册了一个 handler，并且当请求到达路径 ‘/‘ 时来触发handler</li>
+<li>调过各个函数并且在端口 5000 上启动监听</li>
+<li>stack 为空，等待 request 事件触发</li>
+<li>根据传入的请求，事件触发，express 调用之前提供的函数<code>getArticle</code></li>
+<li><code>getArticle</code> 压入(push) stack</li>
+<li><code>fetchArticle</code> 被调用 同时压入 stack</li>
+<li><code>Math.floor</code> 和 <code>Math.random</code> 被调用压入 stack 然后再 弹出(pop), 从 aids 里面取出的一个值被赋值给变量 aid</li>
+<li><code>superagent.get</code> 被执行，参数为 <code>&#39;http://news-at.zhihu.com/api/4/news/${aid}&#39;</code> ,并且回调函数注册给了 <code>end</code> 事件</li>
+<li>到 <code>http://news-at.zhihu.com/api/4/news/${aid}</code> 的HTTP请求被发送到后台线程，然后函数继续往下执行</li>
+<li><code>&#39;Now is fetching an article&#39;</code> 打印在 <code>console</code> 中。 函数 <code>fetchArticle</code> 返回</li>
+<li><code>print</code> 函数被调用, <code>&#39;Print something&#39;</code> 打印在 <code>console</code> 中</li>
+<li>函数 <code>getArticle</code> 返回，并从 stack 中弹出， stack 为空</li>
+<li>等待 <code>http://news-at.zhihu.com/api/4/news/${aid}</code> 发送相应信息</li>
+<li>响应信息到达，<code>end</code> 事件被触发</li>
+<li>注册给 <code>end</code> 事件的匿名回调函数被执行，这个匿名函数和他闭包中的所有变量压入 <code>stack</code>，这意味着这个匿名函数可以访问并修改 <code>express</code>, <code>superagent</code>, <code>app</code>,<code>aids</code>, <code>req</code>, <code>res</code>, <code>aid</code>的值以及之前所有已经定义的函数</li>
+<li>函数 <code>res.send()</code> 伴随着 200 或 500 的状态码被执行，但同时又被放入到后台线程中，因此 响应流 不会阻塞我们函数的执行。匿名函数也被 pop 出 stack。</li>
+</ol>
+<h3 id="Microtasks-Macrotasks"><a href="#Microtasks-Macrotasks" class="headerlink" title="Microtasks Macrotasks"></a>Microtasks Macrotasks</h3><hr>
+<p>任务队列不止一个，还有 microtasks 和 macrotasks</p>
+<h6 id="microtasks"><a href="#microtasks" class="headerlink" title="microtasks:"></a>microtasks:</h6><ul>
+<li>process.nextTick</li>
+<li>promise</li>
+<li>Object.observe</li>
+</ul>
+<h6 id="macrotasks"><a href="#macrotasks" class="headerlink" title="macrotasks:"></a>macrotasks:</h6><ul>
+<li>setTimeout</li>
+<li>setInterval</li>
+<li>setImmediate</li>
+<li><p>I/O<br>这两个的详细区别下一篇再写，先看一段代码</p>
+<p>  console.log(‘start’)</p>
+<p>  const interval = setInterval(() =&gt; {  </p>
+<pre><code>console.log(&apos;setInterval&apos;)
+</code></pre><p>  }, 0)</p>
+<p>  setTimeout(() =&gt; {  </p>
+<pre><code>console.log(&apos;setTimeout 1&apos;)
+ Promise.resolve()
+ .then(() =&gt; {
+   console.log(&apos;promise 3&apos;)
+ })
+ .then(() =&gt; {
+   console.log(&apos;promise 4&apos;)
+ })
+ .then(() =&gt; {
+   setTimeout(() =&gt; {
+         console.log(&apos;setTimeout 2&apos;)
+     Promise.resolve()
+         .then(() =&gt; {
+           console.log(&apos;promise 5&apos;)
+         })
+         .then(() =&gt; {
+           console.log(&apos;promise 6&apos;)
+         })
+         .then(() =&gt; {
+           clearInterval(interval)
+         })
+   }, 0)
+ })
+</code></pre><p>  }, 0)</p>
+<p>  Promise.resolve()</p>
+<pre><code>.then(() =&gt; {  
+    console.log(&apos;promise 1&apos;)
+})
+.then(() =&gt; {
+        console.log(&apos;promise 2&apos;)
+})
+</code></pre></li>
+</ul>
+<p>理解了node的事件循环还是比较容易得出答案的：</p>
+<pre><code>start
+promise 1
+promise 2
+setInterval
+setTimeout 1
+promise 3
+promise 4
+setInterval
+setTimeout 
+promise 5
+promise 6
+</code></pre><p>根据 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#task-queue" target="_blank" rel="external">WHATVG</a> 的说明，在一个事件循环的周期(cycle)中一个 (macro)task 应该从 macrotask 队列开始执行。当这个 macrotask 结束后，所有的 microtasks 将在同一个 cycle 中执行。在 microtasks 执行时还可以加入更多的 microtask，然后一个一个的执行，直到 microtask 队列清空。</p>
+<p>规范理解起来有点晦涩，来看下上面的例子</p>
+<h5 id="Cycle-1"><a href="#Cycle-1" class="headerlink" title="Cycle 1"></a>Cycle 1</h5><p>1) <code>setInterval</code> 被列为 task</p>
+<p>2) <code>setTimeout 1</code> 被列为 task</p>
+<p>3) <code>Promise.resolve 1</code> 中两个 then 被列为 microtask</p>
+<p>4) stack 清空 microtasks 执行</p>
+<p>任务队列： <code>setInterval</code> <code>setTimeout 1</code></p>
+<h5 id="Cycle-2"><a href="#Cycle-2" class="headerlink" title="Cycle 2"></a>Cycle 2</h5><p>5) microtasks 队列清空 setInteval 的回调可以执行。另一个 <code>setInterval</code> 被列为 task , 位于 <code>setTimeout 1</code> 后面</p>
+<p>任务队列： <code>setTimeout 1</code> <code>setInterval</code></p>
+<h5 id="Cycle-3"><a href="#Cycle-3" class="headerlink" title="Cycle 3"></a>Cycle 3</h5><p>6) microtask 队列清空，<code>setTimeout 1</code> 的回调可以执行，<code>promise 3</code> 和 <code>`promise 4 被列为</code>microtasks`</p>
+<p>7) <code>promise 3</code> 和 <code>promise 4</code> 执行。 <code>setTimeout 2</code> 被列为 task</p>
+<p>任务队列 <code>setInterval</code> <code>setTimeout 2</code></p>
+<h5 id="Cycle-4"><a href="#Cycle-4" class="headerlink" title="Cycle 4"></a>Cycle 4</h5><p>8) microtask 队列清空 <code>setInteval</code> 的回调可以执行。然后另一个 <code>setInterval</code> 被列为 task ，位于 <code>setTimeout 2</code> 后面</p>
+<p>任务队列： <code>setTimeout 2</code> <code>setInterval</code></p>
+<p>9) <code>setTimeout 2</code>的回调执行，<code>promise 5</code> 和 <code>promise 6</code> 被列为 microtasks</p>
+<p>现在 <code>promise 5</code> 和<code>promise 6</code> 的回调应该执行，并且 clear 掉 <code>interval</code>。 但有的时候不知道为什么 setInterval 还会在执行一遍，变成下面结果</p>
+<pre><code>...
+setTimeout 2
+setInterval
+promise 5
+promise 6
+</code></pre><p>但是把上面的代码放入 chrome console 中执行却没有问题。这一点还要再根据不同的 node版本 查一下。</p>
+<p>引自：<a href="https://github.com/ccforward/cc/issues/47****" target="_blank" rel="external">https://github.com/ccforward/cc/issues/47</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/12/eventLoop/" class="archive-article-date">
+  	<time datetime="2016-10-12T11:53:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-12</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/10/19/javascript/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          javascript
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/05/react/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">react</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="eventLoop" data-title="eventLoop" data-url="http://yoursite.com/2016/10/12/eventLoop/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 lgp
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

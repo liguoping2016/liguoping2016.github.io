@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>前端小博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="为了学习前端知识">
+<meta property="og:type" content="website">
+<meta property="og:title" content="前端小博客">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="前端小博客">
+<meta property="og:description" content="为了学习前端知识">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端小博客">
+<meta name="twitter:description" content="为了学习前端知识">
+  
+    <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lgp</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">lgp</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lgp</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        
+  
+    <article id="post-Express" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/28/Express/">Express</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Express"><a href="#Express" class="headerlink" title="Express"></a>Express</h1><h2 id="Express-应用生成器"><a href="#Express-应用生成器" class="headerlink" title="Express 应用生成器"></a>Express 应用生成器</h2><p>通过应用生成器工具 express 可以快速创建一个应用的骨架。<br>通过如下命令安装：</p>
+<pre><code>$ npm install express-generator -g
+</code></pre><p>-h 选项可以列出所有可用的命令行选项：</p>
+<pre><code>$ express -h
+
+      Usage: express [options] [dir]
+
+          Options:
+
+           -h, --help          output usage information
+        -V, --version       output the version number
+            -e, --ejs           add ejs engine support (defaults to jade)
+        --hbs           add handlebars engine support
+        -H, --hogan         add hogan.js engine support
+        -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
+        --git           add .gitignore
+        -f, --force         force on non-empty directory
+</code></pre><p>例如，下面的示例就是在当前工作目录下创建一个命名为 myapp 的应用。<br>    个命名为 myapp 的应用。</p>
+<pre><code>$ express myapp
+
+       create : myapp
+       create : myapp/package.json
+       create : myapp/app.js
+       create : myapp/public
+       create : myapp/public/javascripts
+       create : myapp/public/images
+       create : myapp/routes
+       create : myapp/routes/index.js
+       create : myapp/routes/users.js
+       create : myapp/public/stylesheets
+       create : myapp/public/stylesheets/style.css
+       create : myapp/views
+       create : myapp/views/index.jade
+       create : myapp/views/layout.jade
+       create : myapp/views/error.jade
+       create : myapp/bin
+       create : myapp/bin/www
+</code></pre><p>然后安装所有依赖包：</p>
+<pre><code>$ cd myapp 
+$ npm install
+</code></pre><p>启动这个应用（MacOS 或 Linux 平台）：</p>
+<pre><code>$ DEBUG=myapp npm start
+</code></pre><p>Windows 平台使用如下命令：</p>
+<pre><code>&gt; set DEBUG=myapp &amp; npm start
+</code></pre><p>然后在浏览器中打开 <a href="http://localhost:3000/" target="_blank" rel="external">http://localhost:3000/</a> 网址就可以看到这个应用了。i</p>
+<p>通过 Express 应用生成器创建的应用一般都有如下目录结构：</p>
+<pre><code>.
+├── app.js
+├── bin
+│   └── www
+├── package.json
+├── public
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
+├── routes
+│   ├── index.js
+│   └── users.js
+└── views
+        ├── error.jade
+    ├── index.jade
+    └── layout.jade
+
+7 directories, 9 files
+</code></pre><h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>路由是指如何定义应用的端点（URIs）以及如何响应客户端的请求。</p>
+<p>路由是由一个 URI、HTTP 请求（GET、POST等）和若干个句柄组成，它的结构如下： app.METHOD(path, [callback…], callback)， app 是 express 对象的一个实例， METHOD 是一个 HTTP 请求方法， path 是服务器上的路径， callback 是当路由匹配时要执行的函数。</p>
+<p>下面是一个基本的路由示例：</p>
+<pre><code>var express = require(&apos;express&apos;);
+var app = express();
+
+// respond with &quot;hello world&quot; when a GET request is made to the homepage
+app.get(&apos;/&apos;, function(req, res) {
+      res.send(&apos;hello world&apos;);
+});
+</code></pre><h3 id="路由方法"><a href="#路由方法" class="headerlink" title="路由方法"></a>路由方法</h3><p>路由方法源于 HTTP 请求方法，和 express 实例相关联。</p>
+<p>下面这个例子展示了为应用跟路径定义的 GET 和 POST 请求：</p>
+<pre><code>// GET method route
+app.get(&apos;/&apos;, function (req, res) {
+      res.send(&apos;GET request to the homepage&apos;);
+});
+
+// POST method route
+    app.post(&apos;/&apos;, function (req, res) {
+      res.send(&apos;POST request to the homepage&apos;);
+});
+</code></pre><p>Express 定义了如下和 HTTP 请求对应的路由方法： get, post, put, head, delete, options, trace, copy, lock, mkcol, move, purge, propfind, proppatch, unlock, report, mkactivity, checkout, merge, m-search, notify, subscribe, unsubscribe, patch, search, 和 connect。</p>
+<p><code>有些路由方法名不是合规的 JavaScript 变量名，此时使用括号记法，比如： app[&#39;m-search&#39;](&#39;/&#39;, function ...</code></p>
+<p>app.all() 是一个特殊的路由方法，没有任何 HTTP 方法与其对应，它的作用是对于一个路径上的所有请求加载中间件。</p>
+<p>在下面的例子中，来自 “/secret” 的请求，不管使用 GET、POST、PUT、DELETE 或其他任何 <a href="https://nodejs.org/api/http.html#http_http_methods" target="_blank" rel="external">http 模块</a>支持的 HTTP 请求，句柄都会得到执行。</p>
+<pre><code>app.all(&apos;/secret&apos;, function (req, res, next) {
+      console.log(&apos;Accessing the secret section ...&apos;);
+      next(); // pass control to the next handler
+});
+</code></pre><h3 id="路由路径"><a href="#路由路径" class="headerlink" title="路由路径"></a>路由路径</h3><p>路由路径和请求方法一起定义了请求的端点，它可以是字符串、字符串模式或者正则表达式。</p>
+<p><code>Express 使用 path-to-regexp 匹配路由路径，请参考文档查阅所有定义路由路径的方法。 Express Route Tester 是测试基本 Express 路径的好工具，但不支持模式匹配。</code><br><code>查询字符串不是路由路径的一部分。</code></p>
+<p>使用字符串的路由路径示例：</p>
+<pre><code>// 匹配根路径的请求
+app.get(&apos;/&apos;, function (req, res) {
+      res.send(&apos;root&apos;);
+});
+
+// 匹配 /about 路径的请求
+app.get(&apos;/about&apos;, function (req, res) {
+      res.send(&apos;about&apos;);
+});
+
+// 匹配 /random.text 路径的请求
+app.get(&apos;/random.text&apos;, function (req, res) {
+      res.send(&apos;random.text&apos;);
+});
+</code></pre><p>使用字符串模式的路由路径示例：</p>
+<pre><code>// 匹配 acd 和 abcd
+    app.get(&apos;/ab?cd&apos;, function(req, res) {
+      res.send(&apos;ab?cd&apos;);
+});
+
+// 匹配 abcd、abbcd、abbbcd等
+app.get(&apos;/ab+cd&apos;, function(req, res) {
+      res.send(&apos;ab+cd&apos;);
+});
+
+// 匹配 abcd、abxcd、abRABDOMcd、ab123cd等
+app.get(&apos;/ab*cd&apos;, function(req, res) {
+      res.send(&apos;ab*cd&apos;);
+});
+
+// 匹配 /abe 和 /abcde
+app.get(&apos;/ab(cd)?e&apos;, function(req, res) {
+     res.send(&apos;ab(cd)?e&apos;);
+});
+</code></pre><p><code>字符 ?、+、* 和 () 是正则表达式的子集，- 和 . 在基于字符串的路径中按照字面值解释。</code></p>
+<p>使用正则表达式的路由路径示例：</p>
+<pre><code>// 匹配任何路径中含有 a 的路径：
+app.get(/a/, function(req, res) {
+      res.send(&apos;/a/&apos;);
+});
+
+// 匹配 butterfly、dragonfly，不匹配 butterflyman、    dragonfly man等
+app.get(/.*fly$/, function(req, res) {
+      res.send(&apos;/.*fly$/&apos;);
+});
+</code></pre><h3 id="路由句柄"><a href="#路由句柄" class="headerlink" title="路由句柄"></a>路由句柄</h3><p>可以为请求处理提供多个回调函数，其行为类似 中间件。唯一的区别是这些回调函数有可能调用 next(‘route’) 方法而略过其他路由回调函数。可以利用该机制为路由定义前提条件，如果在现有路径上继续执行没有意义，则可将控制权交给剩下的路径。</p>
+<p>路由句柄有多种形式，可以是一个函数、一个函数数组，或者是两者混合，如下所示.</p>
+<p>使用一个回调函数处理路由：</p>
+<pre><code>app.get(&apos;/example/a&apos;, function (req, res) {
+      res.send(&apos;Hello from A!&apos;);
+});
+</code></pre><p>使用多个回调函数处理路由（记得指定 next 对象）：</p>
+<pre><code>app.get(&apos;/example/b&apos;, function (req, res, next) {
+      console.log(&apos;response will be sent by the next function ...&apos;);
+  next();
+}, function (req, res) {
+      res.send(&apos;Hello from B!&apos;);
+});
+</code></pre><p>使用回调函数数组处理路由：</p>
+<pre><code>var cb0 = function (req, res, next) {
+      console.log(&apos;CB0&apos;);
+      next();
+}
+
+var cb1 = function (req, res, next) {
+      console.log(&apos;CB1&apos;);
+      next();
+}
+
+var cb2 = function (req, res) {
+      res.send(&apos;Hello from C!&apos;);
+}
+
+app.get(&apos;/example/c&apos;, [cb0, cb1, cb2]);
+</code></pre><p>混合使用函数和函数数组处理路由：</p>
+<pre><code>var cb0 = function (req, res, next) {
+     console.log(&apos;CB0&apos;);
+      next();
+}
+
+var cb1 = function (req, res, next) {
+      console.log(&apos;CB1&apos;);
+      next();
+}
+
+app.get(&apos;/example/d&apos;, [cb0, cb1], function (req, res,     next) {
+     console.log(&apos;response will be sent by the next function ...&apos;);
+  next();
+}, function (req, res) {
+      res.send(&apos;Hello from D!&apos;);
+});
+</code></pre><h3 id="响应方法"><a href="#响应方法" class="headerlink" title="响应方法"></a>响应方法</h3><p>下表中响应对象（res）的方法向客户端返回响应，终结请求响应的循环。如果在路由句柄中一个方法也不调用，来自客户端的请求会一直挂起。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>res.download()</td>
+<td>提示下载文件。</td>
+</tr>
+<tr>
+<td>res.end()</td>
+<td>终结响应处理流程。</td>
+</tr>
+<tr>
+<td>res.json()</td>
+<td>发送一个 JSON 格式的响应。</td>
+</tr>
+<tr>
+<td>res.jsonp()</td>
+<td>发送一个支持 JSONP 的 JSON 格式的响应。</td>
+</tr>
+<tr>
+<td>res.redirect()</td>
+<td>重定向请求。</td>
+</tr>
+<tr>
+<td>res.render()</td>
+<td>渲染视图模板。</td>
+</tr>
+<tr>
+<td>res.send()</td>
+<td>发送各种类型的响应。</td>
+</tr>
+<tr>
+<td>res.sendFile</td>
+<td>以八位字节流的形式发送文件。</td>
+</tr>
+<tr>
+<td>res.sendStatus()</td>
+<td>设置响应状态代码，并将其以字符串形式作为响应体的一部分发送。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="app-route"><a href="#app-route" class="headerlink" title="app.route()"></a>app.route()</h4><p>可使用 app.route() 创建路由路径的链式路由句柄。由于路径在一个地方指定，这样做有助于创建模块化的路由，而且减少了代码冗余和拼写错误。请参考 Router() 文档 了解更多有关路由的信息。</p>
+<p>下面这个示例程序使用 app.route() 定义了链式路由句柄。</p>
+<pre><code>app.route(&apos;/book&apos;)
+      .get(function(req, res) {
+    res.send(&apos;Get a random book&apos;);
+  })
+  .post(function(req, res) {
+    res.send(&apos;Add a book&apos;);
+  })
+  .put(function(req, res) {
+    res.send(&apos;Update the book&apos;);
+  });
+</code></pre><h4 id="express-Router"><a href="#express-Router" class="headerlink" title="express.Router"></a>express.Router</h4><p>可使用 express.Router 类创建模块化、可挂载的路由句柄。Router 实例是一个完整的中间件和路由系统，因此常称其为一个 “mini-app”。</p>
+<p>下面的实例程序创建了一个路由模块，并加载了一个中间件，定义了一些路由，并且将它们挂载至应用的路径上。</p>
+<p>在 app 目录下创建名为 birds.js 的文件，内容如下：</p>
+<pre><code>var express = require(&apos;express&apos;);
+var router = express.Router();
+
+// 该路由使用的中间件
+router.use(function timeLog(req, res, next) {
+      console.log(&apos;Time: &apos;, Date.now());
+  next();
+});
+// 定义网站主页的路由
+router.get(&apos;/&apos;, function(req, res) {
+      res.send(&apos;Birds home page&apos;);
+});
+// 定义 about 页面的路由
+router.get(&apos;/about&apos;, function(req, res) {
+      res.send(&apos;About birds&apos;);
+});
+
+module.exports = router;
+</code></pre><p>然后在应用中加载路由模块：</p>
+<pre><code>var birds = require(&apos;./birds&apos;);
+...
+app.use(&apos;/birds&apos;, birds);
+</code></pre><p>应用即可处理发自 /birds 和 /birds/about 的请求，并且调用为该路由指定的 timeLog 中间件。</p>
+<h2 id="在-Express-中使用模板引擎"><a href="#在-Express-中使用模板引擎" class="headerlink" title="在 Express 中使用模板引擎"></a>在 Express 中使用模板引擎</h2><p>需要在应用中进行如下设置才能让 Express 渲染模板文件：</p>
+<ul>
+<li>views, 放模板文件的目录，比如： app.set(‘views’, ‘./views’)</li>
+<li>view engine, 模板引擎，比如： app.set(‘view engine’, ‘jade’)</li>
+</ul>
+<p>然后安装相应的模板引擎 npm 软件包。</p>
+<pre><code>$ npm install jade --save
+</code></pre><p><code>和 Express 兼容的模板引擎，比如 Jade，通过 res.render() 调用其导出方法 __express(filePath, options, callback) 渲染模板。
+有一些模板引擎不遵循这种约定，Consolidate.js 能将 Node 中所有流行的模板引擎映射为这种约定，这样就可以和 Express 无缝衔接。</code></p>
+<p>一旦 view engine 设置成功，就不需要显式指定引擎，或者在应用中加载模板引擎模块，Express 已经在内部加载，如下所示。</p>
+<pre><code>app.set(&apos;view engine&apos;, &apos;jade&apos;);
+</code></pre><p>在 views 目录下生成名为 index.jade 的 Jade 模板文件，内容如下：</p>
+<pre><code>html
+      head
+        title!= title
+      body
+        h1!= message
+</code></pre><p>然后创建一个路由渲染 index.jade 文件。如果没有设置 view engine，您需要指明视图文件的后缀，否则就会遗漏它。</p>
+<pre><code>app.get(&apos;/&apos;, function (req, res) {
+      res.render(&apos;index&apos;, { title: &apos;Hey&apos;, message: &apos;Hello there!&apos;});
+});
+</code></pre><p>此时向主页发送请求，“index.jade” 会被渲染为 HTML。</p>
+<h2 id="集成数据库"><a href="#集成数据库" class="headerlink" title="集成数据库"></a>集成数据库</h2><p>为 Express 应用添加连接数据库的能力，只需要加载相应数据库的 Node.js 驱动即可。这里将会简要介绍如何为 Express 应用添加和使用一些常用的数据库 Node 模块。</p>
+<ul>
+<li>Cassandra</li>
+<li>CouchDB</li>
+<li>LevelDB</li>
+<li>MySQL</li>
+<li>MongoDB</li>
+<li>Neo4j</li>
+<li>PostgreSQL</li>
+<li>Redis</li>
+<li>SQLite</li>
+<li>ElasticSearch</li>
+</ul>
+<p><code>这些数据库驱动只是其中一部分，可在 npm 官网 查找更多驱动。</code></p>
+<h3 id="Cassandra"><a href="#Cassandra" class="headerlink" title="Cassandra"></a>Cassandra</h3><h5 id="模块-cassandra-driver"><a href="#模块-cassandra-driver" class="headerlink" title="模块: cassandra-driver"></a>模块:<a href="https://github.com/datastax/nodejs-driver" target="_blank" rel="external"> cassandra-driver</a></h5><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><pre><code>$ npm install cassandra-driver
+</code></pre><h6 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h6><pre><code>var cassandra = require(&apos;cassandra-driver&apos;);
+var client = new cassandra.Client({ contactPoints: [&apos;localhost&apos;]});
+
+client.execute(&apos;select key from system.local&apos;, function(err, result) {
+      if (err) throw err;
+      console.log(result.rows[0]);
+});
+</code></pre><h3 id="CouchDB"><a href="#CouchDB" class="headerlink" title="CouchDB"></a>CouchDB</h3><h5 id="模块-nano"><a href="#模块-nano" class="headerlink" title="模块: nano"></a>模块: <a href="https://github.com/dscape/nano" target="_blank" rel="external">nano</a></h5><h5 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h5><pre><code>$ npm install nano
+</code></pre><h6 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h6><pre><code>var nano = require(&apos;nano&apos;)(&apos;http://localhost:5984&apos;);
+nano.db.create(&apos;books&apos;);
+var books = nano.db.use(&apos;books&apos;);
+
+//Insert a book document in the books database
+books.insert({name: &apos;The Art of war&apos;}, null, function(err, body) {
+      if (!err){
+        console.log(body);
+      }
+});
+
+//Get a list of all books
+books.list(function(err, body){
+      console.log(body.rows);
+}
+</code></pre><h3 id="LevelDB"><a href="#LevelDB" class="headerlink" title="LevelDB"></a>LevelDB</h3><h5 id="模块-levelup"><a href="#模块-levelup" class="headerlink" title="模块: levelup"></a>模块: <a href="https://github.com/Level/levelup" target="_blank" rel="external">levelup</a></h5><h5 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h5><pre><code>$ npm install level levelup leveldown
+</code></pre><p>######示例</p>
+<pre><code>var levelup = require(&apos;levelup&apos;);
+var db = levelup(&apos;./mydb&apos;);
+
+db.put(&apos;name&apos;, &apos;LevelUP&apos;, function (err) {
+
+      if (err) return console.log(&apos;Ooops!&apos;, err);
+          db.get(&apos;name&apos;, function (err, value) {
+    if (err) return console.log(&apos;Ooops!&apos;, err);
+        console.log(&apos;name=&apos; + value)
+      });
+
+});
+</code></pre><h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h5 id="模块-mysql"><a href="#模块-mysql" class="headerlink" title="模块: mysql"></a>模块: <a href="https://github.com/mysqljs/mysql" target="_blank" rel="external">mysql</a></h5><h5 id="安装-3"><a href="#安装-3" class="headerlink" title="安装"></a>安装</h5><pre><code>$ npm install mysql
+</code></pre><h6 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h6><pre><code>var mysql      = require(&apos;mysql&apos;);
+var connection = mysql.createConnection({
+      host     : &apos;localhost&apos;,
+      user     : &apos;dbuser&apos;,
+      password : &apos;s3kreee7&apos;
+});
+
+connection.connect();
+
+connection.query(&apos;SELECT 1 + 1 AS solution&apos;, function(err, rows, fields) {
+      if (err) throw err;
+          console.log(&apos;The solution is: &apos;, rows[0].solution);
+    });
+
+connection.end();
+</code></pre><h3 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h3><h5 id="模块-mongoskin"><a href="#模块-mongoskin" class="headerlink" title="模块: mongoskin"></a>模块: <a href="https://github.com/kissjs/node-mongoskin" target="_blank" rel="external">mongoskin</a></h5><h5 id="安装-4"><a href="#安装-4" class="headerlink" title="安装"></a>安装</h5><pre><code>$ npm install mongoskin
+</code></pre><h6 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h6><pre><code>var db = require(&apos;mongoskin&apos;).db(&apos;localhost:27017/animals&apos;);
+
+db.collection(&apos;mamals&apos;).find().toArray(function(err, result) {
+      if (err) throw err;
+      console.log(result);
+});
+</code></pre><p>If you want a object model driver for MongoDB, checkout <a href="https://github.com/Automattic/mongoose" target="_blank" rel="external">Mongoose</a>.</p>
+<h3 id="Neo4j"><a href="#Neo4j" class="headerlink" title="Neo4j"></a>Neo4j</h3><h5 id="模块-apoc"><a href="#模块-apoc" class="headerlink" title="模块: apoc"></a>模块: <a href="https://github.com/hacksparrow/apoc" target="_blank" rel="external">apoc</a></h5><h5 id="安装-5"><a href="#安装-5" class="headerlink" title="安装"></a>安装</h5><pre><code>$ npm install apoc
+</code></pre><h6 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h6><pre><code>var apoc = require(&apos;apoc&apos;);
+
+apoc.query(&apos;match (n) return n&apos;).exec().then(
+      function (response) {
+        console.log(response);
+      },
+      function (fail) {
+            console.log(fail);
+      }
+);
+</code></pre><h3 id="PostgreSQL"><a href="#PostgreSQL" class="headerlink" title="PostgreSQL"></a>PostgreSQL</h3><h5 id="模块-pg"><a href="#模块-pg" class="headerlink" title="模块: pg"></a>模块: <a href="https://github.com/brianc/node-postgres" target="_blank" rel="external">pg</a></h5><h5 id="安装-6"><a href="#安装-6" class="headerlink" title="安装"></a>安装</h5><pre><code>$ npm install pg
+</code></pre><h6 id="示例-5"><a href="#示例-5" class="headerlink" title="示例"></a>示例</h6><pre><code>var pg = require(&apos;pg&apos;);
+var conString = &quot;postgres://username:password@localhost/database&quot;;
+
+pg.connect(conString, function(err, client, done) {
+
+      if (err) {
+        return console.error(&apos;error fetching client from pool&apos;, err);
+      }
+      client.query(&apos;SELECT $1::int AS number&apos;, [&apos;1&apos;], function(err, result) {
+            done();
+        if (err) {
+             return console.error(&apos;error running query&apos;, err);
+        }
+        console.log(result.rows[0].number);
+      });
+
+});
+</code></pre><h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h5 id="模块-redis"><a href="#模块-redis" class="headerlink" title="模块: redis"></a>模块: <a href="https://github.com/NodeRedis/node_redis" target="_blank" rel="external">redis</a></h5><h5 id="安装-7"><a href="#安装-7" class="headerlink" title="安装"></a>安装</h5><pre><code>$ npm install redis
+</code></pre><h6 id="示例-6"><a href="#示例-6" class="headerlink" title="示例"></a>示例</h6><pre><code>var client = require(&apos;redis&apos;).createClient();
+
+client.on(&apos;error&apos;, function (err) {
+      console.log(&apos;Error &apos; + err);
+});
+
+client.set(&apos;string key&apos;, &apos;string val&apos;, redis.print);
+client.hset(&apos;hash key&apos;, &apos;hashtest 1&apos;, &apos;some value&apos;, redis.print);
+client.hset([&apos;hash key&apos;, &apos;hashtest 2&apos;, &apos;some other value&apos;], redis.print);
+
+client.hkeys(&apos;hash key&apos;, function (err, replies) {
+
+     console.log(replies.length + &apos; replies:&apos;);
+      replies.forEach(function (reply, i) {
+        console.log(&apos;    &apos; + i + &apos;: &apos; + reply);
+      });
+
+      client.quit();
+
+});
+</code></pre><h3 id="SQLite"><a href="#SQLite" class="headerlink" title="SQLite"></a>SQLite</h3><h5 id="模块-sqlite3"><a href="#模块-sqlite3" class="headerlink" title="模块:sqlite3"></a>模块:<a href="https://github.com/mapbox/node-sqlite3" target="_blank" rel="external">sqlite3</a></h5><h5 id="安装-8"><a href="#安装-8" class="headerlink" title="安装"></a>安装</h5><pre><code>$ npm install sqlite3
+</code></pre><h6 id="示例-7"><a href="#示例-7" class="headerlink" title="示例"></a>示例</h6><pre><code>var sqlite3 = require(&apos;sqlite3&apos;).verbose();
+var db = new sqlite3.Database(&apos;:memory:&apos;);
+
+db.serialize(function() {
+
+  db.run(&apos;CREATE TABLE lorem (info TEXT)&apos;);
+  var stmt = db.prepare(&apos;INSERT INTO lorem VALUES (?)&apos;);
+
+ for (var i = 0; i &lt; 10; i++) {
+    stmt.run(&apos;Ipsum &apos; + i);
+ }
+
+  stmt.finalize();
+
+  db.each(&apos;SELECT rowid AS id, info FROM lorem&apos;, function(err,     row) {
+    console.log(row.id + &apos;: &apos; + row.info);
+      });
+});
+
+db.close();
+</code></pre><h3 id="ElasticSearch"><a href="#ElasticSearch" class="headerlink" title="ElasticSearch"></a>ElasticSearch</h3><h5 id="模块-elasticsearch"><a href="#模块-elasticsearch" class="headerlink" title="模块: elasticsearch"></a>模块: <a href="https://github.com/elastic/elasticsearch-js" target="_blank" rel="external">elasticsearch</a></h5><h5 id="安装-9"><a href="#安装-9" class="headerlink" title="安装"></a>安装</h5><pre><code>$ npm install elasticsearch
+</code></pre><h6 id="示例-8"><a href="#示例-8" class="headerlink" title="示例"></a>示例</h6><pre><code>var elasticsearch = require(&apos;elasticsearch&apos;);
+var client = elasticsearch.Client({
+      host: &apos;localhost:9200&apos;  
+});
+
+client.search({
+      index: &apos;books&apos;,
+      type: &apos;book&apos;,
+      body: {
+        query: {
+             multi_match: {
+                query: &apos;express js&apos;,
+                fields: [&apos;title&apos;, &apos;description&apos;]
+              }
+        }
+      }
+}).then(function(response) {
+      var hits = response.hits.hits;
+}, function(error) {
+      console.trace(error.message);
+});
+</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/06/28/Express/" class="archive-article-date">
+  	<time datetime="2016-06-28T06:02:04.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-28</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-React-native" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/12/React-native/">React native</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="React-Native"><a href="#React-Native" class="headerlink" title="React Native"></a>React Native</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="http://brew.sh/" target="_blank" rel="external">Homebrew</a>，Mac系统的包管理器，用于安装NodeJS和一些其他必需的工具软件。</p>
+<pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre><p><a href="https://nodejs.org/en/" target="_blank" rel="external">Node</a></p>
+<pre><code>brew install node
+</code></pre><p><a href="http://reactnative.cn/docs/0.37/getting-started.html" target="_blank" rel="external">React Native</a>  命令</p>
+<pre><code>npm install -g yarn react-native-cli
+</code></pre><p>如果你看到EACCES: permission denied这样的权限报错，那么请参照上文的homebrew译注，修复/usr/local目录的所有权：</p>
+<pre><code>sudo chown -R `whoami` /usr/local
+</code></pre><p><a href="https://facebook.github.io/watchman/docs/install.html" target="_blank" rel="external">Watchman</a>  由Facebook提供的监视文件系统变更的工具</p>
+<pre><code>brew install watchman
+</code></pre><h2 id="测试安装"><a href="#测试安装" class="headerlink" title="测试安装"></a>测试安装</h2><p>推荐使用WebStorm或Sublime Text来编写React Native应用</p>
+<pre><code>react-native init AwesomeProject
+cd AwesomeProject
+react-native run-ios
+</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/06/12/React-native/" class="archive-article-date">
+  	<time datetime="2016-06-12T06:07:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-12</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flex" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/24/flex/">flex</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Flex-布局语法教程"><a href="#Flex-布局语法教程" class="headerlink" title="Flex 布局语法教程"></a>Flex 布局语法教程</h1><p>网页布局（layout）是CSS的一个重点应用。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/7bf8bed24a17fbebd3e171f9630dbccb.gif" alt=""><br>布局的传统解决方案，基于<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model" target="_blank" rel="external">盒状模型</a>，依赖 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display" target="_blank" rel="external">display</a>属性 + <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position" target="_blank" rel="external">position</a>属性 + <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float" target="_blank" rel="external">float</a>属性。它对于那些特殊布局非常不方便，比如，<a href="https://css-tricks.com/centering-css-complete-guide/" target="_blank" rel="external">垂直居中</a>就不容易实现。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/5a7d00514af1e464221c677c15e8e990.png" alt=""><br>2009年，W3C提出了一种新的方案—-Flex布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/8712d713c7d0b884a5cb9770efc422b4.jpg" alt="">Flex布局将成为未来布局的首选方案。本文介绍Flex布局的语法。<br>以下内容主要参考了下面两篇文章：<a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="external">A Complete Guide to Flexbox</a>和 <a href="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties" target="_blank" rel="external">A Visual Guide to CSS3 Flexbox Properties</a>。</p>
+<h2 id="一、Flex布局是什么？"><a href="#一、Flex布局是什么？" class="headerlink" title="一、Flex布局是什么？"></a>一、Flex布局是什么？</h2><p>Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</p>
+<p>任何一个容器都可以指定为Flex布局</p>
+<pre><code>.box{
+      display: flex;
+}
+</code></pre><p>行内元素也可以使用Flex布局。</p>
+<pre><code>.box{
+      display: inline-flex;
+}
+</code></pre><p>Webkit内核的浏览器，必须加上-webkit前缀。</p>
+<pre><code>.box{
+      display: -webkit-flex; /* Safari */
+      display: flex;
+}
+</code></pre><p>注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。</p>
+<h2 id="二、基本概念"><a href="#二、基本概念" class="headerlink" title="二、基本概念"></a>二、基本概念</h2><p>采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目（flex item），简称”项目”。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/3791e575c48b3698be6a94ae1dbff79d.png" alt=""><br>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。<br>项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。</p>
+<h2 id="三、容器的属性"><a href="#三、容器的属性" class="headerlink" title="三、容器的属性"></a>三、容器的属性</h2><p>以下6个属性设置在容器上</p>
+<ul>
+<li>flex-direction</li>
+<li>flex-wrap</li>
+<li>flex-flow</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>align-content</li>
+</ul>
+<h3 id="3-1-flex-direction属性"><a href="#3-1-flex-direction属性" class="headerlink" title="3.1 flex-direction属性"></a>3.1 flex-direction属性</h3><p>flex-direction属性决定主轴的方向（即项目的排列方向）。</p>
+<pre><code>.box {
+      flex-direction: row | row-reverse | column |         column-reverse;
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/0cbe5f8268121114e87d0546e53cda6e.png" alt=""><br>它可能有4个值。</p>
+<ul>
+<li>row（默认值）：主轴为水平方向，起点在左端。</li>
+<li>row-reverse：主轴为水平方向，起点在右端。</li>
+<li>column：主轴为垂直方向，起点在上沿。</li>
+<li>column-reverse：主轴为垂直方向，起点在下沿。</li>
+</ul>
+<h3 id="3-2-flex-wrap属性"><a href="#3-2-flex-wrap属性" class="headerlink" title="3.2 flex-wrap属性"></a>3.2 flex-wrap属性</h3><p>默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/903d5b7df55779c03f2687a7d4d6bcea.png" alt=""></p>
+<pre><code>.box{
+     flex-wrap: nowrap | wrap | wrap-reverse;
+}
+</code></pre><p>它可能取三个值。<br>（1）nowrap（默认）：不换行。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/9da1f23965756568b4c6ea7124db7b9a.png" alt=""><br>（2）wrap：换行，第一行在上方。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/3c6b3c8b8fe5e26bca6fb57538cf72d9.jpg" alt=""><br>（3）wrap-reverse：换行，第一行在下方。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/fb4cf2bab8b6b744b64f6d7a99cd577c.jpg" alt=""></p>
+<h3 id="3-3-flex-flow"><a href="#3-3-flex-flow" class="headerlink" title="3.3 flex-flow"></a>3.3 flex-flow</h3><p>flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。</p>
+<pre><code>.box {
+      flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;
+}
+</code></pre><h3 id="3-4-justify-content属性"><a href="#3-4-justify-content属性" class="headerlink" title="3.4 justify-content属性"></a>3.4 justify-content属性</h3><p>justify-content属性定义了项目在主轴上的对齐方式。</p>
+<pre><code>.box {
+      justify-content: flex-start | flex-end | center | space-between | space-around;
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/c55dfe8e3422458b50e985552ef13ba5.png" alt=""><br>它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。</p>
+<ul>
+<li>flex-start（默认值）：左对齐</li>
+<li>flex-end：右对齐</li>
+<li>center： 居中</li>
+<li>space-between：两端对齐，项目之间的间隔都相等。</li>
+<li>space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</li>
+</ul>
+<h3 id="3-5-align-items属性"><a href="#3-5-align-items属性" class="headerlink" title="3.5 align-items属性"></a>3.5 align-items属性</h3><p>align-items属性定义项目在交叉轴上如何对齐。</p>
+<pre><code>.box {
+      align-items: flex-start | flex-end | center | baseline | stretch;
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/2b0c39c7e7a80d5a784c8c2ca63cde17.png" alt=""><br>它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。</p>
+<ul>
+<li>flex-start：交叉轴的起点对齐。</li>
+<li>flex-end：交叉轴的终点对齐。</li>
+<li>center：交叉轴的中点对齐。</li>
+<li>baseline: 项目的第一行文字的基线对齐。</li>
+<li>stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。</li>
+</ul>
+<h3 id="3-6-align-content属性"><a href="#3-6-align-content属性" class="headerlink" title="3.6 align-content属性"></a>3.6 align-content属性</h3><p>align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。<br>    .box {<br>          align-content: flex-start | flex-end | center | space-between | space-around | stretch;<br>    }<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/f10918ccb8a13247c9d47715a2bd2c33.png" alt=""><br>该属性可能取6个值。</p>
+<ul>
+<li>flex-start：与交叉轴的起点对齐。</li>
+<li>flex-end：与交叉轴的终点对齐。</li>
+<li>center：与交叉轴的中点对齐。</li>
+<li>space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。</li>
+<li>space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</li>
+<li>stretch（默认值）：轴线占满整个交叉轴。</li>
+</ul>
+<h3 id="4-1-order属性"><a href="#4-1-order属性" class="headerlink" title="4.1 order属性"></a>4.1 order属性</h3><p>order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。</p>
+<pre><code>.item {
+      order: &lt;integer&gt;;
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/59e399c72daafcfcc20ede36bf32f266.png" alt=""></p>
+<h3 id="4-2-flex-grow属性"><a href="#4-2-flex-grow属性" class="headerlink" title="4.2 flex-grow属性"></a>4.2 flex-grow属性</h3><p>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</p>
+<pre><code>.item {
+      flex-grow: &lt;number&gt;; /* default 0 */
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/f41c08bb35962ed79e7686f735d6cd78.png" alt=""></p>
+<p>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
+<h3 id="4-3-flex-shrink属性"><a href="#4-3-flex-shrink属性" class="headerlink" title="4.3 flex-shrink属性"></a>4.3 flex-shrink属性</h3><p>flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
+<pre><code>.item {
+     flex-shrink: &lt;number&gt;; /* default 1 */
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/240d3e960043a729bb3ff5e34987904f.jpg" alt=""></p>
+<p>如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。<br>负值对该属性无效。</p>
+<h3 id="4-4-flex-basis属性"><a href="#4-4-flex-basis属性" class="headerlink" title="4.4 flex-basis属性"></a>4.4 flex-basis属性</h3><p>flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。</p>
+<pre><code>.item {
+      flex-basis: &lt;length&gt; | auto; /* default auto */
+}
+</code></pre><p>它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。</p>
+<h3 id="4-5-flex属性"><a href="#4-5-flex属性" class="headerlink" title="4.5 flex属性"></a>4.5 flex属性</h3><p>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</p>
+<pre><code>.item {
+      flex: none | [ &lt;&apos;flex-grow&apos;&gt; &lt;&apos;flex-shrink&apos;&gt;? || &lt;&apos;flex-basis&apos;&gt; ]
+}
+</code></pre><p>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。<br>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
+<h3 id="4-6-align-self属性"><a href="#4-6-align-self属性" class="headerlink" title="4.6 align-self属性"></a>4.6 align-self属性</h3><p>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</p>
+<pre><code>.item {
+      align-self: auto | flex-start | flex-end | center | baseline | stretch;
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/55b19171b8b6b9487d717bf2ecbba6de.png" alt=""></p>
+<p>该属性可能取6个值，除了auto，其他都与align-items属性完全一致。<br>来源：<br><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/05/24/flex/" class="archive-article-date">
+  	<time datetime="2016-05-24T12:55:57.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-05-24</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-javascriptObject" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/08/javascriptObject/">javascriptObject</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript面向对象核心知识归纳"><a href="#JavaScript面向对象核心知识归纳" class="headerlink" title="JavaScript面向对象核心知识归纳"></a>JavaScript面向对象核心知识归纳</h1><h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>1.面向对象就是使用对象。面向对象开发就是使用对象开发。</li>
+<li>2.面向过程就是用过程的方式进行开发。面向对象是对面向过程的封装。</li>
+</ul>
+<h3 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h3><h5 id="抽象性"><a href="#抽象性" class="headerlink" title="抽象性"></a>抽象性</h5><p>所谓的抽象性就是：如果需要一个对象描述数据，需要抽取这个对象的核心数据</p>
+<ul>
+<li>1.提出需要的核心属性和方法</li>
+<li>2.不在特定的环境下无法明确对象的具体意义</li>
+</ul>
+<h5 id="封装性"><a href="#封装性" class="headerlink" title="封装性"></a>封装性</h5><p>对象是将数据与功能组合到一起，即封装</p>
+<ul>
+<li>1.JS对象就是键值对的集合，键值如果是数据（基本数据、符合数据、空数据）就称为属性，如果键值是函数那么就称为方法</li>
+<li>2.对象就是将属性与方法封装起来</li>
+<li>3.方法是将过程封装起来</li>
+</ul>
+<h5 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h5><p>所谓继承性就是自己没有但是别人有，拿过来成为自己的，就是继承，继承是实现复用的一种手段</p>
+<ul>
+<li>在Java等语言中继承满足一个class的规则，类是一个class，他规定了一个对象有什么属性和方法。</li>
+<li>在这些语言中继承是class之间的继承，一个class继承另一个class，那么该class就有了另一个class的成员，那么由该class创建出来的对象就同时具有两个class的成员。</li>
+</ul>
+<p>在JS中没有明确的继承语法（ES6提供了class extend语法），一般都是按照继承的理念实现对象的成员扩充实现继承，因此JS中实现继承的方法非常对多。</p>
+<p>传统继承基于类，JS继承基于对象</p>
+<p>一个简单的继承模式：混入（mix）</p>
+<pre><code>function mix ( o1, o2 ) {
+    for ( var k in o2 ) {
+        o1[ k ] = o2[ k ];
+    }    
+}
+</code></pre><h3 id="关于面向对象的一些其他概念"><a href="#关于面向对象的一些其他概念" class="headerlink" title="关于面向对象的一些其他概念"></a>关于面向对象的一些其他概念</h3><h5 id="类class：在JS中就是构造函数"><a href="#类class：在JS中就是构造函数" class="headerlink" title="类class：在JS中就是构造函数"></a>类<code>class</code>：在<code>JS</code>中就是构造函数</h5><ul>
+<li>在传统的面向对象语言中，使用一个叫类的东西定义模板，然后使用模板创建对象。</li>
+<li>在构造方法中也具有类似的功能，因此也称其为类</li>
+</ul>
+<h5 id="实例-instance-与对象（object）"><a href="#实例-instance-与对象（object）" class="headerlink" title="实例(instance)与对象（object）"></a>实例(<code>instance</code>)与对象（<code>object</code>）</h5><ul>
+<li>实例一般是指某一个构造函数创建出来的对象，我们称为XXXX 构造函数的实例</li>
+<li>实例就是对象。对象是一个泛称</li>
+<li>实例与对象是一个近义词</li>
+</ul>
+<h5 id="键值对与属性和方法"><a href="#键值对与属性和方法" class="headerlink" title="键值对与属性和方法"></a>键值对与属性和方法</h5><ul>
+<li>在JS中键值对的集合称为对象</li>
+<li>如果值为数据（非函数），就称该键值对为属性</li>
+<li>如果值为函数（方法），就称该键值对为方法method</li>
+<li><h5 id="父类与子类（基类和派生类）"><a href="#父类与子类（基类和派生类）" class="headerlink" title="父类与子类（基类和派生类）"></a>父类与子类（基类和派生类）</h5></li>
+<li><p>传统的面向对象语言中使用类来实现继承那么就有父类、子类的概念</p>
+</li>
+<li>父类又称为基类，子类又称为派生类</li>
+<li>在JS中没有类的概念，在JS中常常称为父对象，子对象，基对象，派生对象。</li>
+</ul>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><h4 id="构造函数是干什么用的"><a href="#构造函数是干什么用的" class="headerlink" title="构造函数是干什么用的"></a>构造函数是干什么用的</h4><ul>
+<li>初始化数据的</li>
+<li>在JS中给对象添加属性用的，初始化属性值用的</li>
+</ul>
+<h4 id="创建对象的过程"><a href="#创建对象的过程" class="headerlink" title="创建对象的过程"></a>创建对象的过程</h4><ul>
+<li>1.代码：var p = new Person();</li>
+<li>2.首先运算符new创建了一个对象，类似于{}，是一个没有任何（自定义）成员的对象。<ul>
+<li>使用 new 创建对象，那么对象的类型就是创建他的构造函数名</li>
+<li>使用{}无论如何都是Object类型，相当于 new Object</li>
+</ul>
+</li>
+<li>3.然后调用构造函数，为其初始化成员<ul>
+<li>构造函数在调用的一开始，有一个赋值操作，即this = 刚刚创建出来的对象。</li>
+<li>因此在构造函数中this表示刚刚创建出来的对象。</li>
+</ul>
+</li>
+<li>4.在构造函数中 利用 对象的动态特性 为其对象添加成员。</li>
+</ul>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><h4 id="什么是作用域"><a href="#什么是作用域" class="headerlink" title="什么是作用域"></a>什么是作用域</h4><p>域表示的就是范围，即作用域，就是一个名字在什么地方可以使用，什么时候不能使用。</p>
+<h4 id="JS中词法作用域的规则"><a href="#JS中词法作用域的规则" class="headerlink" title="JS中词法作用域的规则"></a>JS中词法作用域的规则</h4><ul>
+<li>1.函数允许访问函数外部的数据</li>
+<li>整个代码结构中只有函数可以限定作用域</li>
+<li>作用规则首先使用提升规则分析</li>
+<li>如果当前作用域中有了名字了，就不考虑外面的名字</li>
+</ul>
+<h4 id="属性搜索原则"><a href="#属性搜索原则" class="headerlink" title="属性搜索原则"></a>属性搜索原则</h4><ul>
+<li>所谓的属性搜索原则，就是对象在访问属性或方法的时候，首先在当前对象中查找</li>
+<li>如果当前对象中存储着属性或方法，停止查找，直接使用该属性或方法</li>
+<li>如果当前对象没有该成员，那么再在其原型对象中查找</li>
+<li>如果原型对象中含有该成员，那么停止查找，直接使用</li>
+<li>如果原型中还没有，就到原型的原型中查找</li>
+<li>如此往复，直到Object.protitype还没有，那么就返回undefined</li>
+<li>如果是调用方法就报错，该xxx不是一个函数</li>
+</ul>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><h4 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h4><h5 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h5><p>闭包的含义就是闭合，包起来，简单的来说，就是一个具有封闭功能与包裹功能的结构。所谓的闭包就是一个具有封闭的对外不公开的，包裹结构，或空间。</p>
+<h5 id="为什么函数可以构成闭包？"><a href="#为什么函数可以构成闭包？" class="headerlink" title="为什么函数可以构成闭包？"></a>为什么函数可以构成闭包？</h5><p>闭包就是一个具有封闭与包裹功能的结构，是为了实现具有私有访问空间的函数的。函数可以构成闭包。函数内部定义的数据函数外部无法访问，即函数具有封闭性；函数可以封装代码即具有包裹性，所以函数可以构成闭包。</p>
+<h4 id="闭包有什么用"><a href="#闭包有什么用" class="headerlink" title="闭包有什么用"></a>闭包有什么用</h4><p>闭包不允许外部访问，要解决的问题就是让外部间接访问函数内部的数据。事实上，通过使用闭包，我们可以做很多事情。比如模拟面向对象的代码风格；更优雅，更简洁的表达出代码；在某些方面提升代码的执行效率。利用闭包可以实现如下需求：</p>
+<ul>
+<li>1.匿名自执行函数一个匿名的函数，并立即执行它，由于外部无法引用它内部的变量，因此在执行完后很快就会被释放，关键是这种机制不会污染全局对象。</li>
+<li>2.缓存闭包正是可以做到这一点，因为它不会释放外部的引用，从而函数内部的值可以得以保留。</li>
+<li>3.实现封装</li>
+<li>4.模拟面向对象的代码风格</li>
+</ul>
+<h4 id="闭包的基本模型"><a href="#闭包的基本模型" class="headerlink" title="闭包的基本模型"></a>闭包的基本模型</h4><ul>
+<li>1.对象模式函数内部定义个一个对象，对象中绑定多个函数（方法），返回对象，利用对象的方法访问函数内的数据</li>
+<li>2.函数模式函数内部定义一个新函数，返回新函数，用新函数获得函数内的数据</li>
+<li>3.沙箱模式沙箱模式就是一个自调用函数，代码写到函数中一样会执行，但是不会与外界有任何的影响</li>
+</ul>
+<h4 id="闭包的作用举例"><a href="#闭包的作用举例" class="headerlink" title="闭包的作用举例"></a>闭包的作用举例</h4><ul>
+<li>1.获得超过一个数据，返回一个对象</li>
+<li>2.完成读取一个数据和修改这个数据，对象里面的getset方法</li>
+</ul>
+<h4 id="闭包的性能问题"><a href="#闭包的性能问题" class="headerlink" title="闭包的性能问题"></a>闭包的性能问题</h4><p>函数执行需要内存，那么函数中定义的变量，会在函数执行结束后自动回收，凡是因为闭包结构的，被引出的数据，如果还有变量引用这些数据的话，那么这些数据就不会被回收。因此在使用闭包的时候如果不使用某些数据了，一定要赋值一个null</p>
+<pre><code>var f = (function () {
+    var num = 123;
+    return function () {
+        return num;
+    };
+})();
+// f 引用着函数，函数引用着变量num
+// 因此在不使用该数据的时候，最好写上
+f = null;
+</code></pre><h3 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h3><h4 id="什么是原型"><a href="#什么是原型" class="headerlink" title="什么是原型"></a>什么是原型</h4><p>一句话说明什么是原型：原型能存储我们的方法，构造函数创建出来的实例对象能够引用原型中的方法。</p>
+<p>JS中一切皆对象，而每个对象都有一个原型（Object除外），这个原型，大概就像Java中的父类，所以，基本上你可以认为原型就是这个对象的父对象，即每一个对象（Object除外）内部都保存了它自己的父对象，这个父对象就是原型。一般创建的对象如果没有特别指定原型，那么它的原型就是Object(这就很类似Java中所有的类默认继承自Object类)。</p>
+<p>ES6通过引入class ,extends等关键字，以一种语法糖的形式把构造函数包装成类的概念，更便于大家理解。是希望开发者不再花精力去关注原型以及原型链，也充分说明原型的设计意图和类是一样的。</p>
+<h4 id="查看对象的原型"><a href="#查看对象的原型" class="headerlink" title="查看对象的原型"></a>查看对象的原型</h4><p>当对象被创建之后，查看它们的原型的方法不止一种，以前一般使用对象的<strong>proto</strong>属性，ES6推出后，推荐用 Object.getPrototypeOf()方法来获取对象的原型.</p>
+<pre><code>function A(){
+    this.name=&apos;lala&apos;;
+}
+var a=new A();
+console.log(a.__proto__) 
+//输出：Object {}
+
+//推荐使用这种方式获取对象的原型
+console.log(Object.getPrototypeOf(a)) 
+//输出：Object {}
+</code></pre><p>无论对象是如何创建的，默认原型都是Object，在这里需要提及的比较特殊的一点就是，通过构造函数来创建对象，函数A本身也是一个对象，而A有两个指向表示原型的属性，分别是proto和prototype，而且两个属性并不相同</p>
+<pre><code>function A(){
+       this.name=&apos;lala&apos;;
+}
+var a=new A();
+console.log(A.prototype) 
+//输出：Object {}
+
+console.log(A.__proto__) 
+//输出：function () {}
+console.log(Object.getPrototypeOf(A))
+//输出：function () {}
+</code></pre><p>函数的的prototype属性只有在当作构造函数创建的时候，把自身的prototype属性值赋给对象的原型。而实际上，作为函数本身，它的原型应该是function对象，然后function对象的原型才是Object。</p>
+<p>总之，建议使用<code>ES6</code>推荐的查看原型和设置原型的方法。</p>
+<h3 id="原型的用法"><a href="#原型的用法" class="headerlink" title="原型的用法"></a>原型的用法</h3><p>其实原型和类的继承的用法是一致的：当你想用某个对象的属性时，将当前对象的原型指向该对象，你就拥有了该对象的使用权了。</p>
+<pre><code>function A(){
+    this.name=&apos;world &apos;;
+}
+function B(){
+    this.bb=&quot;hello&quot;
+}
+var a=new A();
+var b=new B();
+
+//将b设置为a的原型,此处有一个问题，即a的constructor也指向了B构造函数，可能需要纠正 
+Object.setPrototypeOf(a,b);
+a.constructor=A;
+console.log(a.bb);    //hello
+</code></pre><p>如果使用ES6来做的话则简单许多，甚至不涉及到prototype这个属性</p>
+<pre><code>class B{
+     constructor(){
+        this.bb=&apos;hello&apos;
+     }
+}
+class A  extends B{
+     constructor(){
+        super();
+        this.name=&apos;world&apos;;
+     }
+}
+
+var a=new A();
+console.log(a.bb+&quot; &quot;+a.name);    //hello world
+console.log(typeof(A))                //&quot;function&quot;
+</code></pre><p>怎么样？是不是已经完全看不到原型的影子了？活脱脱就是类继承，但是你也看得到实际上类A 的类型是function，所以说，本质上class在JS中是一种语法糖，JS继承的本质依然是原型，不过，ES6引入class，extends 来掩盖原型的概念也是一个很友好的举动，对于长期学习那些类继承为基础的面对对象编程语言的程序员而言。</p>
+<p>我的建议是，尽可能理解原型，尽可能用class这种语法糖。</p>
+<p>好了，问自己两个问题：</p>
+<ul>
+<li>1.为什么要使用原型？——提高函数的复用性。</li>
+<li><p>2.为什么属性不放在原型上而方法要放在原型上？</p>
+<ul>
+<li>利用对象的动态特性：构造函数.prototype.xxxx = vvv</li>
+<li><p>利用直接替换</p>
+<p>Student.prototype = {<br>  sayHello : function(){},<br>  study : function(){}<br>};</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><h5 id="什么是原型链？"><a href="#什么是原型链？" class="headerlink" title="什么是原型链？"></a>什么是原型链？</h5><p>凡是对象就有原型，那么原型又是对象，因此凡是给定一个对象，那么就可以找到他的原型，原型还有原型，那么如此下去，就构成一个对象的序列，称该结构为原型链。</p>
+<p>这个概念其实也变得比较简单，可以类比类的继承链条，即每个对象的原型往上追溯，一直到Object为止，这组成了一个链条，将其中的对象串联起来，当查找当前对象的属性时，如果没找到，就会沿着这个链条去查找，一直到Object，如果还没发现，就会报undefined。</p>
+<h5 id="原型链的结构"><a href="#原型链的结构" class="headerlink" title="原型链的结构"></a>原型链的结构</h5><p>凡是使用构造函数，创建出对象，并且没有利用赋值的方式修改原型，就说该对象保留默认的原型链。<br>默认原型链结构是什么样子呢？</p>
+<pre><code>function Person(){}
+var p = new Person();
+//p 具有默认的原型链
+</code></pre><p>默认的原型链结构就是：<code>当前对象 -&gt; 构造函数.prototype -&gt; Object.prototype -&gt; null</code></p>
+<p>在实现继承的时候，有时候会利用替换原型链结构的方式实现原型继承，那么原型链结构就会发生改变</p>
+<pre><code>function DunizbCollection(){}
+DunizbCollection.prototype = [];
+var arr = new DunizbCollection();
+</code></pre><p>此时arr对象的原型链结构被指向了数组对象的原型链结构了：<code>arr -&gt; [] -&gt; Array.prototype -&gt; Object.prototype -&gt; null</code></p>
+<h5 id="用图形表示对象的原型链结构"><a href="#用图形表示对象的原型链结构" class="headerlink" title="用图形表示对象的原型链结构"></a>用图形表示对象的原型链结构</h5><p>以如下代码为例绘制原型链结构</p>
+<pre><code>function Person(){}
+var p = new Person();
+</code></pre><p>原型链结构图为：<br><img src="https://segmentfault.com/img/remote/1460000007269207?w=652&amp;h=439" alt=""><br>使用原型需要注意两点：</p>
+<ul>
+<li>1.原型继承链条不要太长，否则会出现效率问题。</li>
+<li>2.指定原型时，注意constructor也会改变。<h5 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h5>实现继承有两种常见方式：</li>
+</ul>
+<p><code>混合式继承</code>：最简单的继承就是将别的对象的属性强加到我身上，那么我就有这个成员了。<br>混合式继承的简单描述：</p>
+<pre><code>var Person = function () {};
+Person.prototype.extend = function ( o ) {
+     for ( var k in o ) {
+          this[ k ] = o[ k ];
+     }
+};
+Person.prototype.extend({
+      run: function () { console.log( &apos;我能跑了&apos; ); },
+      eat: function () { console.log( &apos;我可以吃了&apos; ); },
+      sayHello: function () { console.log( &apos;我吃饱    了&apos; ); }
+});
+</code></pre><p><code>原型继承</code>：利用原型也可以实现继承，不需要在我身上添加任何成员，只要原型有了我就有了。</p>
+<h5 id="借用构造函数继承"><a href="#借用构造函数继承" class="headerlink" title="借用构造函数继承"></a>借用构造函数继承</h5><p>这种技术的基本思想相当简单，即在子类型构造函数的内部调用超类型构造函数，而函数只不过是在特定环境中执行代码的对象，因此通过使用apply()和call()方法也可以在（将来）新创建的对象上执行构造函数</p>
+<pre><code>function Person ( name, age, gender ) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+// 需要提供一个 Student 的构造函数创建学生对象
+// 学生也应该有 name, age, gender, 同时还需要有 course 课程
+function Student ( name, age, gender, course ) {
+    Person.call( this, name, age, gender )；
+    this.course = course;
+}
+</code></pre><p>在《<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" target="_blank" rel="external">JavaScript</a>高级程序设计（第三版）》中详细介绍了继承的6种方式</p>
+<h3 id="函数的四种调用模式"><a href="#函数的四种调用模式" class="headerlink" title="函数的四种调用模式"></a>函数的四种调用模式</h3><h4 id="函数模式"><a href="#函数模式" class="headerlink" title="函数模式"></a>函数模式</h4><p>就是一个简单的函数调用。函数名的前面没有任何引导内容。</p>
+<h4 id="方法模式"><a href="#方法模式" class="headerlink" title="方法模式"></a>方法模式</h4><p>方法一定式依附与一个对象，将函数赋值给对象的一个属性，那么就成为了方法。</p>
+<h4 id="构造器调用模式"><a href="#构造器调用模式" class="headerlink" title="构造器调用模式"></a>构造器调用模式</h4><p>创建对象的时候构造函数做了什么？由于构造函数只是给 this 添加成员，没有做其他事情。而方法也可以完成这个操作，就是 this 而言，构造函数与方法没有本质的区别。</p>
+<p><code>特征</code></p>
+<ul>
+<li>1.使用 new 关键字，来引导构造函数。</li>
+<li>2.构造函数中的 this 与方法中的一样，表示对象，但是构造函数中的对象是刚刚创建出来的对象<ul>
+<li>3.构造函数中不需要 return ，就会默认的 return this。</li>
+<li>如果手动添加return ，就相当于 return this</li>
+<li>如果手动的添加 return 基本类型，无效，还是保留原来 返回 this</li>
+<li>如果手动添加的 return null，或 return undefined ，无效</li>
+<li>如果手动添加 return 对象类型，那么原来创建的 this 就会被丢掉，返回的是 return 后面的对象</li>
+</ul>
+</li>
+</ul>
+<h5 id="创建对象的模式"><a href="#创建对象的模式" class="headerlink" title="创建对象的模式"></a>创建对象的模式</h5><ul>
+<li>1.工厂方法，工厂就是用来生产的，因此如果函数创建对象并返回，就称该函数为工厂函数</li>
+<li>2.构造方法</li>
+<li>3.寄生式创建</li>
+<li>4.混合式创建</li>
+</ul>
+<h4 id="上下文调用模式"><a href="#上下文调用模式" class="headerlink" title="上下文调用模式"></a>上下文调用模式</h4><p>上下文就是环境。就是自己定义设置 this 的含义。</p>
+<p><code>语法</code></p>
+<ul>
+<li>函数名.apply( 对象, [ 参数 ] );</li>
+<li>函数名.call( 对象, 参数 );</li>
+</ul>
+<p><code>描述</code></p>
+<ul>
+<li>1.函数名就是表示函数本身，使用函数进行调用的时候默认 this 是全局变量</li>
+<li>2.函数名也可以是方法提供，使用方法调用的时候，this 是指向当前对象</li>
+<li>3.使用 apply 进行调用后，无论是函数还是方法都无效了，我们的 this ，由 apply 的第一个参数决定</li>
+</ul>
+<p><code>参数问题</code></p>
+<p>无论是 call 还是 apply 在没有后面的参数的情况下（函数无参数，方法五参数）是完全一致的</p>
+<pre><code>function foo(){
+    console.log( this );
+}
+foo.apply( obj );
+foo.call( obj );
+</code></pre><p>第一个参数的使用也是有规则的:</p>
+<ul>
+<li>1.如果传入的是一个对象，那么就相当于设置该函数中的 this 为参数</li>
+<li><p>2.如果不传入参数，或传入 null 、undefined 等，那么相当于 this 默认为 window</p>
+<pre><code>foo();
+foo.apply();
+foo.apply( null );
+foo.call( undefined );
+</code></pre></li>
+<li><p>3.如果传入的是基本类型，那么 this 就是基本类型对应的包装类型的引用<br>在使用上下文调用的时候，原函数（方法）可能会带有参数，那么这个参数再上下文调用中使用 第二个（第 n 个）参数来表示</p>
+<pre><code>function foo( num ) {
+    console.log( num );
+}
+foo.apply( null, [ 123 ] );
+// 等价于
+foo( 123 );
+</code></pre><p>参考资料</p>
+</li>
+<li>本文原型部分部分引用自<a href="http://www.admin10000.com/document/9336.html" target="_blank" rel="external">《JavaScript原型详解》</a>，版权归原作者所有</li>
+<li><a href="http://blog.csdn.net/sunlylorn/article/details/6534610" target="_blank" rel="external">js闭包的用途</a></li>
+</ul>
+<p>摘自：<a href="http://www.imooc.com/u/173711/articles" target="_blank" rel="external">慕课网</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/08/javascriptObject/" class="archive-article-date">
+  	<time datetime="2016-04-08T01:26:24.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-08</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-about-javascript-gif" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/07/about-javascript-gif/">javascript gif</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h1><h4 id="javaScript总结"><a href="#javaScript总结" class="headerlink" title="javaScript总结"></a>javaScript总结</h4><p>javascript变量.gif</p>
+<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/TzogpE6Jx**lSkTamX0*oCdcEyUHWR3lQfwB0Rt9Z8U!/m/dHcBAAAAAAAA&amp;bo=8gORBgAAAAABB0Y!&amp;rf=photolist" alt=""></p>
+<p>javascript函数基础.gif</p>
+<p><img src="http://a2.qpic.cn/psb?/V114g1aN2g6PRw/H7UKcZ2DkURk6fUgLskz9chzAoWw7d1EM.BZ0v9FxYI!/m/dAkBAAAAAAAA&amp;bo=hgM0BgAAAAABB5c!&amp;rf=photolist" alt=""></p>
+<p>javascript流程控制.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/.D2wdl9wbOkaH0Gfwof7kh2C3DXNgKBaW4URL2a.yfE!/m/dAoBAAAAAAAA&amp;bo=gAIkBgAAAAABB4A!&amp;rf=photolist" alt=""></p>
+<p>javascript数据类型.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/tGqgTyic9FedB0MX93NZujWzuhqy6P*uteJRYfX96rs!/m/dAoBAAAAAAAA&amp;bo=gAIQCAAAAAABB7o!&amp;rf=photolist" alt=""></p>
+<p>javascript 数组.gif</p>
+<p><img src="http://a1.qpic.cn/psb?/V114g1aN2g6PRw/nCyxujKEXJdNXlotZCbO0QkVniIzeSQGI3RTGB2oRV0!/m/dHwBAAAAAAAA&amp;bo=gAJXBAAAAAABB*E!&amp;rf=photolist" alt=""></p>
+<p>javascript 运算符.gif</p>
+<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/ial92bpUZCz.sJLxTtlal9yzbJQu3sew2dgJ8qrA5Jg!/m/dI8AAAAAAAAA&amp;bo=gALBCgAAAAABB2k!&amp;rf=photolist" alt=""></p>
+<p>javascript 正则表达式.gif</p>
+<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/bsuh9gTiXx8E3fJbguj3UwR.m9775VlLTyD177PaWLk!/m/dHcBAAAAAAAA&amp;bo=gAINBgAAAAABB6k!&amp;rf=photolist" alt=""></p>
+<p>javascript 字符串函数.gif</p>
+<p><img src="http://a1.qpic.cn/psb?/V114g1aN2g6PRw/TNNJBCpKSPV*N1JlJFJEJGXX9N4p*WUNLLmywT2NoYg!/m/dHABAAAAAAAA&amp;bo=gALaBQAAAAABB30!&amp;rf=photolist" alt=""></p>
+<p>javascript Window对象.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/DTXRqVU1w8dsiW*leCv4hyG81Qi4FwkQUwOnvINpb7o!/m/dAoBAAAAAAAA&amp;bo=gAISBQAAAAABB7U!&amp;rf=photolist" alt=""></p>
+<p>javascript DOM基本操作.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/4L4mRVbRqLEBBB6lmXU0rDfdr0NSM87mDXFOgs6x0IQ!/m/dH4BAAAAAAAA&amp;bo=gALSCgAAAAABB3o!&amp;rf=photolist" alt=""></p>
+<p>希望这几张图能对你有所帮助</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/03/07/about-javascript-gif/" class="archive-article-date">
+  	<time datetime="2016-03-07T03:33:29.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-03-07</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-blog-building" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/04/blog-building/">blog building</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GitHub博客搭建"><a href="#GitHub博客搭建" class="headerlink" title="GitHub博客搭建"></a>GitHub博客搭建</h1><p><strong>GitHub</strong>，上传<em>hexo</em>博客搭建过程</p>
+<h2 id="安装-nodeJS"><a href="#安装-nodeJS" class="headerlink" title="安装  nodeJS"></a>安装  nodeJS</h2><p>nodeJS官网网址:<a href="http://nodejs.org/en/" target="_blank" rel="external">http://nodejs.org/en/</a></p>
+<p>测试nodeJS是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node -v</div></pre></td></tr></table></figure></p>
+<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装  hexo"></a>安装  hexo</h2><h4 id="安装命令："><a href="#安装命令：" class="headerlink" title="安装命令："></a>安装命令：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo -g</div></pre></td></tr></table></figure>
+<h4 id="测试nodeJS是否安装成功："><a href="#测试nodeJS是否安装成功：" class="headerlink" title="测试nodeJS是否安装成功："></a>测试nodeJS是否安装成功：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo</div></pre></td></tr></table></figure>
+<h4 id="创建目录并进入"><a href="#创建目录并进入" class="headerlink" title="创建目录并进入"></a>创建目录并进入</h4><p>初始化hexo目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init</div></pre></td></tr></table></figure></p>
+<p>启动本地服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
+<h2 id="GitGub账号一枚"><a href="#GitGub账号一枚" class="headerlink" title="GitGub账号一枚"></a>GitGub账号一枚</h2><h4 id="配置ssh-key"><a href="#配置ssh-key" class="headerlink" title="配置ssh-key"></a>配置ssh-key</h4><p>连续三次回测<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen</div></pre></td></tr></table></figure></p>
+<p>复制ssh-key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim~/.ssh/id rsa.pub</div></pre></td></tr></table></figure></p>
+<p>github设置ssh黏贴</p>
+<h4 id="配置github与本地机器验证"><a href="#配置github与本地机器验证" class="headerlink" title="配置github与本地机器验证"></a>配置github与本地机器验证</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;&quot;</div></pre></td></tr></table></figure>
+<h4 id="新建博客域名仓库"><a href="#新建博客域名仓库" class="headerlink" title="新建博客域名仓库"></a>新建博客域名仓库</h4><p>用户名 .github.io</p>
+<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><p>deplay字段</p>
+<p>type:git</p>
+<p>repo:域名仓库https地址</p>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deplayer-git --save</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
+<h2 id="新建项目标题"><a href="#新建项目标题" class="headerlink" title="新建项目标题"></a>新建项目标题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bolog $ hexo project</div></pre></td></tr></table></figure>
+<p>进入source中找到该文件夹，进去Mou中书写格式（偏好设置）</p>
+<h2 id="在博客中设置主题背景"><a href="#在博客中设置主题背景" class="headerlink" title="在博客中设置主题背景"></a>在博客中设置主题背景</h2><p>网址：<a href="http://www.zhihu.com/question/24422335/answer/46357100" target="_blank" rel="external">http://www.zhihu.com/question/24422335/answer/46357100</a></p>
+<h4 id="具体操作："><a href="#具体操作：" class="headerlink" title="具体操作："></a>具体操作：</h4><ul>
+<li>命令终端找到themes文件</li>
+<li>终端命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone 主题网址</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例：git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="external">https://github.com/A-limon/pacman.git</a></p>
+<ul>
+<li>命令：<pre><code>ls
+</code></pre>找到下载的文件夹，将其复制到_config.yml中，themes:复制名</li>
+<li><p>启动终端命令</p>
+<p>  hexo server</p>
+</li>
+</ul>
+<p>回到[发布]流程重新输入命令</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/02/04/blog-building/" class="archive-article-date">
+  	<time datetime="2016-02-04T03:17:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/19/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/01/19/hello-world/" class="archive-article-date">
+  	<time datetime="2016-01-19T03:17:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 lgp
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: true,
+		isPost: false,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

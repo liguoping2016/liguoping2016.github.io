@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>mongoose | 前端小博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="mongoMongoose全面理解一、创建schemas创建schemas的方式：
+var userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+       createdOn: Date
+});
+schemas中的数据类型有以下几种：
+
+String
+Number
+Date
+Boolean
+Buffer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mongoose">
+<meta property="og:url" content="http://yoursite.com/2016/08/18/mongoose/index.html">
+<meta property="og:site_name" content="前端小博客">
+<meta property="og:description" content="mongoMongoose全面理解一、创建schemas创建schemas的方式：
+var userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+       createdOn: Date
+});
+schemas中的数据类型有以下几种：
+
+String
+Number
+Date
+Boolean
+Buffer">
+<meta property="og:updated_time" content="2016-11-18T11:12:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mongoose">
+<meta name="twitter:description" content="mongoMongoose全面理解一、创建schemas创建schemas的方式：
+var userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+       createdOn: Date
+});
+schemas中的数据类型有以下几种：
+
+String
+Number
+Date
+Boolean
+Buffer">
+  
+    <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lgp</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">lgp</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lgp</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-mongoose" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mongoose
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="mongo"><a href="#mongo" class="headerlink" title="mongo"></a>mongo</h1><h2 id="Mongoose全面理解"><a href="#Mongoose全面理解" class="headerlink" title="Mongoose全面理解"></a>Mongoose全面理解</h2><h3 id="一、创建schemas"><a href="#一、创建schemas" class="headerlink" title="一、创建schemas"></a>一、创建schemas</h3><p>创建schemas的方式：</p>
+<pre><code>var userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+       createdOn: Date
+});
+</code></pre><p>schemas中的数据类型有以下几种：</p>
+<ul>
+<li>String</li>
+<li>Number</li>
+<li>Date</li>
+<li>Boolean</li>
+<li>Buffer</li>
+<li>ObjectId</li>
+<li>Mixed</li>
+<li>Array</li>
+</ul>
+<p>特别需要说明一下ObjectId类型和Mixed类型以及Array类型，在schemas中声明这几种类型的方式如下：</p>
+<pre><code>1 //ObjectId就类似于唯一键值
+ 2 projectSchema.add({
+3     owner: mongoose.Schema.Types.ObjectId
+4 });
+ 5 //混合类型，顾名思义，就是说里面可以放置任意类型的数据，有两种方式创建该类型数据
+6 //方式一：直接赋予一个空的字面量对象
+7 vardjSchema= new mongoose.Schema({
+8     mixedUp: {}
+9 });
+10 //方式二：根据Schemas.Types中值来赋予
+11 vardjSchema= new mongoose.Schema({
+12     mixedUp: Schema.Types.Mixed
+13 });
+14 //Array类型数据有两种创建方式，一种是简单数组创建：
+15 var userSchema = new mongoose.Schema({
+16     name: String,
+17     emailAddresses: [String]
+18 });
+19 //第二种方式就是复杂类型数据数组，例如我们可以再数组中添加不同类型的schemas:
+20 var emailSchema = new mongoose.Schema({
+21     email: String,
+22     verified: Boolean
+23 });
+24 var userSchema = new mongoose.Schema({
+25     name: String,
+26     emailAddresses: [emailSchema]
+27 });
+28 //注意：如果定义一个空的数据的话，则会创建为一个混合类型数据的数组：
+29 var emailSchema = new mongoose.Schema({
+30     email: String,
+31     verified: Boolean
+32 });
+33 var userSchema = new mongoose.Schema({
+34     name: String,
+35     emailAddresses: [emailSchema]
+36 });
+</code></pre><p>我们可以给schema创建静态方法，这个静态方法将来会用在Model中，创建该静态方法需要在创建完成schema之后，在Model编译之前：</p>
+<pre><code>1 projectSchema.statics.findByUserID = function (userid, callback) {
+2   this.find({ createdBy: userid }, &apos;_id projectName&apos;, {sort: &apos;modifiedOn&apos;}, callback);
+3 };
+</code></pre><p>在其对应的模型创建完成并编译后，我们就可以像下面这样来调用该静态方法了：<br>Model.findByUserID(userid,callback);<br>该静态方法会返回一个JSON格式的数据，这在我们使用AJAX技术来加载网页数据的时候会比较方便，就像下面这样：</p>
+<pre><code> 1 //路由规则：app.get(&apos;/project/byuser/:userid&apos;, project.byUser);
+ 2 exports.byUser = function (req, res) {
+ 3     console.log(&quot;Getting user projects&quot;);
+ 4     if (req.params.userid){
+ 5         Project.findByUserID(req.params.userid,function (err, projects) {
+ 6             if(!err){
+ 7                 console.log(projects);
+ 8                 res.json(projects);
+ 9             }else{
+10                 console.log(err);
+11                 res.json({&quot;status&quot;:&quot;error&quot;, &quot;error&quot;:&quot;Error finding projects&quot;});
+12             }
+13         });
+14     }else{
+15         console.log(&quot;No user id supplied&quot;);
+16         res.json({&quot;status&quot;:&quot;error&quot;, &quot;error&quot;:&quot;No user     id supplied&quot;});
+17     }
+18 };
+</code></pre><h3 id="二、创建Model"><a href="#二、创建Model" class="headerlink" title="二、创建Model"></a>二、创建Model</h3><p>创建Model很简单：</p>
+<p>Mongoose.Model(‘User’, userSchema);</p>
+<p>参数一为Model的名字，参数二为生成Model所需要的schema,Model就像是schema所编译而成的一样。</p>
+<p>mongoose连接数据库是有两种方式的：</p>
+<pre><code> 1 //方式一：
+ 2 var dbURI = &apos;mongodb://localhost/mydatabase&apos;;
+ 3 mongoose.connect(dbURI);
+ 4 //方式二：
+5 var dbURI = &apos;mongodb://localhost/myadmindatabase&apos;;
+6 var adminConnection = mongoose.createConnection(dbURI);
+7 //如果需要声明端口号：
+ 8 var dbURI = &apos;mongodb://localhost:27018/mydatabase&apos;;
+ 9 //如果需要定义用户名和密码：
+10 var dbURI = &apos;mongodb://username:password@localhost/mydatabase&apos;;
+11 //也可以像下面这样传一个对象类型的参数：
+12 var dbURI = &apos;mongodb://localhost/mydatabase&apos;;
+13 var dbOptions = {&apos;user&apos;:&apos;db_username&apos;,&apos;pass&apos;:&apos;db_password&apos;};
+14 mongoose.connect(dbURI, dbOptions);
+</code></pre><p>根据连接数据库的方式，我们可以得到第二种创建Model的方式，就是使用数据库连接的引用名来创建：</p>
+<p>adminConnection.model( ‘User’, userSchema );</p>
+<p>默认情况下mongoose会根据我们传入的Model名字来生成collection名字，在上面的代码中就会生成名为users(全为小写字母)的collection(集合)；</p>
+<p>有两种方法能让我们自定义collection的名字。</p>
+<pre><code> 1 //方式一，在创建schema的时候定义collection的名字：
+ 2 var userSchema = new mongoose.Schema({
+ 3     name: String,
+ 4     email: {type: String, unique:true}
+ 5 },
+ 6 {
+ 7     collection: &apos;myuserlist&apos;
+ 8 });
+ 9 //方式二，在创建Model的时候定义collection的名字：
+10 mongoose.model( &apos;User&apos;, userSchema, &apos;myuserlist&apos; );
+</code></pre><p>创建Model实例：</p>
+<p>var user = new User({ name: ‘Simon’ });</p>
+<p>user就是模型User的一个实例，它具有mongoose中模型所具有的一些方法，例如保存实例：</p>
+<pre><code>1 user.save(function (err) {
+2     if (err) return handleError(err);
+3 });
+</code></pre><p>模型也具有一些常用的增删查改的方法：</p>
+<pre><code> 1 User.findOne({&apos;name&apos; : &apos;Sally&apos;, function(err,user) {
+ 2     if(!err){
+ 3         console.log(user);
+ 4     }
+ 5 });
+ 6 User.find({}, function(err, users) {
+ 7     if(!err){
+ 8         console.log(users);
+ 9     }
+10 });
+</code></pre><p>可以使用链式方式使用这些方法，例如：</p>
+<pre><code>1 var newUser = new User({
+2     name: &apos;Simon Holmes&apos;,
+3     email: &apos;simon@theholmesoffice.com&apos;,
+4     lastLogin : Date.now()
+5 }).save( function( err ){
+6     if(!err){
+7         console.log(&apos;User saved!&apos;);
+8     }
+9 });
+</code></pre><p>上面的代码创建了一个模型实例，然后进行保存。我们有一个更为简介的方式来完成这项工作，就是使用Model.create()方法：</p>
+<pre><code>1 User.create({
+ 2     name: &apos;Simon Holmes&apos;,
+ 3     email: &apos;simon@theholmesoffice.com&apos;,
+ 4     lastLogin : Date.now()
+ 5 }, function( err, user ){
+ 6     if(!err){
+ 7         console.log(&apos;User saved!&apos;);
+ 8         console.log(&apos;Saved user name: &apos; + user.name);
+ 9         console.log(&apos;_id of saved user: &apos; + user._id);
+10     }
+11 });
+</code></pre><h3 id="三、查找数据和读取数据的方法"><a href="#三、查找数据和读取数据的方法" class="headerlink" title="三、查找数据和读取数据的方法"></a>三、查找数据和读取数据的方法</h3><h4 id="1-使用QueryBuilder接口来查找数据"><a href="#1-使用QueryBuilder接口来查找数据" class="headerlink" title="1.使用QueryBuilder接口来查找数据"></a>1.使用QueryBuilder接口来查找数据</h4><p>先看看下面的代码：</p>
+<pre><code>1 var myQuery = User.find({&apos;name&apos; : &apos;Simon Holmes&apos;});
+2 myQuery.where(&apos;age&apos;).gt(18);
+3 myQuery.sort(&apos;-lastLogin&apos;);
+4 myQuery.select(&apos;_id name email&apos;);
+5 myQuery.exec(function (err, users){
+6     if (!err){
+7         console.log(users); // output array of users found
+8     }
+9 });
+</code></pre><p>代码中，我们查找名字为”Simon Holmes”，并且年龄大于18岁，查找结果根据lastLogin降序排列，只获取其中的_id, name, email三个字段的值，上面的代码只有在调用exec方法后才真正执行数据库的查询。</p>
+<p>当然我们可以使用链式的方式来改写上面的代码，代码会更加简洁：</p>
+<pre><code>1 User.find({&apos;name&apos; : &apos;Simon Holmes&apos;})
+2 .where(&apos;age&apos;).gt(18)
+3 .sort(&apos;-lastLogin&apos;)
+4 .select(&apos;_id name email&apos;)
+5 .exec(function (err, users){
+6     if (!err){
+7         console.log(users); // output array of users found
+8     }
+9 });
+</code></pre><p>上面代码中的第一行创建了一个queryBuilder.通过使用这个queryBuilder，我们就可以执行一些比较复杂的查找工作，</p>
+<p>在创建完成这个queryBuilder之后，查询操作并没有马上执行，而是待到执行exec方法时才会去执行数据库的查找。</p>
+<p>当然也有另外一种方式能够直接查找数据库的，就是直接在查找方法中添加回调函数，使用方式为：<br>Model.find(conditions, [fields], [options], [callback])</p>
+<p>下面举一个简单例子：</p>
+<pre><code>1 User.find({&apos;name&apos;, &apos;simon holmes&apos;}, function(err, user) {});
+</code></pre><p>另一个稍微复杂的例子：</p>
+<pre><code>1 User.find({&apos;name&apos;, &apos;simon holmes&apos;}, &apos;name email&apos;,function(err, user) {
+2     //console.log(&apos;some thing&apos;);
+3 });
+</code></pre><p>另一个更加复杂的例子，包含查询结果的排序：</p>
+<pre><code>1 User.find({&apos;name&apos; : &apos;Simon Holmes&apos;},
+2     null, // 如果使用null，则会返回所有的字段值
+3     {sort : {lastLogin : -1}}, // 降序排序
+4     function (err, users){
+5         if (!err){console.log(users);}
+6     });
+</code></pre><p>列举几个比较实用的查找方法：</p>
+<pre><code>1 Model.find(query);
+2 Model.findOne(query);//返回查找到的所有实例的第一个
+3 Model.findById(ObjectID);//根据ObjectId查找到唯一实例
+</code></pre><p>例如：</p>
+<pre><code>1 User.findOne({&apos;email&apos; : req.body.Email},
+2 &apos;_id name email&apos;,
+3 function(err, user) {
+4     //todo
+5 });
+</code></pre><h4 id="2-更新数据"><a href="#2-更新数据" class="headerlink" title="2.更新数据"></a>2.更新数据</h4><p>有三种方式来更新数据：</p>
+<p>(1)update(conditions,update,options,callback); </p>
+<p>该方法会匹配到所查找的内容进行更新，不会返回数据；</p>
+<p>(2)findOneAndUpdate(conditions,update,options,callback);</p>
+<p>该方法会根据查找去更新数据库，另外也会返回查找到的并未改变的数据；</p>
+<p>(3)findByIdAndUpdate(conditions,update,options,callback);</p>
+<p>该方法跟上面的findOneAndUpdate方法功能一样，不过他是根据ID来查找</p>
+<p>文档并更新的。</p>
+<p>三个方法都包含四个参数，一下稍微说明一下几个参数的意思：<br>conditions:查询条件</p>
+<p>update:更新的数据对象，是一个包含键值对的对象</p>
+<p>options:是一个声明操作类型的选项，这个参数在下面再详细介绍</p>
+<p>callback:回调函数</p>
+<p>对于options参数，在update方法中和findOneAndUpdate、</p>
+<p>findByIdAndUpdate两个方法中的可选设置是不同的；</p>
+<pre><code>1 //在update方法中，options的可选设置为：
+ 2 {
+ 3 safe:true|false,  //声明是否返回错误信息，默认true
+4 upsert:false|true, //声明如果查询不到需要更新的数据项，是否需要新插入一条记录，默认false
+5 multi:false|true,  //声明是否可以同时更新多条记录，默认false
+6 strict:true|false  //声明更新的数据中是否可以包含在schema定义之外的字段数据，默认true
+ 7 }
+ 8 //对于findOneAndUpdate、findByIdAndUpdate这两个方法，他们的options可选设置项为：
+9 {
+10 new:true|false, //声明返回的数据时更新后的该是更新前的，如果为true则返回更新后的，默认true
+11 upsert:false|trure, 
+12 sort:javascriptObject, //如果查询返回多个文档记录，则可以进行排序，在这里是根据传入的javascript object对象进行排序
+13 select:String //这里声明要返回的字段，值是一个字符串
+14 }
+</code></pre><p>下面举个例子：</p>
+<pre><code>User.update({_id:user._id},{$set: {lastLogin: Date.now()}},function(){});
+</code></pre><h4 id="3-数据删除"><a href="#3-数据删除" class="headerlink" title="3.数据删除"></a>3.数据删除</h4><p>跟更新数据一样，也有三种方法给我们删除数据：</p>
+<p>remove();</p>
+<p>findOneAndRemove();</p>
+<p>findByIdAndRemove();</p>
+<p>remove方法有两种使用方式，一种是用在模型上，另一种是用在模型实例上，例如：</p>
+<pre><code> 1 User.remove({ name : /Simon/ } , function (err){
+ 2     if (!err){
+ 3         // 删除名字中包含simon的所有用户
+ 4     }
+5 });
+6 
+ 7 User.findOne({ email : &apos;simon@theholmesoffice.com&apos;},function (err,user){
+ 8     if (!err){
+ 9         user.remove( function(err){
+10             // 删除匹配到该邮箱的第一个用户
+11         });
+12     }
+13 });
+</code></pre><p>接下来看一下findOneAndRemove方法：</p>
+<pre><code>1 User.findOneAndRemove({name : /Simon/},{sort : &apos;lastLogin&apos;, select : &apos;name email&apos;},function (err, user){
+2     if (!err) {
+3         console.log(user.name + &quot; removed&quot;);
+4         // Simon Holmes removed
+5     };
+6 });
+</code></pre><p>另外一个findByIdAndRemove方法则是如出一辙的。<br>    1 User.findByIdAndRemove(req.body._id,function (err, user) {<br>    2     if(err){<br>    3         console.log(err);<br>    4         return;<br>    5     }<br>    6     console.log(“User deleted:”, user);<br>    7 });</p>
+<h3 id="四、数据验证"><a href="#四、数据验证" class="headerlink" title="四、数据验证"></a>四、数据验证</h3><h5 id="1-mongoose内置数据验证"><a href="#1-mongoose内置数据验证" class="headerlink" title="1.mongoose内置数据验证"></a>1.mongoose内置数据验证</h5><p>在mongoose中，数据验证这一层是放在schema中的，mongoose已经帮我们做了很多内置的数据验证，有一些验证是针对某些数据类型的，也有一些是针对所有数据类型的。<br>】<br>能够作用在所有数据类型上的验证有require，意思就是该字段是否是必须的，例如：</p>
+<p>email: { type: String, unique: true, required: true }</p>
+<p>上面的代码就定义了一个email是必须的schema.</p>
+<p>下面再分别介绍一下mongoose内置的一些数据验证类型。</p>
+<p>数字类型schemasType,对于Number类型的数据，具有min,max提供用来界定最大最小值：</p>
+<pre><code>1 var teenSchema = new Schema({
+2     age : {type: Number, min: 13, max:19}
+3 });
+</code></pre><p>字符串类型SchemasType,对于该类型数据，mongoose提供了两种验证器：<br>match:可使用正则表达式来匹配字符串是否符合该正则表达式的规则<br>enum:枚举出字符串可使用的一些值<br>分别举例如下：</p>
+<pre><code>1 var weekdaySchema = new Schema({
+2     day : {type: String, match: /^(mon|tues|wednes|thurs|fri)day$/i}
+3 });
+4 
+5 var weekdays = [&apos;monday&apos;, &apos;tuesday&apos;, &apos;wednesday&apos;, &apos;thursday&apos;,&apos;friday&apos;];
+6 var weekdaySchema = new Schema({
+7     day : {type: String, enum: weekdays}
+8 });
+</code></pre><p>在我们进行一些数据库的时候，如果有错误，可能会返回一些错误信息，这些信息封装在一个对象中，该对象的数据格式大致如下：</p>
+<pre><code>1 { 
+2     message: &apos;Validation failed&apos;,
+ 3     name: &apos;ValidationError&apos;,
+ 4     errors:{ 
+ 5         email:{
+ 6             message: &apos;Validator &quot;required&quot; failed for path email&apos;,
+ 7             name: &apos;ValidatorError&apos;,
+ 8             path: &apos;email&apos;,
+ 9             type: &apos;required&apos; 
+10         },
+11         name:{ 
+12             message: &apos;Validator &quot;required&quot; failed for path name&apos;,
+13             name: &apos;ValidatorError&apos;,
+14             path: &apos;name&apos;,
+15             type: &apos;required&apos; 
+16         } 
+17     } 
+18 }
+</code></pre><p>知道该错误信息的具体格式之后，我们可以从中得出我们想要的信息并反馈到控制台。</p>
+<pre><code>1 if(err){
+2     Object.keys(err.errors).forEach(function(key) {
+3         var message = err.errors[key].message;
+4         console.log(&apos;Validation error for &quot;%s&quot;: %s&apos;, key, message);
+5     });
+6 }
+</code></pre><h4 id="2-自定义数据验证"><a href="#2-自定义数据验证" class="headerlink" title="2.自定义数据验证"></a>2.自定义数据验证</h4><p>最简单的自定义数据验证方式就是定义一个数据验证的函数，并将它传递给schema;</p>
+<pre><code>1 var lengthValidator = function(val) {
+2     if (val &amp;&amp; val.length &gt;= 5){
+3         return true;
+4     }
+5     return false;
+6 };
+7 //usage:
+8 name: {type: String, required: true, validate: lengthValidator }
+</code></pre><p>可以看到，我们只需要在schema中添加validate键值对即可，validate对应的值便是我们自定义的验证方法；</p>
+<p>但是该形式的数据验证无法给我们提供完整的错误信息，比如errors信息中返回的type值就会成为undefined;</p>
+<p>在此基础上如果希望错误信息中能返回一个错误描述，那我们可以稍微进行一点修改：</p>
+<pre><code>1 //code 1
+2 validate: { validator: lengthValidator, msg: &apos;Too short&apos; }
+3 
+4 //code 2
+5 var weekdaySchema = new Schema({
+6     day : {type: String, validate: {validator:/^(mon|tues|wednes|thurs|fri)day$/i, msg: &apos;Not a day&apos; }
+7 });
+将validate的值修改为一个对象，并且该对象包含验证器和错误描述。
+</code></pre><p>我们也可以使用另一种方式在写这些验证器，就是将验证器卸载schema外部，例如：</p>
+<pre><code>1 var validateLength = [lengthValidator, &apos;Too short&apos; ];
+2 var validateDay = [/^(mon|tues|wednes|thurs|fri)day$/i, &apos;Not a day&apos; ];
+3 //usage:
+4 name: {type: String, required: true, validate: validateLength }
+5 day : {type: String, validate: validateDay }
+</code></pre><p>眼睛放大，一看再看，确实没错，在validate中我们传入的是一个数组了，而不是原来的对象了。<br>其实就validateLength这个东东来说，他就是一个简写来的，你也可以改成下面这样：</p>
+<pre><code>var validateLength = [
+2     {validator: lengthValidator, msg: &apos;Too short&apos;}
+3 ];
+</code></pre><p>恩，到这里，应该能明白了，将对象改为数组之后，我们便可以传递多个验证器给我们的schema了，的确如此。</p>
+<pre><code>1 var validateUsername = [
+2     {validator: lengthValidator, msg: &apos;Too short&apos;} ,
+3     {validator: /^[a-z]+$/i, msg: &apos;Letters only&apos;}
+4 ];
+</code></pre><p>我们还有另外一种方法给我们的schema提供验证器：</p>
+<pre><code>1 userSchema.path(&apos;name&apos;).validate(lengthValidator, &apos;Too short&apos;);
+2 userSchema.path(&apos;name&apos;).validate(/^[a-z]+$/i, &apos;Letters only&apos;);
+</code></pre><h4 id="摘录至：http-www-cnblogs-com-jayruan-p-5123754-html"><a href="#摘录至：http-www-cnblogs-com-jayruan-p-5123754-html" class="headerlink" title="摘录至：http://www.cnblogs.com/jayruan/p/5123754.html"></a>摘录至：<a href="http://www.cnblogs.com/jayruan/p/5123754.html" target="_blank" rel="external">http://www.cnblogs.com/jayruan/p/5123754.html</a></h4>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/18/mongoose/" class="archive-article-date">
+  	<time datetime="2016-08-18T11:11:08.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/08/18/nodeHeartModule/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          nodeHeartModule
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/14/js-screen/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">js_screen</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="mongoose" data-title="mongoose" data-url="http://yoursite.com/2016/08/18/mongoose/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 lgp
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

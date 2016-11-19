@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>javascript | 前端小博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript 知识点整理JavaScript是按照ECMAScript标准设计和实现的，后文说的JavaScript语法其实是ES5的标准的实现。先说说有哪些基础语法？
+最基础语法有哪些？基础语法几乎所有的语言差异不大，无非数据类型、操作符、控制语句、函数等，简单列举下。
+5种基本数据类型 &amp;amp; 1种复杂的数据类型JavaScript包含5种基本数据类型，分别是undefined /">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript">
+<meta property="og:url" content="http://yoursite.com/2016/10/19/javascript/index.html">
+<meta property="og:site_name" content="前端小博客">
+<meta property="og:description" content="JavaScript 知识点整理JavaScript是按照ECMAScript标准设计和实现的，后文说的JavaScript语法其实是ES5的标准的实现。先说说有哪些基础语法？
+最基础语法有哪些？基础语法几乎所有的语言差异不大，无非数据类型、操作符、控制语句、函数等，简单列举下。
+5种基本数据类型 &amp;amp; 1种复杂的数据类型JavaScript包含5种基本数据类型，分别是undefined /">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1158202-2ef01a8928adaa18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1158202-649241778fd7be55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1158202-ec523cf2296206a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1158202-a1b5a3a35103f841.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-11-19T09:45:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript">
+<meta name="twitter:description" content="JavaScript 知识点整理JavaScript是按照ECMAScript标准设计和实现的，后文说的JavaScript语法其实是ES5的标准的实现。先说说有哪些基础语法？
+最基础语法有哪些？基础语法几乎所有的语言差异不大，无非数据类型、操作符、控制语句、函数等，简单列举下。
+5种基本数据类型 &amp;amp; 1种复杂的数据类型JavaScript包含5种基本数据类型，分别是undefined /">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1158202-2ef01a8928adaa18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lgp</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">lgp</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lgp</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-javascript" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      javascript
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript-知识点整理"><a href="#JavaScript-知识点整理" class="headerlink" title="JavaScript 知识点整理"></a>JavaScript 知识点整理</h1><p>JavaScript是按照ECMAScript标准设计和实现的，后文说的JavaScript语法其实是ES5的标准的实现。<br>先说说有哪些基础语法？</p>
+<h2 id="最基础语法有哪些？"><a href="#最基础语法有哪些？" class="headerlink" title="最基础语法有哪些？"></a>最基础语法有哪些？</h2><p>基础语法几乎所有的语言差异不大，无非数据类型、操作符、控制语句、函数等，简单列举下。</p>
+<h3 id="5种基本数据类型-amp-1种复杂的数据类型"><a href="#5种基本数据类型-amp-1种复杂的数据类型" class="headerlink" title="5种基本数据类型 &amp; 1种复杂的数据类型"></a>5种基本数据类型 &amp; 1种复杂的数据类型</h3><p>JavaScript包含5种基本数据类型，分别是<code>undefined</code> / <code>null</code> /  <code>boolean</code> / <code>number</code> / <code>string</code>，基本数据类型就这五种，没有其他的！<br>JavaScript包含1种复杂的数据类型，就是<code>Object</code>类型，<code>Object</code>类型是所有其他对象的基类。<br>注意：JavaScript并不区分浮点数和整数，都是用<code>number</code>来表示。</p>
+<p>前面提到的5种基本数据类型，以及这儿的1种复杂数据类型，这就是数据类型的全部了！</p>
+<h4 id="基本操作符"><a href="#基本操作符" class="headerlink" title="基本操作符"></a>基本操作符</h4><p>这个是常识，知道怎么回事就好。<br>常用的操作符包括：算术操作符、关系操作符、布尔操作符、赋值操作符等。</p>
+<h4 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h4><p>这就是我们常说的if-else之类的控制语句。<br>常用的并不多：if语句、switch语句、for语句、while语句、for-in语句。</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>函数就是一小段逻辑的封装，理论上逻辑越独立越好。<br>JavaScript函数相对其他语言来说有很大不同。JavaScript函数既可以作为参数，也可以作为返回值。<br>此外JavaScript函数可以接受任意数量的参数，并且可以通过arguments对象来访问这些参数。</p>
+<p>任何一门语言的基础语法都是相通的，除开一些细节差异，大致就是上面这些了：数据类型、操作符、控制语句、函数、模块等等。</p>
+<p>接下来介绍稍微复杂的一些概念。</p>
+<h3 id="变量、作用域、内存问题"><a href="#变量、作用域、内存问题" class="headerlink" title="变量、作用域、内存问题"></a>变量、作用域、内存问题</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>JavaScript变量分为两种：基本类型和引用类型。其中基本类型就是前面提到的5种基本数据类型，引用类型就是前面提到的<code>Object</code>以及基于它的其他复杂数据类型。<br>✦ 基本类型：在内存中占据实际大小的空间，赋值的时候，会在内存中创建一份新的副本。保存在<code>栈内存</code>中。<br>✦ 引用类型：指向对象的指针而不是对象本身，赋值的时候，只是创建了一个新的指针指向对象。保存在<code>堆内存</code>中。<br><img src="http://upload-images.jianshu.io/upload_images/1158202-2ef01a8928adaa18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>                    变量内存分配</p>
+<p>一句话就是，基本类型在内存中是实际的值；而引用类型在内存中就是一个指针，指向一个对象，多个引用类型可能同时指向同一个对象。</p>
+<p>那么，如何确定某个变量是哪种数据类型呢？<br>确定一个变量是哪种基本类型用typeof操作符。<br>确定一个变量是哪种引用类型用instanceof操作符。<br>这个别忘了！</p>
+<h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p>变量是在某个特定的作用域中声明的，作用域决定了这些变量的生命周期，以及哪些代码可以访问其中的变量。<br>JavaScript作用域只包括全局作用域和函数作用域，并不包含块级作用域！</p>
+<p>作用域是可以嵌套的，从而形成作用域链。由于作用域链的存在，可以让变量的查找向上追溯，即子函数可以访问父函数的作用域=&gt;祖先函数的作用域=&gt;直到全局作用域，这种函数我们也称为闭包，后文会介绍。</p>
+<pre><code>var color = &quot;blue&quot;;
+
+function changeColor() {
+    var anotherColor = &quot;red&quot;;
+
+function swapColors() {
+    var tempColor = anotherColor;
+    anotherColor = color;
+    color = tempColor;
+    // 这里可以访问color、anotherColor、tempColor 
+}
+// 这里可以访问color、anotherColor，但不能访问tempColor
+swapColors();
+}
+// 这里只能访问color、changeColor();
+</code></pre><p>如下图所示，每个作用域能够访问到的变量以及嵌套的作用域可向上追溯。<br><img src="http://upload-images.jianshu.io/upload_images/1158202-649241778fd7be55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>                        作用域链<br>作用域的概念看着简单，实际使用会有不少问题，遇到问题要细心分析。</p>
+<h4 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h4><p>JavaScript引擎具有自动垃圾回收机制，不需要太关注内存分配和垃圾回收问题。这儿就不展开了！</p>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>前面提过，Object是唯一的复杂数据类型，引用类型都是从Object类型上继承而来。<br>✦ Array：数组类型<br>✦ Date：日期类型<br>✦ RegExp：正则表达式类型，这个多学学有好处！<br>✦ 等等…<br>那问题来了，我们用的最多的函数是什么数据类型呢？答案是Function类型！<br>诶，好像发现了点什么东西？由于Function是引用类型，而JavaScript又可以往引用类型上加属性和方法。那么，函数也可以！这也是JavaScript函数强大和复杂的地方。也就是说：函数也可以拥有自定义方法和属性！</p>
+<p>此外，JavaScript对前面提到的5种基本类型的其中3种也做了引用类型封装，分别是Boolean、Number、String，但其实使用不多，了解就行。</p>
+<p>对了，在所有代码执行之前，作用域就内置了两个对象，分别是Global和Math，其中浏览器的Global就是window啦！</p>
+<p>到此为止，JavaScript中基础的概念都差不多介绍了，其中函数和作用域相对来说复杂一些，其他的都比较浅显。<br>接下来，我会介绍介绍JavaScript中一些稍微复杂一些的概念：面向对象。</p>
+<h3 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h3><p>JavaScript本身并没有类和接口的概念了，面向对象都是基于原型实现的。<br>为了简单，我们只分析面向对象的两个问题：<br>✦ 如何定义一个类？<br>✦ 如何实现类的继承</p>
+<h4 id="定义一个类"><a href="#定义一个类" class="headerlink" title="定义一个类"></a>定义一个类</h4><p>不扯其他的，直接告诉你。我们使用构造函数+原型的方式来定义一个类。</p>
+<p>使用构造函数创建自定义类型，然后使用new操作符来创建类的实例，但是构造函数上的方法和属性在每个示例上都存在，不能共享，于是我们引入原型来实现方法和属性的共享。<br><img src="http://upload-images.jianshu.io/upload_images/1158202-ec523cf2296206a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>                        原型<br>最后，我们将需要共享的方法和属性定义在原型上，把专属于实例的方法和属性放到构造函数中。到这儿，我们就通过构造函数+原型的方式定义了一个类。</p>
+<pre><code>// 构造函数
+function Person(name, age, job) {
+    this.name = name;
+       this.age = age;
+    this.job = job;
+    this.friends = [&quot;Shelby&quot;, &quot;Court&quot;];
+
+}
+// 原型
+Person.prototype = {
+    constructor: Person,
+    sayName: function() {
+        return this.name;
+    }
+}
+// 实例化
+var person1 = new Person(&quot;Nicholas&quot;, 29, &quot;Software Engineer&quot;);
+var person2 = new Person(&quot;Greg&quot;, 27, &quot;Doctor&quot;);
+
+person1.friends.push(&quot;Van&quot;);
+alert(person1.friends);                     //输出&quot;Shelby,Count,Van&quot;
+alert(person2.friends);                     //输出&quot;Shelby,Count&quot;
+alert(person1.friends === person2.friends);        //输出false
+alert(person1.sayName === person2.sayName);        //输出    true
+</code></pre><h4 id="实现继承"><a href="#实现继承" class="headerlink" title="实现继承"></a>实现继承</h4><p>前文讲了如何定义一个类，那么我们定义一个父类，一个子类。<br>如何让子类继承父类呢？不扯别的，直接告诉你。JavaScript通过原型链来实现继承！<br>如何构建原型链呢？将父类实例赋值给子类构造函数的原型即可。好绕，但是千万得记住了！<br><img src="http://upload-images.jianshu.io/upload_images/1158202-a1b5a3a35103f841.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>                    原型链继承<br>构建原型链之后，子类就可以访问父类的所有属性和方法！</p>
+<pre><code>// 父类
+function SuperType() {
+    this.property = true;
+}
+SuperType.prototype.getSuperValue = function() {
+    return this.property;
+};
+
+// 子类
+function SubType() {
+    this.subproperty = false;
+}
+
+//子类继承父类
+SubType.prototype = new SuperType();
+
+//给子类添加新方法
+SubType.prototype.getSubValue = function() {
+    return this.subproperty;
+};
+//重写父类的方法
+SubType.prototype.getSuperValue = function() {
+    return false;
+};
+
+// 实例化
+var instance = new SubType();
+console.log(instance.getSuperValue()); //输出false
+面向对象的知识可以用一本书来写，这儿只是简单的介绍下最基础最常用的概念。
+</code></pre><h2 id="函数表达式"><a href="#函数表达式" class="headerlink" title="函数表达式"></a>函数表达式</h2><p>JavaScript中有两种定义函数的方式：函数声明和函数表达式。<br>使用函数表达式无须对函数命名，从而实现动态编程，也即匿名函数。有了匿名函数，JavaScript函数有了更强大的用处。</p>
+<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><p>递归是一种很常见的算法，经典例子就是阶乘。也不扯其他的，直接说递归的最佳实践，上代码：</p>
+<pre><code>// 最佳实践，函数表达式
+var factorial = (function f(num) {
+    if (num &lt;= 1) {
+        return 1;
+       } else {
+        return num * f(num - 1);
+    }
+});
+
+// 缺点：
+// factorial存在被修改的可能
+// 导致 return num * factorial(num - 1) 报错
+function factorial(num) {
+    if (num &lt;= 1) {
+        return 1;
+    } else {
+    return num * factorial(num - 1);
+    }
+}
+
+// 缺点：
+// arguments.callee，规范已经不推荐使用
+function factorial(num) {
+    if (num &lt;= 1) {
+    return 1;
+        } else {
+        return num * arguments.callee(num - 1);
+    }
+}
+</code></pre><p>递归就是这样，好多人还在使用arguments.callee的方式，改回函数表达式的方式吧，这才是最佳实践。</p>
+<p>啰嗦一句，好多人觉得递归难写，其实你将其分为两个步骤就会清晰很多了。<br>✦ 边界条件，通常是if-else。<br>✦ 递归调用。<br>按这个模式，找几个经典的递归练练手，就熟悉了。</p>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>很多人经常觉得闭包很复杂，很容易掉到坑里，其实不然。</p>
+<p>那么闭包是什么呢？如果一个函数可以访问另一个函数作用域中的变量，那么前者就是闭包。由于JavaScript函数可以返回函数，自然，创建闭包的常用方式就是在一个函数内部创建另一个函数！<br>这并没有什么神奇的，在父函数中定义子函数就可以创建闭包，而子函数可以访问父函数的作用域。<br>我们通常是因为被闭包坑了，才会被闭包吓到，尤其是面试题里一堆闭包。</p>
+<p>闭包的定义前面提了，如何创建闭包也说了，那么我们说说闭包的缺陷以及如何解决？</p>
+<pre><code>/* 我们通过subFuncs返回函数数组，然后分别调用执行 */
+
+    // 返回函数的数组subFuncs，而这些函数对superFunc的变量有引用
+// 这就是一个典型的闭包
+// 那么有什么问题呢？
+// 当我们回头执行subFuncs中的函数的时候，我们得到的i其实一直都是10，为什么？
+// 因为当我们返回subFuncs之后，superFunc中的i=10
+// 所以当执行subFuncs中的函数的时候，输出i都为10。
+// 
+// 以上，就是闭包最大的坑，一句话理解就是：
+// 子函数对父函数变量的引用，是父函数运行结束之后的变量的状态
+function superFunc() {
+    var subFuncs = new Array();
+    for (var i = 0; i &lt; 10; i++) {
+    subFuncs[i] = function() {
+        return i;
+    };
+    }
+
+return subFuncs;
+}
+
+// 那么，如何解决上诉的闭包坑呢？
+// 其实原理很简单，既然闭包坑的本质是：子函数对父函数变量的引用，是父函数运行结束之后的变量的状态
+// 那么我们解决这个问题的方式就是：子函数对父函数变量的引用，使用运行时的状态
+// 如何做呢？
+// 在函数表达式的基础上，加上自执行即可。
+function superFunc() {
+var subFuncs = new Array();
+for (var i = 0; i &lt; 10; i++) {
+    subFuncs[i] = function(num) {
+        return function() {
+            return num;
+        };
+    }(i);
+}
+return subFuncs;
+}
+</code></pre><p>综上，闭包本身不是什么复杂的机制，就是子函数可以访问父函数的作用域。<br>而由于JavaScript函数的特殊性，我们可以返回函数，如果我们将作为闭包的函数返回，那么该函数引用的父函数变量是父函数运行结束之后的状态，而不是运行时的状态，这便是闭包最大的坑。而为了解决这个坑，我们常用的方式就是让函数表达式自执行。<br>此外，由于闭包引用了祖先函数的作用域，所以滥用闭包会有内存问题。</p>
+<p>好像把闭包说得一无是处，那么闭包有什么用处呢？<br>主要是封装吧…</p>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>闭包可以封装私有变量或者封装块级作用域。<br>➙ 封装块级作用域<br>JavaScript并没有块级作用域的概念，只有全局作用域和函数作用域，那么如果想要创建块级作用域的话，我们可以通过闭包来模拟。<br>创建并立即调用一个函数，就可以封装一个块级作用域。该函数可以立即执行其中的代码，内部变量执行结束就会被立即销毁。</p>
+<pre><code>function outputNumbers(count) {
+// 在函数作用域下，利用闭包封装块级作用域
+// 这样的话，i在外部不可用，便有了类似块级作用域
+(function() {
+    for (var i = 0; i &lt; count; i++) {
+        alert(i);
+    }
+})();
+
+alert(i); //导致一个错误! 
+}
+
+// 在全局作用域下，利用闭包封装块级作用域
+// 这样的话，代码块不会对全局作用域造成污染
+(function() {
+var now = new Date();
+
+if (now.getMonth() == 0 &amp;&amp; now.getDate() == 1) {
+    alert(&quot;Happy new year!&quot;);
+}
+})();
+
+// 是的，封装块级作用域的核心就是这个：函数表达式 + 自执行！
+(function() {
+//这里是块级作用域
+})();
+</code></pre><p>➙ 封装私有变量<br>JavaScript也没有私有变量的概念，我们也可以使用闭包来实现公有方法，通过隐藏变量暴露方法的方式来实现封装私有变量。</p>
+<pre><code>(function() {
+//私有变量和私有函数
+var privateVariable = 10;
+
+function privateFunction() {
+    return false;
+}
+
+//构造函数
+MyObject = function() {};
+//公有/特权方法
+MyObject.prototype.publicMethod = function() {
+    privateVariable++;
+
+    return privateFunction();
+};
+})();
+</code></pre><h2 id="总结说点啥？"><a href="#总结说点啥？" class="headerlink" title="总结说点啥？"></a>总结说点啥？</h2><p>这差不多就是JavaScript的一些基础语法和稍微高级一些的用法，其实所谓的高级，都是JavaScript“不太成熟”的表现，尤其是面向对象，出于工程化的需要但是JavaScript本身并不完美支持。好在ES6最新标准解决了很多问题，结合Babel用起来也不用太考虑兼容性问题，如果你是新手的话，建议你直接去撸ES6+Babel吧。</p>
+<p>✦ JavaScript的基础主要包括：5中基本数据类型、1种复杂的数据类型、操作符、控制语句、函数等。<br>✦ 了解基本的语法后，你还需要学习学习JavaScript的变量、作用域、作用域链。<br>✦ 常见的引用类型可以边查边用。作为过来人，建议多学学正则，对你的代码功底会有较大的提升。<br>✦ 面向对象编程的部分外面有很多种方式，你只需要记住使用构造函数+原型去定义一个类，使用原型链去实现继承即可。更多的扩展，去翻翻书吧。<br>✦ 函数表达式引出了几个比较好玩的东西：递归、闭包、封装。记住递归的最佳实践、闭包的定义及缺陷、闭包的适用场景。</p>
+<p>JavaScript作为一门动态语言，和其他语言有较大的差异，这也造成很多人学习JavaScript时会觉得难学。但你现在看看前文，虽然是一个简略的总结，但JavaScript主要的内容就这些了，所以不要被自己吓到了。<br>再补一句，如果你是新手的话，建议你直接去撸ES6+Babel吧。</p>
+<p>文／齐修_qixiuss（简书作者）<br>原文链接：<a href="http://www.jianshu.com/p/66f3aef3e131" target="_blank" rel="external">http://www.jianshu.com/p/66f3aef3e131</a><br>著作权归作者所有，转载请联系作者获得授权，并标注“简书作者”。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/19/javascript/" class="archive-article-date">
+  	<time datetime="2016-10-19T08:44:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-19</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/12/eventLoop/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">eventLoop</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="javascript" data-title="javascript" data-url="http://yoursite.com/2016/10/19/javascript/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 lgp
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

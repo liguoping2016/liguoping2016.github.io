@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>nodeHeartModule | 前端小博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Node.js 手册查询-1-核心模块方法模块核心模块核心模块是被编译成二进制代码，引用的时候只需require表示符即可
+os 系统基本信息os模块可提供操作系统的一些基本信息
+1.返回系统临时目录
+ os.tmpdir()
+结果如: C:\Users\ADMINI~1\AppData\Local\Temp
+2.返回 CPU 的字节序，可能的是 “BE” 或 “LE”
+ os.endiannes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodeHeartModule">
+<meta property="og:url" content="http://yoursite.com/2016/08/18/nodeHeartModule/index.html">
+<meta property="og:site_name" content="前端小博客">
+<meta property="og:description" content="Node.js 手册查询-1-核心模块方法模块核心模块核心模块是被编译成二进制代码，引用的时候只需require表示符即可
+os 系统基本信息os模块可提供操作系统的一些基本信息
+1.返回系统临时目录
+ os.tmpdir()
+结果如: C:\Users\ADMINI~1\AppData\Local\Temp
+2.返回 CPU 的字节序，可能的是 “BE” 或 “LE”
+ os.endiannes">
+<meta property="og:updated_time" content="2016-11-18T11:56:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodeHeartModule">
+<meta name="twitter:description" content="Node.js 手册查询-1-核心模块方法模块核心模块核心模块是被编译成二进制代码，引用的时候只需require表示符即可
+os 系统基本信息os模块可提供操作系统的一些基本信息
+1.返回系统临时目录
+ os.tmpdir()
+结果如: C:\Users\ADMINI~1\AppData\Local\Temp
+2.返回 CPU 的字节序，可能的是 “BE” 或 “LE”
+ os.endiannes">
+  
+    <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lgp</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">lgp</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lgp</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-nodeHeartModule" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nodeHeartModule
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Node-js-手册查询-1-核心模块方法"><a href="#Node-js-手册查询-1-核心模块方法" class="headerlink" title="Node.js 手册查询-1-核心模块方法"></a>Node.js 手册查询-1-核心模块方法</h1><h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><h3 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h3><p>核心模块是被编译成二进制代码，引用的时候只需require表示符即可</p>
+<h4 id="os-系统基本信息"><a href="#os-系统基本信息" class="headerlink" title="os 系统基本信息"></a>os 系统基本信息</h4><p>os模块可提供操作系统的一些基本信息</p>
+<p>1.返回系统临时目录</p>
+<pre><code> os.tmpdir()
+结果如: C:\Users\ADMINI~1\AppData\Local\Temp
+</code></pre><p>2.返回 CPU 的字节序，可能的是 “BE” 或 “LE”</p>
+<pre><code> os.endianness()
+结果如: LE   (inter i3)
+</code></pre><p>3.返回操作系统的主机名</p>
+<pre><code> os.hostname()
+结果如: QH-20141006HJKT
+</code></pre><p>4.返回操作系统名称</p>
+<pre><code> os.type()
+结果如: Windows_NT
+</code></pre><p>5.返回操作系统平台</p>
+<pre><code> os.platform()
+结果如: win32
+</code></pre><p>6.返回操作系统 CPU 架构，可能的值有 “x64”、“arm” 和 “ia32”</p>
+<pre><code> os.arch()
+结果如: x64
+</code></pre><p>7.返回操作系统的发行版本</p>
+<pre><code> os.release()
+结果如: 6.1.7601
+</code></pre><p>8.返回操作系统运行的时间，以秒为单位</p>
+<pre><code> os.uptime()
+结果如: 7847.6797442
+</code></pre><p>9.返回一个包含 1、5、15 分钟平均负载的数组</p>
+<pre><code> os.loadavg()
+结果如: 6.1.7601
+</code></pre><p>10.返回系统内存总量，单位为字节</p>
+<pre><code>os.totalmem()
+结果如: 3931602944
+</code></pre><p>11.返回操作系统空闲内存量，单位是字节</p>
+<pre><code> os.freemem()
+结果如: 1307422720
+</code></pre><p>12.返回一个对象数组，包含所安装的每个 CPU/内核的信息：型号、速度（单位 MHz）、时间（一个包含 user、nice、sys、idle 和 irq 所使用 CPU/内核毫秒数的对象）</p>
+<pre><code>os.cpus()
+</code></pre><p>13.获取网络接口的一个列表信息</p>
+<pre><code> os.networkInterfaces()
+结果如: 1307422720
+</code></pre><p>14.一个定义了操作系统的一行结束的标识的常量</p>
+<pre><code>os.EOL
+</code></pre><h4 id="process-进程管理"><a href="#process-进程管理" class="headerlink" title="process 进程管理"></a>process 进程管理</h4><p>process 是一个全局变量.无需 require;</p>
+<p>1.返回应用程序当前目录</p>
+<pre><code> process.cwd()
+结果如: c:\Users\Administrator\MongoDb_Test
+</code></pre><p>2.改变应用程序目录</p>
+<pre><code>process.chdir(“目录”)
+</code></pre><p>3.标准输出流.将内容打印到输出设备上.console.log就是封装了它</p>
+<pre><code>process.stdout.write(‘aa\n’)
+结果如: aa
+</code></pre><p>4.标准错误流</p>
+<pre><code> process.stderr.write(‘aa\n’)
+结果如: aa
+</code></pre><p>5.进程的输入流. 通过注册事件的方式来获取输入的内容</p>
+<pre><code> process.stdin.on(‘readable’, function() {
+var chunk = process.stdin.read();
+if (chunk !== null) {
+process.stdout.write(&apos;data: ’ + chunk);
+}
+});
+</code></pre><p>6.结束进程</p>
+<pre><code> process.exit(code);
+参数code为退出后返回的代码，如果省略则默认返回0
+</code></pre><p>7.注册事件</p>
+<pre><code> process.stdout.on(‘data’,function(data){
+console.log(data);
+});
+</code></pre><p>8.为事件循环设置一项任务,Node.js 会在下次事件循环调响应时调用 callback</p>
+<pre><code>process.nextTick(callback)
+</code></pre><p>8.设置编码, 默认 utf8. node.js编码格式只支持UTF8、ascii、base64，暂时不支持GBK、gb2312</p>
+<pre><code> process.stdin.setEncoding(编码);
+process.stdout.setEncoding(编码);
+process.stderr.setEncoding(编码);
+</code></pre><h4 id="fs-文件管理"><a href="#fs-文件管理" class="headerlink" title="fs 文件管理"></a>fs 文件管理</h4><p>fs 模块提供了异步和同步2个版本     fs.readFile()    fs.readFileSync()</p>
+<p>1.写入文件内容</p>
+<pre><code>fs.writeFile(‘test.txt’, ‘Hello Node’ , [encoding], [callback]);
+</code></pre><p>2.追加写入</p>
+<pre><code>fs.appendFile(‘test.txt’,‘Hello Node’,[encoding],[callback]);
+</code></pre><p>3.文件是否存在</p>
+<pre><code>fs.exists(‘test.txt’,[callback]);
+</code></pre><p>4.修改文件名</p>
+<pre><code>fs.rename(旧文件,新文件,[callback]);
+</code></pre><p>5.移动文件. 没有专门函数,通过修改文件名可以达到目的</p>
+<pre><code>fs.rename(oldPath,newPath,[callback]);
+</code></pre><p>6.读取文件内容</p>
+<pre><code>fs.readFile(‘test.txt’, [encoding], [callback]);
+</code></pre><p>7.删除文件</p>
+<pre><code>fs.unlink(‘test.txt’, [callback]);
+</code></pre><p>8.创建目录</p>
+<pre><code> fs.mkdir(路径, 权限, [callback]);
+路径：新创建的目录。
+权限：可选参数，只在linux下有效，表示目录的权限，默认为0777，    表示文件所有者、文件所有者所在的组的*用户、*所有用户，都有权限进行读、写、执行的操作。
+</code></pre><p>9.删除目录</p>
+<pre><code>fs.rmdir(path, [callback]);
+</code></pre><p>10.读取目录. 读取到指定目录下所有的文件</p>
+<pre><code>fs.readdir(path, [callback]);
+</code></pre><p>11.打开文件</p>
+<pre><code>fs.open(path,flags, [mode], [callback(err,fd)])
+</code></pre><p>12.关闭文件</p>
+<pre><code> fs.close(fd, [callback(err)])
+fd 是打开文件后的标示符
+</code></pre><p>13.读取文件</p>
+<pre><code>fs.read(fd,buffer,offset,length,position,[callback(err, bytesRead, buffer)])
+</code></pre><p>14.写入文件</p>
+<pre><code>fs.writeFile(filename, data,[encoding],[callback(err)])
+</code></pre><p>15.获取真实路径</p>
+<pre><code>fs.realpath(path, [callback(err,resolvedPath)])
+</code></pre><p>16.更改所有权</p>
+<pre><code>fs.chown(path, uid, gid, [callback(err)])
+</code></pre><p>17.更改权限</p>
+<pre><code>fs.fchmod(fd, mode, [callback(err)])
+</code></pre><p>18.获取文件信息</p>
+<pre><code>fs.stat(path, [callback(err, stats)])
+</code></pre><p>19.创建硬链接</p>
+<pre><code>fs.link(srcpath, dstpath, [callback(err)])
+</code></pre><p>20.读取链接</p>
+<pre><code>fs.readlink(path, [callback(err,linkString)])
+</code></pre><p>21.修改文件时间戳</p>
+<pre><code>fs.utimes(path, atime, mtime, [callback(err)])
+</code></pre><p>22.同步磁盘缓存</p>
+<pre><code>fs.fsync(fd, [callback(err)])
+</code></pre><h5 id="url-文件管理"><a href="#url-文件管理" class="headerlink" title="url 文件管理"></a>url 文件管理</h5><p>1.解析url，返回一个json格式的数组</p>
+<pre><code> url.parse(‘http://www.baidu.com’);
+结果如: { protocol: ‘http:’,
+slashes: null,
+auth: null,
+host: null,
+port: null,
+hostname: null,
+hash: null,
+search: null,
+query: null,
+pathname: ‘www.baidu.com’,
+path: ‘www.baidu.com’,
+href: ‘http://www.baidu.com’ }
+</code></pre><p>2.解析url - 条件解析</p>
+<pre><code> url.parse(‘http://www.baidu.com?page=1’,true);
+结果如: { protocol: ‘http:’,
+slashes: true,
+auth: null,
+host: ‘www.baidu.com’,
+port: null,
+hostname: ‘www.baidu.com’,
+hash: null,
+search: ‘?page=1’,
+query: { page: ‘1’ },
+pathname: ‘/’,
+path: ‘/?page=1’,
+href: ‘http://www.baidu.com/?page=1’ }
+</code></pre><p>3.解析主机</p>
+<pre><code> url.parse(‘http://www.baidu.com/news’,false,true);
+结果如:{ protocol: ‘http:’,
+slashes: true,
+auth: null,
+host: ‘www.baidu.com’,
+port: null,
+hostname: ‘www.baidu.com’,
+hash: null,
+search: null,
+query: null,
+pathname: ‘/news’,
+    path: ‘/news’,
+href: ‘http://www.baidu.com/news’ }
+</code></pre><p>4.格式化为url. 将json数组逆向成url</p>
+<pre><code> url.format({
+protocol: ‘http:’,
+hostname:‘www.baidu.com’,
+port:‘80’,
+pathname :’/news’,
+query:{page:1}
+});
+结果如: http://www.baidu.com/news?page=1
+</code></pre><p>5.封装路径</p>
+<pre><code> url.resolve(‘http://example.com/’, ‘/one’)  // &apos;http://example.com/one’
+url.resolve(‘http://example.com/one’, ‘/two’) // ‘http://example.com/two’
+</code></pre><h5 id="path-路径管理"><a href="#path-路径管理" class="headerlink" title="path 路径管理"></a>path 路径管理</h5><p>用于处理和转换文件路径的工具集,用于处理目录的对象</p>
+<p>1.格式化路径. 将不符合规范的路径经过格式化转换为标准路径,解析路径中的.与…外，还能去掉多余的斜杠</p>
+<pre><code> path.normalize(’/path///normalize/hi/…’);
+结果如: ‘/path/normalize/’ 标准化之后的路径里的斜杠在Windows系统下是，而在Linux系统下是/
+</code></pre><p>2.组合路径</p>
+<pre><code>path.join(’///you’, ‘/are’, ‘//beautiful’);
+结果如:  ‘/you/are/beautiful’
+</code></pre><p>3.返回路径中的目录名</p>
+<pre><code> path.dirname(’/foo/strong/cool/nice’);
+结果如: ‘/foo/strong/cool’
+</code></pre><p>4.返回路径最后一部分,还可以排除指定字符串</p>
+<pre><code> path.basename(’/foo/strong/basename/index.html’);
+path.basename(’/foo/strong/basename/index.html’,’.html’);
+结果如: index.html 和 index
+</code></pre><p>5.返回路径后缀</p>
+<pre><code> path.extname(‘index.html’);
+结果如: .html
+</code></pre><h4 id="Query-String-字符串转换"><a href="#Query-String-字符串转换" class="headerlink" title="Query String 字符串转换"></a>Query String 字符串转换</h4><p>用于实现URL参数字符串与参数对象之间的互相转换</p>
+<p>1.序列化对象.将对象类型转换成一个字符串类型（默认的分割符（“&amp;”）和分配符（“=”））</p>
+<pre><code> 1 querystring.stringify({foo:‘bar’,cool:[‘xux’, ‘yys’]});
+结果如: foo=bar&amp;cool=xux&amp;cool=yys
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2 重载1: querystring.stringify(&#123;foo:‘bar’,cool:[‘xux’, ‘yys’]&#125;,’*’,’$’);</div><div class="line">结果如: foo$bar*cool$xux*cool$yys</div></pre></td></tr></table></figure>
+<p>2.反序列化</p>
+<pre><code>querystring.parse(‘foo@bar$cool@xux$cool@yys’,’@’,’$’);
+结果如: { foo: ‘bar’ ,  cool: [‘xux’, ‘yys’] }
+</code></pre><h4 id="util-使用工具"><a href="#util-使用工具" class="headerlink" title="util 使用工具"></a>util 使用工具</h4><p>提供常用函数的集合，用于弥补核心JavaScript的一些功能过于精简的不足。并且还提供了一系列常用工具，用来对数据的输出和验证</p>
+<p>1.任意对象转化为字符串,用于调试输出</p>
+<pre><code>util.inspect(object,[showHidden],[depth],[colors])
+</code></pre><p>2.格式化字符串. 就像c语言的 printf函数<br>支持的占位符有：“%s(字符串)”、“%d(数字&lt;整型和浮点型&gt;)”、“%j(JSON)”、“%(单独一个百分号则不作为一个参数)”</p>
+<pre><code> util.format(’%s:%s’, ‘foo’);
+结果如: foo:%s
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">util.format(’%s:%s’, ‘foo’, ‘bar’, ‘baz’);</div><div class="line">结果如: foo:bar baz 额外的参数将会调用util.inspect()转换为	字符串连接在一起</div></pre></td></tr></table></figure>
+<pre><code>util.format(1, 2, 3);
+结果如: 1 2 3 , 第一个参数是一个非格式化字符串，则会把所有的参数转成字符串并以空格隔开拼接在一块
+</code></pre><p>3.验证函数</p>
+<pre><code> util.isArray(object);
+判断对象是否为数组类型，是则返回ture,否则为false
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">util.isDate(object);</div><div class="line">判断对象是否为日期类型，是则返回ture,否则返回false</div></pre></td></tr></table></figure>
+<pre><code>util.isRegExp(object);
+判断对象是否为正则类型，是则返回ture,否则返回false
+,util.isArray()、util.isRegExp()、util.isDate()、util.isError()  util.format()、util. debug()
+</code></pre><p>4.继承</p>
+<pre><code> util.inherits( 子类, 基类)
+实现对象间原型继承
+
+child_process 子进程
+</code></pre><p>node.js是基于单线程模型架构，这样的设计可以带来高效的CPU利用率，但是无法却利用多个核心的CPU，为了解决这个问题，node.js提供了child_process模块，通过多进程来实现对多核CPU的利用. child_process模块提供了四个创建子进程的函数，分别是spawn，exec，execFile和fork</p>
+<p>1.用给定的命令发布一个子进程，带有‘args’命令行参数</p>
+<pre><code> child_process.spawn(command, [args], [options])
+command {String}要运行的命令行
+args {Array} 字符串参数列表
+options {Object}
+cwd {String} 子进程的当前的工作目录
+stdio {Array|String} 子进程 stdio 配置. (参阅下文)
+customFds {Array} Deprecated 作为子进程 stdio 使用的 文件标示符. (参阅下文)
+env {Object} 环境变量的键值对
+detached {Boolean} 子进程将会变成一个进程组的领导者. (参阅下文)
+uid {Number} 设置用户进程的ID. (See setuid(2).)
+gid {Number} 设置进程组的ID. (See setgid(2).)
+返回: {ChildProcess object}
+</code></pre><p>2.创建子进程</p>
+<pre><code>child_process.exec(command, [options], callback)
+</code></pre><p>3.创建进程 - 直接运行指定文件</p>
+<pre><code>child_process.execFile( file);
+</code></pre><p>4.直接运行Node.js模块</p>
+<pre><code> child_process.fork( modulePath );
+fork函数只支持运行JavaScript代码
+</code></pre><h4 id="http-HTTP"><a href="#http-HTTP" class="headerlink" title="http HTTP"></a>http HTTP</h4><p>2个方法</p>
+<pre><code> http.createServer([requestListener])  创建HTTP服务器
+http.createClient([port], [host])     创建HTTP客户端
+</code></pre><h5 id="http-Server"><a href="#http-Server" class="headerlink" title="http.Server"></a>http.Server</h5><p>由 http.createServer 创建所返回的实例</p>
+<h5 id="http-Server-事件"><a href="#http-Server-事件" class="headerlink" title="http.Server 事件"></a>http.Server 事件</h5><p>request 客户端请求到来<br>提供2个参数: req, res  分别是http.ServerRequest 和  http.ServerResponse  的实例.表示请求和响应消息</p>
+<p>connection TCP建立连接时触发<br>提供1个 socket 参数 net.Socket 实例</p>
+<p>close 服务器关闭时触发<br>无参数</p>
+<p>还有checkContinue 、 upgrade 、 clientError 等事件. request 经常使用,所以包含在了 createServer函数中</p>
+<h5 id="http-ServerRequest-对象"><a href="#http-ServerRequest-对象" class="headerlink" title="http.ServerRequest 对象"></a>http.ServerRequest 对象</h5><p>HTTP请求的消息, 一般由 http.Server的 request 事件发送</p>
+<h5 id="属性"><a href="#属性" class="headerlink" title="属性:"></a>属性:</h5><p>complete          客户端请求是否已经发送完成</p>
+<p>httpVersion      HTTP 协议版本，通常是 1.0 或 1.1</p>
+<p>method          HTTP 请求方法，如 GET、POST、PUT、DELETE 等</p>
+<p>url              原始的请求路径，例如 /static/image/x.jpg 或 /user?name=byvoid</p>
+<p>headers          HTTP 请求头</p>
+<p>trailers          HTTP 请求尾（不常见）</p>
+<p>connection      当前 HTTP 连接套接字，为 net.Socket 的实例</p>
+<p>socket          connection 属性的别名</p>
+<p>client          client 属性的别名</p>
+<h5 id="GET"><a href="#GET" class="headerlink" title="GET:"></a>GET:</h5><p>的请求是直接嵌入路径中的. 解析?后面的路径就行了.  url 模块中  parse 函数提供了这个功能</p>
+<h5 id="POST"><a href="#POST" class="headerlink" title="POST:"></a>POST:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">**HTTP 请求分: 请求头.  请求体**</div><div class="line">http.ServerRequest 提供3个事件控制请求体传输</div><div class="line">data:	请求体数据来到时. 参数 chunk 表示接收到的数据</div><div class="line">end:	请求体数据传输完成时</div><div class="line">close	用户当前请求结束时</div></pre></td></tr></table></figure>
+<pre><code>var post = &apos;&apos;;
+req.on(&apos;data&apos;, function(chunk) {    post += chunk;    });
+req.on(&apos;end&apos;, function() {    post = querystring.parse(post);
+res.end(util.inspect(post));});
+</code></pre><h5 id="http-ServerResponse-对象"><a href="#http-ServerResponse-对象" class="headerlink" title="http.ServerResponse 对象"></a>http.ServerResponse 对象</h5><p>http.ServerResponse是返回给客户端的信息,决定了用户最终看到的结果. 有3个重要的成员函数. 用于响应头,响应内容以及结束请求</p>
+<p>1.向客户端发送响应头</p>
+<pre><code> res.writeHead(statusCode, [headers])
+statusCode, 是HTTP状态码. 如200,404.
+
+headers 类似数组的对象,表示响应头的每个属性
+{
+“Content-Type”: “text/html”,
+“Connection”: “keep-alive”
+}
+</code></pre><p>2.发送响应内容, 如果是字符串,需要制定编码方式, 默认 utf-8</p>
+<pre><code>res.write(data, [encoding])
+</code></pre><p>3.结束响应,告知客户端所有响应完成. 此函数必须调用一次</p>
+<pre><code>res.end([data] , [encoding] )
+</code></pre><h4 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h4><p>文件模块，则是指js文件、json文件或者是.node文件</p>
+<h6 id="无"><a href="#无" class="headerlink" title="无"></a>无</h6><h3 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h3><h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><p>挂接模块</p>
+<pre><code>var EventEmitter = require(‘events’).EventEmitter;
+</code></pre><p>1.实例化一个EventEmitter对象</p>
+<pre><code>var event = new EventEmitter();
+</code></pre><p>2.注册事件</p>
+<pre><code> emitter.on( ‘Event_Name’ , callBack_Fun )
+emitter.once( ‘Event_Name’ , callBack_Fun )    //注册一个单次监听器,触发一次后立刻解除
+</code></pre><p>3.发射事件</p>
+<pre><code>event.emit(‘Event_Name’ , 参数1,参数2);
+</code></pre><p>4.移除事件</p>
+<pre><code> emitter…removeListener(‘Event_Name’ , callBack_Fun)
+emitter.removeAllListeners(  [‘Event_Name’] )    //如果指定了事件名,就移除指定的,否则移除所有事件
+</code></pre><h4 id="模块和包"><a href="#模块和包" class="headerlink" title="模块和包"></a>模块和包</h4><pre><code>Node.js 的模块和包机制的实现参照了 CommonJS 的标准，但并未完全遵循。
+
+#### 包
+包是在模块基础上更深一步的抽象, 类似于 c/c++ 的函数库.
+Node.js 包是一个目录. 其中包含一个JSON格式的说明文件     package.json
+CommonJS 规范特征:
+-&gt;   package.json 必须在包的顶层目录下
+-&gt;   二进制文件在bin目录下
+-&gt;   JavaScript代码在lib目录下
+-&gt;   文档应该在doc目录下
+-&gt;   单元测试在test目录下
+
+
+
+
+#### require(&apos;Modile_Name&apos;)     
+功能:    加载其他模块
+说明:    不会重复加载以加载的模块
+
+
+#### exports.setName
+功能:    公开一个模块中的函数或对象
+说明:    exports 本身仅仅是一个普通的空对象，即 {}. 所以     exports.函数  就是给它加了函数
+module.exports  则是用一个对象取代 exports  对象. (不可以对 exports 直接赋值替代此功能)
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">方式1:</div><div class="line">	//使用</div><div class="line">	exports.SayName = function(thyName) &#123;console.log(thyName)&#125;; </div><div class="line">	//调用</div><div class="line">	var test = require(&apos;./fileName&apos;);</div><div class="line">	test.SayName(&apos;XueYou&apos;);</div><div class="line"></div><div class="line">方式2:</div><div class="line">	//使用</div><div class="line">	function hello()&#123;</div><div class="line">	 	var name;</div><div class="line">		this.setNam()&#123;&#125;;</div><div class="line">		this.SayName()&#123;&#125;;</div><div class="line">	&#125;</div><div class="line">	module.exports = hello;</div><div class="line">	//调用</div><div class="line">	var test = require(&apos;./fileName&apos;);</div><div class="line">	test = new test();	//注意因为是对象,所以要new</div><div class="line">	test.SayName();</div></pre></td></tr></table></figure>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><h5 id="express-与-webstorm-配置"><a href="#express-与-webstorm-配置" class="headerlink" title="express 与 webstorm 配置"></a>express 与 webstorm 配置</h5><p>Node interpreter : node.exe 路径<br>Node parameters  : ./bin/www<br>Working directory : 工作目录<br>JavaScript file  :  app.js</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/18/nodeHeartModule/" class="archive-article-date">
+  	<time datetime="2016-08-18T11:56:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/08/29/jszhengze/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          jszhengze
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/18/mongoose/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mongoose</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="nodeHeartModule" data-title="nodeHeartModule" data-url="http://yoursite.com/2016/08/18/nodeHeartModule/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 lgp
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

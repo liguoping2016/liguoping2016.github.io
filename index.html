@@ -142,7 +142,7 @@
       <div class="body-wrap">
         
   
-    <article id="post-React-native" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-javascript" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -152,7 +152,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/12/React-native/">React native</a>
+      <a class="article-title" href="/2016/10/19/javascript/">javascript</a>
     </h1>
   
 
@@ -160,27 +160,1714 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="React-Native"><a href="#React-Native" class="headerlink" title="React Native"></a>React Native</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="http://brew.sh/" target="_blank" rel="external">Homebrew</a>，Mac系统的包管理器，用于安装NodeJS和一些其他必需的工具软件。</p>
-<pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre><p><a href="https://nodejs.org/en/" target="_blank" rel="external">Node</a></p>
-<pre><code>brew install node
-</code></pre><p><a href="http://reactnative.cn/docs/0.37/getting-started.html" target="_blank" rel="external">React Native</a>  命令</p>
-<pre><code>npm install -g yarn react-native-cli
-</code></pre><p>如果你看到EACCES: permission denied这样的权限报错，那么请参照上文的homebrew译注，修复/usr/local目录的所有权：</p>
-<pre><code>sudo chown -R `whoami` /usr/local
-</code></pre><p><a href="https://facebook.github.io/watchman/docs/install.html" target="_blank" rel="external">Watchman</a>  由Facebook提供的监视文件系统变更的工具</p>
-<pre><code>brew install watchman
-</code></pre><h2 id="测试安装"><a href="#测试安装" class="headerlink" title="测试安装"></a>测试安装</h2><p>推荐使用WebStorm或Sublime Text来编写React Native应用</p>
-<pre><code>react-native init AwesomeProject
-cd AwesomeProject
-react-native run-ios
+        <h1 id="JavaScript-知识点整理"><a href="#JavaScript-知识点整理" class="headerlink" title="JavaScript 知识点整理"></a>JavaScript 知识点整理</h1><p>JavaScript是按照ECMAScript标准设计和实现的，后文说的JavaScript语法其实是ES5的标准的实现。<br>先说说有哪些基础语法？</p>
+<h2 id="最基础语法有哪些？"><a href="#最基础语法有哪些？" class="headerlink" title="最基础语法有哪些？"></a>最基础语法有哪些？</h2><p>基础语法几乎所有的语言差异不大，无非数据类型、操作符、控制语句、函数等，简单列举下。</p>
+<h3 id="5种基本数据类型-amp-1种复杂的数据类型"><a href="#5种基本数据类型-amp-1种复杂的数据类型" class="headerlink" title="5种基本数据类型 &amp; 1种复杂的数据类型"></a>5种基本数据类型 &amp; 1种复杂的数据类型</h3><p>JavaScript包含5种基本数据类型，分别是<code>undefined</code> / <code>null</code> /  <code>boolean</code> / <code>number</code> / <code>string</code>，基本数据类型就这五种，没有其他的！<br>JavaScript包含1种复杂的数据类型，就是<code>Object</code>类型，<code>Object</code>类型是所有其他对象的基类。<br>注意：JavaScript并不区分浮点数和整数，都是用<code>number</code>来表示。</p>
+<p>前面提到的5种基本数据类型，以及这儿的1种复杂数据类型，这就是数据类型的全部了！</p>
+<h4 id="基本操作符"><a href="#基本操作符" class="headerlink" title="基本操作符"></a>基本操作符</h4><p>这个是常识，知道怎么回事就好。<br>常用的操作符包括：算术操作符、关系操作符、布尔操作符、赋值操作符等。</p>
+<h4 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h4><p>这就是我们常说的if-else之类的控制语句。<br>常用的并不多：if语句、switch语句、for语句、while语句、for-in语句。</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>函数就是一小段逻辑的封装，理论上逻辑越独立越好。<br>JavaScript函数相对其他语言来说有很大不同。JavaScript函数既可以作为参数，也可以作为返回值。<br>此外JavaScript函数可以接受任意数量的参数，并且可以通过arguments对象来访问这些参数。</p>
+<p>任何一门语言的基础语法都是相通的，除开一些细节差异，大致就是上面这些了：数据类型、操作符、控制语句、函数、模块等等。</p>
+<p>接下来介绍稍微复杂的一些概念。</p>
+<h3 id="变量、作用域、内存问题"><a href="#变量、作用域、内存问题" class="headerlink" title="变量、作用域、内存问题"></a>变量、作用域、内存问题</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>JavaScript变量分为两种：基本类型和引用类型。其中基本类型就是前面提到的5种基本数据类型，引用类型就是前面提到的<code>Object</code>以及基于它的其他复杂数据类型。<br>✦ 基本类型：在内存中占据实际大小的空间，赋值的时候，会在内存中创建一份新的副本。保存在<code>栈内存</code>中。<br>✦ 引用类型：指向对象的指针而不是对象本身，赋值的时候，只是创建了一个新的指针指向对象。保存在<code>堆内存</code>中。<br><img src="http://upload-images.jianshu.io/upload_images/1158202-2ef01a8928adaa18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>                    变量内存分配</p>
+<p>一句话就是，基本类型在内存中是实际的值；而引用类型在内存中就是一个指针，指向一个对象，多个引用类型可能同时指向同一个对象。</p>
+<p>那么，如何确定某个变量是哪种数据类型呢？<br>确定一个变量是哪种基本类型用typeof操作符。<br>确定一个变量是哪种引用类型用instanceof操作符。<br>这个别忘了！</p>
+<h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p>变量是在某个特定的作用域中声明的，作用域决定了这些变量的生命周期，以及哪些代码可以访问其中的变量。<br>JavaScript作用域只包括全局作用域和函数作用域，并不包含块级作用域！</p>
+<p>作用域是可以嵌套的，从而形成作用域链。由于作用域链的存在，可以让变量的查找向上追溯，即子函数可以访问父函数的作用域=&gt;祖先函数的作用域=&gt;直到全局作用域，这种函数我们也称为闭包，后文会介绍。</p>
+<pre><code>var color = &quot;blue&quot;;
+
+function changeColor() {
+    var anotherColor = &quot;red&quot;;
+
+function swapColors() {
+    var tempColor = anotherColor;
+    anotherColor = color;
+    color = tempColor;
+    // 这里可以访问color、anotherColor、tempColor 
+}
+// 这里可以访问color、anotherColor，但不能访问tempColor
+swapColors();
+}
+// 这里只能访问color、changeColor();
+</code></pre><p>如下图所示，每个作用域能够访问到的变量以及嵌套的作用域可向上追溯。<br><img src="http://upload-images.jianshu.io/upload_images/1158202-649241778fd7be55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>                        作用域链<br>作用域的概念看着简单，实际使用会有不少问题，遇到问题要细心分析。</p>
+<h4 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h4><p>JavaScript引擎具有自动垃圾回收机制，不需要太关注内存分配和垃圾回收问题。这儿就不展开了！</p>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>前面提过，Object是唯一的复杂数据类型，引用类型都是从Object类型上继承而来。<br>✦ Array：数组类型<br>✦ Date：日期类型<br>✦ RegExp：正则表达式类型，这个多学学有好处！<br>✦ 等等…<br>那问题来了，我们用的最多的函数是什么数据类型呢？答案是Function类型！<br>诶，好像发现了点什么东西？由于Function是引用类型，而JavaScript又可以往引用类型上加属性和方法。那么，函数也可以！这也是JavaScript函数强大和复杂的地方。也就是说：函数也可以拥有自定义方法和属性！</p>
+<p>此外，JavaScript对前面提到的5种基本类型的其中3种也做了引用类型封装，分别是Boolean、Number、String，但其实使用不多，了解就行。</p>
+<p>对了，在所有代码执行之前，作用域就内置了两个对象，分别是Global和Math，其中浏览器的Global就是window啦！</p>
+<p>到此为止，JavaScript中基础的概念都差不多介绍了，其中函数和作用域相对来说复杂一些，其他的都比较浅显。<br>接下来，我会介绍介绍JavaScript中一些稍微复杂一些的概念：面向对象。</p>
+<h3 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h3><p>JavaScript本身并没有类和接口的概念了，面向对象都是基于原型实现的。<br>为了简单，我们只分析面向对象的两个问题：<br>✦ 如何定义一个类？<br>✦ 如何实现类的继承</p>
+<h4 id="定义一个类"><a href="#定义一个类" class="headerlink" title="定义一个类"></a>定义一个类</h4><p>不扯其他的，直接告诉你。我们使用构造函数+原型的方式来定义一个类。</p>
+<p>使用构造函数创建自定义类型，然后使用new操作符来创建类的实例，但是构造函数上的方法和属性在每个示例上都存在，不能共享，于是我们引入原型来实现方法和属性的共享。<br><img src="http://upload-images.jianshu.io/upload_images/1158202-ec523cf2296206a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>                        原型<br>最后，我们将需要共享的方法和属性定义在原型上，把专属于实例的方法和属性放到构造函数中。到这儿，我们就通过构造函数+原型的方式定义了一个类。</p>
+<pre><code>// 构造函数
+function Person(name, age, job) {
+    this.name = name;
+       this.age = age;
+    this.job = job;
+    this.friends = [&quot;Shelby&quot;, &quot;Court&quot;];
+
+}
+// 原型
+Person.prototype = {
+    constructor: Person,
+    sayName: function() {
+        return this.name;
+    }
+}
+// 实例化
+var person1 = new Person(&quot;Nicholas&quot;, 29, &quot;Software Engineer&quot;);
+var person2 = new Person(&quot;Greg&quot;, 27, &quot;Doctor&quot;);
+
+person1.friends.push(&quot;Van&quot;);
+alert(person1.friends);                     //输出&quot;Shelby,Count,Van&quot;
+alert(person2.friends);                     //输出&quot;Shelby,Count&quot;
+alert(person1.friends === person2.friends);        //输出false
+alert(person1.sayName === person2.sayName);        //输出    true
+</code></pre><h4 id="实现继承"><a href="#实现继承" class="headerlink" title="实现继承"></a>实现继承</h4><p>前文讲了如何定义一个类，那么我们定义一个父类，一个子类。<br>如何让子类继承父类呢？不扯别的，直接告诉你。JavaScript通过原型链来实现继承！<br>如何构建原型链呢？将父类实例赋值给子类构造函数的原型即可。好绕，但是千万得记住了！<br><img src="http://upload-images.jianshu.io/upload_images/1158202-a1b5a3a35103f841.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>                    原型链继承<br>构建原型链之后，子类就可以访问父类的所有属性和方法！</p>
+<pre><code>// 父类
+function SuperType() {
+    this.property = true;
+}
+SuperType.prototype.getSuperValue = function() {
+    return this.property;
+};
+
+// 子类
+function SubType() {
+    this.subproperty = false;
+}
+
+//子类继承父类
+SubType.prototype = new SuperType();
+
+//给子类添加新方法
+SubType.prototype.getSubValue = function() {
+    return this.subproperty;
+};
+//重写父类的方法
+SubType.prototype.getSuperValue = function() {
+    return false;
+};
+
+// 实例化
+var instance = new SubType();
+console.log(instance.getSuperValue()); //输出false
+面向对象的知识可以用一本书来写，这儿只是简单的介绍下最基础最常用的概念。
+</code></pre><h2 id="函数表达式"><a href="#函数表达式" class="headerlink" title="函数表达式"></a>函数表达式</h2><p>JavaScript中有两种定义函数的方式：函数声明和函数表达式。<br>使用函数表达式无须对函数命名，从而实现动态编程，也即匿名函数。有了匿名函数，JavaScript函数有了更强大的用处。</p>
+<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><p>递归是一种很常见的算法，经典例子就是阶乘。也不扯其他的，直接说递归的最佳实践，上代码：</p>
+<pre><code>// 最佳实践，函数表达式
+var factorial = (function f(num) {
+    if (num &lt;= 1) {
+        return 1;
+       } else {
+        return num * f(num - 1);
+    }
+});
+
+// 缺点：
+// factorial存在被修改的可能
+// 导致 return num * factorial(num - 1) 报错
+function factorial(num) {
+    if (num &lt;= 1) {
+        return 1;
+    } else {
+    return num * factorial(num - 1);
+    }
+}
+
+// 缺点：
+// arguments.callee，规范已经不推荐使用
+function factorial(num) {
+    if (num &lt;= 1) {
+    return 1;
+        } else {
+        return num * arguments.callee(num - 1);
+    }
+}
+</code></pre><p>递归就是这样，好多人还在使用arguments.callee的方式，改回函数表达式的方式吧，这才是最佳实践。</p>
+<p>啰嗦一句，好多人觉得递归难写，其实你将其分为两个步骤就会清晰很多了。<br>✦ 边界条件，通常是if-else。<br>✦ 递归调用。<br>按这个模式，找几个经典的递归练练手，就熟悉了。</p>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>很多人经常觉得闭包很复杂，很容易掉到坑里，其实不然。</p>
+<p>那么闭包是什么呢？如果一个函数可以访问另一个函数作用域中的变量，那么前者就是闭包。由于JavaScript函数可以返回函数，自然，创建闭包的常用方式就是在一个函数内部创建另一个函数！<br>这并没有什么神奇的，在父函数中定义子函数就可以创建闭包，而子函数可以访问父函数的作用域。<br>我们通常是因为被闭包坑了，才会被闭包吓到，尤其是面试题里一堆闭包。</p>
+<p>闭包的定义前面提了，如何创建闭包也说了，那么我们说说闭包的缺陷以及如何解决？</p>
+<pre><code>/* 我们通过subFuncs返回函数数组，然后分别调用执行 */
+
+    // 返回函数的数组subFuncs，而这些函数对superFunc的变量有引用
+// 这就是一个典型的闭包
+// 那么有什么问题呢？
+// 当我们回头执行subFuncs中的函数的时候，我们得到的i其实一直都是10，为什么？
+// 因为当我们返回subFuncs之后，superFunc中的i=10
+// 所以当执行subFuncs中的函数的时候，输出i都为10。
+// 
+// 以上，就是闭包最大的坑，一句话理解就是：
+// 子函数对父函数变量的引用，是父函数运行结束之后的变量的状态
+function superFunc() {
+    var subFuncs = new Array();
+    for (var i = 0; i &lt; 10; i++) {
+    subFuncs[i] = function() {
+        return i;
+    };
+    }
+
+return subFuncs;
+}
+
+// 那么，如何解决上诉的闭包坑呢？
+// 其实原理很简单，既然闭包坑的本质是：子函数对父函数变量的引用，是父函数运行结束之后的变量的状态
+// 那么我们解决这个问题的方式就是：子函数对父函数变量的引用，使用运行时的状态
+// 如何做呢？
+// 在函数表达式的基础上，加上自执行即可。
+function superFunc() {
+var subFuncs = new Array();
+for (var i = 0; i &lt; 10; i++) {
+    subFuncs[i] = function(num) {
+        return function() {
+            return num;
+        };
+    }(i);
+}
+return subFuncs;
+}
+</code></pre><p>综上，闭包本身不是什么复杂的机制，就是子函数可以访问父函数的作用域。<br>而由于JavaScript函数的特殊性，我们可以返回函数，如果我们将作为闭包的函数返回，那么该函数引用的父函数变量是父函数运行结束之后的状态，而不是运行时的状态，这便是闭包最大的坑。而为了解决这个坑，我们常用的方式就是让函数表达式自执行。<br>此外，由于闭包引用了祖先函数的作用域，所以滥用闭包会有内存问题。</p>
+<p>好像把闭包说得一无是处，那么闭包有什么用处呢？<br>主要是封装吧…</p>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>闭包可以封装私有变量或者封装块级作用域。<br>➙ 封装块级作用域<br>JavaScript并没有块级作用域的概念，只有全局作用域和函数作用域，那么如果想要创建块级作用域的话，我们可以通过闭包来模拟。<br>创建并立即调用一个函数，就可以封装一个块级作用域。该函数可以立即执行其中的代码，内部变量执行结束就会被立即销毁。</p>
+<pre><code>function outputNumbers(count) {
+// 在函数作用域下，利用闭包封装块级作用域
+// 这样的话，i在外部不可用，便有了类似块级作用域
+(function() {
+    for (var i = 0; i &lt; count; i++) {
+        alert(i);
+    }
+})();
+
+alert(i); //导致一个错误! 
+}
+
+// 在全局作用域下，利用闭包封装块级作用域
+// 这样的话，代码块不会对全局作用域造成污染
+(function() {
+var now = new Date();
+
+if (now.getMonth() == 0 &amp;&amp; now.getDate() == 1) {
+    alert(&quot;Happy new year!&quot;);
+}
+})();
+
+// 是的，封装块级作用域的核心就是这个：函数表达式 + 自执行！
+(function() {
+//这里是块级作用域
+})();
+</code></pre><p>➙ 封装私有变量<br>JavaScript也没有私有变量的概念，我们也可以使用闭包来实现公有方法，通过隐藏变量暴露方法的方式来实现封装私有变量。</p>
+<pre><code>(function() {
+//私有变量和私有函数
+var privateVariable = 10;
+
+function privateFunction() {
+    return false;
+}
+
+//构造函数
+MyObject = function() {};
+//公有/特权方法
+MyObject.prototype.publicMethod = function() {
+    privateVariable++;
+
+    return privateFunction();
+};
+})();
+</code></pre><h2 id="总结说点啥？"><a href="#总结说点啥？" class="headerlink" title="总结说点啥？"></a>总结说点啥？</h2><p>这差不多就是JavaScript的一些基础语法和稍微高级一些的用法，其实所谓的高级，都是JavaScript“不太成熟”的表现，尤其是面向对象，出于工程化的需要但是JavaScript本身并不完美支持。好在ES6最新标准解决了很多问题，结合Babel用起来也不用太考虑兼容性问题，如果你是新手的话，建议你直接去撸ES6+Babel吧。</p>
+<p>✦ JavaScript的基础主要包括：5中基本数据类型、1种复杂的数据类型、操作符、控制语句、函数等。<br>✦ 了解基本的语法后，你还需要学习学习JavaScript的变量、作用域、作用域链。<br>✦ 常见的引用类型可以边查边用。作为过来人，建议多学学正则，对你的代码功底会有较大的提升。<br>✦ 面向对象编程的部分外面有很多种方式，你只需要记住使用构造函数+原型去定义一个类，使用原型链去实现继承即可。更多的扩展，去翻翻书吧。<br>✦ 函数表达式引出了几个比较好玩的东西：递归、闭包、封装。记住递归的最佳实践、闭包的定义及缺陷、闭包的适用场景。</p>
+<p>JavaScript作为一门动态语言，和其他语言有较大的差异，这也造成很多人学习JavaScript时会觉得难学。但你现在看看前文，虽然是一个简略的总结，但JavaScript主要的内容就这些了，所以不要被自己吓到了。<br>再补一句，如果你是新手的话，建议你直接去撸ES6+Babel吧。</p>
+<p>文／齐修_qixiuss（简书作者）<br>原文链接：<a href="http://www.jianshu.com/p/66f3aef3e131" target="_blank" rel="external">http://www.jianshu.com/p/66f3aef3e131</a><br>著作权归作者所有，转载请联系作者获得授权，并标注“简书作者”。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/19/javascript/" class="archive-article-date">
+  	<time datetime="2016-10-19T08:44:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-19</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-eventLoop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/12/eventLoop/">eventLoop</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h1><h2 id="Node-js-事件循环一-浅析"><a href="#Node-js-事件循环一-浅析" class="headerlink" title="Node.js 事件循环一: 浅析"></a>Node.js 事件循环一: 浅析</h2><pre><code>理解事件循环系列第一步 浅析和总览
+</code></pre><p>多数的网站不需要大量计算，程序花费的时间主要集中在磁盘 I/O 和网络 I/O 上面</p>
+<p>SSD读取很快，但和CPU处理指令的速度比起来也不在一个数量级上，而且网络上一个数据包来回的时间更慢：<br><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/ping.png" alt=""><br>一个数据包来回的延迟平均320ms(我网速慢，ping国内网站会更快)，这段时间内一个普通 cpu 执行几千万个周期应该没问题</p>
+<p>因此异步IO就要发挥作用了，比如用多线程，如果用 Java 去读一个文件，这是一个阻塞的操作，在等待数据返回的过程中什么也干不了，因此就开一个新的线程来处理文件读取，读取操作结束后再去通知主线程。</p>
+<p>这样虽然行得通，但是代码写起来比较麻烦。像 Node.js V8 这种无法开一个线程的怎么办？</p>
+<p>先看下面函数执行过程</p>
+<h3 id="栈-Stack"><a href="#栈-Stack" class="headerlink" title="栈 Stack"></a>栈 Stack</h3><p>当我们调用一个函数，它的地址、参数、局部变量都会压入到一个 stack 中</p>
+<pre><code>function fire() {
+    const result = sumSqrt(3, 4)
+    console.log(result);
+}
+function sumSqrt(x, y) {
+    const s1 = square(x)
+    const s2 = square(y)
+    const sum = s1 + s2;
+    return Math.sqrt(sum)
+}
+function square(x) {
+       return x * x;
+}
+
+fire()
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">下面的图都是用 keynote 做的 keynote地址</div></pre></td></tr></table></figure>
+<p>函数 fire 首先被调用</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-00.png" alt=""></p>
+<p>fire 调用 sumSqrt 函数 参数为3和4</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-01.png" alt=""></p>
+<p>之后调用 square 参数为 x, x==3</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-02.png" alt=""></p>
+<p>当 square 执行结束返回时，从 stack 中弹出，并将返回值赋值给 s1<br>s1加入到 sumSqrt 的 stack frame 中</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-03.png" alt=""></p>
+<p>以同样的方式调用下一个 square 函数</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-04.png" alt=""><br><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-05.png" alt=""></p>
+<p>在下一行的表达式中计算出 s1+s2 并赋值给 sum</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-06.png" alt=""></p>
+<p>之后调用 Math.sqrt 参数为sum</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-07.png" alt=""></p>
+<p>现在就剩下 sumSqrt 函数返回计算结果了</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-08.png" alt=""></p>
+<p>返回值赋值给 result</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-09.png" alt=""><br>在 console 中打印出 result</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-10.png" alt=""></p>
+<p>最终 fire 没有任何返回值 从stack中弹出 stack也清空了</p>
+<p><img src="https://raw.githubusercontent.com/ccforward/cc/master/Blog/pic/event-loop-11.png" alt=""></p>
+<p>当函数执行完毕后本地变量会从 stack 中弹出，这只有在使用 numbers string boolean 这种基本数据类型时才会发生。而对象、数组的值是存在于 heap(堆) 中的，stack 只存放了他们对应的指针。</p>
+<p>当函数之行结束从 stack 中弹出来时，只有对象的指针被弹出，而真正的值依然存在 heap 中，然后由垃圾回收器自动的清理回收。</p>
+<h3 id="事件循环-1"><a href="#事件循环-1" class="headerlink" title="事件循环"></a>事件循环</h3><p>通过一个例子来了解函数的执行顺序</p>
+<pre><code>&apos;use strict&apos;
+
+const express = require(&apos;express&apos;)
+const superagent = require(&apos;superagent&apos;)
+const app = express()
+
+app.get(&apos;/&apos;, getArticle)
+
+function getArticle(req, res) {
+       fetchArticle(req, res)
+    print()
+}
+
+const aids = [4564824, 4506868, 4767667, 4856099, 7456996];
+
+function fetchArticle(req, res) {
+    const aid = aids[Math.floor(Math.random() * aids.length)]
+    superagent.get(`http://news-at.zhihu.com/api/4/news/${aid}`)
+        .end((err, res) =&gt; {
+            if(err) {
+                console.log(&apos;error ......&apos;);
+                return res.status(500).send(&apos;an error ......&apos;)
+                }
+            const article = res.body
+            res.send(article)
+            console.log(&apos;Got an article&apos;)
+        })
+
+    console.log(&apos;Now is fetching an article&apos;)
+}
+
+function print(){
+    console.log(&apos;Print something&apos;)
+}
+
+
+app.listen(&apos;5000&apos;)
+</code></pre><p>请求 <a href="http://localhost:5000/" target="_blank" rel="external">http://localhost:5000/</a> 后打印出</p>
+<pre><code>Now is fetching an article
+
+Print something
+
+Got an article
+</code></pre><p>虽然 V8 是单线程的，但底层的 C++ API 却不是。这意味着当我们执行一些非阻塞的操作，Node会调用一些代码，与引擎里的js代码同时执行。一旦这个隐藏的线程收到了等待的返回值或者抛出一个异常，之前提供的回调函数就会执行。</p>
+<p>上面的说的Node调用的一些代码其实就是 <a href="https://github.com/libuv/libuv" target="_blank" rel="external">libuv</a>，一个开源的跨平台的异步 I/O 。最初就是为 Node.js 开发的，现在<a href="https://github.com/libuv/libuv/wiki/Projects-that-use-libuv" target="_blank" rel="external">很多项目</a>都在用</p>
+<h4 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h4><p>javascript 是单线程事件驱动的语言，那我们可以给时间添加监听器，当事件触发时，监听器就能执行回调函数。</p>
+<p>当我们去调用 <code>setTimeout</code> <code>http.get</code> <code>fs.readFile</code>, Node.js 会把这些定时器、http、IO操作发送给另一个线程以保证V8继续执行我们的代码。</p>
+<p>然而我们只有一个主线程和一个 call-stack ，这样当一个读取文件的操作还在执行时，有一个网络请求request过来，那这时他的回调就需要等stack变空才能执行。</p>
+<p>回调函数正在等待轮到自己执行所排的队就被称为任务队列(或者事件队列、消息队列)。每当主线程完成前一个任务，回调函数就会在一个无限循环圈里被调用，因此这个圈被称为事件循环。</p>
+<p>我们前面那个获取文章的例子的执行顺序就会如下：</p>
+<ol>
+<li>express 给 request 事件注册了一个 handler，并且当请求到达路径 ‘/‘ 时来触发handler</li>
+<li>调过各个函数并且在端口 5000 上启动监听</li>
+<li>stack 为空，等待 request 事件触发</li>
+<li>根据传入的请求，事件触发，express 调用之前提供的函数<code>getArticle</code></li>
+<li><code>getArticle</code> 压入(push) stack</li>
+<li><code>fetchArticle</code> 被调用 同时压入 stack</li>
+<li><code>Math.floor</code> 和 <code>Math.random</code> 被调用压入 stack 然后再 弹出(pop), 从 aids 里面取出的一个值被赋值给变量 aid</li>
+<li><code>superagent.get</code> 被执行，参数为 <code>&#39;http://news-at.zhihu.com/api/4/news/${aid}&#39;</code> ,并且回调函数注册给了 <code>end</code> 事件</li>
+<li>到 <code>http://news-at.zhihu.com/api/4/news/${aid}</code> 的HTTP请求被发送到后台线程，然后函数继续往下执行</li>
+<li><code>&#39;Now is fetching an article&#39;</code> 打印在 <code>console</code> 中。 函数 <code>fetchArticle</code> 返回</li>
+<li><code>print</code> 函数被调用, <code>&#39;Print something&#39;</code> 打印在 <code>console</code> 中</li>
+<li>函数 <code>getArticle</code> 返回，并从 stack 中弹出， stack 为空</li>
+<li>等待 <code>http://news-at.zhihu.com/api/4/news/${aid}</code> 发送相应信息</li>
+<li>响应信息到达，<code>end</code> 事件被触发</li>
+<li>注册给 <code>end</code> 事件的匿名回调函数被执行，这个匿名函数和他闭包中的所有变量压入 <code>stack</code>，这意味着这个匿名函数可以访问并修改 <code>express</code>, <code>superagent</code>, <code>app</code>,<code>aids</code>, <code>req</code>, <code>res</code>, <code>aid</code>的值以及之前所有已经定义的函数</li>
+<li>函数 <code>res.send()</code> 伴随着 200 或 500 的状态码被执行，但同时又被放入到后台线程中，因此 响应流 不会阻塞我们函数的执行。匿名函数也被 pop 出 stack。</li>
+</ol>
+<h3 id="Microtasks-Macrotasks"><a href="#Microtasks-Macrotasks" class="headerlink" title="Microtasks Macrotasks"></a>Microtasks Macrotasks</h3><hr>
+<p>任务队列不止一个，还有 microtasks 和 macrotasks</p>
+<h6 id="microtasks"><a href="#microtasks" class="headerlink" title="microtasks:"></a>microtasks:</h6><ul>
+<li>process.nextTick</li>
+<li>promise</li>
+<li>Object.observe</li>
+</ul>
+<h6 id="macrotasks"><a href="#macrotasks" class="headerlink" title="macrotasks:"></a>macrotasks:</h6><ul>
+<li>setTimeout</li>
+<li>setInterval</li>
+<li>setImmediate</li>
+<li><p>I/O<br>这两个的详细区别下一篇再写，先看一段代码</p>
+<p>  console.log(‘start’)</p>
+<p>  const interval = setInterval(() =&gt; {  </p>
+<pre><code>console.log(&apos;setInterval&apos;)
+</code></pre><p>  }, 0)</p>
+<p>  setTimeout(() =&gt; {  </p>
+<pre><code>console.log(&apos;setTimeout 1&apos;)
+ Promise.resolve()
+ .then(() =&gt; {
+   console.log(&apos;promise 3&apos;)
+ })
+ .then(() =&gt; {
+   console.log(&apos;promise 4&apos;)
+ })
+ .then(() =&gt; {
+   setTimeout(() =&gt; {
+         console.log(&apos;setTimeout 2&apos;)
+     Promise.resolve()
+         .then(() =&gt; {
+           console.log(&apos;promise 5&apos;)
+         })
+         .then(() =&gt; {
+           console.log(&apos;promise 6&apos;)
+         })
+         .then(() =&gt; {
+           clearInterval(interval)
+         })
+   }, 0)
+ })
+</code></pre><p>  }, 0)</p>
+<p>  Promise.resolve()</p>
+<pre><code>.then(() =&gt; {  
+    console.log(&apos;promise 1&apos;)
+})
+.then(() =&gt; {
+        console.log(&apos;promise 2&apos;)
+})
+</code></pre></li>
+</ul>
+<p>理解了node的事件循环还是比较容易得出答案的：</p>
+<pre><code>start
+promise 1
+promise 2
+setInterval
+setTimeout 1
+promise 3
+promise 4
+setInterval
+setTimeout 
+promise 5
+promise 6
+</code></pre><p>根据 <a href="https://html.spec.whatwg.org/multipage/webappapis.html#task-queue" target="_blank" rel="external">WHATVG</a> 的说明，在一个事件循环的周期(cycle)中一个 (macro)task 应该从 macrotask 队列开始执行。当这个 macrotask 结束后，所有的 microtasks 将在同一个 cycle 中执行。在 microtasks 执行时还可以加入更多的 microtask，然后一个一个的执行，直到 microtask 队列清空。</p>
+<p>规范理解起来有点晦涩，来看下上面的例子</p>
+<h5 id="Cycle-1"><a href="#Cycle-1" class="headerlink" title="Cycle 1"></a>Cycle 1</h5><p>1) <code>setInterval</code> 被列为 task</p>
+<p>2) <code>setTimeout 1</code> 被列为 task</p>
+<p>3) <code>Promise.resolve 1</code> 中两个 then 被列为 microtask</p>
+<p>4) stack 清空 microtasks 执行</p>
+<p>任务队列： <code>setInterval</code> <code>setTimeout 1</code></p>
+<h5 id="Cycle-2"><a href="#Cycle-2" class="headerlink" title="Cycle 2"></a>Cycle 2</h5><p>5) microtasks 队列清空 setInteval 的回调可以执行。另一个 <code>setInterval</code> 被列为 task , 位于 <code>setTimeout 1</code> 后面</p>
+<p>任务队列： <code>setTimeout 1</code> <code>setInterval</code></p>
+<h5 id="Cycle-3"><a href="#Cycle-3" class="headerlink" title="Cycle 3"></a>Cycle 3</h5><p>6) microtask 队列清空，<code>setTimeout 1</code> 的回调可以执行，<code>promise 3</code> 和 <code>`promise 4 被列为</code>microtasks`</p>
+<p>7) <code>promise 3</code> 和 <code>promise 4</code> 执行。 <code>setTimeout 2</code> 被列为 task</p>
+<p>任务队列 <code>setInterval</code> <code>setTimeout 2</code></p>
+<h5 id="Cycle-4"><a href="#Cycle-4" class="headerlink" title="Cycle 4"></a>Cycle 4</h5><p>8) microtask 队列清空 <code>setInteval</code> 的回调可以执行。然后另一个 <code>setInterval</code> 被列为 task ，位于 <code>setTimeout 2</code> 后面</p>
+<p>任务队列： <code>setTimeout 2</code> <code>setInterval</code></p>
+<p>9) <code>setTimeout 2</code>的回调执行，<code>promise 5</code> 和 <code>promise 6</code> 被列为 microtasks</p>
+<p>现在 <code>promise 5</code> 和<code>promise 6</code> 的回调应该执行，并且 clear 掉 <code>interval</code>。 但有的时候不知道为什么 setInterval 还会在执行一遍，变成下面结果</p>
+<pre><code>...
+setTimeout 2
+setInterval
+promise 5
+promise 6
+</code></pre><p>但是把上面的代码放入 chrome console 中执行却没有问题。这一点还要再根据不同的 node版本 查一下。</p>
+<p>引自：<a href="https://github.com/ccforward/cc/issues/47****" target="_blank" rel="external">https://github.com/ccforward/cc/issues/47</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/12/eventLoop/" class="archive-article-date">
+  	<time datetime="2016-10-12T11:53:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-12</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-react" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/05/react/">react</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#React入门<br><a href="http://xgfe.github.io/uploads/felix/react/react-first-kiss.pdf" target="_blank" rel="external">React入门分享PPT下载</a><br>React 起源于 Facebook 的内部项目，因为该公司对市场上所有 JavaScript MVC 框架，都不满意，就决定自己写一套，用来架设Instagram 的网站。由于 React 的设计思想极其独特，属于革命性创新，性能出众，代码逻辑却非常简单。React的虚拟DOM的特性使得他可以多端渲染，甚至直接渲染到Canvas。</p>
+<p>##框架特色</p>
+<ul>
+<li>类似于web component的组件封装，面向未来</li>
+<li>可复用，可组合的组件架构</li>
+<li>数据驱动，UI自动更新，解放DOM操作</li>
+<li>JSX语法使得代码看起来简洁清晰</li>
+<li>单向数据流: 使得组件行为更可预测</li>
+<li>Virtual DOM: 虚拟DOM的抽象使得React 组件可以跨端渲染</li>
+<li>React Native App开发</li>
+<li>至今未发1.0，API有可能有较大改变</li>
+</ul>
+<p>##如何使用：babel</p>
+<ul>
+<li>react.js：react的核心库</li>
+<li>react-dom.js：提供与DOM相关的功能</li>
+<li><p>Jsx：【HTML 语言直接写在 JavaScript 语言之中，不加任何引号】需要babel编译</p>
+<ul>
+<li>浏览器端使用babel browser.js，由于编译过程比较慢，一般仅在开发时候使用<br>* 也可使用babel预编译，在发布时完成编译</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">babel src —out-dir build</div><div class="line">```		</div><div class="line">	* JSX 的基本语法规则：HTML 语言直接写在 JavaScript 语言之中，不加任何引号，这就是JSX语法。遇到 HTML 标签（以 &lt; 开头），就用 HTML 规则解析；遇到代码块（以 &#123; 开头），就用 JavaScript 规则解析</div><div class="line">		* 在javascript中写XML，不是模板引擎 * HTML元素必须用一个元素包裹</div><div class="line">		* 默认进行字符转义，防XSS攻击(dangerouslySetInnerHTML)</div><div class="line">		* ‘&#123;&#125;’包裹js表达式：简单变量，数组</div><div class="line">		* 分支：预定义变量，三元表达式，自执行函数</div><div class="line">		* 数组循环：arr.map(function() &#123;&#125;)</div><div class="line">	* babel JSX在线编译器</div><div class="line">	</div><div class="line">## 组件</div><div class="line">* 组件声明</div></pre></td></tr></table></figure>
+<pre><code>var HelloMessage = React.createClass({});
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">* 组件必须有自己的render方法</div><div class="line">* 组件使用：模板中直接作为标签名(标签必须闭合，自闭合和配套闭合都可以)使用，自定义标签必须大写</div></pre></td></tr></table></figure>
+<p><hellomessage><br>// 或者</hellomessage></p>
+<p><hellomessage></hellomessage><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">* 通过 `this.props`可访问标签上定义的所有属性</div><div class="line">注意：`class` 属性需要写成 `className` ，`for` 属性需要写成 `htmlFor` ，这是因为 `class` 和 `for` 是 JavaScript 的保留字</div><div class="line"></div><div class="line">* `this.props.children` 属性表示组件的所有子节点[array | object | string | undefined]，因此可直接使用React.Children提供的各种工具方法来操作，如map</div><div class="line"></div><div class="line">	// 使用React.Children提供的工具方法使得我们可以不去考虑	children的数据类型</div><div class="line">	React.Children.map(this.props.children, 		function(child) &#123;</div><div class="line"></div><div class="line">	&#125;);</div><div class="line">* PropTypes: </div><div class="line">组件的属性可以接受任意值，字符串、对象、函数等等都可以。有时，我们需要一种机制，验证别人使用组件时，提供的参数是否符合要求。</div><div class="line">组件类的PropTypes属性，就是用来验证组件实例的属性是否符合要求</div><div class="line"></div><div class="line">	var MyTitle = React.createClass(&#123;</div><div class="line">    	propTypes: &#123;</div><div class="line">        	title: React.PropTypes.string.isRequired,</div><div class="line">    	&#125;,</div><div class="line"></div><div class="line">    	render: function() &#123;</div><div class="line">        	return &lt;h1&gt; &#123;this.props.title&#125; &lt;/h1&gt;;</div><div class="line">    	&#125;</div><div class="line">	&#125;);</div><div class="line">更多PropTypes验证可参考官方文档。</div><div class="line"></div><div class="line">* getDefaultProps:</div><div class="line">此方法可用于设置组件属性的默认值。</div><div class="line">* ref:</div><div class="line">用于获取真实的DOM节点。获取用户的输入。这时就必须获取真实的 DOM 节点，虚拟 DOM 是拿不到用户输入的。为了做到这一点，文本输入框必须有一个 ref 属性，然后 this.refs.[refName] 就会返回这个真实的 DOM 节点。</div><div class="line">* 事件</div><div class="line">React 组件支持很多事件，除了 Click 事件以外，还有 KeyDown 、Copy、Scroll 等，完整的事件清单请查看官方文档。所有事件都在冒泡阶段触发。</div><div class="line">* state: getInitialState, this.setState</div><div class="line">可将组件看做一个状态机，一开始有一个初始状态，然后用户互动，导致状态变化，从而触发重新渲染 UI。</div><div class="line">当用户点击组件，导致状态变化，this.setState 方法就修改状态值，每次修改以后，自动调用 this.render 方法，再次渲染组件。</div><div class="line">*  表单交互：</div><div class="line">	* value, checked, selected，使得组件受限，必须通过onChage事件改</div><div class="line">变值</div><div class="line">	* 仅仅设置默认值可以用：defaultValue, defaultChecked, defaultValue</div><div class="line">* 组件样式style写法</div></pre></td></tr></table></figure></p>
+style={{opacity: this.state.opacity}}
+<p>```<br>这是因为 React 组件样式是一个对象，所以第一重大括号表示这是 JavaScript 语法，第二重大括号表示样式对象。</p>
+<ul>
+<li>大写就是自定义的组件，小写就是react内部的dom组件</li>
+<li>组件生命周期</li>
+</ul>
+<p>组件并不是真实的 DOM 节点，而是存在于内存之中的一种数据结构，叫做虚拟 DOM （virtual DOM）。只有当它插入文档以后，才会变成真实的 DOM 。根据 React 的设计，所有的 DOM 变动，都先在虚拟 DOM 上发生，然后再将实际发生变动的部分，反映在真实 DOM上，这种算法叫做 DOM diff ，它可以极大提高网页的性能表现。</p>
+<ul>
+<li><p>生命周期的三个状态</p>
+<ul>
+<li>Mounting: 已插入真实 DOM</li>
+<li>Updating: 正在被重新渲染</li>
+<li>Unmounting: 已移出真实 DOM</li>
+</ul>
+</li>
+<li>React为每个状态提供两种处理函数，will（进入状态前调用）/did（进入状态后调用），共5个处理函数<ul>
+<li>componentWillMount()</li>
+<li>componentDidMount()</li>
+<li>componentWillUpdate(object nextProps, object nextState)</li>
+<li>componentDidUpdate(object prevProps, object prevState)</li>
+<li>componentWillUnmount()</li>
+</ul>
+</li>
+<li>此外，React 还提供两种特殊状态的处理函数。<ul>
+<li>componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用</li>
+<li>shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用</li>
+</ul>
+</li>
+<li>mixins(array): 定义复杂组件间的共用功能。关于 mixin 值得一提的优点是，如果一个组件使用了多个 mixin，并用有多个 mixin 定义了同样的生命周期方法（如：多个 mixin 都需要在组件销毁时做资源清理操作），所有这些生命周期方法都保证会被执行到。方法执行顺序是：首先按 mixin 引入顺序执行 mixin 里方法，最后执行组件内定义的方法。</li>
+<li><p>setState是异步操作</p>
+<p>   this.setState(</p>
+<pre><code>function(state, props) | object state,
+[function callback]
+</code></pre><p>  )</p>
+</li>
+</ul>
+<p><img src="http://xgfe.github.io/uploads/felix/react/life-cycle.png" alt=""></p>
+<ul>
+<li><p>组件通信</p>
+<ul>
+<li>父子组件通信：<br>子组件通过props可以访问父组件的属性和方法</li>
+<li>非父子组件通信：<br>使用全局事件 Pub/Sub 模式，在 componentDidMount 里面订阅事件，在 componentWillUnmount 里面取消订阅，当收到事件触发的时候调用 setState 更新 UI。这种模式在复杂的系统里面可能会变得难以维护，对于比较复杂的应用，推荐使用类似 Flux 这种单项数据流架构。</li>
+</ul>
+</li>
+<li><p>JSX语法: 仅仅是方法和对象的语法糖</p>
+</li>
+<li><p>渲染DOM时元素属性会做过滤，只会部分属性，如className, id, data-*…当然组件中的this.props能拿到所有属性</p>
+</li>
+<li>变量取值</li>
+</ul>
+<input type="text" value="{this.state.inputValue}" onchange="{this.handleChange}/">
+
+<ul>
+<li><p>分支<br>没有if语句，可以用三元元算符，也可以在componentWillMounting函数中定义变量来实现,但可以在自执行函数里面写。</p>
+<pre><code>{function(){
+if (true){ 
+return &lt;h3&gt;true 分支&lt;/h3&gt;
+    } else {
+    return &lt;h3&gt;false 分支&lt;/h3&gt;
+}
+}()}
+</code></pre></li>
+<li>循环<br>数组循环用.map；对象循环只能用自执行函数了<br>参考：HTML扩展<br>{…this.props}会把父组件的所以props赋值到子组件上<h3 id="辅助"><a href="#辅助" class="headerlink" title="辅助"></a>辅助</h3></li>
+<li>Flux<br>React 标榜自己是 MVC 里面 V 的部分，那么 Flux 就相当于添加 M 和 C 的部分。<br>Flux 是 Facebook 使用的一套前端应用的架构模式。<br>实现库：<a href="http://facebook.github.io/flux/docs/overview.html" target="_blank" rel="external">Facebook</a>, <a href="http://redux.js.org/" target="_blank" rel="external">Flux</a>, <a href="http://redux.js.org/" target="_blank" rel="external">Redux</a>, <a href="https://github.com/reflux" target="_blank" rel="external">Reflux</a><br><a href="">Flux-demos</a></li>
+<li>chrom插件：React Developer Tools</li>
+<li>sublime 使用JSX<ul>
+<li><a href="https://github.com/babel/babel-sublime" target="_blank" rel="external">语法高亮Babel</a></li>
+<li><a href="https://gist.github.com/neilcarpenter/8979ea9ed91b10e36af9" target="_blank" rel="external">在JSX文件中使用Emmet</a></li>
+<li><a href="https://github.com/reactjs/sublime-react" target="_blank" rel="external">常用代码片段</a><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3></li>
+</ul>
+</li>
+<li><a href="https://facebook.github.io/react/docs/hello-world.html" target="_blank" rel="external">官方文档</a>(中文没有入口,可自行添加-zh-CN查看)</li>
+<li><a href="https://github.com/felixyuebin/react-demos" target="_blank" rel="external">react-demos</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/03/react.html" target="_blank" rel="external">React入门实例教程</a></li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/05/react/" class="archive-article-date">
+  	<time datetime="2016-10-05T11:12:44.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-05</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-expressSession" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/05/expressSession/">expressSession</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="express-session"><a href="#express-session" class="headerlink" title="express-session"></a>express-session</h1><h2 id="一、什么是session？"><a href="#一、什么是session？" class="headerlink" title="一、什么是session？"></a>一、什么是session？</h2><p>最近在学习node.js 的express框架，接触到了关于session方面的内容。翻阅了一些的博客，学到了不少东西，发现一篇博文讲的很好，概念内容摘抄如下：</p>
+<p><code>Session是什么</code></p>
+<pre><code>Session一般译作会话，牛津词典对其的解释是进行某活动连续的一段时间。从不同的层面看待session，它有着类似但不全然相同的含义。比如，在web应用的用户看来，他打开浏览器访问一个电子商务网站，登录、并完成购物直到关闭浏览器，这是一个会话。而在web应用的开发者开来，用户登录时我需要创建一个数据结构以存储用户的登录信息，这个结构也叫做session。因此在谈论session的时候要注意上下文环境。而本文谈论的是一种基于HTTP协议的用以增强web应用能力的机制或者说一种方案，它不是单指某种特定的动态页面技术，而这种能力就是保持状态，也可以称作保持会话。
+</code></pre><p><code>为什么需要session</code></p>
+<pre><code>谈及session一般是在web应用的背景之下，我们知道web应用是基于HTTP协议的，而HTTP协议恰恰是一种无状态协议。也就是说，用户从A页面跳转到B页面会重新发送一次HTTP请求，而服务端在返回响应的时候是无法获知该用户在请求B页面之前做了什么的。
+
+对于HTTP的无状态性的原因，相关RFC里并没有解释，但联系到HTTP的历史以及应用场景，我们可以推测出一些理由：
+
+1.   设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。那个时候没有动态页面技术，只有纯粹的静态HTML页面，因此根本不需要协议能保持状态；
+2.   用户在收到响应时，往往要花一些时间来阅读页面，因此如果保持客户端和服务端之间的连接，那么这个连接在大多数的时间里都将是空闲的，这是一种资源的无端浪费。所以HTTP原始的设计是默认短连接，即客户端和服务端完成一次请求和响应之后就断开TCP连接，服务器因此无法预知客户端的下一个动作，它甚至都不知道这个用户会不会再次访问，因此让HTTP协议来维护用户的访问状态也全然没有必要；
+3.   将一部分复杂性转嫁到以HTTP协议为基础的技术之上可以使得HTTP在协议这个层面上显得相对简单，而这种简单也赋予了HTTP更强的扩展能力。事实上，session技术从本质上来讲也是对HTTP协议的一种扩展。
+总而言之，HTTP的无状态是由其历史使命而决定的。但随着网络技术的蓬勃发展，人们再也不满足于死板乏味的静态HTML，他们希望web应用能动起来，于是客户端出现了脚本和DOM技术，HTML里增加了表单，而服务端出现了CGI等等动态技术。
+
+而正是这种web动态化的需求，给HTTP协议提出了一个难题：一个无状态的协议怎样才能关联两次连续的请求呢？也就是说无状态的协议怎样才能满足有状态的需求呢？
+
+此时有状态是必然趋势而协议的无状态性也是木已成舟，因此我们需要一些方案来解决这个矛盾，来保持HTTP连接状态，于是出现了cookie和session。
+</code></pre><p><code>对于此部分内容，读者或许会有一些疑问，笔者在此先谈两点：</code></p>
+<pre><code>1.   无状态性和长连接
+可能有人会问，现在被广泛使用的HTTP1.1默认使用长连接，它还是无状态的吗？
+连接方式和有无状态是完全没有关系的两回事。因为状态从某种意义上来讲就是数据，而连接方式只是决定了数据的传输方式，而不能决定数据。长连接是随着计算机性能的提高和网络环境的改善所采取的一种合理的性能上的优化，一般情况下，web服务器会对长连接的数量进行限制，以免资源的过度消耗。
+2.   无状态性和session
+    Session是有状态的，而HTTP协议是无状态的，二者是否矛盾呢？
+
+Session和HTTP协议属于不同层面的事物，后者属于ISO七层模型的最高层应用层，前者不属于后者，前者是具体的动态页面技术来实现的，但同时它又是基于后者的。在下文中笔者会分析Servlet/Jsp技术中的session机制，这会使你对此有更深刻的理解。
+</code></pre><p><code>Cookie和Session</code></p>
+<pre><code>上面提到解决HTTP协议自身无状态的方式有cookie和session。二者都能记录状态，前者是将状态数据保存在客户端，后者则保存在服务端。
+
+首先看一下cookie的工作原理，这需要有基本的HTTP协议基础。
+
+cookie是在RFC2109（已废弃，被RFC2965取代）里初次被描述的，每个客户端最多保持三百个cookie，每个域名下最多20个Cookie（实际上一般浏览器现在都比这个多，如Firefox是50个），而每个cookie的大小为最多4K，不过不同的浏览器都有各自的实现。对于cookie的使用，最重要的就是要控制cookie的大小，不要放入无用的信息，也不要放入过多信息。
+
+无论使用何种服务端技术，只要发送回的HTTP响应中包含如下形式的头，则视为服务器要求设置一个cookie：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-cookie:name=name;expires=date;path=path;domain=domain</div></pre></td></tr></table></figure>
+<pre><code>支持cookie的浏览器都会对此作出反应，即创建cookie文件并保存（也可能是内存cookie），用户以后在每次发出请求时，浏览器都要判断当前所有的cookie中有没有没失效（根据expires属性判断）并且匹配了path属性的cookie信息，如果有的话，会以下面的形式加入到请求头中发回服务端：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cookie: name=&quot;zj&quot;; Path=&quot;/linkage&quot;</div></pre></td></tr></table></figure>
+<pre><code>服务端的动态脚本会对其进行分析，并做出相应的处理，当然也可以选择直接忽略。
+
+这里牵扯到一个规范（或协议）与实现的问题，简单来讲就是规范规定了做成什么样子，那么实现就必须依据规范来做，这样才能互相兼容，但是各个实现所使用的方式却不受约束，也可以在实现了规范的基础上超出规范，这就称之为扩展了。无论哪种浏览器，只要想提供cookie的功能，那就必须依照相应的RFC规范来实现。所以这里服务器只管发Set-cookie头域，这也是HTTP协议无状态性的一种体现。
+
+需要注意的是，出于安全性的考虑，cookie可以被浏览器禁用。
+</code></pre><p><code>再看一下session的原理：</code></p>
+<pre><code>笔者没有找到相关的RFC，因为session本就不是协议层面的事物。它的基本原理是服务端为每一个session维护一份会话信息数据，而客户端和服务端依靠一个全局唯一的标识来访问会话信息数据。用户访问web应用时，服务端程序决定何时创建session，创建session可以概括为三个步骤：
+
+1.   生成全局唯一标识符（sessionid）；
+2.   开辟数据存储空间。一般会在内存中创建相应的数据结构，但这种情况下，系统一旦掉电，所有的会话数据就会丢失，如果是电子商务网站，这种事故会造成严重的后果。不过也可以写到文件里甚至存储在数据库中，这样虽然会增加I/O开销，但session可以实现某种程度的持久化，而且更有利于session的共享；
+3.   将session的全局唯一标示符发送给客户端。
+问题的关键就在服务端如何发送这个session的唯一标识上。联系到HTTP协议，数据无非可以放到请求行、头域或Body里，基于此，一般来说会有两种常用的方式：cookie和URL重写。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.   Cookie</div><div class="line">读者应该想到了，对，服务端只要设置Set-cookie头就可以将session的标识符传送到客户端，而客户端此后的每一次请求都会带上这个标识符，由于cookie可以设置失效时间，所以一般包含session信息的cookie会设置失效时间为0，即浏览器进程有效时间。至于浏览器怎么处理这个0，每个浏览器都有自己的方案，但差别都不会太大（一般体现在新建浏览器窗口的时候）；</div><div class="line">2.   URL重写</div><div class="line">所谓URL重写，顾名思义就是重写URL。试想，在返回用户请求的页面之前，将页面内所有的URL后面全部以get参数的方式加上session标识符（或者加在path info部分等等），这样用户在收到响应之后，无论点击哪个链接或提交表单，都会在再带上session的标识符，从而就实现了会话的保持。读者可能会觉得这种做法比较麻烦，确实是这样，但是，如果客户端禁用了cookie的话，URL重写将会是首选。</div><div class="line">    到这里，读者应该明白我前面为什么说session也算作是对HTTP的一种扩展了吧。如下两幅图是笔者在Firefox的Firebug插件中的截图，可以看到，当我第一次访问index.jsp时，响应头里包含了Set-cookie头，而请求头中没有。当我再次刷新页面时，图二显示在响应中不在有Set-cookie头，而在请求头中却有了Cookie头。注意一下Cookie的名字：jsessionid，顾名思义，就是session的标识符，另外可以看到两幅图中的jsessionid的值是相同的，原因笔者就不再多解释了。另外读者可能在一些网站上见过在最后附加了一段形如jsessionid=xxx的URL，这就是采用URL重写来实现的session。</div></pre></td></tr></table></figure>
+<p><code>Cookie和session由于实现手段不同，因此也各有优缺点和各自的应用场景：</code></p>
+<pre><code>1.   应用场景
+Cookie的典型应用场景是Remember Me服务，即用户的账户信息通过cookie的形式保存在客户端，当用户再次请求匹配的URL的时候，账户信息会被传送到服务端，交由相应的程序完成自动登录等功能。当然也可以保存一些客户端信息，比如页面布局以及搜索历史等等。
+Session的典型应用场景是用户登录某网站之后，将其登录信息放入session，在以后的每次请求中查询相应的登录信息以确保该用户合法。当然还是有购物车等等经典场景；
+2.   安全性
+cookie将信息保存在客户端，如果不进行加密的话，无疑会暴露一些隐私信息，安全性很差，一般情况下敏感信息是经过加密后存储在cookie中，但很容易就会被窃取。而session只会将信息存储在服务端，如果存储在文件或数据库中，也有被窃取的可能，只是可能性比cookie小了太多。
+Session安全性方面比较突出的是存在会话劫持的问题，这是一种安全威胁，这在下文会进行更详细的说明。总体来讲，session的安全性要高于cookie；
+3.   性能
+Cookie存储在客户端，消耗的是客户端的I/O和内存，而session存储在服务端，消耗的是服务端的资源。但是session对服务器造成的压力比较集中，而cookie很好地分散了资源消耗，就这点来说，cookie是要优于session的；
+4.   时效性
+Cookie可以通过设置有效期使其较长时间内存在于客户端，而session一般只有比较短的有效期（用户主动销毁session或关闭浏览器后引发超时）；
+5.   其他
+Cookie的处理在开发中没有session方便。而且cookie在客户端是有数量和大小的限制的，而session的大小却只以硬件为限制，能存储的数据无疑大了太多。
+</code></pre><h2 id="二、-express-session的安装"><a href="#二、-express-session的安装" class="headerlink" title="二、 express-session的安装"></a>二、 express-session的安装</h2><h4 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h4><pre><code>$ npm install express-session
+</code></pre><h4 id="API"><a href="#API" class="headerlink" title="API"></a>API</h4><pre><code>var session = require(&apos;express-session&apos;)
+</code></pre><h5 id="session-options"><a href="#session-options" class="headerlink" title="session(options)"></a>session(options)</h5><p>Create a session middleware with the given options.</p>
+<p><code>Note</code> Session data is not saved in the cookie itself, just the session ID. Session data is stored server-side.</p>
+<p><code>Note</code> Since version 1.5.0, the <a href="">cookie-parser middleware </a>no longer needs to be used for this module to work. This module now directly reads and writes cookies on req/res. Using cookie-parser may result in issues if the secret is not the same between this module and cookie-parser.</p>
+<p><code>Warning</code> The default server-side session storage, MemoryStore, is purposely not designed for a production environment. It will leak memory under most conditions, does not scale past a single process, and is meant for debugging and developing.</p>
+<p>For a list of stores, see <a href="">compatible session stores</a>.</p>
+<h5 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h5><p>express-session accepts these properties in the options object.</p>
+<h5 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h5><p>Settings object for the session ID cookie. The default value is <code>{ path: &#39;/&#39;, httpOnly: true, secure: false, maxAge: null }.</code></p>
+<p>The following are options that can be set in this object.</p>
+<h5 id="cookie-domain"><a href="#cookie-domain" class="headerlink" title="cookie.domain"></a>cookie.domain</h5><p>Specifies the value for the <code>Domain Set-Cookie</code> attribute. By default, no domain is set, and most clients will consider the cookie to apply to only the current domain.</p>
+<h5 id="cookie-expires"><a href="#cookie-expires" class="headerlink" title="cookie.expires"></a>cookie.expires</h5><p>Specifies the <code>Date</code> object to be the value for the <code>Expires Set-Cookie</code> attribute. By default, no expiration is set, and most clients will consider this a “non-persistent cookie” and will delete it on a condition like exiting a web browser application.</p>
+<p><code>Note</code> If both <code>expires</code> and <code>maxAge</code> are set in the options, then the last one defined in the object is what is used.</p>
+<p><code>Note</code> The <code>expires</code> option should not be set directly;<br>instead only use the maxAge option.</p>
+<p>cookie.httpOnly<br>Specifies the <code>boolean</code> value for the <code>HttpOnly Set-Cookie</code> attribute. When truthy, the HttpOnly attribute is set, otherwise it is not. By default, the <code>HttpOnly</code> attribute is set.</p>
+<p><code>Note</code> be careful when setting this to <code>true</code>, as compliant clients will not allow client-side JavaScript to see the cookie in <code>document.cookie</code>.</p>
+<h5 id="cookie-maxAge"><a href="#cookie-maxAge" class="headerlink" title="cookie.maxAge"></a>cookie.maxAge</h5><p>Specifies the number (in milliseconds) to use when calculating the <code>Expires Set-Cookie</code> attribute. This is done by taking the current server time and adding maxAge milliseconds to the value to calculate an <code>Expires</code> datetime. By default, no maximum age is set.</p>
+<p><code>Note</code> If both <code>expires</code> and <code>maxAge</code> are set in the options, then the last one defined in the object is what is used.</p>
+<h5 id="cookie-path"><a href="#cookie-path" class="headerlink" title="cookie.path"></a>cookie.path</h5><p>Specifies the value for the <code>Path Set-Cookie</code>. By default, this is set to ‘/‘, which is the root path of the domain.</p>
+<h5 id="cookie-sameSite"><a href="#cookie-sameSite" class="headerlink" title="cookie.sameSite"></a>cookie.sameSite</h5><p>Specifies the boolean or string to be the value for the SameSite Set-Cookie attribute.</p>
+<ul>
+<li>true will set the SameSite attribute to Strict for strict same site enforcement.</li>
+<li>false will not set the SameSite attribute.</li>
+<li>‘lax’ will set the SameSite attribute to Lax for lax same site enforcement.</li>
+<li>‘strict’ will set the SameSite attribute to Strict for strict same site enforcement.<br>More information about the different enforcement levels can be found in the specification <a href="https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1.1" target="_blank" rel="external">https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1.1</a></li>
+</ul>
+<p><code>Note</code>This is an attribute that has not yet been fully standardized, and may change in the future. This also means many clients may ignore this attribute until they understand it.</p>
+<h5 id="cookie-secure"><a href="#cookie-secure" class="headerlink" title="cookie.secure"></a>cookie.secure</h5><p>Specifies the boolean value for the <code>Secure Set-Cookie</code>attribute. When truthy, the Secure attribute is set, otherwise it is not. By default, the Secure attribute is not set.</p>
+<p>Note be careful when setting this to true, as compliant clients will not send the cookie back to the server in the future if the browser does not have an HTTPS connection.</p>
+<p>Please note that secure: true is a <a href="">recommended</a> option. However, it requires an https-enabled website, i.e., HTTPS is necessary for secure cookies. If secure is set, and you access your site over HTTP, the cookie will not be set. If you have your node.js behind a proxy and are using secure: true, you need to set “trust proxy” in express:</p>
+<pre><code>var app = express()
+app.set(&apos;trust proxy&apos;, 1) // trust first proxy 
+app.use(session({
+     secret: &apos;keyboard cat&apos;,
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: true }
+  }))
+</code></pre><p>For using secure cookies in production, but allowing for testing in development, the following is an example of enabling this setup based on NODE_ENV in express:</p>
+<pre><code>var app = express()
+var sess = {
+      secret: &apos;keyboard cat&apos;,
+      cookie: {}
+}
+
+if (app.get(&apos;env&apos;) === &apos;production&apos;) {
+      app.set(&apos;trust proxy&apos;, 1) // trust first proxy 
+      sess.cookie.secure = true // serve secure cookies 
+}
+</code></pre><p>app.use(session(sess))<br>The <code>cookie.secure</code> option can also be set to the special value <code>&#39;auto&#39;</code> to have this setting automatically match the determined security of the connection. Be careful when using this setting if the site is available both as HTTP and HTTPS, as once the cookie is set on HTTPS, it will no longer be visible over HTTP. This is useful when the Express <code>&quot;trust proxy&quot;</code> setting is properly setup to simplify development vs production configuration.</p>
+<h5 id="genid"><a href="#genid" class="headerlink" title="genid"></a>genid</h5><p>Function to call to generate a new session ID. Provide a function that returns a string that will be used as a session ID. The function is given req as the first argument if you want to use some value attached to req when generating the ID.</p>
+<p>The default value is a function which uses the uid-safe library to generate IDs.</p>
+<p><code>NOTE</code> be careful to generate unique IDs so your sessions do not conflict.</p>
+<pre><code>app.use(session({
+  genid: function(req) {
+    return genuuid() // use UUIDs for session IDs 
+  },
+  secret: &apos;keyboard cat&apos;
+}))
+</code></pre><h5 id="name"><a href="#name" class="headerlink" title="name"></a>name</h5><p>The name of the session ID cookie to set in the response (and read from in the request).</p>
+<p>The default value is <code>&#39;connect.sid&#39;</code>.</p>
+<p><code>Note</code> if you have multiple apps running on the same hostname (this is just the name, i.e. <code>localhost or 127.0.0.1;</code> different schemes and ports do not name a different hostname), then you need to separate the session cookies from each other. The simplest method is to simply set different names per app.</p>
+<h5 id="proxy"><a href="#proxy" class="headerlink" title="proxy"></a>proxy</h5><p>Trust the reverse proxy when setting secure cookies (via the “X-Forwarded-Proto” header).</p>
+<p>The default value is <code>undefined</code>.</p>
+<ul>
+<li>true The “X-Forwarded-Proto” header will be used.</li>
+<li>false All headers are ignored and the connection is considered secure only if there is a direct TLS/SSL connection.</li>
+<li>undefined Uses the “trust proxy” setting from express</li>
+</ul>
+<h5 id="resave"><a href="#resave" class="headerlink" title="resave"></a>resave</h5><p>Forces the session to be saved back to the session store, even if the session was never modified during the request. Depending on your store this may be necessary, but it can also create race conditions where a client makes two parallel requests to your server and changes made to the session in one request may get overwritten when the other request ends, even if it made no changes (this behavior also depends on what store you’re using).</p>
+<p>The default value is <code>true</code>, but using the default has been deprecated, as the default will change in the future. Please research into this setting and choose what is appropriate to your use-case. Typically, you’ll want <code>false</code>.</p>
+<p>How do I know if this is necessary for my store? The best way to know is to check with your store if it implements the touch method. If it does, then you can safely set <code>resave: false</code>. If it does not implement the <code>touch</code> method and your store sets an expiration date on stored sessions, then you likely need <code>resave: true</code>.</p>
+<h5 id="rolling"><a href="#rolling" class="headerlink" title="rolling"></a>rolling</h5><p>Force a session identifier cookie to be set on every response. The expiration is reset to the original <a href="">maxAge</a>, resetting the expiration countdown.</p>
+<p>The default value is false.</p>
+<p><code>Note</code> When this option is set to true but the saveUninitialized option is set to false, the cookie will not be set on a response with an uninitialized session.</p>
+<h5 id="saveUninitialized"><a href="#saveUninitialized" class="headerlink" title="saveUninitialized"></a>saveUninitialized</h5><p>Forces a session that is “uninitialized” to be saved to the store. A session is uninitialized when it is new but not modified. Choosing <code>false</code> is useful for implementing login sessions, reducing server storage usage, or complying with laws that require permission before setting a cookie. Choosing <code>false</code> will also help with race conditions where a client makes multiple parallel requests without a session.</p>
+<p>The default value is true, but using the default has been deprecated, as the default will change in the future. Please research into this setting and choose what is appropriate to your use-case.</p>
+<p><code>Note</code> if you are using Session in conjunction with PassportJS, Passport will add an empty Passport object to the session for use after a user is authenticated, which will be treated as a modification to the session, causing it to be saved. This has been fixed in PassportJS 0.3.0</p>
+<h5 id="secret"><a href="#secret" class="headerlink" title="secret"></a>secret</h5><h5 id="Required-option"><a href="#Required-option" class="headerlink" title="Required option"></a>Required option</h5><p>This is the secret used to sign the session ID cookie. This can be either a string for a single secret, or an array of multiple secrets. If an array of secrets is provided, only the first element will be used to sign the session ID cookie, while all the elements will be considered when verifying the signature in requests.</p>
+<h5 id="store"><a href="#store" class="headerlink" title="store"></a>store</h5><p>The session store instance, defaults to a new <code>MemoryStore</code> instance.</p>
+<h5 id="unset"><a href="#unset" class="headerlink" title="unset"></a>unset</h5><p>Control the result of unsetting req.session (through delete, setting to null, etc.).</p>
+<p>The default value is <code>&#39;keep&#39;</code>.</p>
+<ul>
+<li><code>&#39;destroy&#39;</code> The session will be destroyed (deleted) when the response ends.</li>
+<li><code>&#39;keep&#39;</code> The session in the store will be kept, but modifications made during the request are ignored and not saved.</li>
+</ul>
+<h5 id="req-session"><a href="#req-session" class="headerlink" title="req.session"></a>req.session</h5><p>To store or access session data, simply use the request property <code>req.session</code>, which is (generally) serialized as JSON by the store, so nested objects are typically fine. For example below is a user-specific view counter:</p>
+<pre><code>// Use the session middleware 
+app.use(session({ secret: &apos;keyboard cat&apos;, cookie:     { maxAge: 60000 }}))
+
+// Access the session as req.session 
+app.get(&apos;/&apos;, function(req, res, next) {
+     var sess = req.session
+      if (sess.views) {
+    sess.views++
+    res.setHeader(&apos;Content-Type&apos;, &apos;text/html&apos;)
+    res.write(&apos;&lt;p&gt;views: &apos; + sess.views + &apos;&lt;/p&gt;&apos;)
+    res.write(&apos;&lt;p&gt;expires in: &apos; +     (sess.cookie.maxAge / 1000) + &apos;s&lt;/p&gt;&apos;)
+        res.end()
+      } else {
+        sess.views = 1
+    res.end(&apos;welcome to the session demo. refresh!&apos;)
+      }
+})
+</code></pre><h5 id="Session-regenerate-callback"><a href="#Session-regenerate-callback" class="headerlink" title="Session.regenerate(callback)"></a>Session.regenerate(callback)</h5><p>To regenerate the session simply invoke the method. Once complete, a new SID and Session instance will be initialized at req.session and the callback will be invoked.</p>
+<pre><code>req.session.regenerate(function(err) {
+      // will have a new session here 
+})
+</code></pre><h5 id="Session-destroy-callback"><a href="#Session-destroy-callback" class="headerlink" title="Session.destroy(callback)"></a>Session.destroy(callback)</h5><p>Destroys the session and will unset the req.session property. Once complete, the callback will be invoked.</p>
+<pre><code>req.session.destroy(function(err) {
+      // cannot access session here 
+})
+</code></pre><h5 id="Session-reload-callback"><a href="#Session-reload-callback" class="headerlink" title="Session.reload(callback)"></a>Session.reload(callback)</h5><p>Reloads the session data from the store and re-populates the <code>req.session</code> object. Once complete, the callback will be invoked.</p>
+<pre><code>req.session.reload(function(err) {
+      // session updated 
+})
+</code></pre><h5 id="Session-save-callback"><a href="#Session-save-callback" class="headerlink" title="Session.save(callback)"></a>Session.save(callback)</h5><p>Save the session back to the store, replacing the contents on the store with the contents in memory (though a store may do something else–consult the store’s documentation for exact behavior).</p>
+<p>This method is automatically called at the end of the HTTP response if the session data has been altered (though this behavior can be altered with various options in the middleware constructor). Because of this, typically this method does not need to be called.</p>
+<p>There are some cases where it is useful to call this method, for example, long- lived requests or in WebSockets.</p>
+<pre><code>req.session.save(function(err) {
+      // session saved 
+})
+</code></pre><h5 id="Session-touch"><a href="#Session-touch" class="headerlink" title="Session.touch()"></a>Session.touch()</h5><p>Updates the <code>.maxAge</code> property. Typically this is not necessary to call, as the session middleware does this for you.</p>
+<h5 id="req-session-id"><a href="#req-session-id" class="headerlink" title="req.session.id"></a>req.session.id</h5><p>Each session has a unique ID associated with it. This property will contain the session ID and cannot be modified.</p>
+<h5 id="req-session-cookie"><a href="#req-session-cookie" class="headerlink" title="req.session.cookie"></a>req.session.cookie</h5><p>Each session has a unique cookie object accompany it. This allows you to alter the session cookie per visitor. For example we can set <code>req.session.cookie.expires</code> to false to enable the cookie to remain for only the duration of the user-agent.</p>
+<h5 id="Cookie-maxAge"><a href="#Cookie-maxAge" class="headerlink" title="Cookie.maxAge"></a>Cookie.maxAge</h5><p>Alternatively <code>req.session.cookie.maxAge</code> will return the time remaining in milliseconds, which we may also re-assign a new value to adjust the .expires property appropriately. The following are essentially equivalent</p>
+<pre><code>var hour = 3600000
+req.session.cookie.expires = new Date(Date.now() + hour)
+req.session.cookie.maxAge = hour
+</code></pre><p>For example when maxAge is set to 60000 (one minute), and 30 seconds has elapsed it will return 30000 until the current request has completed, at which time req.session.touch() is called to reset req.session.maxAge to its original value.</p>
+<pre><code>req.session.cookie.maxAge // =&gt; 30000 
+</code></pre><h5 id="req-sessionID"><a href="#req-sessionID" class="headerlink" title="req.sessionID"></a>req.sessionID</h5><p>To get the ID of the loaded session, access the request property req.sessionID. This is simply a read-only value set when a session is loaded/created.</p>
+<h5 id="Session-Store-Implementation"><a href="#Session-Store-Implementation" class="headerlink" title="Session Store Implementation"></a>Session Store Implementation</h5><p>Every session store must be an EventEmitter and implement specific methods. The following methods are the list of<br> <a href="">required</a>, <a href="">recommended</a>, <a href="">and optional</a>.</p>
+<ul>
+<li>Required methods are ones that this module will always call on the store.</li>
+<li>Recommended methods are ones that this module will call on the store if available.</li>
+<li>Optional methods are ones this module does not call at all, but helps present uniform stores to users.<br>For an example implementation view the <a href="https://github.com/tj/connect-redis" target="_blank" rel="external">connect-redis </a>repo.</li>
+</ul>
+<h5 id="store-all-callback"><a href="#store-all-callback" class="headerlink" title="store.all(callback)"></a>store.all(callback)</h5><h6 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h6><p>This optional method is used to get all sessions in the store as an array. The callback should be called as callback(error, sessions).</p>
+<p>store.destroy(sid, callback)<br>Required</p>
+<p>This required method is used to destroy/delete a session from the store given a session ID <code>(sid)</code>. The <code>callback</code> should be called as <code>callback(error)</code> once the session is destroyed.</p>
+<h5 id="store-clear-callback"><a href="#store-clear-callback" class="headerlink" title="store.clear(callback)"></a>store.clear(callback)</h5><h6 id="Optional-1"><a href="#Optional-1" class="headerlink" title="Optional"></a>Optional</h6><p>This optional method is used to delete all sessions from the store. The <code>callback</code> should be called as <code>callback(error)</code> once the store is cleared.</p>
+<h5 id="store-length-callback"><a href="#store-length-callback" class="headerlink" title="store.length(callback)"></a>store.length(callback)</h5><h6 id="Optional-2"><a href="#Optional-2" class="headerlink" title="Optional"></a>Optional</h6><p>This optional method is used to get the count of all sessions in the store. The <code>callback</code> should be called as <code>callback(error, len)</code>.</p>
+<h5 id="store-get-sid-callback"><a href="#store-get-sid-callback" class="headerlink" title="store.get(sid, callback)"></a>store.get(sid, callback)</h5><h6 id="Required"><a href="#Required" class="headerlink" title="Required"></a>Required</h6><p>This required method is used to get a session from the store given a session ID <code>(sid)</code>. The <code>callback</code> should be called as <code>callback(error, session)</code>.</p>
+<p>The <code>session</code> argument should be a session if found, otherwise null or undefined if the session was not found (and there was no error). A special case is made when <code>error.code === &#39;ENOENT&#39;</code> to act like <code>callback(null, null)</code>.</p>
+<h5 id="store-set-sid-session-callback"><a href="#store-set-sid-session-callback" class="headerlink" title="store.set(sid, session, callback)"></a>store.set(sid, session, callback)</h5><h6 id="Required-1"><a href="#Required-1" class="headerlink" title="Required"></a>Required</h6><p>This required method is used to upsert a session into the store given a session ID (sid) and session (<code>session</code>) object. The callback should be called as <code>callback(error)</code> once the session has been set in the store.</p>
+<h5 id="store-touch-sid-session-callback"><a href="#store-touch-sid-session-callback" class="headerlink" title="store.touch(sid, session, callback)"></a>store.touch(sid, session, callback)</h5><h6 id="Recommended"><a href="#Recommended" class="headerlink" title="Recommended"></a>Recommended</h6><p>This recommended method is used to “touch” a given session given a session ID (<code>sid</code>) and session (<code>session</code>) object. The callback should be called as <code>callback(error)</code> once the session has been touched.</p>
+<p>This is primarily used when the store will automatically delete idle sessions and this method is used to signal to the store the given session is active, potentially resetting the idle timer.</p>
+<h5 id="Compatible-Session-Stores"><a href="#Compatible-Session-Stores" class="headerlink" title="Compatible Session Stores"></a>Compatible Session Stores</h5><p>The following modules implement a session store that is compatible with this module. Please make a PR to add additional modules :)</p>
+<p><img src="https://img.shields.io/github/stars/aerospike/aerospike-session-store-expressjs.svg?label=%E2%98%85****" alt=""> <a href="https://www.npmjs.com/package/aerospike-session-store" target="_blank" rel="external">aerospike-session-store</a> A session store using <a href="http://www.aerospike.com/" target="_blank" rel="external">Aerospike</a>.</p>
+<p><img src="https://img.shields.io/github/stars/webcc/cassandra-store.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/cassandra-store" target="_blank" rel="external">cassandra-store</a> An Apache Cassandra-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/coolaj86/cluster-store.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/cluster-store" target="_blank" rel="external">cluster-store</a> A wrapper for using in-process / embedded stores - such as SQLite (via knex), leveldb, files, or memory - with node cluster (desirable for Raspberry Pi 2 and other multi-core embedded devices).</p>
+<p><img src="https://img.shields.io/github/stars/mike-goodwin/connect-azuretables.svg?label=%E2%98%85****" alt=""><a href="https://www.npmjs.com/package/connect-azuretables" target="_blank" rel="external">connect-azuretables</a> An<a href="https://azure.microsoft.com/en-gb/services/storage/tables/" target="_blank" rel="external"> Azure Table Storage</a>-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/christophermina/connect-couchbase.svg?label=%E2%98%85" alt="">[connect-couchbase] (<a href="https://www.npmjs.com/package/connect-couchbase)A" target="_blank" rel="external">https://www.npmjs.com/package/connect-couchbase)A</a> <a href="http://www.couchbase.com/" target="_blank" rel="external">couchbase</a>-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/adriantanasa/connect-datacache.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-datacache" target="_blank" rel="external">connect-datacache</a> An <a href="https://www.ibm.com/cloud-computing/bluemix/" target="_blank" rel="external">IBM Bluemix Data Cache</a>-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/wallali/connect-db2.svg?label=%E2%98%85****" alt=""><a href="https://www.npmjs.com/package/connect-db2" target="_blank" rel="external">connect-db2</a> An IBM DB2-based session store built using <a href="https://www.npmjs.com/package/ibm_db" target="_blank" rel="external">ibm_db</a> module.</p>
+<p><img src="https://img.shields.io/github/stars/ca98am79/connect-dynamodb.svg?label=%E2%98%85" alt=""><a href="https://github.com/ca98am79/connect-dynamodb" target="_blank" rel="external">connect-dynamodb</a> A DynamoDB-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/Requarks/connect-loki.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-loki" target="_blank" rel="external">connect-loki</a> A Loki.js-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/bluetorch/connect-ml.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-ml" target="_blank" rel="external">connect-ml</a> A MarkLogic Server-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/patriksimek/connect-mssql.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-mssql" target="_blank" rel="external">connect-mssql</a> A SQL Server-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/MonetDB/npm-connect-monetdb.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-monetdb" target="_blank" rel="external">connect-monetdb</a> A MonetDB-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/kcbanner/connect-mongo.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-mongo" target="_blank" rel="external">connect-mongo</a> A MongoDB-based session store.</p>
+<p><img src="https://www.npmjs.com/package/connect-mongodb-session" alt=""><a href="https://www.npmjs.com/package/connect-mongodb-session" target="_blank" rel="external">connect-mongodb-session</a> Lightweight MongoDB-based session store built and maintained by MongoDB.</p>
+<p><img src="https://img.shields.io/github/stars/tj/connect-redis.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-pg-simple" target="_blank" rel="external">connect-pg-simple</a> A PostgreSQL-based session store.</p>
+<p><img src="https://www.npmjs.com/package/connect-redis" alt=""><a href="https://www.npmjs.com/package/connect-redis" target="_blank" rel="external">connect-redis</a> A Redis-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/balor/connect-memcached.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-memcached" target="_blank" rel="external">connect-memcached</a> A memcached-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/llambda/connect-session-knex.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-session-knex" target="_blank" rel="external">connect-session-knex</a> A session store using <a href="http://knexjs.org/" target="_blank" rel="external">Knex.js</a>, which is a SQL query builder for PostgreSQL, MySQL, MariaDB, SQLite3, and Oracle.</p>
+<p><img src="https://img.shields.io/github/stars/mweibel/connect-session-sequelize.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-session-sequelize" target="_blank" rel="external">connect-session-sequelize</a> A session store using <a href="http://docs.sequelizejs.com/en/v3/" target="_blank" rel="external">Sequelize.js</a>, which is a Node.js / io.js ORM for PostgreSQL, MySQL, SQLite and MSSQL.</p>
+<p><img src="https://img.shields.io/github/stars/chill117/express-mysql-session.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/express-mysql-session" target="_blank" rel="external">express-mysql-session</a> A session store using native <a href="https://www.mysql.com/" target="_blank" rel="external">MySQL</a> via the <a href="https://github.com/mysqljs/mysql" target="_blank" rel="external">node-mysql</a> module.</p>
+<p><img src="https://img.shields.io/github/stars/tgohn/express-session-level.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/express-sessions" target="_blank" rel="external">express-sessions</a>: A session store supporting both MongoDB and Redis.</p>
+<p><img src="https://img.shields.io/github/stars/rawberg/connect-sqlite3.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/connect-sqlite3" target="_blank" rel="external">connect-sqlite3</a> A <a href="https://github.com/mapbox/node-sqlite3" target="_blank" rel="external">SQLite3</a>session store modeled after the TJ’s connect-redis store.</p>
+<p><img src="https://img.shields.io/github/stars/dwhieb/documentdb-session.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/documentdb-session" target="_blank" rel="external">documentdb-session</a>A session store for Microsoft Azure’s <a href="https://azure.microsoft.com/en-us/services/documentdb/" target="_blank" rel="external">DocumentDB</a> NoSQL database service.</p>
+<p><img src="https://img.shields.io/github/stars/louischatriot/express-nedb-session.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/express-nedb-session" target="_blank" rel="external">express-nedb-session</a> A NeDB-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/tgohn/express-session-level.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/express-session-level" target="_blank" rel="external">express-session-level</a> A <a href="https://github.com/Level/levelup" target="_blank" rel="external">LevelDB</a> based session store.</p>
+<p><img src="https://img.shields.io/github/stars/gildean/express-etcd.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/express-etcd" target="_blank" rel="external">express-etcd</a> An <a href="https://github.com/stianeikeland/node-etcd" target="_blank" rel="external">etcd</a> based session store.</p>
+<p><img src="https://img.shields.io/github/stars/jackspaniel/hazelcast-store.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/hazelcast-store" target="_blank" rel="external">hazelcast-store</a> A Hazelcast-based session store built on the <a href="https://www.npmjs.com/package/hazelcast-client" target="_blank" rel="external">Hazelcast Node Client</a>.</p>
+<p><img src="https://img.shields.io/github/stars/scriptollc/level-session-store.svg?label=%E2%98%85" alt="">[level-session-store] A <a href="https://www.npmjs.com/package/level-session-store" target="_blank" rel="external">LevelDB</a>-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/BenjaminVadant/medea-session-store.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/medea-session-store" target="_blank" rel="external">medea-session-store</a> A Medea-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/jwathen/mssql-session-store.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/mssql-session-store" target="_blank" rel="external">mssql-session-store</a> A SQL Server-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/JamesMGreene/nedb-session-store.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/nedb-session-store" target="_blank" rel="external">nedb-session-store</a> An alternate NeDB-based (either in-memory or file-persisted) session store.</p>
+<p><img src="https://img.shields.io/github/stars/MattMcFarland/sequelstore-connect.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/sequelstore-connect" target="_blank" rel="external">sequelstore-connect</a> A session store using <a href="http://docs.sequelizejs.com/en/v3/" target="_blank" rel="external">Sequelize.js</a>.</p>
+<p><img src="https://img.shields.io/github/stars/valery-barysok/session-file-store.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/session-file-store" target="_blank" rel="external">session-file-store</a>A file system-based session store.</p>
+<p><img src="https://img.shields.io/github/stars/llambda/session-rethinkdb.svg?label=%E2%98%85" alt=""><a href="https://www.npmjs.com/package/session-rethinkdb" target="_blank" rel="external">session-rethinkdb</a>* A <a href="https://rethinkdb.com/" target="_blank" rel="external">RethinkDB</a>-based session store.</p>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><p>A simple example using express-session to store page views for a user.</p>
+<h4 id="express框架之session-内存存储"><a href="#express框架之session-内存存储" class="headerlink" title="express框架之session 内存存储"></a>express框架之session 内存存储</h4><pre><code>1 var express = require(&apos;express&apos;);
+ 2 var session = require(&apos;express-session&apos;);
+ 3 var cookieParser = require(&apos;cookie-parser&apos;);
+ 4 
+ 5 var app = express();
+ 6 
+7 app.use(cookieParser());
+ 8 app.use(session({
+ 9     secret: &apos;12345&apos;,
+10     name: &apos;testapp&apos;,   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+11     cookie: {maxAge: 80000 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+12     resave: false,
+13     saveUninitialized: true,
+14 }));
+15 
+16 
+17 app.get(&apos;/awesome&apos;, function(req, res){
+18     
+19     if(req.session.lastPage) {
+20         console.log(&apos;Last page was: &apos; + req.session.lastPage + &quot;.&quot;);    
+21     }    
+22     req.session.lastPage = &apos;/awesome&apos;; //每一次访问时，session对象的lastPage会自动的保存或更新内存中的session中去。
+23     res.send(&quot;You&apos;re Awesome. And the session expired time is: &quot; + req.session.cookie.maxAge);
+24 });
+25 
+26 app.get(&apos;/radical&apos;, function(req, res){
+27     if (req.session.lastPage) {
+28         console.log(&apos;Last page was: &apos; + req.session.lastPage + &quot;.&quot;);    
+29     }
+30     req.session.lastPage = &apos;/radical&apos;;  
+31     res.send(&apos;What a radical visit! And the session expired time is: &apos; + req.session.cookie.maxAge);
+32 });
+33 
+34 app.get(&apos;/tubular&apos;, function(req, res){
+35     if (req.session.lastPage){
+36         console.log(&quot;Last page was: &quot; + req.session.lastPage + &quot;.&quot;);    
+37     }
+    38 
+39     req.session.lastPage = &apos;/tubular&apos;;
+40     res.send(&apos;Are you a suffer? And the session expired time is: &apos; + req.session.cookie.maxAge);
+41 });
+42 
+43 
+44 app.listen(5000);
+</code></pre><h4 id="express框架之session-数据库存储"><a href="#express框架之session-数据库存储" class="headerlink" title="express框架之session 数据库存储"></a>express框架之session 数据库存储</h4><p>　有时候，我们需要session的声明周期要长一点，比如好多网站有个免密码两周内自动登录的功能。基于这个需求，session必须寻找内存之外的存储载体，数据库能提供完美的解决方案。这里，我选用的是mongodb数据库，作为一个NoSQL数据库，它的基础数据对象时database-collection-document 对象模型非常直观并易于理解，针对node.js 也提供了丰富的驱动和API。express框架提供了针对mongodb的中间件：connect-mongo，我们只需在挂载session的时候在options中传入mongodb的参数即可，程序运行的时候, express app 会自动的替我们管理session的存储，更新和删除。具体可以参考：<br><a href="https://github.com/kcbanner/connect-mongo" target="_blank" rel="external">https://github.com/kcbanner/connect-mongo</a></p>
+<pre><code> 1 var express = require(&apos;express&apos;);
+ 2 var session = require(&apos;express-session&apos;);
+ 3 var cookieParser = require(&apos;cookie-parser&apos;);
+     4 var MongoStore = require(&apos;connect-mongo&apos;)(session);
+ 5 var app = express();
+ 6 
+     7 app.use(cookieParser());
+ 8 app.use(session({
+ 9     secret: &apos;12345&apos;,
+10     name: &apos;testapp&apos;,
+11     cookie: {maxAge: 80000 },
+12     resave: false,
+13     saveUninitialized: true,
+14     store: new MongoStore({   //创建新的mongodb数据库
+15         host: &apos;localhost&apos;,    //数据库的地址，本机的话就是127.0.0.1，也可以是网络主机
+16         port: 27017,          //数据库的端口号
+17         db: &apos;test-app&apos;        //数据库的名称。
+18     })
+    19 }));
+20 
+21 
+    22 app.get(&apos;/awesome&apos;, function(req, res){
+23     
+24     if(req.session.lastPage) {
+25         console.log(&apos;Last page was: &apos; + req.session.lastPage + &quot;.&quot;);    
+26     }    
+27     req.session.lastPage = &apos;/awesome&apos;;
+28     res.send(&quot;You&apos;re Awesome. And the session expired time is: &quot; + req.session.cookie.maxAge);
+29 });
+30 
+31 app.get(&apos;/radical&apos;, function(req, res){
+32     if (req.session.lastPage) {
+33         console.log(&apos;Last page was: &apos; + req.session.lastPage + &quot;.&quot;);    
+34     }
+35     req.session.lastPage = &apos;/radical&apos;;
+36     res.send(&apos;What a radical visit! And the session expired time is: &apos; + req.session.cookie.maxAge);
+37 });
+38 
+39 app.get(&apos;/tubular&apos;, function(req, res){
+40     if (req.session.lastPage){
+41         console.log(&quot;Last page was: &quot; + req.session.lastPage + &quot;.&quot;);    
+42     }
+43 
+44     req.session.lastPage = &apos;/tubular&apos;;
+45     res.send(&apos;Are you a suffer? And the session expired time is: &apos; + req.session.cookie.maxAge);
+46 });
+47 
+48 
+49 app.listen(5000);
+</code></pre><h4 id="session的生命周期："><a href="#session的生命周期：" class="headerlink" title="session的生命周期："></a>session的生命周期：</h4><p>　　由于session是存在服务器端数据库的，所以的它的生命周期可以持久化，而不仅限于浏览器关闭的时间。具体是由cookie.maxAge 决定：如果maxAge设定是1个小时，那么从这个因浏览器访问服务器导致session创建开始后，session会一直保存在服务器端，即使浏览器关闭，session也会继续存在。如果此时服务器宕机，只要开机后数据库没发生不可逆转的破坏，maxAge时间没过期，那么session是可以继续保持的。</p>
+<p>　　当maxAge时间过期后，session会自动的数据库中移除，对应的还有浏览器的cookie。不过，由于connect-mongo的特殊机制（每1分钟检查一次过期session），session的移除可能在时间上会有一定的滞后。<br>部分参考：<a href="https://www.npmjs.com/package/express-session#cookiemaxage" target="_blank" rel="external">https://www.npmjs.com/package/express-session#cookiemaxage</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/05/expressSession/" class="archive-article-date">
+  	<time datetime="2016-10-05T03:52:24.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-05</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Interview" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/19/Interview/">Interview</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前端面试详解一"><a href="#前端面试详解一" class="headerlink" title="前端面试详解一"></a>前端面试详解一</h1><h6 id="1-标签上title与alt属性的区别是什么？"><a href="#1-标签上title与alt属性的区别是什么？" class="headerlink" title="1.标签上title与alt属性的区别是什么？"></a>1.标签上title与alt属性的区别是什么？</h6><pre><code>title是设置鼠标移动到图片上时显示的内容，而alt是用于当图片没有正常显示时出现的提示文字，另外alt还用于在seo中针对图片的优化说明.
+</code></pre><h6 id="2-标签内的文字是什么颜色的？"><a href="#2-标签内的文字是什么颜色的？" class="headerlink" title="2.标签内的文字是什么颜色的？"></a>2.<p>标签内的文字是什么颜色的？</p></h6><pre><code>  &lt;style&gt;
+      .classA{color:blue !important;}
+      .classB{color:red;}
+      &lt;/style&gt;
+ &lt;body&gt;
+       &lt;p class=‘classB classA’ style=‘color:green’&gt;123&lt;/p&gt;
+  &lt;/body&gt;
+答：文字是blue蓝色，! important ，可以更改默认的CSS样式优先级规则，使该条样式属性声明具有最高优先级
+</code></pre><h6 id="3-css单位px-em-rem的区别。"><a href="#3-css单位px-em-rem的区别。" class="headerlink" title="3. css单位px,em,rem的区别。"></a>3. css单位px,em,rem的区别。</h6><p>px像素（Pixel）。相对长度单位。像素px是相对于显示器屏幕分辨率而言的px的特点：</p>
+<pre><code>1. IE无法调整那些使用px作为单位的字体大小；
+2. 国外的大部分网站能够调整的原因在于其使用了em或rem作为字体单位；
+3. Firefox能够调整px和em，rem，但是96%以上的中国网民使用IE浏览器(或内核)。
+em是相对长度单位。相对于当前对象内文本的字体尺寸。如当前对行内文本的字体尺寸未被人为设置，则相对于浏览器的默认字体尺寸
+</code></pre><p>EM特点 </p>
+<pre><code>1. em的值并不是固定的；
+2. em会继承父级元素的字体大小。
+rem是CSS3新增的一个相对单位（root em，根em），这个单位引起了广泛关注。这个单位与em有什么区别呢？区别在于使用rem为元素设定字体大小时，仍然是相对大小，但相对的只是HTML根元素。这个单位可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。目前，除了IE8及更早版本外，所有浏览器均已支持rem。对于不支持它的浏览器，应对方法也很简单，就是多写一个绝对单位的声明。这些浏览器会忽略用rem设定的字体大小。
+</code></pre><h6 id="4-DOMContentLoaded-与-OnLoad事件的区别。"><a href="#4-DOMContentLoaded-与-OnLoad事件的区别。" class="headerlink" title="4.DOMContentLoaded 与 OnLoad事件的区别。"></a>4.DOMContentLoaded 与 OnLoad事件的区别。</h6><pre><code>onload会在html,css,js,图片等资源文件加载完成后执行里面的代码，而DOMContentLoaded则只需在html,css,js加载完成后就执行里面的代码。
+</code></pre><h6 id="5-“-”和“-”的不同。"><a href="#5-“-”和“-”的不同。" class="headerlink" title="5.“==”和“===”的不同。"></a>5.“==”和“===”的不同。</h6><pre><code>==用于一般比较，===用于严格比较，==在比较的时候可以转换数据类型，===严格比较，只要类型不匹配就返回flase
+</code></pre><h6 id="6-JavaScript的数据类型都有哪些？"><a href="#6-JavaScript的数据类型都有哪些？" class="headerlink" title="6.JavaScript的数据类型都有哪些？"></a>6.JavaScript的数据类型都有哪些？</h6><pre><code>JavaScript中有5种简单数据类型（也称为基本数据类型）：Undefined、Null、Boolean、Number和String。还有1种复杂数据类型——Object，Object本质上是由一组无序的名值对组成的
+</code></pre><h6 id="7-var-foo-“11”-2-“1”"><a href="#7-var-foo-“11”-2-“1”" class="headerlink" title="7. var foo = “11” + 2 - “1”;"></a>7. var foo = “11” + 2 - “1”;</h6><pre><code> foo 输出的是？
+ typeof foo输出的是？
+foo输出的是111,首先字符串11+数字2,执行字符串连接为112,而后减1，是将112执行隐式类型转换为数字112后再减1，所以最后结果是111
+typeof foo，为number
+</code></pre><h6 id="8-split-join-的区别在哪？"><a href="#8-split-join-的区别在哪？" class="headerlink" title="8.split() join()的区别在哪？"></a>8.split() join()的区别在哪？</h6><pre><code>split是将字符串分割为数组，而join是将数组中的值连接为字符串
+</code></pre><h6 id="9-数组方法pop-push-unshift-shift-的区别在哪？"><a href="#9-数组方法pop-push-unshift-shift-的区别在哪？" class="headerlink" title="9.数组方法pop() push() unshift() shift()的区别在哪？"></a>9.数组方法pop() push() unshift() shift()的区别在哪？</h6><pre><code>* pop是删除数组最后一位
+* push是在数组最后一位插入一个新元素
+* unshift是在数组开头添加一个或更多元素
+* shift是将数组开头的元素删除
+</code></pre><h6 id="10-JavaScript的事件流模型都有哪些？"><a href="#10-JavaScript的事件流模型都有哪些？" class="headerlink" title="10.JavaScript的事件流模型都有哪些？"></a>10.JavaScript的事件流模型都有哪些？</h6><pre><code>在各种浏览器中存在三种事件模型:原始事件模型( original event model),DOM2事件模型,IE事件模型.
+
+原始事件模型简单来说就是用on+事件名的方式绑定的事件,比如onclick,onsubmit等
+
+dom2事件模型就是通过addEventListener绑定的事件，可以通过event.stopPropagation()来停止事件的传播,调用preventDefault()来阻止浏览器的默认行为
+
+IE模型也提供了一个event对象封装了事件的详细信息,但是IE不把该对象传入事件处理函数,由于在任意时刻只会存在一个事件,所以IE把它作为全局对象window的一个属性,IE中的事件传播模式对应于DOM2的第二和第三阶段,首先执目标元素的处理函数,然后向上传播到达document,ie中只能能捕捉鼠标事件,而DOM2中可以捕捉所有的事件,IE中注册和删除事件处理函数的方法也不同于DOM2.
+
+事件处理函数的注册和删除是通过元素的
+
+* attachEvent( &quot;eventType&quot;,&quot;handler&quot;) and
+* detachEvent(&quot;eventType&quot;,&quot;handler&quot; ),与dom2不同的是eventType有on前缀
+</code></pre><h6 id="11-请按执行顺序写出几次alert-语句a的值："><a href="#11-请按执行顺序写出几次alert-语句a的值：" class="headerlink" title="11.请按执行顺序写出几次alert()语句a的值："></a>11.请按执行顺序写出几次alert()语句a的值：</h6><pre><code>function fn1() {
+    var a = 1;
+    function fn2() {
+        alert(a++);
+    }
+    return fn2;
+}
+var f = fn1();
+f();
+f();
+两次：第1次1，第二次2，var f=fn1()的时候只是调用了fn1这个函数并将fn2作为返回值返回，并未执行fn2里面的内容.
+
+在第一个f()的时候就是执行fn2里面的内容，同时因为fn2是一个闭包函数，调用了fn1中的a，所以a为1，至于a++，因为a++为后自加，先引用a,再进行自加操作，所以第一次弹出为1,而第二个f(),因为a的值已经++过了，所以弹出2.
+</code></pre><h6 id="12-请按要求操作数组a："><a href="#12-请按要求操作数组a：" class="headerlink" title="12.请按要求操作数组a："></a>12.请按要求操作数组a：</h6><pre><code>i. 如何删除数组a中第2个元素（即：“B”）？
+var a = [“A”, “B”, “C”, “D”];
+a.splice(1,1);
+
+ii. 如何删除数组a中最后一个元素？
+var a = [“A”, “B”, “C”, “D”];
+a.pop()
+
+iii. 如何将“NEW”插入数组a的“B”和“C”之间？
+var a = [“A”, “B”, “C”, “D”];
+a.splice(2,0,”new”);
+</code></pre><h6 id="13-以下技术您用到过哪些？"><a href="#13-以下技术您用到过哪些？" class="headerlink" title="13.以下技术您用到过哪些？"></a>13.以下技术您用到过哪些？</h6><pre><code>EasyUI  BootStrap  jQuery   jQuery Mobile  zepto  ExtJS
+angular react  backbone  redux grunt  gulp  seats nodeJS
+swiper web pack requireJS
+略
+</code></pre><h6 id="14-var-stringArray-“Hello”-“World”-给出您能想到的最好的方法输出“Hello-World”。"><a href="#14-var-stringArray-“Hello”-“World”-给出您能想到的最好的方法输出“Hello-World”。" class="headerlink" title="14.var stringArray = [“Hello”, “World”],给出您能想到的最好的方法输出“Hello World”。"></a>14.var stringArray = [“Hello”, “World”],给出您能想到的最好的方法输出“Hello World”。</h6><p><code>stringArray.join(“ ”);</code></p>
+<h6 id="15-typeof输出的类型有哪些"><a href="#15-typeof输出的类型有哪些" class="headerlink" title="15.typeof输出的类型有哪些"></a>15.typeof输出的类型有哪些</h6><pre><code>A.number  B.string C.null  D.undefined
+</code></pre><h6 id="16-以下关于Array数组对象的说法不正确的是（c）"><a href="#16-以下关于Array数组对象的说法不正确的是（c）" class="headerlink" title="16.以下关于Array数组对象的说法不正确的是（c）"></a>16.以下关于Array数组对象的说法不正确的是（c）</h6><pre><code>A.对数组里数据的排序可以用sort函数，如果排序效果非预期，可以给sort函数加一个排序函数的参数。
+B.reverse用于对数组数据的倒序排列。
+C.向数组的最后位置加一个新元素，可以用pop方法。
+D.unshift方法用于向数组删除第一个元素。
+</code></pre><h6 id="17-以下哪些是css伪类？（c-d）after和before是伪元素"><a href="#17-以下哪些是css伪类？（c-d）after和before是伪元素" class="headerlink" title="17.以下哪些是css伪类？（c,d）after和before是伪元素"></a>17.以下哪些是css伪类？（c,d）after和before是伪元素</h6><pre><code>A.after 
+
+B.before 
+
+C.hover 
+
+D.nth-child
+</code></pre><h6 id="18-javascrip的基本数据类型有哪些？（a-b-e-f-g）"><a href="#18-javascrip的基本数据类型有哪些？（a-b-e-f-g）" class="headerlink" title="18.javascrip的基本数据类型有哪些？（a,b,e,f,g）"></a>18.javascrip的基本数据类型有哪些？（a,b,e,f,g）</h6><pre><code>A.number 
+
+    B.string  
+
+C.object  
+
+D.array  
+
+E.null 
+
+F.undefined  
+
+G.boolean
+</code></pre><h6 id="19-以下不是html5元素的有哪些？-b-c）"><a href="#19-以下不是html5元素的有哪些？-b-c）" class="headerlink" title="19.以下不是html5元素的有哪些？(b,c）"></a>19.以下不是html5元素的有哪些？(b,c）</h6><pre><code>A.footer
+
+B.center 
+
+C.font 
+
+D.frame
+</code></pre><h6 id="20-下面有关浏览器中使用js跨域获取数据的描述。说法错误的是？a"><a href="#20-下面有关浏览器中使用js跨域获取数据的描述。说法错误的是？a" class="headerlink" title="20.下面有关浏览器中使用js跨域获取数据的描述。说法错误的是？a"></a>20.下面有关浏览器中使用js跨域获取数据的描述。说法错误的是？a</h6><pre><code>A.域名，端口相同，协议不同，属于相同的域。
+
+B.js可以使用jsonp进行跨域。
+
+C.通过修改document.domain来跨子域。
+
+D.使用window.name来进行跨域。
+</code></pre><h6 id="21-下述有关css属性position的属性值的描述。-语法错误的是？b"><a href="#21-下述有关css属性position的属性值的描述。-语法错误的是？b" class="headerlink" title="21.下述有关css属性position的属性值的描述。 语法错误的是？b"></a>21.下述有关css属性position的属性值的描述。 语法错误的是？b</h6><pre><code>static：没有定位，元素出现在正常的流中。
+
+fixed：生成绝对定位的元素，相对于父元素进行定位。
+
+relative：生成相对定位的元素，相对于元素本身正常位置进行定位。
+
+absolute：生成绝对定位的元素，相对于static定位意外的第一个祖先元素。
+</code></pre><h6 id="22-CSS实现隐藏页面元素的方法有哪些？"><a href="#22-CSS实现隐藏页面元素的方法有哪些？" class="headerlink" title="22.CSS实现隐藏页面元素的方法有哪些？"></a>22.CSS实现隐藏页面元素的方法有哪些？</h6><pre><code>display:none; 
+
+visibility: hidden;
+
+opacity:0;  
+
+position:absolute;
+
+left:-10000px;
+</code></pre><h6 id="23-请写出打印出来的值。"><a href="#23-请写出打印出来的值。" class="headerlink" title="23.请写出打印出来的值。"></a>23.请写出打印出来的值。</h6><pre><code>var flag = true;
+if (flag) {
+    var a = 10;
+}
+function fn() {
+    var b = 20;
+    c = 30;
+}
+fn();
+console.log(a);
+console.log(c);
+console.log(b);
+答:10,30,报错(b是在fn内部定义，全局并没有b这个变量)
+</code></pre><h6 id="24-xhtml和html有什么区别？"><a href="#24-xhtml和html有什么区别？" class="headerlink" title="24.xhtml和html有什么区别？"></a>24.xhtml和html有什么区别？</h6><pre><code>xhtml比HTML严谨性会高点，然后基本语言都还是沿用的HTML的标签，只不过废除了部分表现层的标签，同事在标准上要求高了点比如标签的严格嵌套，标签结束等等
+</code></pre><h6 id="25-每个html文件里开头都有个Doctype。这是代表了什么意思？"><a href="#25-每个html文件里开头都有个Doctype。这是代表了什么意思？" class="headerlink" title="25.每个html文件里开头都有个Doctype。这是代表了什么意思？"></a>25.每个html文件里开头都有个Doctype。这是代表了什么意思？</h6><pre><code>版本声明
+</code></pre><h6 id="26-问题-strong与em的异同？"><a href="#26-问题-strong与em的异同？" class="headerlink" title="26.问题 strong与em的异同？"></a>26.问题 strong与em的异同？</h6><pre><code>语义都是语气加重，strong在显示上是变粗，而em是斜体显示
+</code></pre><h6 id="27-行内元素有哪些？块级元素有哪些？"><a href="#27-行内元素有哪些？块级元素有哪些？" class="headerlink" title="27.行内元素有哪些？块级元素有哪些？"></a>27.行内元素有哪些？块级元素有哪些？</h6><pre><code>块状：* &lt;ol&gt; 
+* &lt;ul&gt; 
+* &lt;dl&gt; 
+* &lt;table&gt;
+* &lt;h1&gt;...&lt;h6&gt; 
+* &lt;p&gt; 
+* &lt;blockquote&gt; 
+* &lt;dt&gt; 
+* &lt;address&gt;
+* &lt;caption&gt; 
+* &lt;div&gt;
+</code></pre><p>内联（行内）：</p>
+<pre><code>* a - 锚点
+* abbr - 缩写
+* acronym - 首字
+* b - 粗体(不推荐)
+* bdo - bidi override
+* big - 大字体
+* br - 换行
+* cite - 引用
+* code - 计算机代码(在引用源码的时候需要)
+* dfn - 定义字段
+* em - 强调
+* font - 字体设定(不推荐)
+* i - 斜体
+* img - 图片
+* input - 输入框
+* kbd - 定义键盘文本
+* label - 表格标签
+* q - 短引用
+* s - 中划线(不推荐)
+* samp - 定义范例计算机代码
+* select - 项目选择
+* small - 小字体文本
+* span - 常用内联容器，定义文本内区块
+* strike - 中划线
+* strong - 粗体强调
+* sub - 下标
+* sup - 上标
+* textarea - 多行文本输入框
+* tt - 电传文本
+* u - 下划线
+* var - 定义变量
+</code></pre><h6 id="28-css选择符有哪些？哪些属性可以继承？优先级算法如何计算？"><a href="#28-css选择符有哪些？哪些属性可以继承？优先级算法如何计算？" class="headerlink" title="28.css选择符有哪些？哪些属性可以继承？优先级算法如何计算？"></a>28.css选择符有哪些？哪些属性可以继承？优先级算法如何计算？</h6><pre><code>选择符：[http://www.360doc.com/content/
+14/0104/22/15643_342679505.shtml](http://www.360doc.com/content/
+14/0104/22/15643_342679505.shtml)
+
+除了这些都可以继承：display、margin、border、padding、background、height、min-height、max- height、width、min-width、max-width、overflow、position、left、right、top、 bottom、z-index、float、clear、table-layout、vertical-align、page-break-after、 page-bread-before和unicode-bidi
+
+原则一： 继承不如指定
+
+原则二： #id &gt; .class &gt; 标签选择符
+
+原则三：越具体越强大
+
+原则四：标签#id &gt;#id ; 标签.class &gt; .class
+
+CSS优先级包含四个级别（标签内选择符，ID选择符，Class选择符，元素选择符）以及各级别出现的次数!
+
+根据这四个级别出现的次数计算得到CSS的优先级。
+
+CSS优先级的计算规则如下：
+
+* 元素标签中定义的样式（Style属性）,加1,0,0,0
+* 每个ID选择符(如 #id),加0,1,0,0
+* 每个Class选择符(如 .class)、每个属性选择符(如 [attribute=])、每个伪类(如 :hover)加0,0,1,0
+* 每个元素选择符（如p）或伪元素选择符(如 :firstchild)等，加0,0,0,1
+
+然后，将这四个数字分别累加，就得到每个CSS定义的优先级的值，
+然后从左到右逐位比较大小，数字大的CSS样式的优先级就高。
+</code></pre><h6 id="29-HTML5文档类型和字符集是？"><a href="#29-HTML5文档类型和字符集是？" class="headerlink" title="29.HTML5文档类型和字符集是？"></a>29.HTML5文档类型和字符集是？</h6><pre><code>&lt;!DOCTYPE html&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+</code></pre><h6 id="30-HTML5中canvas是什么？datalist是什么？"><a href="#30-HTML5中canvas是什么？datalist是什么？" class="headerlink" title="30.HTML5中canvas是什么？datalist是什么？"></a>30.HTML5中canvas是什么？datalist是什么？</h6><pre><code>canvas：绘图标签，可以使用它制作游戏和图像处理
+datalist:&lt;datalist&gt; 标签定义选项列表。与 input 元素配合使用该元素，来定义 input 可能的值
+</code></pre><h6 id="31-请分别使用原生js，jquery获取标签信息。"><a href="#31-请分别使用原生js，jquery获取标签信息。" class="headerlink" title="31.请分别使用原生js，jquery获取标签信息。"></a>31.请分别使用原生js，jquery获取标签信息。</h6><p><code>(&lt;div id=“div1”&gt;这是一个DIV标签&lt;/div&gt;)</code><br>    document.getElementById(“div1”).innerHTML;</p>
+<pre><code>    document.querySelector(“#div1”).innerText;
+
+$(“#div1”).html()
+</code></pre><h6 id="32-求下面两种情况下，a和b的值是多少？"><a href="#32-求下面两种情况下，a和b的值是多少？" class="headerlink" title="32.求下面两种情况下，a和b的值是多少？"></a>32.求下面两种情况下，a和b的值是多少？</h6><pre><code>题目1：var a = 1;  function func1(){a=b=5;} alert(a); alert(b);
+
+题目2：var a = 1;  function func1(){var b = 1;a=b=5;}alert(a);alert(b);
+
+题目1答：如果在alert(a)前没有调用func1的话就1，和报错，b没定义,如果调用了func1的话就是5,5
+
+题目2答：如果在alert(a)前没有调用func1的话就1，和报错，b没定义,如果调用了func1的话就是5,和报错，因为b是在func1中定义的局部变量，在全局获取不到
+</code></pre><p>######34.将数组[“a”, “b”, “c”, “d”]转化为字符串”d#c#b#a”;<br>    [‘a’,’b’,’c’,’d’].join(“#”)</p>
+<h6 id="35-对应写出下列输出值。"><a href="#35-对应写出下列输出值。" class="headerlink" title="35.对应写出下列输出值。"></a>35.对应写出下列输出值。</h6><pre><code>alert(typeof(null))
+alert(typeof(NaN))
+alert(typeof(undefined))
+alert(typeof(“undefined”))
+alert(NaN == undefined)
+alert(NaN == NaN)
+
+答：
+alert(typeof(null))//object
+alert(typeof(NaN))//number
+alert(typeof(undefined))//undefined
+alert(typeof(&quot;undefined&quot;))//string
+alert(NaN == undefined)//false
+alert(NaN == NaN)//false
+</code></pre><h6 id="36-获取enent目标对象的方法（要求兼容性）。"><a href="#36-获取enent目标对象的方法（要求兼容性）。" class="headerlink" title="36.获取enent目标对象的方法（要求兼容性）。"></a>36.获取enent目标对象的方法（要求兼容性）。</h6><pre><code>document.onclick = function (ev){
+var e = ev||window.event;
+}
+</code></pre><h6 id="37-经常使用的页面开发工具以及测试工具。"><a href="#37-经常使用的页面开发工具以及测试工具。" class="headerlink" title="37.经常使用的页面开发工具以及测试工具。"></a>37.经常使用的页面开发工具以及测试工具。</h6><pre><code>sublime,hbulider,webstorm,测试工具：mocha
+</code></pre><h6 id="38-经常使用什么脚本库，开发或使用过什么应用或组建。"><a href="#38-经常使用什么脚本库，开发或使用过什么应用或组建。" class="headerlink" title="38.经常使用什么脚本库，开发或使用过什么应用或组建。"></a>38.经常使用什么脚本库，开发或使用过什么应用或组建。</h6><pre><code>jquery,zepto
+</code></pre><h6 id="39-请写出代码执行结果"><a href="#39-请写出代码执行结果" class="headerlink" title="39.请写出代码执行结果"></a>39.请写出代码执行结果</h6><pre><code>var a;
+alert(a);                   ___undefined_________
+alert(typeof a);        undefined______________
+alert(b);                  报错_________________
+</code></pre><h6 id="40-旧版本的IE浏览器-如-IE6-IE7-的默认盒模型-W3C定义的合模型-二者之间有什么不同"><a href="#40-旧版本的IE浏览器-如-IE6-IE7-的默认盒模型-W3C定义的合模型-二者之间有什么不同" class="headerlink" title="40.旧版本的IE浏览器(如:IE6,IE7)的默认盒模型,W3C定义的合模型,二者之间有什么不同?"></a>40.旧版本的IE浏览器(如:IE6,IE7)的默认盒模型,W3C定义的合模型,二者之间有什么不同?</h6><pre><code>ie的width是包含border和padding的,也称为怪异模式，触发条件是在没写版本声明的时候
+
+而w3c的width就width不含border和padding
+</code></pre><h6 id="41-以下HTML代码片段-有几种方法让该div在浏览器中横向居中"><a href="#41-以下HTML代码片段-有几种方法让该div在浏览器中横向居中" class="headerlink" title="41.以下HTML代码片段,有几种方法让该div在浏览器中横向居中?"></a>41.以下HTML代码片段,有几种方法让该div在浏览器中横向居中?</h6><pre><code>&lt;div style=“width:200px;height:100px;”&gt;&lt;/div&gt;
+
+第一种：&lt;div style=“width:200px;height:100px; margin:    0 auto”&gt;&lt;/div&gt;
+
+第二种：&lt;div style=&quot;width:200px;height:100px; position:absolute; left:50%; margin-left:-100px;”&gt;&lt;/div&gt;
+
+第三种:&lt;div style=&quot;width:200px;height:100px; position:absolute; left:50%; transform:translate(-50%,0)&quot;&gt;&lt;/div&gt;
+</code></pre><h6 id="42-以下css代码片段-在IE6-IE7-IE8-Firefox-Chrome下分别呈现什么颜色"><a href="#42-以下css代码片段-在IE6-IE7-IE8-Firefox-Chrome下分别呈现什么颜色" class="headerlink" title="42.以下css代码片段,在IE6,IE7,IE8,Firefox,Chrome下分别呈现什么颜色?"></a>42.以下css代码片段,在IE6,IE7,IE8,Firefox,Chrome下分别呈现什么颜色?</h6><pre><code>.browers{
+
+background-color:#000000;/*黑色*/
+
+background-color:#ff0000\9;/*红色*/
+
++background-color:#00ff00;/*绿色*/
+
+_background-color:#0000ff;/*蓝色*/
+
+}
+在firefox和chrome中显示的是黑色
+
+在ie8下是红色(\9是ie8的hack)
+
+在ie7下是绿色（+是ie7的hack）
+
+在ie6下是蓝色(_是ie6转有hack)
+</code></pre><h6 id="43-如何做到让一个div隐藏但是却在html流中占位"><a href="#43-如何做到让一个div隐藏但是却在html流中占位" class="headerlink" title="43.如何做到让一个div隐藏但是却在html流中占位?"></a>43.如何做到让一个div隐藏但是却在html流中占位?</h6><pre><code>visibility: hidden;和opacity:0;
+</code></pre><h6 id="44-请写一段json字符串-包含所有的数据类型"><a href="#44-请写一段json字符串-包含所有的数据类型" class="headerlink" title="44.请写一段json字符串,包含所有的数据类型."></a>44.请写一段json字符串,包含所有的数据类型.</h6><pre><code>{&quot;a&quot;:&quot;string&quot;,&quot;b&quot;:5,&quot;c&quot;:[1,2,3,4],&quot;d&quot;:{&quot;e&quot;:&quot;obj&quot;}}
+</code></pre><h6 id="45-请按执行顺序写出几次alert-语句a的值"><a href="#45-请按执行顺序写出几次alert-语句a的值" class="headerlink" title="45.请按执行顺序写出几次alert()语句a的值:"></a>45.请按执行顺序写出几次alert()语句a的值:</h6><pre><code>var a = 10;
+function fn() {
+    alert(a);
+    var a = 100;
+    alert(a);
+}
+fn();
+alert(a);
+
+undefined,100,10
+</code></pre><h6 id="46-请按执行顺序写出几次alert-语句a的值"><a href="#46-请按执行顺序写出几次alert-语句a的值" class="headerlink" title="46.请按执行顺序写出几次alert()语句a的值:"></a>46.请按执行顺序写出几次alert()语句a的值:</h6><pre><code>function fn1(){
+
+var a = 1;
+
+function fn2(){
+    alert(a++);
+}
+
+fn2();
+}
+fn1();
+fn1();
+
+1,1
+</code></pre><h6 id="47-下面的输出是"><a href="#47-下面的输出是" class="headerlink" title="47.下面的输出是?"></a>47.下面的输出是?</h6><pre><code>&lt;style&gt;
+.red{color:red;}
+.blue{color:blue;}
+&lt;/style&gt;
+
+&lt;p class=“blue red”&gt;&lt;/p&gt;
+蓝色
+</code></pre><h6 id="48-怎样添加-移除-移动-复制-创建和查找节点"><a href="#48-怎样添加-移除-移动-复制-创建和查找节点" class="headerlink" title="48.怎样添加,移除,移动,复制,创建和查找节点?"></a>48.怎样添加,移除,移动,复制,创建和查找节点?</h6><pre><code>appendChild,
+removeChild,
+replaceChild,
+cloneNode,
+createElement,
+getElementById(ByTagName)
+</code></pre><h6 id="49-用js写一个正则匹配标签中是否包含一个class"><a href="#49-用js写一个正则匹配标签中是否包含一个class" class="headerlink" title="49.用js写一个正则匹配标签中是否包含一个class?"></a>49.用js写一个正则匹配标签中是否包含一个class?</h6><pre><code>var className = &quot;active&quot;;
+var reg = new RegExp(“\\b&quot;+className+&quot;\\b&quot;);
+</code></pre><h6 id="50-阅读以下代码回答-hello-world-是什么颜色"><a href="#50-阅读以下代码回答-hello-world-是什么颜色" class="headerlink" title="50.阅读以下代码回答:hello world 是什么颜色?"></a>50.阅读以下代码回答:hello world 是什么颜色?</h6><pre><code>&lt;style&gt;
+    .classA{color:red;}
+    .classB{color:yellow;}
+&lt;/style&gt;
+&lt;p class=“classB classA”&gt;hello world&lt;/p&gt;
+yellow
+</code></pre><h6 id="51-完善以下代码"><a href="#51-完善以下代码" class="headerlink" title="51.完善以下代码:"></a>51.完善以下代码:</h6><pre><code>&lt;div style=“height:50px;” id=“content”&gt;
+&lt;p&gt;铝神公司&lt;/p&gt;
+&lt;/div&gt;
+(1).请用CSS实现”铝神公司”在div内水平垂直居中?
+(2).请用javascript将字体设置为红色.
+答：(1)
+第一种写法：
+    *{
+            margin: 0;
+    }
+    div{
+        text-align: center;
+        line-height: 50px;
+    }
+第二种写法：
+    *{
+        margin: 0;
+    }
+    div{
+        display: table;
+        width: 100%;
+    }
+    div p{
+        display: table-cell;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+    }
+第三种写法：
+    *{
+        margin: 0;
+    }
+div{
+    position: relative;
+}
+div p{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+(2)
+    第一种：content.style.color=“red”，高级浏览器id不用获取
+    第二种:  document.getElementById(“content”).style.color=“red”
+    第三种：document.querySelector(“#content&quot;).style.color=&quot;red&quot;;
+</code></pre><h6 id="52-写一个函数-将一串字符串中空格替换”-”-如replace-“铝-神-欢-迎-你”-“铝-神-欢-迎-你”"><a href="#52-写一个函数-将一串字符串中空格替换”-”-如replace-“铝-神-欢-迎-你”-“铝-神-欢-迎-你”" class="headerlink" title="52.写一个函数,将一串字符串中空格替换”.”,如replace(“铝 神 欢 迎 你”)=“铝.神.欢.迎.你”"></a>52.写一个函数,将一串字符串中空格替换”.”,如replace(“铝 神 欢 迎 你”)=“铝.神.欢.迎.你”</h6><pre><code>第一种：
+    function re(s){
+        return s.replace(/\s/g,&quot;.&quot;);
+    }
+第二种：
+    function re(s){
+        return s.split(&quot; &quot;).join(&quot;.&quot;);
+    }
+</code></pre><h6 id="53-请用CSS实现4个div的水平排列占满一行-要求4个div宽度相同-有10px的padding值"><a href="#53-请用CSS实现4个div的水平排列占满一行-要求4个div宽度相同-有10px的padding值" class="headerlink" title="53.请用CSS实现4个div的水平排列占满一行,要求4个div宽度相同,有10px的padding值."></a>53.请用CSS实现4个div的水平排列占满一行,要求4个div宽度相同,有10px的padding值.</h6><pre><code>div{
+    float: left;
+    width: 25%;
+    height: 100px;
+    background-color: #ccc;
+    padding: 10px;
+    box-sizing:border-box;
+}
+</code></pre><h6 id="54-对作用域上下文和this的理解-看下列代码"><a href="#54-对作用域上下文和this的理解-看下列代码" class="headerlink" title="54.对作用域上下文和this的理解,看下列代码:"></a>54.对作用域上下文和this的理解,看下列代码:</h6><pre><code>var  User =  {
+
+  count:1,
+
+ getCount:function(){
+
+return this.count;
+
+}
+};
+console.log(User.getCount());//??
+
+var func = User.getCount;
+
+    console.log(func());//??
+
+1,undefined
+</code></pre><h6 id="55-lt-DOCTYPE-html-gt-中DOCTYPE有什么作用，去掉会有什么影响？"><a href="#55-lt-DOCTYPE-html-gt-中DOCTYPE有什么作用，去掉会有什么影响？" class="headerlink" title="55.&lt;!DOCTYPE html&gt;中DOCTYPE有什么作用，去掉会有什么影响？"></a>55.&lt;!DOCTYPE html&gt;中DOCTYPE有什么作用，去掉会有什么影响？</h6><pre><code>声明文档类型，在ie6下如果去掉会进入怪异模式，width包含padding和border
+</code></pre><h6 id="56-HTML行内元素有哪些，块级元素有哪些？画出CSS盒模型。"><a href="#56-HTML行内元素有哪些，块级元素有哪些？画出CSS盒模型。" class="headerlink" title="56.HTML行内元素有哪些，块级元素有哪些？画出CSS盒模型。"></a>56.HTML行内元素有哪些，块级元素有哪些？画出CSS盒模型。</h6><pre><code>上面有
+</code></pre><h6 id="57-内联和important哪个优先级更高？"><a href="#57-内联和important哪个优先级更高？" class="headerlink" title="57.内联和important哪个优先级更高？"></a>57.内联和important哪个优先级更高？</h6><pre><code>important更高
+</code></pre><h6 id="58-清除浮动的几种方式？"><a href="#58-清除浮动的几种方式？" class="headerlink" title="58.清除浮动的几种方式？"></a>58.清除浮动的几种方式？</h6><pre><code>第一种：clear:both;
+第二种：overflow:hidden;
+第三种：父级一起浮动
+第四种：父级定义:after伪元素配合zoom解决ie6,7
+第五种：父级加position:absolute
+</code></pre><h6 id="59-HTML5存储类型有哪些？"><a href="#59-HTML5存储类型有哪些？" class="headerlink" title="59.HTML5存储类型有哪些？"></a>59.HTML5存储类型有哪些？</h6><pre><code>cookies：存储大小为4k
+localstorage：以键值对(Key-Value)的方式存储，永久存储，永不失效，除非手动删除,大小为5m
+sessionstorage:HTML5 的本地存储 API 中的 localStorage     与 sessionStorage 在使用方法上是相同的，区别在于 sessionStorage 在关闭页面后即被清空，而 localStorage 则会一直保存
+离线缓存（application cache）:本地缓存应用所需的文件
+Web SQL:关系数据库，通过SQL语句访问
+Web SQL 数据库 API 并不是 HTML5 规范的一部分，但是它是一个独立的规范，引入了一组使用 SQL 操作客户端数据库的 APIs。
+</code></pre><h6 id="60-HTTP状态码有哪些，分别代表什么意思？"><a href="#60-HTTP状态码有哪些，分别代表什么意思？" class="headerlink" title="60.HTTP状态码有哪些，分别代表什么意思？"></a>60.HTTP状态码有哪些，分别代表什么意思？</h6><pre><code>如果是1开头的代表请求已被接受，需要继续处理
+如果是2开头这一类型的状态码，代表请求已成功被服务器接收、理解、并接受
+如果是3开头这类状态码代表需要客户端采取进一步的操作才能完成请求
+如果是4开头这类的状态码代表了客户端看起来可能发生了错误，妨碍了服务器的处理
+如果是5开头这类状态码代表了服务器在处理请求的过程中有错误或者异常状态发生，也有可能是服务器意识到以当前的软硬件资源无法完成对请求的处理
+</code></pre><h6 id="61-CSS3新增伪类选择器有哪些？"><a href="#61-CSS3新增伪类选择器有哪些？" class="headerlink" title="61.CSS3新增伪类选择器有哪些？"></a>61.CSS3新增伪类选择器有哪些？</h6><pre><code>:first-of-type    p:first-of-type    选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。 
+
+:last-of-type    p:last-of-type    选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+
+:only-of-type    p:only-of-type    选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+
+:only-child    p:only-child    选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
+
+:nth-child(n)    p:nth-child(2)    选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。 
+
+:nth-last-child(n)    p:nth-last-child(2)    同上，从最后一个子元素开始计数。
+
+:nth-of-type(n)    p:nth-of-type(2)    选择属于其父元素第二个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。 
+
+:nth-last-of-type(n)    p:nth-last-of-type(2)    同上，但是从最后一个子元素开始计数。   
+
+:last-child    p:last-child    选择属于其父元素最后一个子元素每个 &lt;p&gt; 元素。  
+
+:root    :root    选择文档的根元素。
+
+:empty    p:empty    选择没有子元素的每个 &lt;p&gt; 元素（包括文本节点）。  
+
+:target    #news:target    选择当前活动的 #news 元素。
+
+:enabled    input:enabled    选择每个启用的 &lt;input&gt; 元素。  
+
+:disabled    input:disabled    选择每个禁用的 &lt;input&gt; 元素  
+
+:checked    input:checked    选择每个被选中的 &lt;input&gt; 元素。  
+
+:not(selector)    :not(p)    选择非 &lt;p&gt; 元素的每个元素。
+
+::selection    ::selection    选择被用户选取的元素部分。
+</code></pre><h6 id="62-用CSS3编写：div旋转90度，0-5秒后变圆，0-5秒后方法两倍。"><a href="#62-用CSS3编写：div旋转90度，0-5秒后变圆，0-5秒后方法两倍。" class="headerlink" title="62.用CSS3编写：div旋转90度，0.5秒后变圆，0.5秒后方法两倍。"></a>62.用CSS3编写：div旋转90度，0.5秒后变圆，0.5秒后方法两倍。</h6><pre><code>略
+</code></pre><h6 id="63-举例2种强制类型转换和1种隐式类型转换？"><a href="#63-举例2种强制类型转换和1种隐式类型转换？" class="headerlink" title="63.举例2种强制类型转换和1种隐式类型转换？"></a>63.举例2种强制类型转换和1种隐式类型转换？</h6><pre><code>强制（parseInt,parseFloat,number）
+隐式（== - ===）
+</code></pre><h6 id="64-split-和join-的区别"><a href="#64-split-和join-的区别" class="headerlink" title="64.split()  和join()的区别"></a>64.split()  和join()的区别</h6><pre><code>split是将字符串切割为数组，而join是将数组连接为字符串
+</code></pre><h6 id="66-事件绑定和普通事件有什么区别"><a href="#66-事件绑定和普通事件有什么区别" class="headerlink" title="66.事件绑定和普通事件有什么区别"></a>66.事件绑定和普通事件有什么区别</h6><pre><code>区别就是普通事件只支持单个事件，而事件绑定可以添加多个事件
+</code></pre><h6 id="67-ajax请求的时候get和post方式的区别"><a href="#67-ajax请求的时候get和post方式的区别" class="headerlink" title="67.ajax请求的时候get和post方式的区别"></a>67.ajax请求的时候get和post方式的区别</h6><pre><code>第一：ajax.open方法的第二个参数如果是get请求路径中是带有参数的，而post就只是路径
+
+第二：如果是post方式在open方法和send方法之间还要设置请求的头：ajax.setRequestHeader(&quot;Content-Type&quot;, “application/x-www-form-urlencoded&quot;);
+
+第三：ajax.send方法如果是get的话参数留空就行，而post需要将参数以序列化的格式传入
+</code></pre><h6 id="68-call和apply的区别"><a href="#68-call和apply的区别" class="headerlink" title="68.call和apply的区别"></a>68.call和apply的区别</h6><pre><code>call和apply都是改变函数内部的this指向，第一个参数也都放的是要改变this对象，区别主要在第二个参数上，call从第二个开始放的是正常的参数，而apply放的是数组
+</code></pre><h6 id="69-事件委托是什么，使用事件委托有什么好处？"><a href="#69-事件委托是什么，使用事件委托有什么好处？" class="headerlink" title="69.事件委托是什么，使用事件委托有什么好处？"></a>69.事件委托是什么，使用事件委托有什么好处？</h6><pre><code>就是让别人来做，这个事件本来是加在某些元素上的，然而你却加到别人身上来做，完成这个事件。
+
+也就是：利用冒泡的原理，把事件加到父级上，触发执行效果。
+
+好处呢：1，提高性能。
+</code></pre><h6 id="70-如何阻止事件冒泡和默认事件"><a href="#70-如何阻止事件冒泡和默认事件" class="headerlink" title="70.如何阻止事件冒泡和默认事件"></a>70.如何阻止事件冒泡和默认事件</h6><pre><code>阻止事件冒泡：ie:window.event.cancelBubble=true;而非ie:e.stopPropagation();
+
+阻止默认事件：ie:window.event.returnValue = false;return false;而非ie:e.preventDefault();
+</code></pre><h6 id="72-跨域的方法"><a href="#72-跨域的方法" class="headerlink" title="72.跨域的方法"></a>72.跨域的方法</h6><pre><code>1&gt; document.domain + iframe      (只有在主域相同的时候才能使用该方法)
+
+2&gt; window.name + iframe
+
+3&gt;html5中的postMessage()
+
+4&gt;CORS
+
+5&gt;jsonp
+
+6&gt;websocket
+
+跨域支持post请求的：
+
+1&gt;CORS
+
+2&gt;window.postMessage
+
+3&gt;html5的websocket
+
+4&gt;iframe http://www.jianshu.com/p/4773501f1adf
+
+5&gt;flash proxy
+</code></pre><h6 id="73-编写一个数组去重的方法"><a href="#73-编写一个数组去重的方法" class="headerlink" title="73.编写一个数组去重的方法"></a>73.编写一个数组去重的方法</h6><pre><code>Array.prototype.unique3 = function(){
+ var res = [];
+ var json = {};
+ for(var i = 0; i &lt; this.length; i++){
+  if(!json[this[i]]){
+   res.push(this[i]);
+   json[this[i]] = 1;
+  }
+     }
+ return res;
+}
+</code></pre><h6 id="74-Ajax请求Json数据后如何解析"><a href="#74-Ajax请求Json数据后如何解析" class="headerlink" title="74.Ajax请求Json数据后如何解析"></a>74.Ajax请求Json数据后如何解析</h6><pre><code>第一种：使用eval
+第二种：使用JSON.parse()
+第三种：new Function(&quot;return&quot; + strJSON)();
+</code></pre><h6 id="75-如何实现多标签页之间的通讯。"><a href="#75-如何实现多标签页之间的通讯。" class="headerlink" title="75.如何实现多标签页之间的通讯。"></a>75.如何实现多标签页之间的通讯。</h6><pre><code>调用 localstorge、cookies 等本地存储方式
+</code></pre><h6 id="76-简述什么是按需加载-然后实现一个图片按需加载的js。"><a href="#76-简述什么是按需加载-然后实现一个图片按需加载的js。" class="headerlink" title="76.简述什么是按需加载,然后实现一个图片按需加载的js。"></a>76.简述什么是按需加载,然后实现一个图片按需加载的js。</h6><pre><code>图片的按需加载又称为延时加载，随着用户的滚动条滑动来按需获取图片。代码略，课件中有
+</code></pre><h6 id="77-简述下闭包-有什么好处和坏处。"><a href="#77-简述下闭包-有什么好处和坏处。" class="headerlink" title="77.简述下闭包,有什么好处和坏处。"></a>77.简述下闭包,有什么好处和坏处。</h6><pre><code>闭包的好处有：
+1.缓存
+2.面向对象中的对象
+3.实现封装，防止变量跑到外层作用域中，发生命名冲突
+4.匿名自执行函数，匿名自执行函数可以减小内存消耗
+
+闭包的坏处：
+1.内存消耗
+2.性能差
+</code></pre><h6 id="78-什么是模块开发-怎么实现一个模块开发。"><a href="#78-什么是模块开发-怎么实现一个模块开发。" class="headerlink" title="78.什么是模块开发,怎么实现一个模块开发。"></a>78.什么是模块开发,怎么实现一个模块开发。</h6><pre><code>一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。
+可以使用模块加载器比如sea.js或者require.js
+</code></pre><h6 id="79-实现一个多列的等高布局。"><a href="#79-实现一个多列的等高布局。" class="headerlink" title="79.实现一个多列的等高布局。"></a>79.实现一个多列的等高布局。</h6><p>略</p>
+<h6 id="80-zoom是什么-有什么用"><a href="#80-zoom是什么-有什么用" class="headerlink" title="80.zoom是什么,有什么用?"></a>80.zoom是什么,有什么用?</h6><pre><code>Zoom属性是IE浏览器的专有属性,它可以设置或检索对象的缩放比例,比如触发ie的hasLayout属性，清除浮动、清除margin的重叠等。
+</code></pre><h6 id="81-怎么优化一个首屏的加载速度-可以从js和css等多方便考虑"><a href="#81-怎么优化一个首屏的加载速度-可以从js和css等多方便考虑" class="headerlink" title="81.怎么优化一个首屏的加载速度,可以从js和css等多方便考虑"></a>81.怎么优化一个首屏的加载速度,可以从js和css等多方便考虑</h6><pre><code>可以
+1.可以使用延迟加载，通过js将第二屏出现的图片设置问延迟加载，优先加载第一屏的图片，如果不想自己写js推荐一个lazyload这个插件
+2.尽可能压缩图片大小，可以利用在线图片压缩工具tinypng
+3.将JS放到HTML最后的地方，能最后加载，优先保证基础信息阅读。可以参考雅虎优化原则
+</code></pre><h6 id="83-怎么实现一个对象的继承。"><a href="#83-怎么实现一个对象的继承。" class="headerlink" title="83.怎么实现一个对象的继承。"></a>83.怎么实现一个对象的继承。</h6><pre><code>Object.prototype.extend = function(obj){
+ //在函数里，把obj属性复制到自身
+ for(var k in obj){
+      if(obj.hasOwnProperty(k)){
+       if(this[k] == undefined){
+    this[k] = obj[k];
+       }
+  }
+ }
+}
+var kitty = {color:&apos;yellow&apos;,climb:function()    {alert(&apos;我会爬树&apos;);}};
+var tiger = {color:&apos;yellow and black&apos;};
+tiger.extend(kitty);
+tiger.climb();
+</code></pre><h6 id="84-简述下平时开发用到的技术栈。"><a href="#84-简述下平时开发用到的技术栈。" class="headerlink" title="84.简述下平时开发用到的技术栈。"></a>84.简述下平时开发用到的技术栈。</h6><pre><code>作者：何幻
+
+链接：http://www.zhihu.com/question/33179506/answer/    75015013
+
+来源：知乎
+
+著作权归作者所有，转载请联系作者获得授权。
+
+浏览器环境IE6~8 IE9+ Chrome Firefox Safari Opera Edge
+
+HTTP协议URI Cache Session Cookie Request Response
+
+HTMLW3C HTML4.01 HTML5 DOM 语义化
+
+CSSCSS1~3 选择器 盒模型 Flex 媒体检测 响应式 渲染引擎
+
+JavaScriptEcmaScript3~5~6 Lexical-scope prototype-chain AJAX js引擎
+
+编辑器Emacs Vim WebStorm Atom Sublime-Text
+
+发布部署合并 压缩 单元测试 Node.js Grunt Gulp Yeoman Phantom JSLint
+
+框架类库jQuery Zepto UnderScore Backbone Knockout React AngularJS
+
+模块管理CommonJS Webpack
+UI框架BootStrap SemanticUI jQueryUI Foundation
+推送技术WebSocket 轮询 长连接
+跨域技术iframe JSONP CORS
+数据可视化D3 Echarts HighCharts Canvas
+异步编程Promise $.Deferred Generator
+CSS预处理器LESS SASS Stylus
+客户端模板Handlebars Haml Jade Mustache
+相关语言CoffeeScript TypeScript Dart WebAssembly
+WebApp/PCReact-native ionic
+</code></pre><h6 id="85-css选择器中，以下排序正确的为（a）"><a href="#85-css选择器中，以下排序正确的为（a）" class="headerlink" title="85.css选择器中，以下排序正确的为（a）"></a>85.css选择器中，以下排序正确的为（a）</h6><pre><code>A、行内样式&gt;id&gt;class&gt;标签
+B、行内像是&gt;class&gt;id&gt;标签
+C、id&gt;class&gt;行内样式&gt;标签
+D、标签&gt;class&gt;id&gt;行内样式
+</code></pre><h6 id="86-在JavaScript中，以下哪个变量名是非法的-b"><a href="#86-在JavaScript中，以下哪个变量名是非法的-b" class="headerlink" title="86.在JavaScript中，以下哪个变量名是非法的(b)"></a>86.在JavaScript中，以下哪个变量名是非法的(b)</h6><pre><code>A、Name    B、9name    C、Name_a    D、Name9
+</code></pre><h6 id="87-请选择结果为真的表达式（c）"><a href="#87-请选择结果为真的表达式（c）" class="headerlink" title="87.请选择结果为真的表达式（c）"></a>87.请选择结果为真的表达式（c）</h6><pre><code>A、null instance Object    B、null === undefined        C、null == undefined        D、NaN == NaN
+</code></pre><h6 id="88-var-a-new-Object"><a href="#88-var-a-new-Object" class="headerlink" title="88.var a = new Object();"></a>88.var a = new Object();</h6><pre><code>a.value = 1;
+b = a;
+b.value = 2;
+console.log(a.value);
+输出正确的是：（b）
+A、1        B、2        C、undefined    D、以上都不正确
+</code></pre><h6 id="89-var-a-3"><a href="#89-var-a-3" class="headerlink" title="89.  var a = 3;"></a>89.  var a = 3;</h6><pre><code>(function() {
+window.a = 2
+    var a = 1;
+})()
+console.log(a)
+输出为：（b）
+A、1        B、2        C、3        D、undefined
+</code></pre><h6 id="91-标签内的文字颜色是什么？"><a href="#91-标签内的文字颜色是什么？" class="headerlink" title="91.标签内的文字颜色是什么？"></a>91.<p>标签内的文字颜色是什么？</p></h6><pre><code>&lt;style&gt;
+.classA{color:blue !important;}
+.classB{color:red;}
+&lt;/style&gt;
+&lt;body&gt;
+    &lt;p class=‘classB classA’ style=‘color:green’&gt; 123 &lt;/p&gt;
+&lt;/body&gt;
+</code></pre><p>蓝色</p>
+<h6 id="100-微信分享怎么实现"><a href="#100-微信分享怎么实现" class="headerlink" title="100.微信分享怎么实现"></a>100.微信分享怎么实现</h6><pre><code>分为3种：
+第一种使用微信默认分享，分享标题为分享页的title标签的内容，如果是分享给朋友，描述中为网页链接，分享小图标为网页中第一张符合大小的图片
+
+第二种是使用微信的jssdk，wx.onMenuShareTimeline分享到朋友圈.和wx.onMenuShareAppMessage分享给朋友。
+
+第三种如果是做微信广告，部署到腾讯服务器下，可以使用WeixinJSBridge调用分享接口
+</code></pre><h6 id="105-ajax出问题时怎么判断是前端的问题还是后台的"><a href="#105-ajax出问题时怎么判断是前端的问题还是后台的" class="headerlink" title="105.ajax出问题时怎么判断是前端的问题还是后台的"></a>105.ajax出问题时怎么判断是前端的问题还是后台的</h6><pre><code>首先测试api是否能正常调用，比如可以模拟一些数据发送一下，如果是get请求就直接浏览器地址栏中拼接上然后看返回结果。在确认api调用正常的情况下，基本就可以确定是属于前端的问题。
+</code></pre><p>技术方面问题：</p>
+<h6 id="108-如何解决在移动端1px的线比实际粗"><a href="#108-如何解决在移动端1px的线比实际粗" class="headerlink" title="108.如何解决在移动端1px的线比实际粗"></a>108.如何解决在移动端1px的线比实际粗</h6><pre><code>1.设置为0.5px
+2.判断如果在retina屏上就使用tranform对它进行缩放
+@media screen and (-webkit-min-device-pixel-ratio: 2){
+.radius-border:before{
+    content: &quot;&quot;;
+    pointer-events: none; /* 防止点击触发 */
+    box-sizing: border-box;
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    left: 0;
+    top: 0;
+    border-radius: 8px;
+    border:1px solid #999;
+    -webkit-transform(scale(0.5));
+    -webkit-transform-origin: 0 0;
+    transform(scale(0.5));
+    transform-origin: 0 0;
+}
+}
+</code></pre><h6 id="109-如何计算移动端rem的值"><a href="#109-如何计算移动端rem的值" class="headerlink" title="109.如何计算移动端rem的值"></a>109.如何计算移动端rem的值</h6><pre><code>如果html的font-size为10px,2rem就是20px.
+</code></pre><h6 id="110-ajax请求到显示流程"><a href="#110-ajax请求到显示流程" class="headerlink" title="110.ajax请求到显示流程"></a>110.ajax请求到显示流程</h6><pre><code>1.创建ajax对象
+2.调用open方法
+3.调用send方法
+4.添加onreadystatechange事件
+5.判断返回的状态码是否为成功的状态码
+6.通过调用ajax的responesText属性返回数据
+</code></pre><h6 id="113-向后台请求数据，有几种方式"><a href="#113-向后台请求数据，有几种方式" class="headerlink" title="113.向后台请求数据，有几种方式"></a>113.向后台请求数据，有几种方式</h6><pre><code>用的最多的就是get和post.
+除了这两个还有：
+HEAD
+类似于get请求，只不过返回的响应中没有具体的内容，用于获取报头
+PUT
+传说当前请求文档的一个版本
+DELETE
+发送一个用来删除指定文档的请求
+TRACE
+发送请求的一个副本，以跟踪其处理进程
+OPTIONS
+返回所有可用的方法；可检查服务器支持哪些方法
+CONNECT
+用于ssl隧道的基于代理的请求
+</code></pre><h6 id="121-以下localStroage的使用方式-哪些是正确的-abe"><a href="#121-以下localStroage的使用方式-哪些是正确的-abe" class="headerlink" title="121.以下localStroage的使用方式,哪些是正确的?abe"></a>121.以下localStroage的使用方式,哪些是正确的?abe</h6><pre><code>A.localStorage. setItem(“lastname”, “smith”);
+        B.document.getElementById(“result”).innerHTML=loaclStorage.getItem(“lastname”);
+C.localStorage.lastname=“Smith”;
+D.document.getElementByid(“result”).innerHTML=localStorage.lastname;
+E.localStorage.removeItem(“lastname”);
+</code></pre><h6 id="122-以下关于Array数组对象的说法不正确的是-c"><a href="#122-以下关于Array数组对象的说法不正确的是-c" class="headerlink" title="122.以下关于Array数组对象的说法不正确的是?c"></a>122.以下关于Array数组对象的说法不正确的是?c</h6><pre><code>A.对数组里数据的排序可以用sort函数,如果排序效果非预期,可以给sort函数加一个排序函数的参数.
+B.reverser用于对数组数据的排序排列.
+C.向数组的最后位置加一个新元素,可以用pop方法.
+D.unshift方法用于向数组删除第一个元素.
+</code></pre><h6 id="123-var-stringArray-“Hello”-”World”-给出您能想到的最好的方法输出”Hello-World”"><a href="#123-var-stringArray-“Hello”-”World”-给出您能想到的最好的方法输出”Hello-World”" class="headerlink" title="123.var stringArray=[“Hello”,”World”],给出您能想到的最好的方法输出”Hello, World”"></a>123.var stringArray=[“Hello”,”World”],给出您能想到的最好的方法输出”Hello, World”</h6><pre><code>stringArray.join(“,”);
 </code></pre>
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/06/12/React-native/" class="archive-article-date">
-  	<time datetime="2016-06-12T06:07:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-12</time>
+      <a href="/2016/09/19/Interview/" class="archive-article-date">
+  	<time datetime="2016-09-19T12:20:52.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-19</time>
 </a>
       
       
@@ -200,7 +1887,7 @@ react-native run-ios
 
 
   
-    <article id="post-about-javascript-gif" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-algorithm" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -210,7 +1897,7 @@ react-native run-ios
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/07/about-javascript-gif/">javascript gif</a>
+      <a class="article-title" href="/2016/09/19/algorithm/">算法</a>
     </h1>
   
 
@@ -218,114 +1905,300 @@ react-native run-ios
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h1><h4 id="javaScript总结"><a href="#javaScript总结" class="headerlink" title="javaScript总结"></a>javaScript总结</h4><p>javascript变量.gif</p>
-<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/TzogpE6Jx**lSkTamX0*oCdcEyUHWR3lQfwB0Rt9Z8U!/m/dHcBAAAAAAAA&amp;bo=8gORBgAAAAABB0Y!&amp;rf=photolist" alt=""></p>
-<p>javascript函数基础.gif</p>
-<p><img src="http://a2.qpic.cn/psb?/V114g1aN2g6PRw/H7UKcZ2DkURk6fUgLskz9chzAoWw7d1EM.BZ0v9FxYI!/m/dAkBAAAAAAAA&amp;bo=hgM0BgAAAAABB5c!&amp;rf=photolist" alt=""></p>
-<p>javascript流程控制.gif</p>
-<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/.D2wdl9wbOkaH0Gfwof7kh2C3DXNgKBaW4URL2a.yfE!/m/dAoBAAAAAAAA&amp;bo=gAIkBgAAAAABB4A!&amp;rf=photolist" alt=""></p>
-<p>javascript数据类型.gif</p>
-<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/tGqgTyic9FedB0MX93NZujWzuhqy6P*uteJRYfX96rs!/m/dAoBAAAAAAAA&amp;bo=gAIQCAAAAAABB7o!&amp;rf=photolist" alt=""></p>
-<p>javascript 数组.gif</p>
-<p><img src="http://a1.qpic.cn/psb?/V114g1aN2g6PRw/nCyxujKEXJdNXlotZCbO0QkVniIzeSQGI3RTGB2oRV0!/m/dHwBAAAAAAAA&amp;bo=gAJXBAAAAAABB*E!&amp;rf=photolist" alt=""></p>
-<p>javascript 运算符.gif</p>
-<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/ial92bpUZCz.sJLxTtlal9yzbJQu3sew2dgJ8qrA5Jg!/m/dI8AAAAAAAAA&amp;bo=gALBCgAAAAABB2k!&amp;rf=photolist" alt=""></p>
-<p>javascript 正则表达式.gif</p>
-<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/bsuh9gTiXx8E3fJbguj3UwR.m9775VlLTyD177PaWLk!/m/dHcBAAAAAAAA&amp;bo=gAINBgAAAAABB6k!&amp;rf=photolist" alt=""></p>
-<p>javascript 字符串函数.gif</p>
-<p><img src="http://a1.qpic.cn/psb?/V114g1aN2g6PRw/TNNJBCpKSPV*N1JlJFJEJGXX9N4p*WUNLLmywT2NoYg!/m/dHABAAAAAAAA&amp;bo=gALaBQAAAAABB30!&amp;rf=photolist" alt=""></p>
-<p>javascript Window对象.gif</p>
-<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/DTXRqVU1w8dsiW*leCv4hyG81Qi4FwkQUwOnvINpb7o!/m/dAoBAAAAAAAA&amp;bo=gAISBQAAAAABB7U!&amp;rf=photolist" alt=""></p>
-<p>javascript DOM基本操作.gif</p>
-<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/4L4mRVbRqLEBBB6lmXU0rDfdr0NSM87mDXFOgs6x0IQ!/m/dH4BAAAAAAAA&amp;bo=gALSCgAAAAABB3o!&amp;rf=photolist" alt=""></p>
-<p>希望这几张图能对你有所帮助</p>
+        <h1 id="前端面试中的常见的算法问题"><a href="#前端面试中的常见的算法问题" class="headerlink" title="前端面试中的常见的算法问题"></a>前端面试中的常见的算法问题</h1><p>虽说我们很多时候前端很少有机会接触到算法。大多都交互性的操作，然而从各大公司面试来看，算法依旧是考察的一方面。实际上学习数据结构与算法对于工程师去理解和分析问题都是有帮助的。如果将来当我们面对较为复杂的问题，这些基础知识的积累可以帮助我们更好的优化解决思路。下面罗列在前端面试中经常撞见的几个问题吧。</p>
+<h2 id="Q1-判断一个单词是否是回文？"><a href="#Q1-判断一个单词是否是回文？" class="headerlink" title="Q1 判断一个单词是否是回文？"></a>Q1 判断一个单词是否是回文？</h2><p><code>回文是指把相同的词汇或句子，在下文中调换位置或颠倒过来，产生首尾回环的情趣，叫做回文，也叫回环。比如 mamam redivider .</code></p>
+<p>很多人拿到这样的题目非常容易想到用for 将字符串颠倒字母顺序然后匹配就行了。其实重要的考察的就是对于reverse的实现。其实我们可以利用现成的函数，将字符串转换成数组，这个思路很重要，我们可以拥有更多的自由度去进行字符串的一些操作。</p>
+<pre><code>function checkPalindrom(str) {  
+    return str == str.split(&apos;&apos;).reverse().join(&apos;&apos;);
+}
+</code></pre><h2 id="Q2-去掉一组整型数组重复的值"><a href="#Q2-去掉一组整型数组重复的值" class="headerlink" title="Q2 去掉一组整型数组重复的值"></a>Q2 去掉一组整型数组重复的值</h2><pre><code>比如输入: [1,13,24,11,11,14,1,2] 
+输出: [1,13,24,11,14,2]
+需要去掉重复的11 和 1 这两个元素。
+</code></pre><p>这道问题出现在诸多的前端面试题中，主要考察个人对Object的使用，利用key来进行筛选。<br>    let unique = function(arr) {<br>          let hashTable = {};<br>          let data = [];<br>          for(let i=0,l=arr.length;i&lt;l;i++) {<br>            if(!hashTable[arr[i]]) {<br>                  hashTable[arr[i]] = true;<br>                  data.push(arr[i]);<br>               }<br>          }<br>          return data</p>
+<pre><code>}
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/03/07/about-javascript-gif/" class="archive-article-date">
-  	<time datetime="2016-03-07T03:33:29.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-03-07</time>
-</a>
-      
-      
+module.exports = unique;  
+</code></pre><h2 id="Q3-统计一个字符串出现最多的字母"><a href="#Q3-统计一个字符串出现最多的字母" class="headerlink" title="Q3 统计一个字符串出现最多的字母"></a>Q3 统计一个字符串出现最多的字母</h2><p>给出一段英文连续的英文字符窜，找出重复出现次数最多的字母</p>
+<pre><code>输入 ： afjghdfraaaasdenas 
 
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
+输出 ： a
+</code></pre><p>前面出现过去重的算法，这里需要是统计重复次数。</p>
+<pre><code>function findMaxDuplicateChar(str) {  
+      if(str.length == 1) {
+    return str;
+      }
+      let charObj = {};
+      for(let i=0;i&lt;str.length;i++) {
+        if(!charObj[str.charAt(i)]) {
+          charObj[str.charAt(i)] = 1;
+        }else{
+          charObj[str.charAt(i)] += 1;
+    }
+  }
+      let maxChar = &apos;&apos;,
+      maxValue = 1;
+      for(var k in charObj) {
+        if(charObj[k] &gt;= maxValue) {
+              maxChar = k;
+              maxValue = charObj[k];
+            }
+      }
+      return maxChar;
 
+}
 
+module.exports = findMaxDuplicateChar;  
+</code></pre><h2 id="Q4-排序算法"><a href="#Q4-排序算法" class="headerlink" title="Q4 排序算法"></a>Q4 排序算法</h2><p>如果抽到算法题目的话，应该大多都是比较开放的题目，不限定算法的实现，但是一定要求掌握其中的几种，所以冒泡排序，这种较为基础并且便于理解记忆的算法一定需要熟记于心。冒泡排序算法就是依次比较大小，小的的大的进行位置上的交换。</p>
+<pre><code>function bubbleSort(arr) {  
+    for(let i = 0,l=arr.length;i&lt;l-1;i++) {
+           for(let j = i+1;j&lt;l;j++) { 
+              if(arr[i]&gt;arr[j]) {
+                let tem = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tem;
+            }
+        }
+    }
+    return arr;
+}
+module.exports = bubbleSort;  
+</code></pre><p>除了冒泡排序外，其实还有很多诸如 插入排序,快速排序，希尔排序等。每一种排序算法都有各自的特点。全部掌握也不需要，但是心底一定要熟悉几种算法。 比如快速排序，其效率很高，而其基本原理如图(来自wiki)：<br><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" alt=""></p>
+<p>算法参考某个元素值，将小于它的值，放到左数组中，大于它的值的元素就放到右数组中，然后递归进行上一次左右数组的操作，返回合并的数组就是已经排好顺序的数组了。</p>
+<pre><code>function quickSort(arr) {
 
+if(arr.length&lt;=1) {
+    return arr;
+}
 
+let leftArr = [];
+let rightArr = [];
+let q = arr[0];
+for(let i = 1,l=arr.length; i&lt;l; i++) {
+    if(arr[i]&gt;q) {
+        rightArr.push(arr[i]);
+    }else{
+        leftArr.push(arr[i]);
+    }
+}
 
+return [].concat(quickSort(leftArr),[q],quickSort(rightArr));
+}
 
+module.exports = quickSort;  
+</code></pre><p>安利大家一个学习的地址，通过动画演示算法的实现。</p>
+<p><a href="http://math.hws.edu/eck/jsdemo/sortlab.html" target="_blank" rel="external">HTML5 Canvas Demo: Sorting Algorithms</a></p>
+<h2 id="Q5-不借助临时变量，进行两个整数的交换"><a href="#Q5-不借助临时变量，进行两个整数的交换" class="headerlink" title="Q5 不借助临时变量，进行两个整数的交换"></a>Q5 不借助临时变量，进行两个整数的交换</h2><p>输入 a = 2, b = 4 输出 a = 4, b =2<br>这种问题非常巧妙，需要大家跳出惯有的思维，利用 a , b进行置换。</p>
+<p>主要是利用 + - 去进行运算，类似 a = a + ( b - a) 实际上等同于最后 的 a = b;</p>
+<pre><code>function swap(a , b) {  
+      b = b - a;
+      a = a + b;
+      b = a - b;
+      return [a,b];
+}
 
+module.exports = swap;  
+</code></pre><h2 id="Q6-使用canvas-绘制一个有限度的斐波那契数列的曲线？"><a href="#Q6-使用canvas-绘制一个有限度的斐波那契数列的曲线？" class="headerlink" title="Q6 使用canvas 绘制一个有限度的斐波那契数列的曲线？"></a>Q6 使用canvas 绘制一个有限度的斐波那契数列的曲线？</h2><p><img src="http://img1.vued.vanthink.cn/vued90edf7b944ec479ee8b4203cf56e158d.png" alt=""><br>数列长度限定在9.</p>
+<p><code>斐波那契数列</code>，又称黄金分割数列，指的是这样一个数列：0、1、1、2、3、5、8、13、21、34、……在数学上，斐波纳契数列主要考察递归的调用。我们一般都知道定义</p>
+<pre><code>fibo[i] = fibo[i-1]+fibo[i-2];  
+</code></pre><p>生成斐波那契数组的方法</p>
+<pre><code>function getFibonacci(n) {  
+      var fibarr = [];
+      var i = 0;
+      while(i&lt;n) {
+        if(i&lt;=1) {
+              fibarr.push(i);
+        }else{
+              fibarr.push(fibarr[i-1] + fibarr[i-2])
+        }
+        i++;
+      }
 
+      return fibarr;
+}
+</code></pre><p>剩余的工作就是利用canvas <code>arc</code>方法进行曲线绘制了</p>
+<p><a href="http://codepen.io/Jack_Pu/pen/LRaxZB" target="_blank" rel="external">DEMO</a></p>
+<h2 id="Q7-找出下列正数组的最大差值比如"><a href="#Q7-找出下列正数组的最大差值比如" class="headerlink" title="Q7 找出下列正数组的最大差值比如:"></a>Q7 找出下列正数组的最大差值比如:</h2><pre><code>输入 [10,5,11,7,8,9]
 
+输出 6
+</code></pre><p>这是通过一道题目去测试对于基本的数组的最大值的查找，很明显我们知道，最大差值肯定是一个数组中最大值与最小值的差。</p>
+<pre><code>  function getMaxProfit(arr) {
 
-  
-    <article id="post-blog-building" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/04/blog-building/">blog building</a>
-    </h1>
-  
+       var minPrice = arr[0];
+    var maxProfit = 0;
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="GitHub博客搭建"><a href="#GitHub博客搭建" class="headerlink" title="GitHub博客搭建"></a>GitHub博客搭建</h1><p><strong>GitHub</strong>，上传<em>hexo</em>博客搭建过程</p>
-<h2 id="安装-nodeJS"><a href="#安装-nodeJS" class="headerlink" title="安装  nodeJS"></a>安装  nodeJS</h2><p>nodeJS官网网址:<a href="http://nodejs.org/en/" target="_blank" rel="external">http://nodejs.org/en/</a></p>
-<p>测试nodeJS是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node -v</div></pre></td></tr></table></figure></p>
-<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装  hexo"></a>安装  hexo</h2><h4 id="安装命令："><a href="#安装命令：" class="headerlink" title="安装命令："></a>安装命令：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo -g</div></pre></td></tr></table></figure>
-<h4 id="测试nodeJS是否安装成功："><a href="#测试nodeJS是否安装成功：" class="headerlink" title="测试nodeJS是否安装成功："></a>测试nodeJS是否安装成功：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo</div></pre></td></tr></table></figure>
-<h4 id="创建目录并进入"><a href="#创建目录并进入" class="headerlink" title="创建目录并进入"></a>创建目录并进入</h4><p>初始化hexo目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init</div></pre></td></tr></table></figure></p>
-<p>启动本地服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
-<h2 id="GitGub账号一枚"><a href="#GitGub账号一枚" class="headerlink" title="GitGub账号一枚"></a>GitGub账号一枚</h2><h4 id="配置ssh-key"><a href="#配置ssh-key" class="headerlink" title="配置ssh-key"></a>配置ssh-key</h4><p>连续三次回测<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen</div></pre></td></tr></table></figure></p>
-<p>复制ssh-key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim~/.ssh/id rsa.pub</div></pre></td></tr></table></figure></p>
-<p>github设置ssh黏贴</p>
-<h4 id="配置github与本地机器验证"><a href="#配置github与本地机器验证" class="headerlink" title="配置github与本地机器验证"></a>配置github与本地机器验证</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;&quot;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;&quot;</div></pre></td></tr></table></figure>
-<h4 id="新建博客域名仓库"><a href="#新建博客域名仓库" class="headerlink" title="新建博客域名仓库"></a>新建博客域名仓库</h4><p>用户名 .github.io</p>
-<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><p>deplay字段</p>
-<p>type:git</p>
-<p>repo:域名仓库https地址</p>
-<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deplayer-git --save</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
-<h2 id="新建项目标题"><a href="#新建项目标题" class="headerlink" title="新建项目标题"></a>新建项目标题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bolog $ hexo project</div></pre></td></tr></table></figure>
-<p>进入source中找到该文件夹，进去Mou中书写格式（偏好设置）</p>
-<h2 id="在博客中设置主题背景"><a href="#在博客中设置主题背景" class="headerlink" title="在博客中设置主题背景"></a>在博客中设置主题背景</h2><p>网址：<a href="http://www.zhihu.com/question/24422335/answer/46357100" target="_blank" rel="external">http://www.zhihu.com/question/24422335/answer/46357100</a></p>
-<h4 id="具体操作："><a href="#具体操作：" class="headerlink" title="具体操作："></a>具体操作：</h4><ul>
-<li>命令终端找到themes文件</li>
-<li>终端命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone 主题网址</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>例：git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="external">https://github.com/A-limon/pacman.git</a></p>
+    for (var i = 0; i &lt; arr.length; i++) {
+        var currentPrice = arr[i];
+
+        minPrice = Math.min(minPrice, currentPrice);
+
+        var potentialProfit = currentPrice - minPrice;
+
+        maxProfit = Math.max(maxProfit, potentialProfit);
+    }
+
+    return maxProfit;
+}
+</code></pre><h2 id="Q8-随机生成指定长度的字符串"><a href="#Q8-随机生成指定长度的字符串" class="headerlink" title="Q8 随机生成指定长度的字符串"></a>Q8 随机生成指定长度的字符串</h2><p>实现一个算法，随机生成指制定长度的字符窜。</p>
+<pre><code>比如给定 长度 8  输出 4ldkfg9j
+function randomString(n) {  
+      let str = &apos;abcdefghijklmnopqrstuvwxyz9876543210&apos;;
+      let tmp = &apos;&apos;,
+      i = 0,
+      l = str.length;
+      for (i = 0; i &lt; n; i++) {
+            tmp += str.charAt(Math.floor(Math.random() * l));
+      }
+      return tmp;
+}
+
+module.exports = randomString;  
+</code></pre><h2 id="Q9-实现类似getElementsByClassName-的功能"><a href="#Q9-实现类似getElementsByClassName-的功能" class="headerlink" title="Q9 实现类似getElementsByClassName 的功能"></a>Q9 实现类似getElementsByClassName 的功能</h2><p>自己实现一个函数，查找某个DOM节点下面的包含某个class的所有DOM节点？不允许使用原生提供的 getElementsByClassName querySelectorAll 等原生提供DOM查找函数。</p>
+<pre><code>function queryClassName(node, name) {  
+      var starts = &apos;(^|[ \n\r\t\f])&apos;,
+       ends = &apos;([ \n\r\t\f]|$)&apos;;
+      var array = [],
+    regex = new RegExp(starts + name + ends),
+    elements = node.getElementsByTagName(&quot;*&quot;),
+    length = elements.length,
+    i = 0,
+    element;
+
+while (i &lt; length) {
+    element = elements[i];
+    if (regex.test(element.className)) {
+        array.push(element);
+    }
+
+    i += 1;
+}
+
+return array;
+</code></pre><p>}</p>
+<h2 id="Q10-使用JS-实现二叉查找树-Binary-Search-Tree"><a href="#Q10-使用JS-实现二叉查找树-Binary-Search-Tree" class="headerlink" title="Q10 使用JS 实现二叉查找树(Binary Search Tree)"></a>Q10 使用JS 实现二叉查找树(Binary Search Tree)</h2><p>一般叫全部写完的概率比较少，但是重点考察你对它的理解和一些基本特点的实现。 二叉查找树，也称二叉搜索树、有序二叉树（英语：ordered binary tree）是指一棵空树或者具有下列性质的二叉树：</p>
 <ul>
-<li>命令：<pre><code>ls
-</code></pre>找到下载的文件夹，将其复制到_config.yml中，themes:复制名</li>
-<li><p>启动终端命令</p>
-<p>  hexo server</p>
-</li>
+<li>任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
+<li>任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>任意节点的左、右子树也分别为二叉查找树；</li>
+<li>没有键值相等的节点。二叉查找树相比于其他数据结构的优势在于查找、插入的时间复杂度较低。为O(log n)。二叉查找树是基础性数据结构，用于构建更为抽象的数据结构，如集合、multiset、关联数组等。<br><img src="http://img1.vued.vanthink.cn/vued95685e8f89199babd6273a93651ecd8b.png" alt=""></li>
 </ul>
-<p>回到[发布]流程重新输入命令</p>
+<p>在写的时候需要足够理解二叉搜素树的特点，需要先设定好每个节点的数据结构</p>
+<pre><code>class Node {  
+      constructor(data, left, right) {
+        this.data = data;
+        this.left = left;
+        this.right = right;
+      }
+
+}
+</code></pre><p>树是有节点构成，由根节点逐渐延生到各个子节点，因此它具备基本的结构就是具备一个根节点，具备添加，查找和删除节点的方法.</p>
+<pre><code>class BinarySearchTree {
+
+      constructor() {
+        this.root = null;
+      }
+
+  insert(data) {
+    let n = new Node(data, null, null);
+    if (!this.root) {
+          return this.root = n;
+    }
+    let currentNode = this.root;
+    let parent = null;
+    while (1) {
+          parent = currentNode;
+          if (data &lt; currentNode.data) {
+            currentNode = currentNode.left;
+            if (currentNode === null) {
+                  parent.left = n;
+                  break;
+            }
+      } else {
+        currentNode = currentNode.right;
+        if (currentNode === null) {
+              parent.right = n;
+              break;
+            }
+      }
+    }
+  }
+
+  remove(data) {
+    this.root = this.removeNode(this.root, data)
+  }
+
+  removeNode(node, data) {
+    if (node == null) {
+          return null;
+    }
+
+if (data == node.data) {
+  // no children node
+  if (node.left == null &amp;&amp; node.right == null) {
+    return null;
+  }
+  if (node.left == null) {
+    return node.right;
+  }
+  if (node.right == null) {
+    return node.left;
+  }
+
+  let getSmallest = function(node) {
+    if(node.left === null &amp;&amp; node.right == null) {
+      return node;
+    }
+    if(node.left != null) {
+      return node.left;
+    }
+    if(node.right !== null) {
+      return getSmallest(node.right);
+    }
+
+  }
+  let temNode = getSmallest(node.right);
+  node.data = temNode.data;
+  node.right = this.removeNode(temNode.right,temNode.data);
+  return node;
+
+} else if (data &lt; node.data) {
+  node.left = this.removeNode(node.left,data);
+  return node;
+} else {
+  node.right = this.removeNode(node.right,data);
+  return node;
+}
+</code></pre><p>  }</p>
+<pre><code>  find(data) {
+    var current = this.root;
+    while (current != null) {
+      if (data == current.data) {
+        break;
+      }
+      if (data &lt; current.data) {
+        current = current.left;
+      } else {
+        current = current.right
+      }
+    }
+    return current.data;
+  }
+
+}
+
+module.exports = BinarySearchTree;  
+</code></pre><p><a href="https://github.com/JackPu/JavaScript-Algorithm-Learning" target="_blank" rel="external">完整代码 Github</a></p>
+<p>扩展阅读<br><a href="https://www.interviewcake.com/question/javascript/rectangular-love" target="_blank" rel="external">https://www.interviewcake.com/question/javascript/rectangular-love
+</a><br><a href="http://stackoverflow.com/questions/21853967/get-elements-by-class-a-or-b-in-javascript" target="_blank" rel="external">http://stackoverflow.com/questions/21853967/get-elements-by-class-a-or-b-in-javascript</a></p>
+<p><a href="http://codepen.io/Jack_Pu/pen/EgrXBp" target="_blank" rel="external">http://codepen.io/Jack_Pu/pen/EgrXBp</a></p>
+<p><a href="http://javascript-html5-tutorial.com/algorithms-and-data-structures-in-javascript.html" target="_blank" rel="external">http://javascript-html5-tutorial.com/algorithms-and-data-structures-in-javascript.html</a></p>
+<p>引自：<a href="http://www.jackpu.com/qian-duan-mian-shi-zhong-de-chang-jian-de-suan-fa-wen-ti/" target="_blank" rel="external">http://www.jackpu.com/qian-duan-mian-shi-zhong-de-chang-jian-de-suan-fa-wen-ti/</a></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/02/04/blog-building/" class="archive-article-date">
-  	<time datetime="2016-02-04T03:17:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
+      <a href="/2016/09/19/algorithm/" class="archive-article-date">
+  	<time datetime="2016-09-19T06:59:13.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-19</time>
 </a>
       
       
@@ -345,7 +2218,7 @@ react-native run-ios
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-jszhengze" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -355,7 +2228,7 @@ react-native run-ios
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/19/hello-world/">Hello World</a>
+      <a class="article-title" href="/2016/08/29/jszhengze/">jszhengze</a>
     </h1>
   
 
@@ -363,22 +2236,251 @@ react-native run-ios
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><h2 id="正则表达式-语法"><a href="#正则表达式-语法" class="headerlink" title="正则表达式 - 语法"></a>正则表达式 - <code>语法</code></h2><p><code>正则表达式</code>(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。</p>
+<ul>
+<li>列目录时，　dir <em>.txt或ls </em>.txt中的<em>.txt就不是一个正则表达式,因为这里</em>与正则式的*的含义是不同的。</li>
+<li>构造正则表达式的方法和创建数学表达式的方法一样。也就是用多种元字符与运算符可以将小的表达式结合在一起来创建更大的表达式。正则表达式的组件可以是单个的字符、字符集合、字符范围、字符间的选择或者所有这些组件的任意组合。</li>
+</ul>
+<p>正则表达式是由普通字符（例如字符 a 到 z）以及特殊字符（称为”元字符”）组成的文字模式。模式描述在搜索文本时要匹配的一个或多个字符串。正则表达式作为一个模板，将某个字符模式与所搜索的字符串进行匹配。</p>
+<h3 id="普通字符"><a href="#普通字符" class="headerlink" title="普通字符"></a>普通字符</h3><p>普通字符包括没有显式指定为元字符的所有可打印和不可打印字符。这包括所有大写和小写字母、所有数字、所有标点符号和一些其他符号。</p>
+<h3 id="非打印字符"><a href="#非打印字符" class="headerlink" title="非打印字符"></a>非打印字符</h3><p>非打印字符也可以是正则表达式的组成部分。下表列出了表示非打印字符的转义序列：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\cx</td>
+<td>匹配由x指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>匹配一个换页符。等价于 \x0c 和 \cL。</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符。等价于 \x0a 和 \cJ。</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>匹配一个回车符。等价于 \x0d 和 \cM。</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符。等价于 \x09 和 \cI。</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><p>所谓特殊字符，就是一些有特殊含义的字符，如上面说的”<em>.txt”中的</em>，简单的说就是表示任何字符串的意思。如果要查找文件名中有<em>的文件，则需要对</em>进行转义，即在其前加一个\。ls *.txt。<br>许多元字符要求在试图匹配它们时特别对待。若要匹配这些特殊字符，必须首先使字符”转义”，即，将反斜杠字符 () 放在它们前面。下表列出了正则表达式中的特殊字符：</p>
+<table>
+<thead>
+<tr>
+<th>特别字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$</td>
+<td>匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline属性，则 $ 也匹配 ‘\n’ 或 ‘\r’。要匹配 $ 字符本身，请使用 \$。</td>
+</tr>
+<tr>
+<td>( )</td>
+<td>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 ( 和 )。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次。要匹配 <em> 字符，请使用 \</em>。</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 +。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 . 。</td>
+</tr>
+<tr>
+<td>[</td>
+<td>标记一个中括号表达式的开始。要匹配 [，请使用 [。</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 \?。</td>
+</tr>
+<tr>
+<td>\</td>
+<td>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ‘n’ 匹配字符 ‘n’。’\n’ 匹配换行符。序列 ‘\‘ 匹配 “\”，而 ‘(‘ 则匹配 “(“。</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配输入字符串的开始位置，除非在方括号表达式中使用，此时它表示不接受该字符集合。要匹配 ^ 字符本身，请使用 \^。</td>
+</tr>
+<tr>
+<td>{</td>
+<td>标记限定符表达式的开始。要匹配 {，请使用 {。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>指明两项之间的一个选择。要匹配</td>
+<td>，请使用 \</td>
+<td>。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h3><p>限定符用来指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。有*或+或?或{n}或{n,}或{n,m}共6种。<br>正则表达式的限定符有：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 或 “does” 中的”do” 。? 等价于 {0,1}。</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h3><p>定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。<br>定位符用来描述字符串或单词的边界，^和$分别指字符串的开始与结束，\b描述单词的前或后边界，\B表示非单词边界。<br>正则表达式的限定符有：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配。</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配输入字符串结尾的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \n 或 \r 之前的位置匹配。</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配一个字边界，即字与空格间的位置。</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>非字边界匹配。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="正则表达式-运算符优级"><a href="#正则表达式-运算符优级" class="headerlink" title="正则表达式 -运算符优级"></a>正则表达式 -<a href="">运算符优级</a></h2><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\</td>
+<td>转义符</td>
+</tr>
+<tr>
+<td>(), (?:), (?=), []</td>
+<td>圆括号和方括号</td>
+</tr>
+<tr>
+<td>*, +, ?, {n}, {n,}, {n,m}</td>
+<td>限定符</td>
+</tr>
+<tr>
+<td>^, $, \任何元字符、任何字符</td>
+<td>定位点和序列（即：位置和顺序）</td>
+</tr>
+<tr>
+<td>(或”</td>
+<td>“)</td>
+<td>替换，”或”操作字符具有高于替换运算符的优先级，使得”m</td>
+<td>food”匹配”m”或”food”。若要匹配”mood”或”food”，请使用括号创建子表达式，从而产生”(m</td>
+<td>f)ood”。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="常见正则表达式"><a href="#常见正则表达式" class="headerlink" title="常见正则表达式:"></a>常见正则表达式:</h2><h3 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h3><hr>
+<p><code>[0-9]+</code></p>
+<p><img src="http://ggbond.qiniudn.com/2016-10-13%2019:35:52.png" alt=""></p>
+<p>###逗号分隔的整数</p>
+<hr>
+<p><code>\b[0-9]{1,3}(,[0-9]{3})*\b</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:40:05.png" alt=""></p>
+<h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><hr>
+<p><code>(\+?(\d+|\.\d+|\d+\.\d+)|-?(\d+|\d+\.\d+))</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:20:37.png" alt=""></p>
+<h3 id="0-255之间的数字"><a href="#0-255之间的数字" class="headerlink" title="0-255之间的数字"></a>0-255之间的数字</h3><hr>
+<p><code>^([0-9]|[0-9]{2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</code></p>
+<p><img src="http://ggbond.qiniudn.com/255.png" alt=""></p>
+<h3 id="身份证"><a href="#身份证" class="headerlink" title="身份证"></a>身份证</h3><hr>
+<p><code>^[1-9]\d{14}(\d{2}[0-9x])?$</code></p>
+<p><img src="http://ggbond.qiniudn.com/shenfz.png" alt=""></p>
+<h3 id="邮箱"><a href="#邮箱" class="headerlink" title="邮箱"></a>邮箱</h3><hr>
+<p><code>^[-\w.]{0,64}@([a-zA-Z0-9]{1,63}\.)*[-a-zA-Z0-9]{1,63}$</code><br><img src="http://ggbond.qiniudn.com/email.png" alt=""></p>
+<h3 id="固定电话"><a href="#固定电话" class="headerlink" title="固定电话"></a>固定电话</h3><hr>
+<p><code>(\(?0[1-9]{2,3}\)?-?)?[1-9][0-9]\{6,7}(-[0-9]{1,6})?</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:46:08.png" alt=""></p>
+<h3 id="邮编"><a href="#邮编" class="headerlink" title="邮编"></a>邮编</h3><hr>
+<p><code>[1-9][0-9]{5}</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:47:35.png" alt=""></p>
+<h3 id="ISBN"><a href="#ISBN" class="headerlink" title="ISBN"></a>ISBN</h3><hr>
+<p><code>((ISBN(-13)?:?\s)?97[89][-\s]?[0-9][-\s]?[0-9]{3}[-\s]?[0-9]{5}[-\s]?[0-9]|(ISBN(-10)?:?\s)?[0-9][-\s]?[0-9]{3}[-\s]?[0-9]{5}[-\s]?[0-9x])</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:55:10.png" alt=""></p>
+<h3 id="手机号"><a href="#手机号" class="headerlink" title="手机号"></a>手机号</h3><hr>
+<p><code>(0|\+86)?(13[0-9]|15[0-356]|18[025-9])\d{8}</code><br><img src="http://ggbond.qiniudn.com/tel.png" alt=""></p>
+<h3 id="成对的html-tag"><a href="#成对的html-tag" class="headerlink" title="成对的html tag"></a>成对的html tag</h3><hr>
+<p>如<code>&lt;code&gt;test&lt;/code&gt;</code><br><code>&lt;([^&gt;]+)&gt;[\s\S]*?&lt;\/\1&gt;</code><br><img src="http://ggbond.qiniudn.com/tag.png" alt=""></p>
+<h3 id="a"><a href="#a" class="headerlink" title="a"></a>a</h3><hr>
+<p><code>&lt;a\s+href\s*=\s*[&quot;&#39;]?([^&quot;&#39;\s]+)[&quot;&#39;]?&gt;([^&lt;]+)&lt;\/a&gt;</code><br><img src="http://ggbond.qiniudn.com/a.png" alt=""></p>
+<h3 id="head"><a href="#head" class="headerlink" title="head"></a>head</h3><hr>
+<p><code>&lt;head&gt;([^&gt;]+)&lt;\/head&gt;</code><br><img src="http://ggbond.qiniudn.com/head.png" alt=""></p>
+<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><hr>
+<p><code>&lt;img\s[^&gt;]*?src=[&#39;&quot;]?([^&quot;&#39;]+)[&quot;&#39;]?[^&gt;]*&gt;</code><br><img src="http://ggbond.qiniudn.com/img11.png" alt=""></p>
+<p>附：正则指引思维导图<br><img src="http://ggbond.qiniudn.com/%E6%AD%A3%E5%88%99%E6%8C%87%E5%BC%95.png" alt=""></p>
+<p>参考文档：<a href="http://www.lixuejiang.me/2016/10/13/%E5%B8%B8%E8%A7%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_blank" rel="external">http://www.lixuejiang.me/2016/10/13/%E5%B8%B8%E8%A7%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</a></p>
+<p><a href="http://www.runoob.com/regexp/regexp-tutorial.html" target="_blank" rel="external">http://www.runoob.com/regexp/regexp-tutorial.html</a></p>
 
       
     </div>
     <div class="article-info article-info-index">
       
-      <a href="/2016/01/19/hello-world/" class="archive-article-date">
-  	<time datetime="2016-01-19T03:17:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
+      <a href="/2016/08/29/jszhengze/" class="archive-article-date">
+  	<time datetime="2016-08-29T11:52:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-29</time>
 </a>
       
       
@@ -398,6 +2500,826 @@ react-native run-ios
 
 
   
+    <article id="post-nodeHeartModule" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/18/nodeHeartModule/">nodeHeartModule</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Node-js-手册查询-1-核心模块方法"><a href="#Node-js-手册查询-1-核心模块方法" class="headerlink" title="Node.js 手册查询-1-核心模块方法"></a>Node.js 手册查询-1-核心模块方法</h1><h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><h3 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h3><p>核心模块是被编译成二进制代码，引用的时候只需require表示符即可</p>
+<h4 id="os-系统基本信息"><a href="#os-系统基本信息" class="headerlink" title="os 系统基本信息"></a>os 系统基本信息</h4><p>os模块可提供操作系统的一些基本信息</p>
+<p>1.返回系统临时目录</p>
+<pre><code> os.tmpdir()
+结果如: C:\Users\ADMINI~1\AppData\Local\Temp
+</code></pre><p>2.返回 CPU 的字节序，可能的是 “BE” 或 “LE”</p>
+<pre><code> os.endianness()
+结果如: LE   (inter i3)
+</code></pre><p>3.返回操作系统的主机名</p>
+<pre><code> os.hostname()
+结果如: QH-20141006HJKT
+</code></pre><p>4.返回操作系统名称</p>
+<pre><code> os.type()
+结果如: Windows_NT
+</code></pre><p>5.返回操作系统平台</p>
+<pre><code> os.platform()
+结果如: win32
+</code></pre><p>6.返回操作系统 CPU 架构，可能的值有 “x64”、“arm” 和 “ia32”</p>
+<pre><code> os.arch()
+结果如: x64
+</code></pre><p>7.返回操作系统的发行版本</p>
+<pre><code> os.release()
+结果如: 6.1.7601
+</code></pre><p>8.返回操作系统运行的时间，以秒为单位</p>
+<pre><code> os.uptime()
+结果如: 7847.6797442
+</code></pre><p>9.返回一个包含 1、5、15 分钟平均负载的数组</p>
+<pre><code> os.loadavg()
+结果如: 6.1.7601
+</code></pre><p>10.返回系统内存总量，单位为字节</p>
+<pre><code>os.totalmem()
+结果如: 3931602944
+</code></pre><p>11.返回操作系统空闲内存量，单位是字节</p>
+<pre><code> os.freemem()
+结果如: 1307422720
+</code></pre><p>12.返回一个对象数组，包含所安装的每个 CPU/内核的信息：型号、速度（单位 MHz）、时间（一个包含 user、nice、sys、idle 和 irq 所使用 CPU/内核毫秒数的对象）</p>
+<pre><code>os.cpus()
+</code></pre><p>13.获取网络接口的一个列表信息</p>
+<pre><code> os.networkInterfaces()
+结果如: 1307422720
+</code></pre><p>14.一个定义了操作系统的一行结束的标识的常量</p>
+<pre><code>os.EOL
+</code></pre><h4 id="process-进程管理"><a href="#process-进程管理" class="headerlink" title="process 进程管理"></a>process 进程管理</h4><p>process 是一个全局变量.无需 require;</p>
+<p>1.返回应用程序当前目录</p>
+<pre><code> process.cwd()
+结果如: c:\Users\Administrator\MongoDb_Test
+</code></pre><p>2.改变应用程序目录</p>
+<pre><code>process.chdir(“目录”)
+</code></pre><p>3.标准输出流.将内容打印到输出设备上.console.log就是封装了它</p>
+<pre><code>process.stdout.write(‘aa\n’)
+结果如: aa
+</code></pre><p>4.标准错误流</p>
+<pre><code> process.stderr.write(‘aa\n’)
+结果如: aa
+</code></pre><p>5.进程的输入流. 通过注册事件的方式来获取输入的内容</p>
+<pre><code> process.stdin.on(‘readable’, function() {
+var chunk = process.stdin.read();
+if (chunk !== null) {
+process.stdout.write(&apos;data: ’ + chunk);
+}
+});
+</code></pre><p>6.结束进程</p>
+<pre><code> process.exit(code);
+参数code为退出后返回的代码，如果省略则默认返回0
+</code></pre><p>7.注册事件</p>
+<pre><code> process.stdout.on(‘data’,function(data){
+console.log(data);
+});
+</code></pre><p>8.为事件循环设置一项任务,Node.js 会在下次事件循环调响应时调用 callback</p>
+<pre><code>process.nextTick(callback)
+</code></pre><p>8.设置编码, 默认 utf8. node.js编码格式只支持UTF8、ascii、base64，暂时不支持GBK、gb2312</p>
+<pre><code> process.stdin.setEncoding(编码);
+process.stdout.setEncoding(编码);
+process.stderr.setEncoding(编码);
+</code></pre><h4 id="fs-文件管理"><a href="#fs-文件管理" class="headerlink" title="fs 文件管理"></a>fs 文件管理</h4><p>fs 模块提供了异步和同步2个版本     fs.readFile()    fs.readFileSync()</p>
+<p>1.写入文件内容</p>
+<pre><code>fs.writeFile(‘test.txt’, ‘Hello Node’ , [encoding], [callback]);
+</code></pre><p>2.追加写入</p>
+<pre><code>fs.appendFile(‘test.txt’,‘Hello Node’,[encoding],[callback]);
+</code></pre><p>3.文件是否存在</p>
+<pre><code>fs.exists(‘test.txt’,[callback]);
+</code></pre><p>4.修改文件名</p>
+<pre><code>fs.rename(旧文件,新文件,[callback]);
+</code></pre><p>5.移动文件. 没有专门函数,通过修改文件名可以达到目的</p>
+<pre><code>fs.rename(oldPath,newPath,[callback]);
+</code></pre><p>6.读取文件内容</p>
+<pre><code>fs.readFile(‘test.txt’, [encoding], [callback]);
+</code></pre><p>7.删除文件</p>
+<pre><code>fs.unlink(‘test.txt’, [callback]);
+</code></pre><p>8.创建目录</p>
+<pre><code> fs.mkdir(路径, 权限, [callback]);
+路径：新创建的目录。
+权限：可选参数，只在linux下有效，表示目录的权限，默认为0777，    表示文件所有者、文件所有者所在的组的*用户、*所有用户，都有权限进行读、写、执行的操作。
+</code></pre><p>9.删除目录</p>
+<pre><code>fs.rmdir(path, [callback]);
+</code></pre><p>10.读取目录. 读取到指定目录下所有的文件</p>
+<pre><code>fs.readdir(path, [callback]);
+</code></pre><p>11.打开文件</p>
+<pre><code>fs.open(path,flags, [mode], [callback(err,fd)])
+</code></pre><p>12.关闭文件</p>
+<pre><code> fs.close(fd, [callback(err)])
+fd 是打开文件后的标示符
+</code></pre><p>13.读取文件</p>
+<pre><code>fs.read(fd,buffer,offset,length,position,[callback(err, bytesRead, buffer)])
+</code></pre><p>14.写入文件</p>
+<pre><code>fs.writeFile(filename, data,[encoding],[callback(err)])
+</code></pre><p>15.获取真实路径</p>
+<pre><code>fs.realpath(path, [callback(err,resolvedPath)])
+</code></pre><p>16.更改所有权</p>
+<pre><code>fs.chown(path, uid, gid, [callback(err)])
+</code></pre><p>17.更改权限</p>
+<pre><code>fs.fchmod(fd, mode, [callback(err)])
+</code></pre><p>18.获取文件信息</p>
+<pre><code>fs.stat(path, [callback(err, stats)])
+</code></pre><p>19.创建硬链接</p>
+<pre><code>fs.link(srcpath, dstpath, [callback(err)])
+</code></pre><p>20.读取链接</p>
+<pre><code>fs.readlink(path, [callback(err,linkString)])
+</code></pre><p>21.修改文件时间戳</p>
+<pre><code>fs.utimes(path, atime, mtime, [callback(err)])
+</code></pre><p>22.同步磁盘缓存</p>
+<pre><code>fs.fsync(fd, [callback(err)])
+</code></pre><h5 id="url-文件管理"><a href="#url-文件管理" class="headerlink" title="url 文件管理"></a>url 文件管理</h5><p>1.解析url，返回一个json格式的数组</p>
+<pre><code> url.parse(‘http://www.baidu.com’);
+结果如: { protocol: ‘http:’,
+slashes: null,
+auth: null,
+host: null,
+port: null,
+hostname: null,
+hash: null,
+search: null,
+query: null,
+pathname: ‘www.baidu.com’,
+path: ‘www.baidu.com’,
+href: ‘http://www.baidu.com’ }
+</code></pre><p>2.解析url - 条件解析</p>
+<pre><code> url.parse(‘http://www.baidu.com?page=1’,true);
+结果如: { protocol: ‘http:’,
+slashes: true,
+auth: null,
+host: ‘www.baidu.com’,
+port: null,
+hostname: ‘www.baidu.com’,
+hash: null,
+search: ‘?page=1’,
+query: { page: ‘1’ },
+pathname: ‘/’,
+path: ‘/?page=1’,
+href: ‘http://www.baidu.com/?page=1’ }
+</code></pre><p>3.解析主机</p>
+<pre><code> url.parse(‘http://www.baidu.com/news’,false,true);
+结果如:{ protocol: ‘http:’,
+slashes: true,
+auth: null,
+host: ‘www.baidu.com’,
+port: null,
+hostname: ‘www.baidu.com’,
+hash: null,
+search: null,
+query: null,
+pathname: ‘/news’,
+    path: ‘/news’,
+href: ‘http://www.baidu.com/news’ }
+</code></pre><p>4.格式化为url. 将json数组逆向成url</p>
+<pre><code> url.format({
+protocol: ‘http:’,
+hostname:‘www.baidu.com’,
+port:‘80’,
+pathname :’/news’,
+query:{page:1}
+});
+结果如: http://www.baidu.com/news?page=1
+</code></pre><p>5.封装路径</p>
+<pre><code> url.resolve(‘http://example.com/’, ‘/one’)  // &apos;http://example.com/one’
+url.resolve(‘http://example.com/one’, ‘/two’) // ‘http://example.com/two’
+</code></pre><h5 id="path-路径管理"><a href="#path-路径管理" class="headerlink" title="path 路径管理"></a>path 路径管理</h5><p>用于处理和转换文件路径的工具集,用于处理目录的对象</p>
+<p>1.格式化路径. 将不符合规范的路径经过格式化转换为标准路径,解析路径中的.与…外，还能去掉多余的斜杠</p>
+<pre><code> path.normalize(’/path///normalize/hi/…’);
+结果如: ‘/path/normalize/’ 标准化之后的路径里的斜杠在Windows系统下是，而在Linux系统下是/
+</code></pre><p>2.组合路径</p>
+<pre><code>path.join(’///you’, ‘/are’, ‘//beautiful’);
+结果如:  ‘/you/are/beautiful’
+</code></pre><p>3.返回路径中的目录名</p>
+<pre><code> path.dirname(’/foo/strong/cool/nice’);
+结果如: ‘/foo/strong/cool’
+</code></pre><p>4.返回路径最后一部分,还可以排除指定字符串</p>
+<pre><code> path.basename(’/foo/strong/basename/index.html’);
+path.basename(’/foo/strong/basename/index.html’,’.html’);
+结果如: index.html 和 index
+</code></pre><p>5.返回路径后缀</p>
+<pre><code> path.extname(‘index.html’);
+结果如: .html
+</code></pre><h4 id="Query-String-字符串转换"><a href="#Query-String-字符串转换" class="headerlink" title="Query String 字符串转换"></a>Query String 字符串转换</h4><p>用于实现URL参数字符串与参数对象之间的互相转换</p>
+<p>1.序列化对象.将对象类型转换成一个字符串类型（默认的分割符（“&amp;”）和分配符（“=”））</p>
+<pre><code> 1 querystring.stringify({foo:‘bar’,cool:[‘xux’, ‘yys’]});
+结果如: foo=bar&amp;cool=xux&amp;cool=yys
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2 重载1: querystring.stringify(&#123;foo:‘bar’,cool:[‘xux’, ‘yys’]&#125;,’*’,’$’);</div><div class="line">结果如: foo$bar*cool$xux*cool$yys</div></pre></td></tr></table></figure>
+<p>2.反序列化</p>
+<pre><code>querystring.parse(‘foo@bar$cool@xux$cool@yys’,’@’,’$’);
+结果如: { foo: ‘bar’ ,  cool: [‘xux’, ‘yys’] }
+</code></pre><h4 id="util-使用工具"><a href="#util-使用工具" class="headerlink" title="util 使用工具"></a>util 使用工具</h4><p>提供常用函数的集合，用于弥补核心JavaScript的一些功能过于精简的不足。并且还提供了一系列常用工具，用来对数据的输出和验证</p>
+<p>1.任意对象转化为字符串,用于调试输出</p>
+<pre><code>util.inspect(object,[showHidden],[depth],[colors])
+</code></pre><p>2.格式化字符串. 就像c语言的 printf函数<br>支持的占位符有：“%s(字符串)”、“%d(数字&lt;整型和浮点型&gt;)”、“%j(JSON)”、“%(单独一个百分号则不作为一个参数)”</p>
+<pre><code> util.format(’%s:%s’, ‘foo’);
+结果如: foo:%s
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">util.format(’%s:%s’, ‘foo’, ‘bar’, ‘baz’);</div><div class="line">结果如: foo:bar baz 额外的参数将会调用util.inspect()转换为	字符串连接在一起</div></pre></td></tr></table></figure>
+<pre><code>util.format(1, 2, 3);
+结果如: 1 2 3 , 第一个参数是一个非格式化字符串，则会把所有的参数转成字符串并以空格隔开拼接在一块
+</code></pre><p>3.验证函数</p>
+<pre><code> util.isArray(object);
+判断对象是否为数组类型，是则返回ture,否则为false
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">util.isDate(object);</div><div class="line">判断对象是否为日期类型，是则返回ture,否则返回false</div></pre></td></tr></table></figure>
+<pre><code>util.isRegExp(object);
+判断对象是否为正则类型，是则返回ture,否则返回false
+,util.isArray()、util.isRegExp()、util.isDate()、util.isError()  util.format()、util. debug()
+</code></pre><p>4.继承</p>
+<pre><code> util.inherits( 子类, 基类)
+实现对象间原型继承
+
+child_process 子进程
+</code></pre><p>node.js是基于单线程模型架构，这样的设计可以带来高效的CPU利用率，但是无法却利用多个核心的CPU，为了解决这个问题，node.js提供了child_process模块，通过多进程来实现对多核CPU的利用. child_process模块提供了四个创建子进程的函数，分别是spawn，exec，execFile和fork</p>
+<p>1.用给定的命令发布一个子进程，带有‘args’命令行参数</p>
+<pre><code> child_process.spawn(command, [args], [options])
+command {String}要运行的命令行
+args {Array} 字符串参数列表
+options {Object}
+cwd {String} 子进程的当前的工作目录
+stdio {Array|String} 子进程 stdio 配置. (参阅下文)
+customFds {Array} Deprecated 作为子进程 stdio 使用的 文件标示符. (参阅下文)
+env {Object} 环境变量的键值对
+detached {Boolean} 子进程将会变成一个进程组的领导者. (参阅下文)
+uid {Number} 设置用户进程的ID. (See setuid(2).)
+gid {Number} 设置进程组的ID. (See setgid(2).)
+返回: {ChildProcess object}
+</code></pre><p>2.创建子进程</p>
+<pre><code>child_process.exec(command, [options], callback)
+</code></pre><p>3.创建进程 - 直接运行指定文件</p>
+<pre><code>child_process.execFile( file);
+</code></pre><p>4.直接运行Node.js模块</p>
+<pre><code> child_process.fork( modulePath );
+fork函数只支持运行JavaScript代码
+</code></pre><h4 id="http-HTTP"><a href="#http-HTTP" class="headerlink" title="http HTTP"></a>http HTTP</h4><p>2个方法</p>
+<pre><code> http.createServer([requestListener])  创建HTTP服务器
+http.createClient([port], [host])     创建HTTP客户端
+</code></pre><h5 id="http-Server"><a href="#http-Server" class="headerlink" title="http.Server"></a>http.Server</h5><p>由 http.createServer 创建所返回的实例</p>
+<h5 id="http-Server-事件"><a href="#http-Server-事件" class="headerlink" title="http.Server 事件"></a>http.Server 事件</h5><p>request 客户端请求到来<br>提供2个参数: req, res  分别是http.ServerRequest 和  http.ServerResponse  的实例.表示请求和响应消息</p>
+<p>connection TCP建立连接时触发<br>提供1个 socket 参数 net.Socket 实例</p>
+<p>close 服务器关闭时触发<br>无参数</p>
+<p>还有checkContinue 、 upgrade 、 clientError 等事件. request 经常使用,所以包含在了 createServer函数中</p>
+<h5 id="http-ServerRequest-对象"><a href="#http-ServerRequest-对象" class="headerlink" title="http.ServerRequest 对象"></a>http.ServerRequest 对象</h5><p>HTTP请求的消息, 一般由 http.Server的 request 事件发送</p>
+<h5 id="属性"><a href="#属性" class="headerlink" title="属性:"></a>属性:</h5><p>complete          客户端请求是否已经发送完成</p>
+<p>httpVersion      HTTP 协议版本，通常是 1.0 或 1.1</p>
+<p>method          HTTP 请求方法，如 GET、POST、PUT、DELETE 等</p>
+<p>url              原始的请求路径，例如 /static/image/x.jpg 或 /user?name=byvoid</p>
+<p>headers          HTTP 请求头</p>
+<p>trailers          HTTP 请求尾（不常见）</p>
+<p>connection      当前 HTTP 连接套接字，为 net.Socket 的实例</p>
+<p>socket          connection 属性的别名</p>
+<p>client          client 属性的别名</p>
+<h5 id="GET"><a href="#GET" class="headerlink" title="GET:"></a>GET:</h5><p>的请求是直接嵌入路径中的. 解析?后面的路径就行了.  url 模块中  parse 函数提供了这个功能</p>
+<h5 id="POST"><a href="#POST" class="headerlink" title="POST:"></a>POST:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">**HTTP 请求分: 请求头.  请求体**</div><div class="line">http.ServerRequest 提供3个事件控制请求体传输</div><div class="line">data:	请求体数据来到时. 参数 chunk 表示接收到的数据</div><div class="line">end:	请求体数据传输完成时</div><div class="line">close	用户当前请求结束时</div></pre></td></tr></table></figure>
+<pre><code>var post = &apos;&apos;;
+req.on(&apos;data&apos;, function(chunk) {    post += chunk;    });
+req.on(&apos;end&apos;, function() {    post = querystring.parse(post);
+res.end(util.inspect(post));});
+</code></pre><h5 id="http-ServerResponse-对象"><a href="#http-ServerResponse-对象" class="headerlink" title="http.ServerResponse 对象"></a>http.ServerResponse 对象</h5><p>http.ServerResponse是返回给客户端的信息,决定了用户最终看到的结果. 有3个重要的成员函数. 用于响应头,响应内容以及结束请求</p>
+<p>1.向客户端发送响应头</p>
+<pre><code> res.writeHead(statusCode, [headers])
+statusCode, 是HTTP状态码. 如200,404.
+
+headers 类似数组的对象,表示响应头的每个属性
+{
+“Content-Type”: “text/html”,
+“Connection”: “keep-alive”
+}
+</code></pre><p>2.发送响应内容, 如果是字符串,需要制定编码方式, 默认 utf-8</p>
+<pre><code>res.write(data, [encoding])
+</code></pre><p>3.结束响应,告知客户端所有响应完成. 此函数必须调用一次</p>
+<pre><code>res.end([data] , [encoding] )
+</code></pre><h4 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h4><p>文件模块，则是指js文件、json文件或者是.node文件</p>
+<h6 id="无"><a href="#无" class="headerlink" title="无"></a>无</h6><h3 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h3><h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><p>挂接模块</p>
+<pre><code>var EventEmitter = require(‘events’).EventEmitter;
+</code></pre><p>1.实例化一个EventEmitter对象</p>
+<pre><code>var event = new EventEmitter();
+</code></pre><p>2.注册事件</p>
+<pre><code> emitter.on( ‘Event_Name’ , callBack_Fun )
+emitter.once( ‘Event_Name’ , callBack_Fun )    //注册一个单次监听器,触发一次后立刻解除
+</code></pre><p>3.发射事件</p>
+<pre><code>event.emit(‘Event_Name’ , 参数1,参数2);
+</code></pre><p>4.移除事件</p>
+<pre><code> emitter…removeListener(‘Event_Name’ , callBack_Fun)
+emitter.removeAllListeners(  [‘Event_Name’] )    //如果指定了事件名,就移除指定的,否则移除所有事件
+</code></pre><h4 id="模块和包"><a href="#模块和包" class="headerlink" title="模块和包"></a>模块和包</h4><pre><code>Node.js 的模块和包机制的实现参照了 CommonJS 的标准，但并未完全遵循。
+
+#### 包
+包是在模块基础上更深一步的抽象, 类似于 c/c++ 的函数库.
+Node.js 包是一个目录. 其中包含一个JSON格式的说明文件     package.json
+CommonJS 规范特征:
+-&gt;   package.json 必须在包的顶层目录下
+-&gt;   二进制文件在bin目录下
+-&gt;   JavaScript代码在lib目录下
+-&gt;   文档应该在doc目录下
+-&gt;   单元测试在test目录下
+
+
+
+
+#### require(&apos;Modile_Name&apos;)     
+功能:    加载其他模块
+说明:    不会重复加载以加载的模块
+
+
+#### exports.setName
+功能:    公开一个模块中的函数或对象
+说明:    exports 本身仅仅是一个普通的空对象，即 {}. 所以     exports.函数  就是给它加了函数
+module.exports  则是用一个对象取代 exports  对象. (不可以对 exports 直接赋值替代此功能)
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">方式1:</div><div class="line">	//使用</div><div class="line">	exports.SayName = function(thyName) &#123;console.log(thyName)&#125;; </div><div class="line">	//调用</div><div class="line">	var test = require(&apos;./fileName&apos;);</div><div class="line">	test.SayName(&apos;XueYou&apos;);</div><div class="line"></div><div class="line">方式2:</div><div class="line">	//使用</div><div class="line">	function hello()&#123;</div><div class="line">	 	var name;</div><div class="line">		this.setNam()&#123;&#125;;</div><div class="line">		this.SayName()&#123;&#125;;</div><div class="line">	&#125;</div><div class="line">	module.exports = hello;</div><div class="line">	//调用</div><div class="line">	var test = require(&apos;./fileName&apos;);</div><div class="line">	test = new test();	//注意因为是对象,所以要new</div><div class="line">	test.SayName();</div></pre></td></tr></table></figure>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><h5 id="express-与-webstorm-配置"><a href="#express-与-webstorm-配置" class="headerlink" title="express 与 webstorm 配置"></a>express 与 webstorm 配置</h5><p>Node interpreter : node.exe 路径<br>Node parameters  : ./bin/www<br>Working directory : 工作目录<br>JavaScript file  :  app.js</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/18/nodeHeartModule/" class="archive-article-date">
+  	<time datetime="2016-08-18T11:56:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mongoose" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/18/mongoose/">mongoose</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="mongo"><a href="#mongo" class="headerlink" title="mongo"></a>mongo</h1><h2 id="Mongoose全面理解"><a href="#Mongoose全面理解" class="headerlink" title="Mongoose全面理解"></a>Mongoose全面理解</h2><h3 id="一、创建schemas"><a href="#一、创建schemas" class="headerlink" title="一、创建schemas"></a>一、创建schemas</h3><p>创建schemas的方式：</p>
+<pre><code>var userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+       createdOn: Date
+});
+</code></pre><p>schemas中的数据类型有以下几种：</p>
+<ul>
+<li>String</li>
+<li>Number</li>
+<li>Date</li>
+<li>Boolean</li>
+<li>Buffer</li>
+<li>ObjectId</li>
+<li>Mixed</li>
+<li>Array</li>
+</ul>
+<p>特别需要说明一下ObjectId类型和Mixed类型以及Array类型，在schemas中声明这几种类型的方式如下：</p>
+<pre><code>1 //ObjectId就类似于唯一键值
+ 2 projectSchema.add({
+3     owner: mongoose.Schema.Types.ObjectId
+4 });
+ 5 //混合类型，顾名思义，就是说里面可以放置任意类型的数据，有两种方式创建该类型数据
+6 //方式一：直接赋予一个空的字面量对象
+7 vardjSchema= new mongoose.Schema({
+8     mixedUp: {}
+9 });
+10 //方式二：根据Schemas.Types中值来赋予
+11 vardjSchema= new mongoose.Schema({
+12     mixedUp: Schema.Types.Mixed
+13 });
+14 //Array类型数据有两种创建方式，一种是简单数组创建：
+15 var userSchema = new mongoose.Schema({
+16     name: String,
+17     emailAddresses: [String]
+18 });
+19 //第二种方式就是复杂类型数据数组，例如我们可以再数组中添加不同类型的schemas:
+20 var emailSchema = new mongoose.Schema({
+21     email: String,
+22     verified: Boolean
+23 });
+24 var userSchema = new mongoose.Schema({
+25     name: String,
+26     emailAddresses: [emailSchema]
+27 });
+28 //注意：如果定义一个空的数据的话，则会创建为一个混合类型数据的数组：
+29 var emailSchema = new mongoose.Schema({
+30     email: String,
+31     verified: Boolean
+32 });
+33 var userSchema = new mongoose.Schema({
+34     name: String,
+35     emailAddresses: [emailSchema]
+36 });
+</code></pre><p>我们可以给schema创建静态方法，这个静态方法将来会用在Model中，创建该静态方法需要在创建完成schema之后，在Model编译之前：</p>
+<pre><code>1 projectSchema.statics.findByUserID = function (userid, callback) {
+2   this.find({ createdBy: userid }, &apos;_id projectName&apos;, {sort: &apos;modifiedOn&apos;}, callback);
+3 };
+</code></pre><p>在其对应的模型创建完成并编译后，我们就可以像下面这样来调用该静态方法了：<br>Model.findByUserID(userid,callback);<br>该静态方法会返回一个JSON格式的数据，这在我们使用AJAX技术来加载网页数据的时候会比较方便，就像下面这样：</p>
+<pre><code> 1 //路由规则：app.get(&apos;/project/byuser/:userid&apos;, project.byUser);
+ 2 exports.byUser = function (req, res) {
+ 3     console.log(&quot;Getting user projects&quot;);
+ 4     if (req.params.userid){
+ 5         Project.findByUserID(req.params.userid,function (err, projects) {
+ 6             if(!err){
+ 7                 console.log(projects);
+ 8                 res.json(projects);
+ 9             }else{
+10                 console.log(err);
+11                 res.json({&quot;status&quot;:&quot;error&quot;, &quot;error&quot;:&quot;Error finding projects&quot;});
+12             }
+13         });
+14     }else{
+15         console.log(&quot;No user id supplied&quot;);
+16         res.json({&quot;status&quot;:&quot;error&quot;, &quot;error&quot;:&quot;No user     id supplied&quot;});
+17     }
+18 };
+</code></pre><h3 id="二、创建Model"><a href="#二、创建Model" class="headerlink" title="二、创建Model"></a>二、创建Model</h3><p>创建Model很简单：</p>
+<p>Mongoose.Model(‘User’, userSchema);</p>
+<p>参数一为Model的名字，参数二为生成Model所需要的schema,Model就像是schema所编译而成的一样。</p>
+<p>mongoose连接数据库是有两种方式的：</p>
+<pre><code> 1 //方式一：
+ 2 var dbURI = &apos;mongodb://localhost/mydatabase&apos;;
+ 3 mongoose.connect(dbURI);
+ 4 //方式二：
+5 var dbURI = &apos;mongodb://localhost/myadmindatabase&apos;;
+6 var adminConnection = mongoose.createConnection(dbURI);
+7 //如果需要声明端口号：
+ 8 var dbURI = &apos;mongodb://localhost:27018/mydatabase&apos;;
+ 9 //如果需要定义用户名和密码：
+10 var dbURI = &apos;mongodb://username:password@localhost/mydatabase&apos;;
+11 //也可以像下面这样传一个对象类型的参数：
+12 var dbURI = &apos;mongodb://localhost/mydatabase&apos;;
+13 var dbOptions = {&apos;user&apos;:&apos;db_username&apos;,&apos;pass&apos;:&apos;db_password&apos;};
+14 mongoose.connect(dbURI, dbOptions);
+</code></pre><p>根据连接数据库的方式，我们可以得到第二种创建Model的方式，就是使用数据库连接的引用名来创建：</p>
+<p>adminConnection.model( ‘User’, userSchema );</p>
+<p>默认情况下mongoose会根据我们传入的Model名字来生成collection名字，在上面的代码中就会生成名为users(全为小写字母)的collection(集合)；</p>
+<p>有两种方法能让我们自定义collection的名字。</p>
+<pre><code> 1 //方式一，在创建schema的时候定义collection的名字：
+ 2 var userSchema = new mongoose.Schema({
+ 3     name: String,
+ 4     email: {type: String, unique:true}
+ 5 },
+ 6 {
+ 7     collection: &apos;myuserlist&apos;
+ 8 });
+ 9 //方式二，在创建Model的时候定义collection的名字：
+10 mongoose.model( &apos;User&apos;, userSchema, &apos;myuserlist&apos; );
+</code></pre><p>创建Model实例：</p>
+<p>var user = new User({ name: ‘Simon’ });</p>
+<p>user就是模型User的一个实例，它具有mongoose中模型所具有的一些方法，例如保存实例：</p>
+<pre><code>1 user.save(function (err) {
+2     if (err) return handleError(err);
+3 });
+</code></pre><p>模型也具有一些常用的增删查改的方法：</p>
+<pre><code> 1 User.findOne({&apos;name&apos; : &apos;Sally&apos;, function(err,user) {
+ 2     if(!err){
+ 3         console.log(user);
+ 4     }
+ 5 });
+ 6 User.find({}, function(err, users) {
+ 7     if(!err){
+ 8         console.log(users);
+ 9     }
+10 });
+</code></pre><p>可以使用链式方式使用这些方法，例如：</p>
+<pre><code>1 var newUser = new User({
+2     name: &apos;Simon Holmes&apos;,
+3     email: &apos;simon@theholmesoffice.com&apos;,
+4     lastLogin : Date.now()
+5 }).save( function( err ){
+6     if(!err){
+7         console.log(&apos;User saved!&apos;);
+8     }
+9 });
+</code></pre><p>上面的代码创建了一个模型实例，然后进行保存。我们有一个更为简介的方式来完成这项工作，就是使用Model.create()方法：</p>
+<pre><code>1 User.create({
+ 2     name: &apos;Simon Holmes&apos;,
+ 3     email: &apos;simon@theholmesoffice.com&apos;,
+ 4     lastLogin : Date.now()
+ 5 }, function( err, user ){
+ 6     if(!err){
+ 7         console.log(&apos;User saved!&apos;);
+ 8         console.log(&apos;Saved user name: &apos; + user.name);
+ 9         console.log(&apos;_id of saved user: &apos; + user._id);
+10     }
+11 });
+</code></pre><h3 id="三、查找数据和读取数据的方法"><a href="#三、查找数据和读取数据的方法" class="headerlink" title="三、查找数据和读取数据的方法"></a>三、查找数据和读取数据的方法</h3><h4 id="1-使用QueryBuilder接口来查找数据"><a href="#1-使用QueryBuilder接口来查找数据" class="headerlink" title="1.使用QueryBuilder接口来查找数据"></a>1.使用QueryBuilder接口来查找数据</h4><p>先看看下面的代码：</p>
+<pre><code>1 var myQuery = User.find({&apos;name&apos; : &apos;Simon Holmes&apos;});
+2 myQuery.where(&apos;age&apos;).gt(18);
+3 myQuery.sort(&apos;-lastLogin&apos;);
+4 myQuery.select(&apos;_id name email&apos;);
+5 myQuery.exec(function (err, users){
+6     if (!err){
+7         console.log(users); // output array of users found
+8     }
+9 });
+</code></pre><p>代码中，我们查找名字为”Simon Holmes”，并且年龄大于18岁，查找结果根据lastLogin降序排列，只获取其中的_id, name, email三个字段的值，上面的代码只有在调用exec方法后才真正执行数据库的查询。</p>
+<p>当然我们可以使用链式的方式来改写上面的代码，代码会更加简洁：</p>
+<pre><code>1 User.find({&apos;name&apos; : &apos;Simon Holmes&apos;})
+2 .where(&apos;age&apos;).gt(18)
+3 .sort(&apos;-lastLogin&apos;)
+4 .select(&apos;_id name email&apos;)
+5 .exec(function (err, users){
+6     if (!err){
+7         console.log(users); // output array of users found
+8     }
+9 });
+</code></pre><p>上面代码中的第一行创建了一个queryBuilder.通过使用这个queryBuilder，我们就可以执行一些比较复杂的查找工作，</p>
+<p>在创建完成这个queryBuilder之后，查询操作并没有马上执行，而是待到执行exec方法时才会去执行数据库的查找。</p>
+<p>当然也有另外一种方式能够直接查找数据库的，就是直接在查找方法中添加回调函数，使用方式为：<br>Model.find(conditions, [fields], [options], [callback])</p>
+<p>下面举一个简单例子：</p>
+<pre><code>1 User.find({&apos;name&apos;, &apos;simon holmes&apos;}, function(err, user) {});
+</code></pre><p>另一个稍微复杂的例子：</p>
+<pre><code>1 User.find({&apos;name&apos;, &apos;simon holmes&apos;}, &apos;name email&apos;,function(err, user) {
+2     //console.log(&apos;some thing&apos;);
+3 });
+</code></pre><p>另一个更加复杂的例子，包含查询结果的排序：</p>
+<pre><code>1 User.find({&apos;name&apos; : &apos;Simon Holmes&apos;},
+2     null, // 如果使用null，则会返回所有的字段值
+3     {sort : {lastLogin : -1}}, // 降序排序
+4     function (err, users){
+5         if (!err){console.log(users);}
+6     });
+</code></pre><p>列举几个比较实用的查找方法：</p>
+<pre><code>1 Model.find(query);
+2 Model.findOne(query);//返回查找到的所有实例的第一个
+3 Model.findById(ObjectID);//根据ObjectId查找到唯一实例
+</code></pre><p>例如：</p>
+<pre><code>1 User.findOne({&apos;email&apos; : req.body.Email},
+2 &apos;_id name email&apos;,
+3 function(err, user) {
+4     //todo
+5 });
+</code></pre><h4 id="2-更新数据"><a href="#2-更新数据" class="headerlink" title="2.更新数据"></a>2.更新数据</h4><p>有三种方式来更新数据：</p>
+<p>(1)update(conditions,update,options,callback); </p>
+<p>该方法会匹配到所查找的内容进行更新，不会返回数据；</p>
+<p>(2)findOneAndUpdate(conditions,update,options,callback);</p>
+<p>该方法会根据查找去更新数据库，另外也会返回查找到的并未改变的数据；</p>
+<p>(3)findByIdAndUpdate(conditions,update,options,callback);</p>
+<p>该方法跟上面的findOneAndUpdate方法功能一样，不过他是根据ID来查找</p>
+<p>文档并更新的。</p>
+<p>三个方法都包含四个参数，一下稍微说明一下几个参数的意思：<br>conditions:查询条件</p>
+<p>update:更新的数据对象，是一个包含键值对的对象</p>
+<p>options:是一个声明操作类型的选项，这个参数在下面再详细介绍</p>
+<p>callback:回调函数</p>
+<p>对于options参数，在update方法中和findOneAndUpdate、</p>
+<p>findByIdAndUpdate两个方法中的可选设置是不同的；</p>
+<pre><code>1 //在update方法中，options的可选设置为：
+ 2 {
+ 3 safe:true|false,  //声明是否返回错误信息，默认true
+4 upsert:false|true, //声明如果查询不到需要更新的数据项，是否需要新插入一条记录，默认false
+5 multi:false|true,  //声明是否可以同时更新多条记录，默认false
+6 strict:true|false  //声明更新的数据中是否可以包含在schema定义之外的字段数据，默认true
+ 7 }
+ 8 //对于findOneAndUpdate、findByIdAndUpdate这两个方法，他们的options可选设置项为：
+9 {
+10 new:true|false, //声明返回的数据时更新后的该是更新前的，如果为true则返回更新后的，默认true
+11 upsert:false|trure, 
+12 sort:javascriptObject, //如果查询返回多个文档记录，则可以进行排序，在这里是根据传入的javascript object对象进行排序
+13 select:String //这里声明要返回的字段，值是一个字符串
+14 }
+</code></pre><p>下面举个例子：</p>
+<pre><code>User.update({_id:user._id},{$set: {lastLogin: Date.now()}},function(){});
+</code></pre><h4 id="3-数据删除"><a href="#3-数据删除" class="headerlink" title="3.数据删除"></a>3.数据删除</h4><p>跟更新数据一样，也有三种方法给我们删除数据：</p>
+<p>remove();</p>
+<p>findOneAndRemove();</p>
+<p>findByIdAndRemove();</p>
+<p>remove方法有两种使用方式，一种是用在模型上，另一种是用在模型实例上，例如：</p>
+<pre><code> 1 User.remove({ name : /Simon/ } , function (err){
+ 2     if (!err){
+ 3         // 删除名字中包含simon的所有用户
+ 4     }
+5 });
+6 
+ 7 User.findOne({ email : &apos;simon@theholmesoffice.com&apos;},function (err,user){
+ 8     if (!err){
+ 9         user.remove( function(err){
+10             // 删除匹配到该邮箱的第一个用户
+11         });
+12     }
+13 });
+</code></pre><p>接下来看一下findOneAndRemove方法：</p>
+<pre><code>1 User.findOneAndRemove({name : /Simon/},{sort : &apos;lastLogin&apos;, select : &apos;name email&apos;},function (err, user){
+2     if (!err) {
+3         console.log(user.name + &quot; removed&quot;);
+4         // Simon Holmes removed
+5     };
+6 });
+</code></pre><p>另外一个findByIdAndRemove方法则是如出一辙的。<br>    1 User.findByIdAndRemove(req.body._id,function (err, user) {<br>    2     if(err){<br>    3         console.log(err);<br>    4         return;<br>    5     }<br>    6     console.log(“User deleted:”, user);<br>    7 });</p>
+<h3 id="四、数据验证"><a href="#四、数据验证" class="headerlink" title="四、数据验证"></a>四、数据验证</h3><h5 id="1-mongoose内置数据验证"><a href="#1-mongoose内置数据验证" class="headerlink" title="1.mongoose内置数据验证"></a>1.mongoose内置数据验证</h5><p>在mongoose中，数据验证这一层是放在schema中的，mongoose已经帮我们做了很多内置的数据验证，有一些验证是针对某些数据类型的，也有一些是针对所有数据类型的。<br>】<br>能够作用在所有数据类型上的验证有require，意思就是该字段是否是必须的，例如：</p>
+<p>email: { type: String, unique: true, required: true }</p>
+<p>上面的代码就定义了一个email是必须的schema.</p>
+<p>下面再分别介绍一下mongoose内置的一些数据验证类型。</p>
+<p>数字类型schemasType,对于Number类型的数据，具有min,max提供用来界定最大最小值：</p>
+<pre><code>1 var teenSchema = new Schema({
+2     age : {type: Number, min: 13, max:19}
+3 });
+</code></pre><p>字符串类型SchemasType,对于该类型数据，mongoose提供了两种验证器：<br>match:可使用正则表达式来匹配字符串是否符合该正则表达式的规则<br>enum:枚举出字符串可使用的一些值<br>分别举例如下：</p>
+<pre><code>1 var weekdaySchema = new Schema({
+2     day : {type: String, match: /^(mon|tues|wednes|thurs|fri)day$/i}
+3 });
+4 
+5 var weekdays = [&apos;monday&apos;, &apos;tuesday&apos;, &apos;wednesday&apos;, &apos;thursday&apos;,&apos;friday&apos;];
+6 var weekdaySchema = new Schema({
+7     day : {type: String, enum: weekdays}
+8 });
+</code></pre><p>在我们进行一些数据库的时候，如果有错误，可能会返回一些错误信息，这些信息封装在一个对象中，该对象的数据格式大致如下：</p>
+<pre><code>1 { 
+2     message: &apos;Validation failed&apos;,
+ 3     name: &apos;ValidationError&apos;,
+ 4     errors:{ 
+ 5         email:{
+ 6             message: &apos;Validator &quot;required&quot; failed for path email&apos;,
+ 7             name: &apos;ValidatorError&apos;,
+ 8             path: &apos;email&apos;,
+ 9             type: &apos;required&apos; 
+10         },
+11         name:{ 
+12             message: &apos;Validator &quot;required&quot; failed for path name&apos;,
+13             name: &apos;ValidatorError&apos;,
+14             path: &apos;name&apos;,
+15             type: &apos;required&apos; 
+16         } 
+17     } 
+18 }
+</code></pre><p>知道该错误信息的具体格式之后，我们可以从中得出我们想要的信息并反馈到控制台。</p>
+<pre><code>1 if(err){
+2     Object.keys(err.errors).forEach(function(key) {
+3         var message = err.errors[key].message;
+4         console.log(&apos;Validation error for &quot;%s&quot;: %s&apos;, key, message);
+5     });
+6 }
+</code></pre><h4 id="2-自定义数据验证"><a href="#2-自定义数据验证" class="headerlink" title="2.自定义数据验证"></a>2.自定义数据验证</h4><p>最简单的自定义数据验证方式就是定义一个数据验证的函数，并将它传递给schema;</p>
+<pre><code>1 var lengthValidator = function(val) {
+2     if (val &amp;&amp; val.length &gt;= 5){
+3         return true;
+4     }
+5     return false;
+6 };
+7 //usage:
+8 name: {type: String, required: true, validate: lengthValidator }
+</code></pre><p>可以看到，我们只需要在schema中添加validate键值对即可，validate对应的值便是我们自定义的验证方法；</p>
+<p>但是该形式的数据验证无法给我们提供完整的错误信息，比如errors信息中返回的type值就会成为undefined;</p>
+<p>在此基础上如果希望错误信息中能返回一个错误描述，那我们可以稍微进行一点修改：</p>
+<pre><code>1 //code 1
+2 validate: { validator: lengthValidator, msg: &apos;Too short&apos; }
+3 
+4 //code 2
+5 var weekdaySchema = new Schema({
+6     day : {type: String, validate: {validator:/^(mon|tues|wednes|thurs|fri)day$/i, msg: &apos;Not a day&apos; }
+7 });
+将validate的值修改为一个对象，并且该对象包含验证器和错误描述。
+</code></pre><p>我们也可以使用另一种方式在写这些验证器，就是将验证器卸载schema外部，例如：</p>
+<pre><code>1 var validateLength = [lengthValidator, &apos;Too short&apos; ];
+2 var validateDay = [/^(mon|tues|wednes|thurs|fri)day$/i, &apos;Not a day&apos; ];
+3 //usage:
+4 name: {type: String, required: true, validate: validateLength }
+5 day : {type: String, validate: validateDay }
+</code></pre><p>眼睛放大，一看再看，确实没错，在validate中我们传入的是一个数组了，而不是原来的对象了。<br>其实就validateLength这个东东来说，他就是一个简写来的，你也可以改成下面这样：</p>
+<pre><code>var validateLength = [
+2     {validator: lengthValidator, msg: &apos;Too short&apos;}
+3 ];
+</code></pre><p>恩，到这里，应该能明白了，将对象改为数组之后，我们便可以传递多个验证器给我们的schema了，的确如此。</p>
+<pre><code>1 var validateUsername = [
+2     {validator: lengthValidator, msg: &apos;Too short&apos;} ,
+3     {validator: /^[a-z]+$/i, msg: &apos;Letters only&apos;}
+4 ];
+</code></pre><p>我们还有另外一种方法给我们的schema提供验证器：</p>
+<pre><code>1 userSchema.path(&apos;name&apos;).validate(lengthValidator, &apos;Too short&apos;);
+2 userSchema.path(&apos;name&apos;).validate(/^[a-z]+$/i, &apos;Letters only&apos;);
+</code></pre><h4 id="摘录至：http-www-cnblogs-com-jayruan-p-5123754-html"><a href="#摘录至：http-www-cnblogs-com-jayruan-p-5123754-html" class="headerlink" title="摘录至：http://www.cnblogs.com/jayruan/p/5123754.html"></a>摘录至：<a href="http://www.cnblogs.com/jayruan/p/5123754.html" target="_blank" rel="external">http://www.cnblogs.com/jayruan/p/5123754.html</a></h4>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/18/mongoose/" class="archive-article-date">
+  	<time datetime="2016-08-18T11:11:08.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-js-screen" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/js-screen/">js_screen</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JS-Jquery获取各种屏幕的宽度和高度"><a href="#JS-Jquery获取各种屏幕的宽度和高度" class="headerlink" title="JS,Jquery获取各种屏幕的宽度和高度"></a>JS,Jquery获取各种屏幕的宽度和高度</h1><h2 id="javascript"><a href="#javascript" class="headerlink" title="javascript:"></a>javascript:</h2><pre><code>document.write(
+&quot;屏幕分辨率为：&quot;+screen.width+&quot;*&quot;+screen.height
++&quot;&lt;br /&gt;&quot;+
+&quot;屏幕可用大小：&quot;+screen.availWidth+&quot;*&quot;+screen.availHeight
++&quot;&lt;br /&gt;&quot;
+
+网页可见区域宽： document.body.clientWidth
+网页可见区域高： document.body.clientHeight
+网页可见区域宽： document.body.offsetWidth (包括边线的宽)
+网页可见区域高： document.body.offsetHeight (包括边线的高)
+网页正文全文宽： document.body.scrollWidth
+网页正文全文高： document.body.scrollHeight
+网页被卷去的高： document.body.scrollTop
+网页被卷去的左： document.body.scrollLeft
+网页正文部分上： window.screenTop
+网页正文部分左： window.screenLeft
+屏幕分辨率的高： window.screen.height
+屏幕分辨率的宽： window.screen.width
+屏幕可用工作区高度： window.screen.availHeight
+屏幕可用工作区宽度： window.screen.availWidth
+</code></pre><h2 id="juery"><a href="#juery" class="headerlink" title="juery"></a>juery</h2><pre><code>$(document).ready(function(){
+alert($(window).height()); //浏览器当前窗口可视区域高度
+alert($(document).height()); //浏览器当前窗口文档的高度
+alert($(document.body).height());//浏览器当前窗口文档body的高度
+alert($(document.body).outerHeight(true));//浏览器当前窗口文档body的总高度 包括border padding margin
+
+alert($(window).width()); //浏览器当前窗口可视区域宽度
+alert($(document).width());//浏览器当前窗口文档对象宽度
+alert($(document.body).width());//浏览器当前窗口文档body的宽度
+alert($(document.body).outerWidth(true));//浏览器当前窗口文档body的总宽度 包括border padding margin
+
+})
+</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/14/js-screen/" class="archive-article-date">
+  	<time datetime="2016-08-14T11:14:18.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-14</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
