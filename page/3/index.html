@@ -142,6 +142,64 @@
       <div class="body-wrap">
         
   
+    <article id="post-React-native" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/12/React-native/">React native</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="React-Native"><a href="#React-Native" class="headerlink" title="React Native"></a>React Native</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="http://brew.sh/" target="_blank" rel="external">Homebrew</a>，Mac系统的包管理器，用于安装NodeJS和一些其他必需的工具软件。</p>
+<pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre><p><a href="https://nodejs.org/en/" target="_blank" rel="external">Node</a></p>
+<pre><code>brew install node
+</code></pre><p><a href="http://reactnative.cn/docs/0.37/getting-started.html" target="_blank" rel="external">React Native</a>  命令</p>
+<pre><code>npm install -g yarn react-native-cli
+</code></pre><p>如果你看到EACCES: permission denied这样的权限报错，那么请参照上文的homebrew译注，修复/usr/local目录的所有权：</p>
+<pre><code>sudo chown -R `whoami` /usr/local
+</code></pre><p><a href="https://facebook.github.io/watchman/docs/install.html" target="_blank" rel="external">Watchman</a>  由Facebook提供的监视文件系统变更的工具</p>
+<pre><code>brew install watchman
+</code></pre><h2 id="测试安装"><a href="#测试安装" class="headerlink" title="测试安装"></a>测试安装</h2><p>推荐使用WebStorm或Sublime Text来编写React Native应用</p>
+<pre><code>react-native init AwesomeProject
+cd AwesomeProject
+react-native run-ios
+</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/06/12/React-native/" class="archive-article-date">
+  	<time datetime="2016-06-12T06:07:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-12</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flex" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
