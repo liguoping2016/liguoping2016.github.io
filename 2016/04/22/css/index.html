@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>css | 前端小博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#css 气泡框气泡框（或者提示框）是网页中一种很常见的元素，大多用来展示提示信息，如下图所示：拆分来看，形如这种气泡框无外乎就是一个矩形框+一个指示方向的三角形小箭头，要制作出这样的气泡框，如果解决了三角形小箭头就容易了。一种方法就是制作这样一个三角形箭头的图片，然后定位在矩形框上。但这种解决办法在后期更改气泡框会很不方便，可能每修改一次气泡框都要重新制作一个三角形小图标。如果我们能够直接用HT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css">
+<meta property="og:url" content="http://yoursite.com/2016/04/22/css/index.html">
+<meta property="og:site_name" content="前端小博客">
+<meta property="og:description" content="#css 气泡框气泡框（或者提示框）是网页中一种很常见的元素，大多用来展示提示信息，如下图所示：拆分来看，形如这种气泡框无外乎就是一个矩形框+一个指示方向的三角形小箭头，要制作出这样的气泡框，如果解决了三角形小箭头就容易了。一种方法就是制作这样一个三角形箭头的图片，然后定位在矩形框上。但这种解决办法在后期更改气泡框会很不方便，可能每修改一次气泡框都要重新制作一个三角形小图标。如果我们能够直接用HT">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27135746-85abb8f6c7454f48a62b44a1e908bf02.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27135955-aaa1f2752d73462aadea82e292475eba.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27140105-00e0731396f14261989ffef09b394f6a.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27140155-447ee9befd8040d0bd0b2fb68c0cc89c.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27140233-5b3d1d5d8a664ac2a1df177c0bb3be9e.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27140346-dd09209ce9b74634bb329a5c977d8cd0.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27140409-453ea666963841138c626205019f8169.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27140650-0278f388c94d4d269f0da7e999e6c6c7.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27140929-1fb65137a64c43da98b56ffeab3923cc.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27141342-86373016c6244abea59acb416f4b74af.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27141534-f457141016864329a010b9151b167c09.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27141603-fa1e89b3bee84e4c9adaa77d133ffb3a.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27171828-b0bd5c465bd74639945e72007dd11feb.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27173638-57063cb1878f4d2c82c4beee0fc51873.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27173839-80e772024c43456eaf5229fdec4025c2.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27174050-30d1ec8c3c784d9abac45b4fb266ea96.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27174149-a6d66657cbb04bb48f74a62f7746d105.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27174330-3d10fdb16a204292b0a7a6262ebcfa99.x-png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/131078/201306/27174509-770883fa209045a294b56f1d4b972e33.x-png">
+<meta property="og:updated_time" content="2016-11-22T09:21:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css">
+<meta name="twitter:description" content="#css 气泡框气泡框（或者提示框）是网页中一种很常见的元素，大多用来展示提示信息，如下图所示：拆分来看，形如这种气泡框无外乎就是一个矩形框+一个指示方向的三角形小箭头，要制作出这样的气泡框，如果解决了三角形小箭头就容易了。一种方法就是制作这样一个三角形箭头的图片，然后定位在矩形框上。但这种解决办法在后期更改气泡框会很不方便，可能每修改一次气泡框都要重新制作一个三角形小图标。如果我们能够直接用HT">
+<meta name="twitter:image" content="http://images.cnitblog.com/blog/131078/201306/27135746-85abb8f6c7454f48a62b44a1e908bf02.x-png">
+  
+    <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lgp</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">lgp</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lgp</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-css" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      css
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#css 气泡框<br>气泡框（或者提示框）是网页中一种很常见的元素，大多用来展示提示信息，如下图所示：<br><img src="http://images.cnitblog.com/blog/131078/201306/27135746-85abb8f6c7454f48a62b44a1e908bf02.x-png" alt=""><br>拆分来看，形如这种气泡框无外乎就是一个矩形框+一个指示方向的三角形小箭头，要制作出这样的气泡框，如果解决了三角形小箭头就容易了。一种方法就是制作这样一个三角形箭头的图片，然后定位在矩形框上。但这种解决办法在后期更改气泡框会很不方便，可能每修改一次气泡框都要重新制作一个三角形小图标。如果我们能够直接用HTML和CSS代码实现这样一个三角形小箭头一切都迎刃而解了。</p>
+<p>首先我们来看一下border这个属性，当我们把一个div的border-color设为不同值的时候，可以看到四边都成了一个梯形。</p>
+<pre><code># test{width:50px; height:50px; border-width:50px; border-style:solid; border-color:#09F #990 #933 #0C9;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27135955-aaa1f2752d73462aadea82e292475eba.x-png" alt=""></p>
+<p>如果我们继续把这个div的width和height都设为0，可以看到四边都成了一个三角形。</p>
+<pre><code># test{width:0; height:0; border-width:75px; border-style:solid; border-color:#09F #990 #933 #0C9;
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27140105-00e0731396f14261989ffef09b394f6a.x-png" alt=""></p>
+<p>在主流浏览器中检测一下，发现IE6中存在一个小问题，上下边能形成三角形，左右两边仍然还是梯形</p>
+<p><img src="http://images.cnitblog.com/blog/131078/201306/27140155-447ee9befd8040d0bd0b2fb68c0cc89c.x-png" alt=""></p>
+<p>通过实验发现当把div的font-size和line-height都设为0的时候，div的四边在IE6下都能形成完美的三角形：</p>
+<pre><code>#test{ width:0; height:0; border-width:75px; border-style:solid; border-color:#09F #990 #933 #0C9; font-size:0; line-height:0;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27140233-5b3d1d5d8a664ac2a1df177c0bb3be9e.x-png" alt=""></p>
+<p>很显然我们只需要其中的一个三角形，那么只需要将其他三边的color设置为透明或者跟页面背景一样的颜色，就能模拟出一个三角来，推荐将其他三边颜色设置为透明，即color的值为transparent，如果其他三边颜色跟页面背景一样，虽然视觉上只能看到一个三角，但背景颜色一旦改变，其他三边颜色也要随之改变。</p>
+<pre><code>#test{ width:0; height:0; border-width:75px; border-style:solid; border-color:#09F transparent transparent; font-size:0; line-height:0;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27140346-dd09209ce9b74634bb329a5c977d8cd0.x-png" alt=""></p>
+<p>问题又来了，IE6下transparent无效！其他三边被设置成默认的黑色了。<br><img src="http://images.cnitblog.com/blog/131078/201306/27140409-453ea666963841138c626205019f8169.x-png" alt=""></p>
+<p>但通过实验发现把border-style设置为dashed后，IE6下其他三边就能透明了！</p>
+<pre><code>#test{ width:0; height:0; border-width:75px; border-style:solid dashed dashed; border-color:#09F transparent transparent; font-size:0; line-height:0;}    
+</code></pre><p> 到这一步我们已经成功的模拟出了一个小三角，下一步我们把这个小三角同矩形框结合起来。先设置一个矩形框，然后把小三角定位到矩形框上。先来写出HTML结构：</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+  &lt;em&gt;&lt;/em&gt;   
+  CSS气泡框实现
+&lt;/div&gt;
+</code></pre><p><code>CSS样式：</code></p>
+<pre><code>.tag{ width:300px; height:100px; border:5px solid #09F; position:relative;}
+.tag em{display:block; border-width:20px; position:absolute; bottom:-40px; left:100px;border-style:solid dashed dashed; border-color:#09F transparent transparent;font-size:0; line-height:0;}
+</code></pre><p> 效果如下：</p>
+<p> <img src="http://images.cnitblog.com/blog/131078/201306/27140650-0278f388c94d4d269f0da7e999e6c6c7.x-png" alt=""></p>
+<p>现在指示方向的三角形箭头是实心的，而我们想要的是镂空的效果，这里我们再叠加一个同气泡框背景颜色一样的小三角，然后把这个叠加的小三角移动一下位置就能达到了。<br>首先需要对HTML结构进行调整，如下：</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+  &lt;em&gt;&lt;/em&gt;   
+  &lt;span&gt;&lt;/span&gt;
+  CSS气泡框实现
+&lt;/div&gt;
+</code></pre><p>CSS样式修改为：</p>
+<pre><code>.tag{ width:300px; height:100px; border:5px solid #09F; position:relative; background-color:#FFF;}
+
+.tag em{display:block; border-width:20px; position:absolute; bottom:-40px; left:100px;border-style:solid dashed dashed; border-color:#09F transparent transparent;font-size:0; line-height:0;}
+
+.tag span{display:block; border-width:20px; position:absolute; bottom:-33px; left:100px;border-style:solid dashed dashed; border-color:#FFF transparent transparent;font-size:0; line-height:0;}
+</code></pre><p>最终效果如下所示：<br><img src="http://images.cnitblog.com/blog/131078/201306/27140929-1fb65137a64c43da98b56ffeab3923cc.x-png" alt=""></p>
+<p>注意：叠加的小三角span的bottom值并不是border-width的值，两个小三角bottom的差值理论上应该是2(border-width)2的平方根<br><img src="http://images.cnitblog.com/blog/131078/201306/27141342-86373016c6244abea59acb416f4b74af.jpg" alt=""></p>
+<p>最后来把代码优化一下，以便在后期更容易维护，完整的HTML结构：</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+ &lt;div class=&quot;arrow&quot;&gt;
+     &lt;em&gt;&lt;/em&gt;&lt;span&gt;&lt;/span&gt;
+    &lt;/div&gt;
+   CSS气泡框实现
+&lt;/div&gt;
+</code></pre><p>CSS样式修改为：</p>
+<pre><code>.tag{ width:300px; height:100px; border:5px solid #09F; position:relative; background-color:#FFF;}
+
+.arrow{ position:absolute; width:40px; height:40px; bottom:-40px; left:100px; }
+
+.arrow *{ display:block; border-width:20px; position:absolute; border-style:solid dashed dashed dashed; font-size:0; line-height:0; }
+.arrow em{border-color:#09F transparent transparent;}
+
+.arrow span{border-color:#FFF transparent transparent; top:-7px;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27141534-f457141016864329a010b9151b167c09.x-png" alt=""></p>
+<p> 举一反三：不规则三角箭头的气泡框又如何实现？<br><img src="http://images.cnitblog.com/blog/131078/201306/27141603-fa1e89b3bee84e4c9adaa77d133ffb3a.x-png" alt=""></p>
+<p>HTML结构同前面一样：</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+     &lt;div class=&quot;arrow&quot;&gt;
+     &lt;em&gt;&lt;/em&gt;&lt;span&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    CSS气泡框实现
+&lt;/div&gt;
+</code></pre><p>矩形框CSS样式稍微改动一下：</p>
+<pre><code>.tag{ width:300px; height:100px;position:relative; background-color:#09F;}
+</code></pre><p> 重新定位一下三角箭头：</p>
+<pre><code>.arrow{ position:absolute; width:70px; height:60px; left:-70px; bottom:10px;}
+</code></pre><p>元素相邻的两边border-style值设为solid（显示），另两边设为transparent（不会显示）</p>
+<pre><code>.arrow *{ display:block; position:absolute; border-style:dashed solid solid dashed; font-size:0; line-height:0; }
+</code></pre><p>首先模拟一个直角三角形，把一个元素的相邻两边color设为相同的值，另外两边颜色设为透明，即可得到一个直角：</p>
+<pre><code>.arrow em{border-color:transparent #09F #09F transparent; border-width:30px 35px;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27171828-b0bd5c465bd74639945e72007dd11feb.jpg" alt=""></p>
+<p>把两个直角三角形重叠在一起就可以得到一个不规则三角形</p>
+<pre><code>.arrow span{ border-width:20px 35px;border-color:transparent #FFF #FFF transparent; bottom:0;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27173638-57063cb1878f4d2c82c4beee0fc51873.jpg" alt=""></p>
+<p>至此，不规则三角箭头的气泡框效果已经实现。</p>
+<p><img src="http://images.cnitblog.com/blog/131078/201306/27173839-80e772024c43456eaf5229fdec4025c2.x-png" alt=""></p>
+<p>除了通过设置元素的border来模拟小三角之外，还可以用特殊字符来模拟，用特殊字符模拟小三角同样需要用到定位和重叠覆盖，只不过不需要调整border属性了。</p>
+<p>先来看一个菱形“◆” ，它在页面中的代码是“&amp;#9670”，需要注意的是页面编码需要设置为utf-8，在网页中可以把◆当作文字处理，可以通过调整font-size来它的大小、通过color来设置它的颜色。</p>
+<p>HTML结构依然用前面的，不同的是在em、span标签中加入了 ◆</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+     &lt;div class=&quot;arrow&quot;&gt;
+         &lt;em&gt;◆&lt;/em&gt;&lt;span&gt;◆&lt;/span&gt;
+    &lt;/div&gt;
+    CSS气泡框实现
+&lt;/div&gt;
+</code></pre><p>先来设置最外层div的样式，得到一个矩形框：</p>
+<pre><code>.tag{ width:300px; height:100px;position:relative; border:5px solid #09F;}
+</code></pre><p>接着定位箭头最外层容器div，便于观察可以先设置一个背景色 ： </p>
+<p>.arrow{ position:absolute; width:40px; height:40px; left:100px; bottom:-40px; overflow:hidden;}</p>
+<p><img src="http://images.cnitblog.com/blog/131078/201306/27174050-30d1ec8c3c784d9abac45b4fb266ea96.x-png" alt=""><br>再对◆设置样式：</p>
+<pre><code>.arrow *{ display:block; position:absolute; font-size:40px; line-height:40px; width:40px; font-family:SimSun; font-style:normal; font-weight:normal; text-align:center; vertical-align:middle;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27174149-a6d66657cbb04bb48f74a62f7746d105.x-png" alt=""></p>
+<p>注意：为了◆主流浏览器中显示一致，需要清除浏览器的默认字体样式，特别注意这里字体的设置</p>
+<p>再分别修改em、span标签的字体颜色，并对这两个标签定位：</p>
+<pre><code>.arrow em{ color:#09F; top:-15px;}
+.arrow span{ color:#FFF; top:-22px;}
+</code></pre><p> <img src="http://images.cnitblog.com/blog/131078/201306/27174330-3d10fdb16a204292b0a7a6262ebcfa99.x-png" alt=""></p>
+<p>注意：该例子中em和span两个元素垂直方向相差约7px，原来同上面提到的一样，差值理论上应该是2(border-width)2的平方根</p>
+<p>完整CSS样式：</p>
+<pre><code>.tag{ width:300px; height:100px;position:relative; border:5px solid #09F;}
+.arrow{ position:absolute; width:40px; height:40px; left:100px; bottom:-40px; overflow:hidden;}
+.arrow *{ display:block; position:absolute; font-size:40px; line-height:40px; width:40px;font-family:SimSun; font-style:normal; font-weight:normal;text-align:center; vertical-align:middle;}
+.arrow em{ color:#09F; top:-15px;}
+.arrow span{ color:#FFF; top:-22px;}
+</code></pre><p>最终效果如下：</p>
+<p> <img src="http://images.cnitblog.com/blog/131078/201306/27174509-770883fa209045a294b56f1d4b972e33.x-png" alt=""></p>
+<p> HTML特殊字符查询：<a href="http://ikwebdesigner.com/special-characters/" target="_blank" rel="external">http://ikwebdesigner.com/special-characters/</a></p>
+<p>补充：以上方式实现小三角的过程中不可避免的增加了多余的标签，如果不要求所有浏览器中显示一致的话， 我们可以利用css3来实现这个小三角</p>
+<p>HTML结构：</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+    css3气泡框
+&lt;/div&gt;
+</code></pre><p>CSS:</p>
+<pre><code>.tag{
+        width:300px;
+    height:100px;
+        border:5px solid #09F;
+    position:relative;
+    background-color:#FFF;
+}
+.tag:before,.tag:after{
+    content:&quot;&quot;;display:block;
+    border-width:20px;
+    position:absolute; bottom:-40px;
+        left:100px;
+    border-style:solid dashed dashed;
+    border-color:#09F transparent transparent;
+    font-size:0;
+    line-height:0;
+}
+.tag:after{
+    bottom:-33px;
+    border-color:#FFF transparent transparent;
+}
+</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/22/css/" class="archive-article-date">
+  	<time datetime="2016-04-22T09:21:35.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-22</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/05/24/flex/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          flex
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/08/javascriptObject/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">javascriptObject</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="css" data-title="css" data-url="http://yoursite.com/2016/04/22/css/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 lgp
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

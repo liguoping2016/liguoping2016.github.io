@@ -6,17 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2016/8 | 前端小博客</title>
+  <title>ydshipei | 前端小博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="为了学习前端知识">
-<meta property="og:type" content="website">
-<meta property="og:title" content="前端小博客">
-<meta property="og:url" content="http://yoursite.com/archives/2016/08/index.html">
+  <meta name="description" content="移动适配移动适配的几种方式1.直接利用js适配(function (doc, win) {
+var docEl = doc.documentElement,
+  resizeEvt = &amp;apos;orientationchange&amp;apos; in window ? &amp;apos;orientationchange&amp;apos; : &amp;apos;resize&amp;apos;,
+  recalc = fu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ydshipei">
+<meta property="og:url" content="http://yoursite.com/2016/07/22/ydshipei/index.html">
 <meta property="og:site_name" content="前端小博客">
-<meta property="og:description" content="为了学习前端知识">
+<meta property="og:description" content="移动适配移动适配的几种方式1.直接利用js适配(function (doc, win) {
+var docEl = doc.documentElement,
+  resizeEvt = &amp;apos;orientationchange&amp;apos; in window ? &amp;apos;orientationchange&amp;apos; : &amp;apos;resize&amp;apos;,
+  recalc = fu">
+<meta property="og:updated_time" content="2016-11-22T09:27:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端小博客">
-<meta name="twitter:description" content="为了学习前端知识">
+<meta name="twitter:title" content="ydshipei">
+<meta name="twitter:description" content="移动适配移动适配的几种方式1.直接利用js适配(function (doc, win) {
+var docEl = doc.documentElement,
+  resizeEvt = &amp;apos;orientationchange&amp;apos; in window ? &amp;apos;orientationchange&amp;apos; : &amp;apos;resize&amp;apos;,
+  recalc = fu">
   
     <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
   
@@ -140,184 +150,163 @@
 </nav>
 
       <div class="body-wrap">
+        <article id="post-ydshipei" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
   
+    <h1 class="article-title" itemprop="name">
+      ydshipei
+    </h1>
   
+
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="移动适配"><a href="#移动适配" class="headerlink" title="移动适配"></a>移动适配</h1><h2 id="移动适配的几种方式"><a href="#移动适配的几种方式" class="headerlink" title="移动适配的几种方式"></a>移动适配的几种方式</h2><h3 id="1-直接利用js适配"><a href="#1-直接利用js适配" class="headerlink" title="1.直接利用js适配"></a>1.直接利用js适配</h3><pre><code>(function (doc, win) {
+var docEl = doc.documentElement,
+  resizeEvt = &apos;orientationchange&apos; in window ? &apos;orientationchange&apos; : &apos;resize&apos;,
+  recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 100 * (clientWidth / 750) + &apos;px&apos;;
+  };
+if (!doc.addEventListener) return;
+ win.addEventListener(resizeEvt, recalc, false);
+doc.addEventListener(&apos;DOMContentLoaded&apos;, recalc, false);
+})(document, window);
+</code></pre><p>例如：100px=1rem;10px=0.1rem;1px=0.01rem;    </p>
+<h3 id="2-利用js-less适配"><a href="#2-利用js-less适配" class="headerlink" title="2.利用js+less适配"></a>2.利用js+less适配</h3><pre><code>(function (win) {
+function setUnitA() {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 10 + &quot;px&quot;;
+}
+        var h = null;
+    window.addEventListener(&quot;resize&quot;, function () { clearTimeout(h); h = setTimeout(setUnitA, 300); }, false);
+setUnitA();
+})(window);
+
+less:文件顶部定义@unit: 750/10rem，然后css全文件的单位直接用@unit。
+
+例如：100px=100/@unit;10px=10/@unit;1px=1/@unit;
+</code></pre><h3 id="3-利用less适配。"><a href="#3-利用less适配。" class="headerlink" title="3.利用less适配。"></a>3.利用less适配。</h3><pre><code>html {
+font-size: 20px;
+}
+@media only screen and (min-width: 401px) {
+        html {
+    font-size: 25px !important;
+    }
+}
+@media only screen and (min-width: 428px) {
+    html {
+    font-size: 26.75px !important;
+    }
+}
+@media only screen and (min-width: 481px) {
+    html {
+        font-size: 30px !important;
+    }
+}
+@media only screen and (min-width: 569px) {
+    html {
+        font-size: 35px !important;
+    }
+}
+@media only screen and (min-width: 641px) {
+    html {
+        font-size: 40px !important;
+    }
+}
+@unit: 40rem;
+</code></pre><p>例如：100px=100/@unit;10px=10/@unit;1px=1/@unit;</p>
+<p>作者：sky<br>链接：<a href="https://zhuanlan.zhihu.com/p/23837333" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/23837333</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/07/22/ydshipei/" class="archive-article-date">
+  	<time datetime="2016-07-22T09:26:53.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-22</time>
+</a>
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/29/jszhengze/" class="archive-article-date">
-  	<time datetime="2016-08-29T11:52:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/29/jszhengze/">jszhengze</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/26/cssCenter/" class="archive-article-date">
-  	<time datetime="2016-08-26T12:13:21.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/26/cssCenter/">cssCenter</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
+  
+<nav id="article-nav">
+  
+    <a href="/2016/08/14/js-screen/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          js_screen
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/28/Express/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Express</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/18/nodeHeartModule/" class="archive-article-date">
-  	<time datetime="2016-08-18T11:56:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/18/nodeHeartModule/">nodeHeartModule</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/18/mongoose/" class="archive-article-date">
-  	<time datetime="2016-08-18T11:11:08.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/18/mongoose/">mongoose</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/14/gulp/" class="archive-article-date">
-  	<time datetime="2016-08-14T13:27:35.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/14/gulp/">gulp</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/14/js-screen/" class="archive-article-date">
-  	<time datetime="2016-08-14T11:14:18.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/14/js-screen/">js_screen</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ydshipei" data-title="ydshipei" data-url="http://yoursite.com/2016/07/22/ydshipei/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
       </div>
@@ -340,8 +329,8 @@
 		mathjax: false,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

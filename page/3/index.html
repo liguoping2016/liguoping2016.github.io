@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>前端小博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="为了学习前端知识">
+<meta property="og:type" content="website">
+<meta property="og:title" content="前端小博客">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="前端小博客">
+<meta property="og:description" content="为了学习前端知识">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端小博客">
+<meta name="twitter:description" content="为了学习前端知识">
+  
+    <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lgp</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">lgp</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lgp</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        
+  
+    <article id="post-flex" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/24/flex/">flex</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Flex-布局语法教程"><a href="#Flex-布局语法教程" class="headerlink" title="Flex 布局语法教程"></a>Flex 布局语法教程</h1><p>网页布局（layout）是CSS的一个重点应用。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/7bf8bed24a17fbebd3e171f9630dbccb.gif" alt=""><br>布局的传统解决方案，基于<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model" target="_blank" rel="external">盒状模型</a>，依赖 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display" target="_blank" rel="external">display</a>属性 + <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position" target="_blank" rel="external">position</a>属性 + <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float" target="_blank" rel="external">float</a>属性。它对于那些特殊布局非常不方便，比如，<a href="https://css-tricks.com/centering-css-complete-guide/" target="_blank" rel="external">垂直居中</a>就不容易实现。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/5a7d00514af1e464221c677c15e8e990.png" alt=""><br>2009年，W3C提出了一种新的方案—-Flex布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/8712d713c7d0b884a5cb9770efc422b4.jpg" alt="">Flex布局将成为未来布局的首选方案。本文介绍Flex布局的语法。<br>以下内容主要参考了下面两篇文章：<a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="external">A Complete Guide to Flexbox</a>和 <a href="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties" target="_blank" rel="external">A Visual Guide to CSS3 Flexbox Properties</a>。</p>
+<h2 id="一、Flex布局是什么？"><a href="#一、Flex布局是什么？" class="headerlink" title="一、Flex布局是什么？"></a>一、Flex布局是什么？</h2><p>Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</p>
+<p>任何一个容器都可以指定为Flex布局</p>
+<pre><code>.box{
+      display: flex;
+}
+</code></pre><p>行内元素也可以使用Flex布局。</p>
+<pre><code>.box{
+      display: inline-flex;
+}
+</code></pre><p>Webkit内核的浏览器，必须加上-webkit前缀。</p>
+<pre><code>.box{
+      display: -webkit-flex; /* Safari */
+      display: flex;
+}
+</code></pre><p>注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。</p>
+<h2 id="二、基本概念"><a href="#二、基本概念" class="headerlink" title="二、基本概念"></a>二、基本概念</h2><p>采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目（flex item），简称”项目”。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/3791e575c48b3698be6a94ae1dbff79d.png" alt=""><br>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。<br>项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。</p>
+<h2 id="三、容器的属性"><a href="#三、容器的属性" class="headerlink" title="三、容器的属性"></a>三、容器的属性</h2><p>以下6个属性设置在容器上</p>
+<ul>
+<li>flex-direction</li>
+<li>flex-wrap</li>
+<li>flex-flow</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>align-content</li>
+</ul>
+<h3 id="3-1-flex-direction属性"><a href="#3-1-flex-direction属性" class="headerlink" title="3.1 flex-direction属性"></a>3.1 flex-direction属性</h3><p>flex-direction属性决定主轴的方向（即项目的排列方向）。</p>
+<pre><code>.box {
+      flex-direction: row | row-reverse | column |         column-reverse;
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/0cbe5f8268121114e87d0546e53cda6e.png" alt=""><br>它可能有4个值。</p>
+<ul>
+<li>row（默认值）：主轴为水平方向，起点在左端。</li>
+<li>row-reverse：主轴为水平方向，起点在右端。</li>
+<li>column：主轴为垂直方向，起点在上沿。</li>
+<li>column-reverse：主轴为垂直方向，起点在下沿。</li>
+</ul>
+<h3 id="3-2-flex-wrap属性"><a href="#3-2-flex-wrap属性" class="headerlink" title="3.2 flex-wrap属性"></a>3.2 flex-wrap属性</h3><p>默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/903d5b7df55779c03f2687a7d4d6bcea.png" alt=""></p>
+<pre><code>.box{
+     flex-wrap: nowrap | wrap | wrap-reverse;
+}
+</code></pre><p>它可能取三个值。<br>（1）nowrap（默认）：不换行。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/9da1f23965756568b4c6ea7124db7b9a.png" alt=""><br>（2）wrap：换行，第一行在上方。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/3c6b3c8b8fe5e26bca6fb57538cf72d9.jpg" alt=""><br>（3）wrap-reverse：换行，第一行在下方。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/fb4cf2bab8b6b744b64f6d7a99cd577c.jpg" alt=""></p>
+<h3 id="3-3-flex-flow"><a href="#3-3-flex-flow" class="headerlink" title="3.3 flex-flow"></a>3.3 flex-flow</h3><p>flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。</p>
+<pre><code>.box {
+      flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;
+}
+</code></pre><h3 id="3-4-justify-content属性"><a href="#3-4-justify-content属性" class="headerlink" title="3.4 justify-content属性"></a>3.4 justify-content属性</h3><p>justify-content属性定义了项目在主轴上的对齐方式。</p>
+<pre><code>.box {
+      justify-content: flex-start | flex-end | center | space-between | space-around;
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/c55dfe8e3422458b50e985552ef13ba5.png" alt=""><br>它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。</p>
+<ul>
+<li>flex-start（默认值）：左对齐</li>
+<li>flex-end：右对齐</li>
+<li>center： 居中</li>
+<li>space-between：两端对齐，项目之间的间隔都相等。</li>
+<li>space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</li>
+</ul>
+<h3 id="3-5-align-items属性"><a href="#3-5-align-items属性" class="headerlink" title="3.5 align-items属性"></a>3.5 align-items属性</h3><p>align-items属性定义项目在交叉轴上如何对齐。</p>
+<pre><code>.box {
+      align-items: flex-start | flex-end | center | baseline | stretch;
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/2b0c39c7e7a80d5a784c8c2ca63cde17.png" alt=""><br>它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。</p>
+<ul>
+<li>flex-start：交叉轴的起点对齐。</li>
+<li>flex-end：交叉轴的终点对齐。</li>
+<li>center：交叉轴的中点对齐。</li>
+<li>baseline: 项目的第一行文字的基线对齐。</li>
+<li>stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。</li>
+</ul>
+<h3 id="3-6-align-content属性"><a href="#3-6-align-content属性" class="headerlink" title="3.6 align-content属性"></a>3.6 align-content属性</h3><p>align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。<br>    .box {<br>          align-content: flex-start | flex-end | center | space-between | space-around | stretch;<br>    }<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/f10918ccb8a13247c9d47715a2bd2c33.png" alt=""><br>该属性可能取6个值。</p>
+<ul>
+<li>flex-start：与交叉轴的起点对齐。</li>
+<li>flex-end：与交叉轴的终点对齐。</li>
+<li>center：与交叉轴的中点对齐。</li>
+<li>space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。</li>
+<li>space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</li>
+<li>stretch（默认值）：轴线占满整个交叉轴。</li>
+</ul>
+<h3 id="4-1-order属性"><a href="#4-1-order属性" class="headerlink" title="4.1 order属性"></a>4.1 order属性</h3><p>order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。</p>
+<pre><code>.item {
+      order: &lt;integer&gt;;
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/59e399c72daafcfcc20ede36bf32f266.png" alt=""></p>
+<h3 id="4-2-flex-grow属性"><a href="#4-2-flex-grow属性" class="headerlink" title="4.2 flex-grow属性"></a>4.2 flex-grow属性</h3><p>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</p>
+<pre><code>.item {
+      flex-grow: &lt;number&gt;; /* default 0 */
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/f41c08bb35962ed79e7686f735d6cd78.png" alt=""></p>
+<p>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
+<h3 id="4-3-flex-shrink属性"><a href="#4-3-flex-shrink属性" class="headerlink" title="4.3 flex-shrink属性"></a>4.3 flex-shrink属性</h3><p>flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
+<pre><code>.item {
+     flex-shrink: &lt;number&gt;; /* default 1 */
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/240d3e960043a729bb3ff5e34987904f.jpg" alt=""></p>
+<p>如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。<br>负值对该属性无效。</p>
+<h3 id="4-4-flex-basis属性"><a href="#4-4-flex-basis属性" class="headerlink" title="4.4 flex-basis属性"></a>4.4 flex-basis属性</h3><p>flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。</p>
+<pre><code>.item {
+      flex-basis: &lt;length&gt; | auto; /* default auto */
+}
+</code></pre><p>它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。</p>
+<h3 id="4-5-flex属性"><a href="#4-5-flex属性" class="headerlink" title="4.5 flex属性"></a>4.5 flex属性</h3><p>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</p>
+<pre><code>.item {
+      flex: none | [ &lt;&apos;flex-grow&apos;&gt; &lt;&apos;flex-shrink&apos;&gt;? || &lt;&apos;flex-basis&apos;&gt; ]
+}
+</code></pre><p>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。<br>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
+<h3 id="4-6-align-self属性"><a href="#4-6-align-self属性" class="headerlink" title="4.6 align-self属性"></a>4.6 align-self属性</h3><p>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</p>
+<pre><code>.item {
+      align-self: auto | flex-start | flex-end | center | baseline | stretch;
+}
+</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/55b19171b8b6b9487d717bf2ecbba6de.png" alt=""></p>
+<p>该属性可能取6个值，除了auto，其他都与align-items属性完全一致。<br>来源：<br><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/05/24/flex/" class="archive-article-date">
+  	<time datetime="2016-05-24T12:55:57.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-05-24</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-css" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/22/css/">css</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#css 气泡框<br>气泡框（或者提示框）是网页中一种很常见的元素，大多用来展示提示信息，如下图所示：<br><img src="http://images.cnitblog.com/blog/131078/201306/27135746-85abb8f6c7454f48a62b44a1e908bf02.x-png" alt=""><br>拆分来看，形如这种气泡框无外乎就是一个矩形框+一个指示方向的三角形小箭头，要制作出这样的气泡框，如果解决了三角形小箭头就容易了。一种方法就是制作这样一个三角形箭头的图片，然后定位在矩形框上。但这种解决办法在后期更改气泡框会很不方便，可能每修改一次气泡框都要重新制作一个三角形小图标。如果我们能够直接用HTML和CSS代码实现这样一个三角形小箭头一切都迎刃而解了。</p>
+<p>首先我们来看一下border这个属性，当我们把一个div的border-color设为不同值的时候，可以看到四边都成了一个梯形。</p>
+<pre><code># test{width:50px; height:50px; border-width:50px; border-style:solid; border-color:#09F #990 #933 #0C9;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27135955-aaa1f2752d73462aadea82e292475eba.x-png" alt=""></p>
+<p>如果我们继续把这个div的width和height都设为0，可以看到四边都成了一个三角形。</p>
+<pre><code># test{width:0; height:0; border-width:75px; border-style:solid; border-color:#09F #990 #933 #0C9;
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27140105-00e0731396f14261989ffef09b394f6a.x-png" alt=""></p>
+<p>在主流浏览器中检测一下，发现IE6中存在一个小问题，上下边能形成三角形，左右两边仍然还是梯形</p>
+<p><img src="http://images.cnitblog.com/blog/131078/201306/27140155-447ee9befd8040d0bd0b2fb68c0cc89c.x-png" alt=""></p>
+<p>通过实验发现当把div的font-size和line-height都设为0的时候，div的四边在IE6下都能形成完美的三角形：</p>
+<pre><code>#test{ width:0; height:0; border-width:75px; border-style:solid; border-color:#09F #990 #933 #0C9; font-size:0; line-height:0;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27140233-5b3d1d5d8a664ac2a1df177c0bb3be9e.x-png" alt=""></p>
+<p>很显然我们只需要其中的一个三角形，那么只需要将其他三边的color设置为透明或者跟页面背景一样的颜色，就能模拟出一个三角来，推荐将其他三边颜色设置为透明，即color的值为transparent，如果其他三边颜色跟页面背景一样，虽然视觉上只能看到一个三角，但背景颜色一旦改变，其他三边颜色也要随之改变。</p>
+<pre><code>#test{ width:0; height:0; border-width:75px; border-style:solid; border-color:#09F transparent transparent; font-size:0; line-height:0;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27140346-dd09209ce9b74634bb329a5c977d8cd0.x-png" alt=""></p>
+<p>问题又来了，IE6下transparent无效！其他三边被设置成默认的黑色了。<br><img src="http://images.cnitblog.com/blog/131078/201306/27140409-453ea666963841138c626205019f8169.x-png" alt=""></p>
+<p>但通过实验发现把border-style设置为dashed后，IE6下其他三边就能透明了！</p>
+<pre><code>#test{ width:0; height:0; border-width:75px; border-style:solid dashed dashed; border-color:#09F transparent transparent; font-size:0; line-height:0;}    
+</code></pre><p> 到这一步我们已经成功的模拟出了一个小三角，下一步我们把这个小三角同矩形框结合起来。先设置一个矩形框，然后把小三角定位到矩形框上。先来写出HTML结构：</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+  &lt;em&gt;&lt;/em&gt;   
+  CSS气泡框实现
+&lt;/div&gt;
+</code></pre><p><code>CSS样式：</code></p>
+<pre><code>.tag{ width:300px; height:100px; border:5px solid #09F; position:relative;}
+.tag em{display:block; border-width:20px; position:absolute; bottom:-40px; left:100px;border-style:solid dashed dashed; border-color:#09F transparent transparent;font-size:0; line-height:0;}
+</code></pre><p> 效果如下：</p>
+<p> <img src="http://images.cnitblog.com/blog/131078/201306/27140650-0278f388c94d4d269f0da7e999e6c6c7.x-png" alt=""></p>
+<p>现在指示方向的三角形箭头是实心的，而我们想要的是镂空的效果，这里我们再叠加一个同气泡框背景颜色一样的小三角，然后把这个叠加的小三角移动一下位置就能达到了。<br>首先需要对HTML结构进行调整，如下：</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+  &lt;em&gt;&lt;/em&gt;   
+  &lt;span&gt;&lt;/span&gt;
+  CSS气泡框实现
+&lt;/div&gt;
+</code></pre><p>CSS样式修改为：</p>
+<pre><code>.tag{ width:300px; height:100px; border:5px solid #09F; position:relative; background-color:#FFF;}
+
+.tag em{display:block; border-width:20px; position:absolute; bottom:-40px; left:100px;border-style:solid dashed dashed; border-color:#09F transparent transparent;font-size:0; line-height:0;}
+
+.tag span{display:block; border-width:20px; position:absolute; bottom:-33px; left:100px;border-style:solid dashed dashed; border-color:#FFF transparent transparent;font-size:0; line-height:0;}
+</code></pre><p>最终效果如下所示：<br><img src="http://images.cnitblog.com/blog/131078/201306/27140929-1fb65137a64c43da98b56ffeab3923cc.x-png" alt=""></p>
+<p>注意：叠加的小三角span的bottom值并不是border-width的值，两个小三角bottom的差值理论上应该是2(border-width)2的平方根<br><img src="http://images.cnitblog.com/blog/131078/201306/27141342-86373016c6244abea59acb416f4b74af.jpg" alt=""></p>
+<p>最后来把代码优化一下，以便在后期更容易维护，完整的HTML结构：</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+ &lt;div class=&quot;arrow&quot;&gt;
+     &lt;em&gt;&lt;/em&gt;&lt;span&gt;&lt;/span&gt;
+    &lt;/div&gt;
+   CSS气泡框实现
+&lt;/div&gt;
+</code></pre><p>CSS样式修改为：</p>
+<pre><code>.tag{ width:300px; height:100px; border:5px solid #09F; position:relative; background-color:#FFF;}
+
+.arrow{ position:absolute; width:40px; height:40px; bottom:-40px; left:100px; }
+
+.arrow *{ display:block; border-width:20px; position:absolute; border-style:solid dashed dashed dashed; font-size:0; line-height:0; }
+.arrow em{border-color:#09F transparent transparent;}
+
+.arrow span{border-color:#FFF transparent transparent; top:-7px;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27141534-f457141016864329a010b9151b167c09.x-png" alt=""></p>
+<p> 举一反三：不规则三角箭头的气泡框又如何实现？<br><img src="http://images.cnitblog.com/blog/131078/201306/27141603-fa1e89b3bee84e4c9adaa77d133ffb3a.x-png" alt=""></p>
+<p>HTML结构同前面一样：</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+     &lt;div class=&quot;arrow&quot;&gt;
+     &lt;em&gt;&lt;/em&gt;&lt;span&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    CSS气泡框实现
+&lt;/div&gt;
+</code></pre><p>矩形框CSS样式稍微改动一下：</p>
+<pre><code>.tag{ width:300px; height:100px;position:relative; background-color:#09F;}
+</code></pre><p> 重新定位一下三角箭头：</p>
+<pre><code>.arrow{ position:absolute; width:70px; height:60px; left:-70px; bottom:10px;}
+</code></pre><p>元素相邻的两边border-style值设为solid（显示），另两边设为transparent（不会显示）</p>
+<pre><code>.arrow *{ display:block; position:absolute; border-style:dashed solid solid dashed; font-size:0; line-height:0; }
+</code></pre><p>首先模拟一个直角三角形，把一个元素的相邻两边color设为相同的值，另外两边颜色设为透明，即可得到一个直角：</p>
+<pre><code>.arrow em{border-color:transparent #09F #09F transparent; border-width:30px 35px;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27171828-b0bd5c465bd74639945e72007dd11feb.jpg" alt=""></p>
+<p>把两个直角三角形重叠在一起就可以得到一个不规则三角形</p>
+<pre><code>.arrow span{ border-width:20px 35px;border-color:transparent #FFF #FFF transparent; bottom:0;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27173638-57063cb1878f4d2c82c4beee0fc51873.jpg" alt=""></p>
+<p>至此，不规则三角箭头的气泡框效果已经实现。</p>
+<p><img src="http://images.cnitblog.com/blog/131078/201306/27173839-80e772024c43456eaf5229fdec4025c2.x-png" alt=""></p>
+<p>除了通过设置元素的border来模拟小三角之外，还可以用特殊字符来模拟，用特殊字符模拟小三角同样需要用到定位和重叠覆盖，只不过不需要调整border属性了。</p>
+<p>先来看一个菱形“◆” ，它在页面中的代码是“&amp;#9670”，需要注意的是页面编码需要设置为utf-8，在网页中可以把◆当作文字处理，可以通过调整font-size来它的大小、通过color来设置它的颜色。</p>
+<p>HTML结构依然用前面的，不同的是在em、span标签中加入了 ◆</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+     &lt;div class=&quot;arrow&quot;&gt;
+         &lt;em&gt;◆&lt;/em&gt;&lt;span&gt;◆&lt;/span&gt;
+    &lt;/div&gt;
+    CSS气泡框实现
+&lt;/div&gt;
+</code></pre><p>先来设置最外层div的样式，得到一个矩形框：</p>
+<pre><code>.tag{ width:300px; height:100px;position:relative; border:5px solid #09F;}
+</code></pre><p>接着定位箭头最外层容器div，便于观察可以先设置一个背景色 ： </p>
+<p>.arrow{ position:absolute; width:40px; height:40px; left:100px; bottom:-40px; overflow:hidden;}</p>
+<p><img src="http://images.cnitblog.com/blog/131078/201306/27174050-30d1ec8c3c784d9abac45b4fb266ea96.x-png" alt=""><br>再对◆设置样式：</p>
+<pre><code>.arrow *{ display:block; position:absolute; font-size:40px; line-height:40px; width:40px; font-family:SimSun; font-style:normal; font-weight:normal; text-align:center; vertical-align:middle;}
+</code></pre><p><img src="http://images.cnitblog.com/blog/131078/201306/27174149-a6d66657cbb04bb48f74a62f7746d105.x-png" alt=""></p>
+<p>注意：为了◆主流浏览器中显示一致，需要清除浏览器的默认字体样式，特别注意这里字体的设置</p>
+<p>再分别修改em、span标签的字体颜色，并对这两个标签定位：</p>
+<pre><code>.arrow em{ color:#09F; top:-15px;}
+.arrow span{ color:#FFF; top:-22px;}
+</code></pre><p> <img src="http://images.cnitblog.com/blog/131078/201306/27174330-3d10fdb16a204292b0a7a6262ebcfa99.x-png" alt=""></p>
+<p>注意：该例子中em和span两个元素垂直方向相差约7px，原来同上面提到的一样，差值理论上应该是2(border-width)2的平方根</p>
+<p>完整CSS样式：</p>
+<pre><code>.tag{ width:300px; height:100px;position:relative; border:5px solid #09F;}
+.arrow{ position:absolute; width:40px; height:40px; left:100px; bottom:-40px; overflow:hidden;}
+.arrow *{ display:block; position:absolute; font-size:40px; line-height:40px; width:40px;font-family:SimSun; font-style:normal; font-weight:normal;text-align:center; vertical-align:middle;}
+.arrow em{ color:#09F; top:-15px;}
+.arrow span{ color:#FFF; top:-22px;}
+</code></pre><p>最终效果如下：</p>
+<p> <img src="http://images.cnitblog.com/blog/131078/201306/27174509-770883fa209045a294b56f1d4b972e33.x-png" alt=""></p>
+<p> HTML特殊字符查询：<a href="http://ikwebdesigner.com/special-characters/" target="_blank" rel="external">http://ikwebdesigner.com/special-characters/</a></p>
+<p>补充：以上方式实现小三角的过程中不可避免的增加了多余的标签，如果不要求所有浏览器中显示一致的话， 我们可以利用css3来实现这个小三角</p>
+<p>HTML结构：</p>
+<pre><code>&lt;div class=&quot;tag&quot;&gt;
+    css3气泡框
+&lt;/div&gt;
+</code></pre><p>CSS:</p>
+<pre><code>.tag{
+        width:300px;
+    height:100px;
+        border:5px solid #09F;
+    position:relative;
+    background-color:#FFF;
+}
+.tag:before,.tag:after{
+    content:&quot;&quot;;display:block;
+    border-width:20px;
+    position:absolute; bottom:-40px;
+        left:100px;
+    border-style:solid dashed dashed;
+    border-color:#09F transparent transparent;
+    font-size:0;
+    line-height:0;
+}
+.tag:after{
+    bottom:-33px;
+    border-color:#FFF transparent transparent;
+}
+</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/22/css/" class="archive-article-date">
+  	<time datetime="2016-04-22T09:21:35.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-22</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-javascriptObject" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/08/javascriptObject/">javascriptObject</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript面向对象核心知识归纳"><a href="#JavaScript面向对象核心知识归纳" class="headerlink" title="JavaScript面向对象核心知识归纳"></a>JavaScript面向对象核心知识归纳</h1><h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>1.面向对象就是使用对象。面向对象开发就是使用对象开发。</li>
+<li>2.面向过程就是用过程的方式进行开发。面向对象是对面向过程的封装。</li>
+</ul>
+<h3 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h3><h5 id="抽象性"><a href="#抽象性" class="headerlink" title="抽象性"></a>抽象性</h5><p>所谓的抽象性就是：如果需要一个对象描述数据，需要抽取这个对象的核心数据</p>
+<ul>
+<li>1.提出需要的核心属性和方法</li>
+<li>2.不在特定的环境下无法明确对象的具体意义</li>
+</ul>
+<h5 id="封装性"><a href="#封装性" class="headerlink" title="封装性"></a>封装性</h5><p>对象是将数据与功能组合到一起，即封装</p>
+<ul>
+<li>1.JS对象就是键值对的集合，键值如果是数据（基本数据、符合数据、空数据）就称为属性，如果键值是函数那么就称为方法</li>
+<li>2.对象就是将属性与方法封装起来</li>
+<li>3.方法是将过程封装起来</li>
+</ul>
+<h5 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h5><p>所谓继承性就是自己没有但是别人有，拿过来成为自己的，就是继承，继承是实现复用的一种手段</p>
+<ul>
+<li>在Java等语言中继承满足一个class的规则，类是一个class，他规定了一个对象有什么属性和方法。</li>
+<li>在这些语言中继承是class之间的继承，一个class继承另一个class，那么该class就有了另一个class的成员，那么由该class创建出来的对象就同时具有两个class的成员。</li>
+</ul>
+<p>在JS中没有明确的继承语法（ES6提供了class extend语法），一般都是按照继承的理念实现对象的成员扩充实现继承，因此JS中实现继承的方法非常对多。</p>
+<p>传统继承基于类，JS继承基于对象</p>
+<p>一个简单的继承模式：混入（mix）</p>
+<pre><code>function mix ( o1, o2 ) {
+    for ( var k in o2 ) {
+        o1[ k ] = o2[ k ];
+    }    
+}
+</code></pre><h3 id="关于面向对象的一些其他概念"><a href="#关于面向对象的一些其他概念" class="headerlink" title="关于面向对象的一些其他概念"></a>关于面向对象的一些其他概念</h3><h5 id="类class：在JS中就是构造函数"><a href="#类class：在JS中就是构造函数" class="headerlink" title="类class：在JS中就是构造函数"></a>类<code>class</code>：在<code>JS</code>中就是构造函数</h5><ul>
+<li>在传统的面向对象语言中，使用一个叫类的东西定义模板，然后使用模板创建对象。</li>
+<li>在构造方法中也具有类似的功能，因此也称其为类</li>
+</ul>
+<h5 id="实例-instance-与对象（object）"><a href="#实例-instance-与对象（object）" class="headerlink" title="实例(instance)与对象（object）"></a>实例(<code>instance</code>)与对象（<code>object</code>）</h5><ul>
+<li>实例一般是指某一个构造函数创建出来的对象，我们称为XXXX 构造函数的实例</li>
+<li>实例就是对象。对象是一个泛称</li>
+<li>实例与对象是一个近义词</li>
+</ul>
+<h5 id="键值对与属性和方法"><a href="#键值对与属性和方法" class="headerlink" title="键值对与属性和方法"></a>键值对与属性和方法</h5><ul>
+<li>在JS中键值对的集合称为对象</li>
+<li>如果值为数据（非函数），就称该键值对为属性</li>
+<li>如果值为函数（方法），就称该键值对为方法method</li>
+<li><h5 id="父类与子类（基类和派生类）"><a href="#父类与子类（基类和派生类）" class="headerlink" title="父类与子类（基类和派生类）"></a>父类与子类（基类和派生类）</h5></li>
+<li><p>传统的面向对象语言中使用类来实现继承那么就有父类、子类的概念</p>
+</li>
+<li>父类又称为基类，子类又称为派生类</li>
+<li>在JS中没有类的概念，在JS中常常称为父对象，子对象，基对象，派生对象。</li>
+</ul>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><h4 id="构造函数是干什么用的"><a href="#构造函数是干什么用的" class="headerlink" title="构造函数是干什么用的"></a>构造函数是干什么用的</h4><ul>
+<li>初始化数据的</li>
+<li>在JS中给对象添加属性用的，初始化属性值用的</li>
+</ul>
+<h4 id="创建对象的过程"><a href="#创建对象的过程" class="headerlink" title="创建对象的过程"></a>创建对象的过程</h4><ul>
+<li>1.代码：var p = new Person();</li>
+<li>2.首先运算符new创建了一个对象，类似于{}，是一个没有任何（自定义）成员的对象。<ul>
+<li>使用 new 创建对象，那么对象的类型就是创建他的构造函数名</li>
+<li>使用{}无论如何都是Object类型，相当于 new Object</li>
+</ul>
+</li>
+<li>3.然后调用构造函数，为其初始化成员<ul>
+<li>构造函数在调用的一开始，有一个赋值操作，即this = 刚刚创建出来的对象。</li>
+<li>因此在构造函数中this表示刚刚创建出来的对象。</li>
+</ul>
+</li>
+<li>4.在构造函数中 利用 对象的动态特性 为其对象添加成员。</li>
+</ul>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><h4 id="什么是作用域"><a href="#什么是作用域" class="headerlink" title="什么是作用域"></a>什么是作用域</h4><p>域表示的就是范围，即作用域，就是一个名字在什么地方可以使用，什么时候不能使用。</p>
+<h4 id="JS中词法作用域的规则"><a href="#JS中词法作用域的规则" class="headerlink" title="JS中词法作用域的规则"></a>JS中词法作用域的规则</h4><ul>
+<li>1.函数允许访问函数外部的数据</li>
+<li>整个代码结构中只有函数可以限定作用域</li>
+<li>作用规则首先使用提升规则分析</li>
+<li>如果当前作用域中有了名字了，就不考虑外面的名字</li>
+</ul>
+<h4 id="属性搜索原则"><a href="#属性搜索原则" class="headerlink" title="属性搜索原则"></a>属性搜索原则</h4><ul>
+<li>所谓的属性搜索原则，就是对象在访问属性或方法的时候，首先在当前对象中查找</li>
+<li>如果当前对象中存储着属性或方法，停止查找，直接使用该属性或方法</li>
+<li>如果当前对象没有该成员，那么再在其原型对象中查找</li>
+<li>如果原型对象中含有该成员，那么停止查找，直接使用</li>
+<li>如果原型中还没有，就到原型的原型中查找</li>
+<li>如此往复，直到Object.protitype还没有，那么就返回undefined</li>
+<li>如果是调用方法就报错，该xxx不是一个函数</li>
+</ul>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><h4 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h4><h5 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h5><p>闭包的含义就是闭合，包起来，简单的来说，就是一个具有封闭功能与包裹功能的结构。所谓的闭包就是一个具有封闭的对外不公开的，包裹结构，或空间。</p>
+<h5 id="为什么函数可以构成闭包？"><a href="#为什么函数可以构成闭包？" class="headerlink" title="为什么函数可以构成闭包？"></a>为什么函数可以构成闭包？</h5><p>闭包就是一个具有封闭与包裹功能的结构，是为了实现具有私有访问空间的函数的。函数可以构成闭包。函数内部定义的数据函数外部无法访问，即函数具有封闭性；函数可以封装代码即具有包裹性，所以函数可以构成闭包。</p>
+<h4 id="闭包有什么用"><a href="#闭包有什么用" class="headerlink" title="闭包有什么用"></a>闭包有什么用</h4><p>闭包不允许外部访问，要解决的问题就是让外部间接访问函数内部的数据。事实上，通过使用闭包，我们可以做很多事情。比如模拟面向对象的代码风格；更优雅，更简洁的表达出代码；在某些方面提升代码的执行效率。利用闭包可以实现如下需求：</p>
+<ul>
+<li>1.匿名自执行函数一个匿名的函数，并立即执行它，由于外部无法引用它内部的变量，因此在执行完后很快就会被释放，关键是这种机制不会污染全局对象。</li>
+<li>2.缓存闭包正是可以做到这一点，因为它不会释放外部的引用，从而函数内部的值可以得以保留。</li>
+<li>3.实现封装</li>
+<li>4.模拟面向对象的代码风格</li>
+</ul>
+<h4 id="闭包的基本模型"><a href="#闭包的基本模型" class="headerlink" title="闭包的基本模型"></a>闭包的基本模型</h4><ul>
+<li>1.对象模式函数内部定义个一个对象，对象中绑定多个函数（方法），返回对象，利用对象的方法访问函数内的数据</li>
+<li>2.函数模式函数内部定义一个新函数，返回新函数，用新函数获得函数内的数据</li>
+<li>3.沙箱模式沙箱模式就是一个自调用函数，代码写到函数中一样会执行，但是不会与外界有任何的影响</li>
+</ul>
+<h4 id="闭包的作用举例"><a href="#闭包的作用举例" class="headerlink" title="闭包的作用举例"></a>闭包的作用举例</h4><ul>
+<li>1.获得超过一个数据，返回一个对象</li>
+<li>2.完成读取一个数据和修改这个数据，对象里面的getset方法</li>
+</ul>
+<h4 id="闭包的性能问题"><a href="#闭包的性能问题" class="headerlink" title="闭包的性能问题"></a>闭包的性能问题</h4><p>函数执行需要内存，那么函数中定义的变量，会在函数执行结束后自动回收，凡是因为闭包结构的，被引出的数据，如果还有变量引用这些数据的话，那么这些数据就不会被回收。因此在使用闭包的时候如果不使用某些数据了，一定要赋值一个null</p>
+<pre><code>var f = (function () {
+    var num = 123;
+    return function () {
+        return num;
+    };
+})();
+// f 引用着函数，函数引用着变量num
+// 因此在不使用该数据的时候，最好写上
+f = null;
+</code></pre><h3 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h3><h4 id="什么是原型"><a href="#什么是原型" class="headerlink" title="什么是原型"></a>什么是原型</h4><p>一句话说明什么是原型：原型能存储我们的方法，构造函数创建出来的实例对象能够引用原型中的方法。</p>
+<p>JS中一切皆对象，而每个对象都有一个原型（Object除外），这个原型，大概就像Java中的父类，所以，基本上你可以认为原型就是这个对象的父对象，即每一个对象（Object除外）内部都保存了它自己的父对象，这个父对象就是原型。一般创建的对象如果没有特别指定原型，那么它的原型就是Object(这就很类似Java中所有的类默认继承自Object类)。</p>
+<p>ES6通过引入class ,extends等关键字，以一种语法糖的形式把构造函数包装成类的概念，更便于大家理解。是希望开发者不再花精力去关注原型以及原型链，也充分说明原型的设计意图和类是一样的。</p>
+<h4 id="查看对象的原型"><a href="#查看对象的原型" class="headerlink" title="查看对象的原型"></a>查看对象的原型</h4><p>当对象被创建之后，查看它们的原型的方法不止一种，以前一般使用对象的<strong>proto</strong>属性，ES6推出后，推荐用 Object.getPrototypeOf()方法来获取对象的原型.</p>
+<pre><code>function A(){
+    this.name=&apos;lala&apos;;
+}
+var a=new A();
+console.log(a.__proto__) 
+//输出：Object {}
+
+//推荐使用这种方式获取对象的原型
+console.log(Object.getPrototypeOf(a)) 
+//输出：Object {}
+</code></pre><p>无论对象是如何创建的，默认原型都是Object，在这里需要提及的比较特殊的一点就是，通过构造函数来创建对象，函数A本身也是一个对象，而A有两个指向表示原型的属性，分别是proto和prototype，而且两个属性并不相同</p>
+<pre><code>function A(){
+       this.name=&apos;lala&apos;;
+}
+var a=new A();
+console.log(A.prototype) 
+//输出：Object {}
+
+console.log(A.__proto__) 
+//输出：function () {}
+console.log(Object.getPrototypeOf(A))
+//输出：function () {}
+</code></pre><p>函数的的prototype属性只有在当作构造函数创建的时候，把自身的prototype属性值赋给对象的原型。而实际上，作为函数本身，它的原型应该是function对象，然后function对象的原型才是Object。</p>
+<p>总之，建议使用<code>ES6</code>推荐的查看原型和设置原型的方法。</p>
+<h3 id="原型的用法"><a href="#原型的用法" class="headerlink" title="原型的用法"></a>原型的用法</h3><p>其实原型和类的继承的用法是一致的：当你想用某个对象的属性时，将当前对象的原型指向该对象，你就拥有了该对象的使用权了。</p>
+<pre><code>function A(){
+    this.name=&apos;world &apos;;
+}
+function B(){
+    this.bb=&quot;hello&quot;
+}
+var a=new A();
+var b=new B();
+
+//将b设置为a的原型,此处有一个问题，即a的constructor也指向了B构造函数，可能需要纠正 
+Object.setPrototypeOf(a,b);
+a.constructor=A;
+console.log(a.bb);    //hello
+</code></pre><p>如果使用ES6来做的话则简单许多，甚至不涉及到prototype这个属性</p>
+<pre><code>class B{
+     constructor(){
+        this.bb=&apos;hello&apos;
+     }
+}
+class A  extends B{
+     constructor(){
+        super();
+        this.name=&apos;world&apos;;
+     }
+}
+
+var a=new A();
+console.log(a.bb+&quot; &quot;+a.name);    //hello world
+console.log(typeof(A))                //&quot;function&quot;
+</code></pre><p>怎么样？是不是已经完全看不到原型的影子了？活脱脱就是类继承，但是你也看得到实际上类A 的类型是function，所以说，本质上class在JS中是一种语法糖，JS继承的本质依然是原型，不过，ES6引入class，extends 来掩盖原型的概念也是一个很友好的举动，对于长期学习那些类继承为基础的面对对象编程语言的程序员而言。</p>
+<p>我的建议是，尽可能理解原型，尽可能用class这种语法糖。</p>
+<p>好了，问自己两个问题：</p>
+<ul>
+<li>1.为什么要使用原型？——提高函数的复用性。</li>
+<li><p>2.为什么属性不放在原型上而方法要放在原型上？</p>
+<ul>
+<li>利用对象的动态特性：构造函数.prototype.xxxx = vvv</li>
+<li><p>利用直接替换</p>
+<p>Student.prototype = {<br>  sayHello : function(){},<br>  study : function(){}<br>};</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><h5 id="什么是原型链？"><a href="#什么是原型链？" class="headerlink" title="什么是原型链？"></a>什么是原型链？</h5><p>凡是对象就有原型，那么原型又是对象，因此凡是给定一个对象，那么就可以找到他的原型，原型还有原型，那么如此下去，就构成一个对象的序列，称该结构为原型链。</p>
+<p>这个概念其实也变得比较简单，可以类比类的继承链条，即每个对象的原型往上追溯，一直到Object为止，这组成了一个链条，将其中的对象串联起来，当查找当前对象的属性时，如果没找到，就会沿着这个链条去查找，一直到Object，如果还没发现，就会报undefined。</p>
+<h5 id="原型链的结构"><a href="#原型链的结构" class="headerlink" title="原型链的结构"></a>原型链的结构</h5><p>凡是使用构造函数，创建出对象，并且没有利用赋值的方式修改原型，就说该对象保留默认的原型链。<br>默认原型链结构是什么样子呢？</p>
+<pre><code>function Person(){}
+var p = new Person();
+//p 具有默认的原型链
+</code></pre><p>默认的原型链结构就是：<code>当前对象 -&gt; 构造函数.prototype -&gt; Object.prototype -&gt; null</code></p>
+<p>在实现继承的时候，有时候会利用替换原型链结构的方式实现原型继承，那么原型链结构就会发生改变</p>
+<pre><code>function DunizbCollection(){}
+DunizbCollection.prototype = [];
+var arr = new DunizbCollection();
+</code></pre><p>此时arr对象的原型链结构被指向了数组对象的原型链结构了：<code>arr -&gt; [] -&gt; Array.prototype -&gt; Object.prototype -&gt; null</code></p>
+<h5 id="用图形表示对象的原型链结构"><a href="#用图形表示对象的原型链结构" class="headerlink" title="用图形表示对象的原型链结构"></a>用图形表示对象的原型链结构</h5><p>以如下代码为例绘制原型链结构</p>
+<pre><code>function Person(){}
+var p = new Person();
+</code></pre><p>原型链结构图为：<br><img src="https://segmentfault.com/img/remote/1460000007269207?w=652&amp;h=439" alt=""><br>使用原型需要注意两点：</p>
+<ul>
+<li>1.原型继承链条不要太长，否则会出现效率问题。</li>
+<li>2.指定原型时，注意constructor也会改变。<h5 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h5>实现继承有两种常见方式：</li>
+</ul>
+<p><code>混合式继承</code>：最简单的继承就是将别的对象的属性强加到我身上，那么我就有这个成员了。<br>混合式继承的简单描述：</p>
+<pre><code>var Person = function () {};
+Person.prototype.extend = function ( o ) {
+     for ( var k in o ) {
+          this[ k ] = o[ k ];
+     }
+};
+Person.prototype.extend({
+      run: function () { console.log( &apos;我能跑了&apos; ); },
+      eat: function () { console.log( &apos;我可以吃了&apos; ); },
+      sayHello: function () { console.log( &apos;我吃饱    了&apos; ); }
+});
+</code></pre><p><code>原型继承</code>：利用原型也可以实现继承，不需要在我身上添加任何成员，只要原型有了我就有了。</p>
+<h5 id="借用构造函数继承"><a href="#借用构造函数继承" class="headerlink" title="借用构造函数继承"></a>借用构造函数继承</h5><p>这种技术的基本思想相当简单，即在子类型构造函数的内部调用超类型构造函数，而函数只不过是在特定环境中执行代码的对象，因此通过使用apply()和call()方法也可以在（将来）新创建的对象上执行构造函数</p>
+<pre><code>function Person ( name, age, gender ) {
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+}
+// 需要提供一个 Student 的构造函数创建学生对象
+// 学生也应该有 name, age, gender, 同时还需要有 course 课程
+function Student ( name, age, gender, course ) {
+    Person.call( this, name, age, gender )；
+    this.course = course;
+}
+</code></pre><p>在《<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" target="_blank" rel="external">JavaScript</a>高级程序设计（第三版）》中详细介绍了继承的6种方式</p>
+<h3 id="函数的四种调用模式"><a href="#函数的四种调用模式" class="headerlink" title="函数的四种调用模式"></a>函数的四种调用模式</h3><h4 id="函数模式"><a href="#函数模式" class="headerlink" title="函数模式"></a>函数模式</h4><p>就是一个简单的函数调用。函数名的前面没有任何引导内容。</p>
+<h4 id="方法模式"><a href="#方法模式" class="headerlink" title="方法模式"></a>方法模式</h4><p>方法一定式依附与一个对象，将函数赋值给对象的一个属性，那么就成为了方法。</p>
+<h4 id="构造器调用模式"><a href="#构造器调用模式" class="headerlink" title="构造器调用模式"></a>构造器调用模式</h4><p>创建对象的时候构造函数做了什么？由于构造函数只是给 this 添加成员，没有做其他事情。而方法也可以完成这个操作，就是 this 而言，构造函数与方法没有本质的区别。</p>
+<p><code>特征</code></p>
+<ul>
+<li>1.使用 new 关键字，来引导构造函数。</li>
+<li>2.构造函数中的 this 与方法中的一样，表示对象，但是构造函数中的对象是刚刚创建出来的对象<ul>
+<li>3.构造函数中不需要 return ，就会默认的 return this。</li>
+<li>如果手动添加return ，就相当于 return this</li>
+<li>如果手动的添加 return 基本类型，无效，还是保留原来 返回 this</li>
+<li>如果手动添加的 return null，或 return undefined ，无效</li>
+<li>如果手动添加 return 对象类型，那么原来创建的 this 就会被丢掉，返回的是 return 后面的对象</li>
+</ul>
+</li>
+</ul>
+<h5 id="创建对象的模式"><a href="#创建对象的模式" class="headerlink" title="创建对象的模式"></a>创建对象的模式</h5><ul>
+<li>1.工厂方法，工厂就是用来生产的，因此如果函数创建对象并返回，就称该函数为工厂函数</li>
+<li>2.构造方法</li>
+<li>3.寄生式创建</li>
+<li>4.混合式创建</li>
+</ul>
+<h4 id="上下文调用模式"><a href="#上下文调用模式" class="headerlink" title="上下文调用模式"></a>上下文调用模式</h4><p>上下文就是环境。就是自己定义设置 this 的含义。</p>
+<p><code>语法</code></p>
+<ul>
+<li>函数名.apply( 对象, [ 参数 ] );</li>
+<li>函数名.call( 对象, 参数 );</li>
+</ul>
+<p><code>描述</code></p>
+<ul>
+<li>1.函数名就是表示函数本身，使用函数进行调用的时候默认 this 是全局变量</li>
+<li>2.函数名也可以是方法提供，使用方法调用的时候，this 是指向当前对象</li>
+<li>3.使用 apply 进行调用后，无论是函数还是方法都无效了，我们的 this ，由 apply 的第一个参数决定</li>
+</ul>
+<p><code>参数问题</code></p>
+<p>无论是 call 还是 apply 在没有后面的参数的情况下（函数无参数，方法五参数）是完全一致的</p>
+<pre><code>function foo(){
+    console.log( this );
+}
+foo.apply( obj );
+foo.call( obj );
+</code></pre><p>第一个参数的使用也是有规则的:</p>
+<ul>
+<li>1.如果传入的是一个对象，那么就相当于设置该函数中的 this 为参数</li>
+<li><p>2.如果不传入参数，或传入 null 、undefined 等，那么相当于 this 默认为 window</p>
+<pre><code>foo();
+foo.apply();
+foo.apply( null );
+foo.call( undefined );
+</code></pre></li>
+<li><p>3.如果传入的是基本类型，那么 this 就是基本类型对应的包装类型的引用<br>在使用上下文调用的时候，原函数（方法）可能会带有参数，那么这个参数再上下文调用中使用 第二个（第 n 个）参数来表示</p>
+<pre><code>function foo( num ) {
+    console.log( num );
+}
+foo.apply( null, [ 123 ] );
+// 等价于
+foo( 123 );
+</code></pre><p>参考资料</p>
+</li>
+<li>本文原型部分部分引用自<a href="http://www.admin10000.com/document/9336.html" target="_blank" rel="external">《JavaScript原型详解》</a>，版权归原作者所有</li>
+<li><a href="http://blog.csdn.net/sunlylorn/article/details/6534610" target="_blank" rel="external">js闭包的用途</a></li>
+</ul>
+<p>摘自：<a href="http://www.imooc.com/u/173711/articles" target="_blank" rel="external">慕课网</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/08/javascriptObject/" class="archive-article-date">
+  	<time datetime="2016-04-08T01:26:24.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-08</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/16/git/">git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><p><img src="http://ac-mhke0kuv.clouddn.com/496329d7cbf7d3cde751.png?imageView/2/w/800/h/600/q/80/format/jpeg" alt=""></p>
+<h2 id="用github来展示你的前端页面吧"><a href="#用github来展示你的前端页面吧" class="headerlink" title="用github来展示你的前端页面吧"></a>用github来展示你的前端页面吧</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>经常会有人问我如何才能将自己做的静态页面放到网上供他人欣赏，是不是需要自己有一个服务器，是不是还要搞个域名才能访问？对于以上问题我都会回答：用github来展示你的前端页面吧。</p>
+<p>工欲善其事，必先利其器。github是一个很好的代码管理与协同开发平台，在程序界又被称为最大的“同性交友网站”。如果你不懂git，没有自己的github账户，那你就丢失了一把能够很好的展示自我，储存知识的利器。</p>
+<p>当然知道github的人不在少数，但是大部分人可能仅知道它可以用于管理我们的项目代码，而不知道其还可以用于展示我们前端的静态页面。比如：</p>
+<p><a href="https://github.com/luozhihao/demo" target="_blank" rel="external">https://github.com/luozhihao/demo</a></p>
+<p>了解github的人都知道上方的地址指向的是一个github项目目录，同时你可能还会发现这样的一个地址：</p>
+<p><a href="https://luozhihao.github.io/demo" target="_blank" rel="external">https://luozhihao.github.io/demo</a></p>
+<p>上方的地址就是对应demo项目的展示页面了。</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>其实利用github来展示前端静态页面的例子很多，比如各种插件、框架的demo演示地址都会这样做，那么下面我们就来实际操作一下，体验一把展示自己前端项目成果的乐趣。</p>
+<h4 id="1-安装git"><a href="#1-安装git" class="headerlink" title="1.安装git"></a>1.安装git</h4><p>如果你是mac用户，那么恭喜你mac自带git命令功能，你无须安装git。如果你是windows用户，你可以前往<a href="https://git-for-windows.github.io/index.html" target="_blank" rel="external">windows</a>地址下载并安装。</p>
+<h3 id="2-建立仓库"><a href="#2-建立仓库" class="headerlink" title="2.建立仓库"></a>2.建立仓库</h3><p>在你的github主页，我们可以点击右上角的加号按钮下的“New repository”来新建一个项目仓库，如图所示：</p>
+<p><img src="http://ac-mhke0kuv.clouddn.com/31ddfc42736c179b7f5e.png" alt=""></p>
+<p>点击之后我们给仓库取一个名字并进行相应的描述和配置后点击“Create repository”就ok了。</p>
+<p><img src="http://ac-mhke0kuv.clouddn.com/1d6842e6b567377e0588.png" alt=""></p>
+<h3 id="3-上传代码"><a href="#3-上传代码" class="headerlink" title="3.上传代码"></a>3.上传代码</h3><p>仓库建立完毕后，这时候就需要用我们之前安装的git命令来将本地的代码推送到github上了。如果你仅为了展示自己的前端页面，那么只要掌握如下命令即可（不熟悉git命令的可以参考git - 简易指南）：</p>
+<p>（1）打开你的目录</p>
+<pre><code>cd demo
+</code></pre><p>（2）初始化版本库，用于生成.git文件</p>
+<pre><code>git init
+</code></pre><p>（3）将所有文件添加到缓存区</p>
+<pre><code>git add *
+</code></pre><p>（4）提交当前工作空间的修改内容</p>
+<pre><code>git commit -m &quot;first commit&quot;
+</code></pre><p>（5）将仓库连接到远程服务器</p>
+<pre><code>git remote add origin &lt;server&gt;
+</code></pre><p>（6）将改动推送到所添加的服务器上</p>
+<pre><code>git push -u origin master
+</code></pre><p>上方server中的地址在github上创建仓库后可以找到，如下：</p>
+<p><img src="http://ac-mhke0kuv.clouddn.com/c14f8107554ee5f47cdc" alt=""></p>
+<h3 id="4-创建gh-pages分支"><a href="#4-创建gh-pages分支" class="headerlink" title="4.创建gh-pages分支"></a>4.创建gh-pages分支</h3><p>之前的工作只是将我们的代码发布到了github上demo仓库的master分支上，当然你也可以不发布，而我们的展示页面代码必须发布到名为“gh-pages”的分支上。方法很简单，我们只需要在github的demo项目页面手动创建gh-pages分支即可。如图：</p>
+<p><img src="http://ac-mhke0kuv.clouddn.com/93b8046f20cea77a4ba5" alt=""><br>输入gh-pages后创建即可，这样的方式会直接拷贝master分支的所有文件到gh-pages分支，而你也可以用命令行的形式创建并重新上传一份新的代码：</p>
+<p>（1）新建并切换到gh-pages分支</p>
+<pre><code>git checkout --orphan gh-pages
+</code></pre><p>（2）之后的操作和之前一样，只是push的时候是gh-pages</p>
+<pre><code>git add *
+git commit -m &quot;update&quot;
+git push -u origin gh-pages
+</code></pre><p>如此，我们的demo项目就多了一个gh-pages分支，里面的代码文件就可以用来展示页面了。</p>
+<h3 id="5-访问页面"><a href="#5-访问页面" class="headerlink" title="5.访问页面"></a>5.访问页面</h3><p>创建并上传文件至gh-pages之后，我们就可以访问如下url来查看自己的demo了：</p>
+<pre><code>http://(user_name|org_name).github.io/repo_name
+</code></pre><p>这里我们的demo地址为：<a href="https://luozhihao.github.io/demo/" target="_blank" rel="external">https://luozhihao.github.io/demo/</a>, 最终页面如图：</p>
+<p><img src="http://ac-mhke0kuv.clouddn.com/46300ed96f0e0cf2c682" alt=""><br>这样我们便实现了利用github来展示前端静态页面的目标。</p>
+<p>结语</p>
+<p>很多时候方法就摆在眼前，就看你会不会捅破那层隔膜，敢不敢进行钻研与尝试。github之所以经久不衰是因为其不仅解决了我们代码提交、版本管理的问题，还提供了其他实用而独特的功能,对我们学习github真的有很大的帮助。</p>
+<p>本文只针对Github Pages提供给我们展示静态页面（不支持服务端语言）的功能做了基础的介绍，至于想真正掌握并了解更加深入内容的同学还请付诸于实践，比如利用gihub搭建博客等。</p>
+<p>补充：根据读者反馈，现在github有一种更加简便的方式来实现上述功能，将代码上传至仓库后在settings里配置下GitHub Pages为你想展示的分支就行了。<br>转载自：<a href="http://gold.xitu.io/post/582ffaf9da2f600063f40660?utm_source=gold_browser_extension" target="_blank" rel="external">http://gold.xitu.io/post/582ffaf9da2f600063f40660?utm_source=gold_browser_extension</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/03/16/git/" class="archive-article-date">
+  	<time datetime="2016-03-16T12:53:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-03-16</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-about-javascript-gif" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/07/about-javascript-gif/">javascript gif</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h1><h4 id="javaScript总结"><a href="#javaScript总结" class="headerlink" title="javaScript总结"></a>javaScript总结</h4><p>javascript变量.gif</p>
+<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/TzogpE6Jx**lSkTamX0*oCdcEyUHWR3lQfwB0Rt9Z8U!/m/dHcBAAAAAAAA&amp;bo=8gORBgAAAAABB0Y!&amp;rf=photolist" alt=""></p>
+<p>javascript函数基础.gif</p>
+<p><img src="http://a2.qpic.cn/psb?/V114g1aN2g6PRw/H7UKcZ2DkURk6fUgLskz9chzAoWw7d1EM.BZ0v9FxYI!/m/dAkBAAAAAAAA&amp;bo=hgM0BgAAAAABB5c!&amp;rf=photolist" alt=""></p>
+<p>javascript流程控制.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/.D2wdl9wbOkaH0Gfwof7kh2C3DXNgKBaW4URL2a.yfE!/m/dAoBAAAAAAAA&amp;bo=gAIkBgAAAAABB4A!&amp;rf=photolist" alt=""></p>
+<p>javascript数据类型.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/tGqgTyic9FedB0MX93NZujWzuhqy6P*uteJRYfX96rs!/m/dAoBAAAAAAAA&amp;bo=gAIQCAAAAAABB7o!&amp;rf=photolist" alt=""></p>
+<p>javascript 数组.gif</p>
+<p><img src="http://a1.qpic.cn/psb?/V114g1aN2g6PRw/nCyxujKEXJdNXlotZCbO0QkVniIzeSQGI3RTGB2oRV0!/m/dHwBAAAAAAAA&amp;bo=gAJXBAAAAAABB*E!&amp;rf=photolist" alt=""></p>
+<p>javascript 运算符.gif</p>
+<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/ial92bpUZCz.sJLxTtlal9yzbJQu3sew2dgJ8qrA5Jg!/m/dI8AAAAAAAAA&amp;bo=gALBCgAAAAABB2k!&amp;rf=photolist" alt=""></p>
+<p>javascript 正则表达式.gif</p>
+<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/bsuh9gTiXx8E3fJbguj3UwR.m9775VlLTyD177PaWLk!/m/dHcBAAAAAAAA&amp;bo=gAINBgAAAAABB6k!&amp;rf=photolist" alt=""></p>
+<p>javascript 字符串函数.gif</p>
+<p><img src="http://a1.qpic.cn/psb?/V114g1aN2g6PRw/TNNJBCpKSPV*N1JlJFJEJGXX9N4p*WUNLLmywT2NoYg!/m/dHABAAAAAAAA&amp;bo=gALaBQAAAAABB30!&amp;rf=photolist" alt=""></p>
+<p>javascript Window对象.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/DTXRqVU1w8dsiW*leCv4hyG81Qi4FwkQUwOnvINpb7o!/m/dAoBAAAAAAAA&amp;bo=gAISBQAAAAABB7U!&amp;rf=photolist" alt=""></p>
+<p>javascript DOM基本操作.gif</p>
+<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/4L4mRVbRqLEBBB6lmXU0rDfdr0NSM87mDXFOgs6x0IQ!/m/dH4BAAAAAAAA&amp;bo=gALSCgAAAAABB3o!&amp;rf=photolist" alt=""></p>
+<p>希望这几张图能对你有所帮助</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/03/07/about-javascript-gif/" class="archive-article-date">
+  	<time datetime="2016-03-07T03:33:29.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-03-07</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-blog-building" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/04/blog-building/">blog building</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="GitHub博客搭建"><a href="#GitHub博客搭建" class="headerlink" title="GitHub博客搭建"></a>GitHub博客搭建</h1><p><strong>GitHub</strong>，上传<em>hexo</em>博客搭建过程</p>
+<h2 id="安装-nodeJS"><a href="#安装-nodeJS" class="headerlink" title="安装  nodeJS"></a>安装  nodeJS</h2><p>nodeJS官网网址:<a href="http://nodejs.org/en/" target="_blank" rel="external">http://nodejs.org/en/</a></p>
+<p>测试nodeJS是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node -v</div></pre></td></tr></table></figure></p>
+<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装  hexo"></a>安装  hexo</h2><h4 id="安装命令："><a href="#安装命令：" class="headerlink" title="安装命令："></a>安装命令：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo -g</div></pre></td></tr></table></figure>
+<h4 id="测试nodeJS是否安装成功："><a href="#测试nodeJS是否安装成功：" class="headerlink" title="测试nodeJS是否安装成功："></a>测试nodeJS是否安装成功：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo</div></pre></td></tr></table></figure>
+<h4 id="创建目录并进入"><a href="#创建目录并进入" class="headerlink" title="创建目录并进入"></a>创建目录并进入</h4><p>初始化hexo目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init</div></pre></td></tr></table></figure></p>
+<p>启动本地服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
+<h2 id="GitGub账号一枚"><a href="#GitGub账号一枚" class="headerlink" title="GitGub账号一枚"></a>GitGub账号一枚</h2><h4 id="配置ssh-key"><a href="#配置ssh-key" class="headerlink" title="配置ssh-key"></a>配置ssh-key</h4><p>连续三次回测<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen</div></pre></td></tr></table></figure></p>
+<p>复制ssh-key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim~/.ssh/id rsa.pub</div></pre></td></tr></table></figure></p>
+<p>github设置ssh黏贴</p>
+<h4 id="配置github与本地机器验证"><a href="#配置github与本地机器验证" class="headerlink" title="配置github与本地机器验证"></a>配置github与本地机器验证</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;&quot;</div></pre></td></tr></table></figure>
+<h4 id="新建博客域名仓库"><a href="#新建博客域名仓库" class="headerlink" title="新建博客域名仓库"></a>新建博客域名仓库</h4><p>用户名 .github.io</p>
+<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><p>deplay字段</p>
+<p>type:git</p>
+<p>repo:域名仓库https地址</p>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deplayer-git --save</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
+<h2 id="新建项目标题"><a href="#新建项目标题" class="headerlink" title="新建项目标题"></a>新建项目标题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bolog $ hexo project</div></pre></td></tr></table></figure>
+<p>进入source中找到该文件夹，进去Mou中书写格式（偏好设置）</p>
+<h2 id="在博客中设置主题背景"><a href="#在博客中设置主题背景" class="headerlink" title="在博客中设置主题背景"></a>在博客中设置主题背景</h2><p>网址：<a href="http://www.zhihu.com/question/24422335/answer/46357100" target="_blank" rel="external">http://www.zhihu.com/question/24422335/answer/46357100</a></p>
+<h4 id="具体操作："><a href="#具体操作：" class="headerlink" title="具体操作："></a>具体操作：</h4><ul>
+<li>命令终端找到themes文件</li>
+<li>终端命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone 主题网址</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>例：git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="external">https://github.com/A-limon/pacman.git</a></p>
+<ul>
+<li>命令：<pre><code>ls
+</code></pre>找到下载的文件夹，将其复制到_config.yml中，themes:复制名</li>
+<li><p>启动终端命令</p>
+<p>  hexo server</p>
+</li>
+</ul>
+<p>回到[发布]流程重新输入命令</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/02/04/blog-building/" class="archive-article-date">
+  	<time datetime="2016-02-04T03:17:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/19/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/01/19/hello-world/" class="archive-article-date">
+  	<time datetime="2016-01-19T03:17:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
+  
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 lgp
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: true,
+		isPost: false,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

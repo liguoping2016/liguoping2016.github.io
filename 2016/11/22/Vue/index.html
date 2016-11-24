@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>Vue | 前端小博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="指南：如何使用vue.js jQuery插件使用Vue可真棒。但你知道，它也可以让你头痛，当你试图将它与jQuery插件或其他图书馆。
+问题是，jQuery的作品比Vue根本不同。Vue渲染基于组件的核心数据的一切。jQuery是大多是做简单的点击操作，具有强大的能力操纵DOM。当我寻找帮助我发现一些不令人满意的解决方案组件做所有的初始化工作。让我告诉你我是如何将vue.js jQuery。
+目标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue">
+<meta property="og:url" content="http://yoursite.com/2016/11/22/Vue/index.html">
+<meta property="og:site_name" content="前端小博客">
+<meta property="og:description" content="指南：如何使用vue.js jQuery插件使用Vue可真棒。但你知道，它也可以让你头痛，当你试图将它与jQuery插件或其他图书馆。
+问题是，jQuery的作品比Vue根本不同。Vue渲染基于组件的核心数据的一切。jQuery是大多是做简单的点击操作，具有强大的能力操纵DOM。当我寻找帮助我发现一些不令人满意的解决方案组件做所有的初始化工作。让我告诉你我是如何将vue.js jQuery。
+目标">
+<meta property="og:image" content="http://gambardella.info/wp-content/uploads/2016/08/cropper-v1-700x647.jpg">
+<meta property="og:updated_time" content="2016-11-22T13:58:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue">
+<meta name="twitter:description" content="指南：如何使用vue.js jQuery插件使用Vue可真棒。但你知道，它也可以让你头痛，当你试图将它与jQuery插件或其他图书馆。
+问题是，jQuery的作品比Vue根本不同。Vue渲染基于组件的核心数据的一切。jQuery是大多是做简单的点击操作，具有强大的能力操纵DOM。当我寻找帮助我发现一些不令人满意的解决方案组件做所有的初始化工作。让我告诉你我是如何将vue.js jQuery。
+目标">
+<meta name="twitter:image" content="http://gambardella.info/wp-content/uploads/2016/08/cropper-v1-700x647.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="前端小博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lgp</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="#" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="#" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">lgp</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="http://img5.imgtn.bdimg.com/it/u=1999300046,1517656119&amp;fm=21&amp;gp=0.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lgp</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Vue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="指南：如何使用vue-js-jQuery插件"><a href="#指南：如何使用vue-js-jQuery插件" class="headerlink" title="指南：如何使用vue.js jQuery插件"></a>指南：如何使用vue.js jQuery插件</h1><p>使用Vue可真棒。但你知道，它也可以让你头痛，当你试图将它与jQuery插件或其他图书馆。</p>
+<p>问题是，jQuery的作品比Vue根本不同。Vue渲染基于组件的核心数据的一切。jQuery是大多是做简单的点击操作，具有强大的能力操纵DOM。<br>当我寻找帮助我发现一些不令人满意的解决方案组件做所有的初始化工作。<br>让我告诉你我是如何将vue.js jQuery。</p>
+<h2 id="目标是什么？"><a href="#目标是什么？" class="headerlink" title="目标是什么？"></a>目标是什么？</h2><p>在大多数情况下，你可以省去使用jQuery和找到一个简单的基于Vue对你的问题的解决方案。情态动词、滑块等相当简单与Vue组件和CSS。</p>
+<h6 id="所以我们的目标是使用强大的jQuery插件，不能写很快在Vue。"><a href="#所以我们的目标是使用强大的jQuery插件，不能写很快在Vue。" class="headerlink" title="所以我们的目标是使用强大的jQuery插件，不能写很快在Vue。"></a>所以我们的目标是使用强大的jQuery插件，不能写很快在Vue。</h6><p>我们将…</p>
+<ul>
+<li><p>…使用VUE指令建立一个桥梁，jQuery。</p>
+</li>
+<li><p>……当元素被连接时初始化这个插件。</p>
+</li>
+<li><p>当元素被分离时，破坏它。</p>
+</li>
+<li><p>……发送事件通知组件。</p>
+</li>
+<li><p>……从组件中接收事件并将它们传递给插件。</p>
+</li>
+</ul>
+<h2 id="教程的时间"><a href="#教程的时间" class="headerlink" title="教程的时间"></a>教程的时间</h2><p>我拿起冯元辰的<a href="https://fengyuanchen.github.io/cropper/" target="_blank" rel="external">农作物的插件</a>，因为它是一个写得很好的jQuery插件，你可能不能改写接下来的60分钟。vue.js单独使用。<br>它的复杂和演示了如何vue.js可以与它进行交互。<br>演示：<a href="https://vue-jquery-cropper-demo.firebaseapp.com/" target="_blank" rel="external">https://vue-jquery-cropper-demo.firebaseapp.com/</a><br>我要描述如何从一开始就开始工作。跳过你已经做的部分。</p>
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># install vue-cli</div><div class="line">$ npm install -g vue-cli</div><div class="line"># create a new project using the &quot;webpack&quot; boilerplate</div><div class="line">$ vue init webpack vue-cropper</div><div class="line"> </div><div class="line">? Project name &quot;vue-cropper&quot;</div><div class="line">? Project description &quot;A Vue.js project&quot;</div><div class="line">? Author &quot;Christian Gambardella &lt;christian@gambardella.info&gt;&quot;</div><div class="line">? Use ESLint to lint your code? &quot;Yes&quot;</div><div class="line">? Pick an ESLint preset &quot;Standard&quot;</div><div class="line">? Setup unit tests with Karma + Mocha? &quot;No&quot;</div><div class="line">? Setup e2e tests with Nightwatch? &quot;No&quot;</div><div class="line"> </div><div class="line">$ cd vue-cropper</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
+<p>恭喜你有一个vue.js项目。</p>
+<h3 id="安装jQuery和cropper-js"><a href="#安装jQuery和cropper-js" class="headerlink" title="安装jQuery和cropper.js"></a>安装jQuery和cropper.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># install jQuery &amp; cropper</div><div class="line">$ npm install jquery cropper --save</div></pre></td></tr></table></figure>
+<h3 id="配置WebPACK-jQuery和Vue指令"><a href="#配置WebPACK-jQuery和Vue指令" class="headerlink" title="配置WebPACK jQuery和Vue指令"></a>配置WebPACK jQuery和Vue指令</h3><p>添加jQuery源和指令到WebPACK别名地图文件夹。<br>通常会包括WebPACK的编译版本的jQuery。建议是有源码包括而不是。<br>你可以看到，Vue WebPACK模板添加组件的文件夹。我通常添加其他文件夹一样的指令，混入，等这个例子中我们只需要添加指令。</p>
+<p>这将有助于我们导入依赖关系，而不必知道确切的路径。这也有利于当你重构你的应用程序的路上。你不需要管理相对路径。<br>编辑<code>生成/ webpack.base.conf.js</code>添加高亮线。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">resolve: &#123;</div><div class="line">  extensions: [&apos;&apos;, &apos;.js&apos;, &apos;.vue&apos;],</div><div class="line">  fallback: [path.join(__dirname, &apos;../node_modules&apos;)],</div><div class="line">  alias: &#123;</div><div class="line">    &apos;src&apos;: path.resolve(__dirname, &apos;../src&apos;),</div><div class="line">    &apos;assets&apos;: path.resolve(__dirname, &apos;../src/assets&apos;),</div><div class="line">    &apos;components&apos;: path.resolve(__dirname, &apos;../src/components&apos;),</div><div class="line">    &apos;jquery&apos;: path.resolve(__dirname, &apos;../node_modules/jquery/src/jquery&apos;),</div><div class="line">    &apos;directives&apos;: path.resolve(__dirname, &apos;../src/directives&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<p>别忘了在组件线的末端加一个逗号。</p>
+<h3 id="准备应用程序组件"><a href="#准备应用程序组件" class="headerlink" title="准备应用程序组件"></a>准备应用程序组件</h3><p>我将开始与组件，因为我相信这是更容易理解的美丽和简单的组件。你可以立即开始写指令，因为你知道如何在组件中使用它们。<br>在<code>SRC / app.vue</code>更换<code>模板</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;img</div><div class="line">      v-cropper=&quot;cropOptions&quot;</div><div class="line">      src=&quot;https://i.imgur.com/WcvkCxl.png&quot;</div><div class="line">      alt=&quot;jQuery Meme&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<p>在<code>SRC / app.vue</code>更换<code>模板</code></p>
+<pre><code>&lt;script&gt;
+import Cropper from &apos;./directives/Cropper&apos;
+
+export default {
+  directives: {
+    Cropper
+  },
+
+  data () {
+    return {
+      cropOptions: {
+        viewMode: 0,
+        zoomable: false
+      }
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre><p>这里有几个重要的事情要注意。</p>
+<ul>
+<li>我们不进口jQuery也没有处理组件的初始化。</li>
+<li>农作物的可供选择的原始数据。</li>
+<li>农作物将被初始化时，这个被渲染，将当视图不可见了破坏。</li>
+<li>该指令的名字将在模板中可作为一个串精装版。mycropper会成为我的割草机。初始化，我们已经添加v-my-cropper在构件的模板的一个元素。<h3 id="创建农作物指令"><a href="#创建农作物指令" class="headerlink" title="创建农作物指令"></a>创建农作物指令</h3>这是本教程的核心。我们要创建一个农作物的指令，与较低的DOM操作的交易代码。在这种情况下我们要初始化的农作物。<br>  自定义指令提供测绘数据的变化任意DOM的行为机制。<br>  <a href="http://vuejs.org/guide/custom-directive.html" target="_blank" rel="external">http://vuejs.org/guide/custom-directive.html</a></li>
+</ul>
+<h5 id="创建src-指令-Cropper-js"><a href="#创建src-指令-Cropper-js" class="headerlink" title="创建src /指令/ Cropper.js"></a>创建src /指令/ Cropper.js</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">JavaScript</div><div class="line"></div><div class="line">import jQuery from &apos;jquery&apos;</div><div class="line">import &apos;cropper&apos;</div><div class="line"></div><div class="line">export default &#123;</div><div class="line">  deep: true,</div><div class="line"></div><div class="line">  bind () &#123;&#125;,</div><div class="line"></div><div class="line">  update (options) &#123;</div><div class="line">    // Destroy in case it has been initialized already.</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">    // Initializing directly after destroying</div><div class="line">    // didn&apos;t work. Wrapping it in a setTimeout</div><div class="line">    // seems to do the trick.</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">      jQuery(this.el).cropper(options)</div><div class="line">    &#125;, 0)</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  unbind () &#123;</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">import jQuery from &apos;jquery&apos;</div><div class="line">import &apos;cropper&apos;</div><div class="line"> </div><div class="line">export default &#123;</div><div class="line">  deep: true,</div><div class="line"> </div><div class="line">  bind () &#123;&#125;,</div><div class="line"> </div><div class="line">  update (options) &#123;</div><div class="line">    // Destroy in case it has been initialized already.</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">    // Initializing directly after destroying</div><div class="line">    // didn&apos;t work. Wrapping it in a setTimeout</div><div class="line">    // seems to do the trick.</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">      jQuery(this.el).cropper(options)</div><div class="line">    &#125;, 0)</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  unbind () &#123;</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>每一vue.js指令的核心是一个绑定<code>更新</code>、<code>绑定</code>功能简单的对象。</p>
+<ul>
+<li>绑定：一旦元素被连接到文档上，将被调用。</li>
+<li>更新：绑定后调用一次，每次当有线数据改变时。在这种情况下cropoptions是一个对象。的vue.js指令需要知道它是一个对象。这就是为什么我们需要加深：在这种情况下，真的。</li>
+<li>取消绑定：当DOM元素将被删除。我们在这里摧毁一切，并删除所有的事件侦听器。<br>会有一对夫妇在<code>Vue 2</code>的变化。</li>
+</ul>
+<p>的虚拟机实例将作为函数参数传递，不会被设置为。</p>
+<p>指令的更新功能只会被调用在更新，而不是最初绑定后。</p>
+<h3 id="第一次运行"><a href="#第一次运行" class="headerlink" title="第一次运行"></a>第一次运行</h3><p>我们只是做了最低限度的。让我们看看它是否工作到目前为止。</p>
+<p>只有一个快速的东西失踪。我们没有增加农作物的样式呢。让我们这样做，并运行应用程序。</p>
+<p>添加第一，强调线的<code>SRC / main.js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">import &apos;../node_modules/cropper/dist/cropper.css&apos;</div><div class="line">import Vue from &apos;vue&apos;</div><div class="line">import App from &apos;./App&apos;</div><div class="line"> </div><div class="line">/* eslint-disable no-new */</div><div class="line">new Vue(&#123;</div><div class="line">  el: &apos;body&apos;,</div><div class="line">  components: &#123; App &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h5 id="启动服务器。"><a href="#启动服务器。" class="headerlink" title="启动服务器。"></a>启动服务器。</h5><pre><code>$ npm run dev
+</code></pre><p><img src="http://gambardella.info/wp-content/uploads/2016/08/cropper-v1-700x647.jpg" alt=""></p>
+<h3 id="拨动开关"><a href="#拨动开关" class="headerlink" title="拨动开关"></a>拨动开关</h3><p>从这里开始一切都会很容易。我们将通过它的情况下。但每一个都会几乎太简单。<br>让我们来启用和禁用农作物与按钮。想从网页或打开农作物在用户选择了一个文件。这表明，农作物可以在任何时间进行初始化。<br>编辑在<code>SRC / app.vue</code> <code>脚本</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">import Cropper from &apos;./directives/Cropper&apos;</div><div class="line"> </div><div class="line">export default &#123;</div><div class="line">  directives: &#123;</div><div class="line">    Cropper</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  data () &#123;</div><div class="line">    return &#123;</div><div class="line">      cropOptions: &#123;</div><div class="line">        viewMode: 0,</div><div class="line">        zoomable: false</div><div class="line">      &#125;,</div><div class="line">      showCropper: false</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  methods: &#123;</div><div class="line">    toggleCropper () &#123;</div><div class="line">      this.showCropper = !this.showCropper</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>添加showcropper：虚假数据。</li>
+<li>添加一个方法来切换showcropper。</li>
+</ul>
+<p>编辑在<code>SRC / app.vue</code> <code>模板</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">  &lt;button id=&quot;toggle&quot; @click=&quot;toggleCropper&quot;&gt;Toggle Cropper&lt;/button&gt;</div><div class="line">  &lt;img</div><div class="line">    v-if=&quot;showCropper&quot;</div><div class="line">    v-cropper=&quot;cropOptions&quot;</div><div class="line">    src=&quot;https://i.imgur.com/WcvkCxl.png&quot;</div><div class="line">    alt=&quot;Mustache&quot;&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>添加一个“单击处理程序”按钮。</p>
+</li>
+<li><p>添加一个v-if指令img标签。</p>
+</li>
+</ul>
+<p>每一次的图像显示了自定义指令的结合收割机和<code>更新</code>功能将被称为。</p>
+<p>当showcropper设置为false农作物的绑定函数将被调用。</p>
+<p>没有太多我们可以从这里搞砸了。</p>
+<p>农作物将装在需要卸载后用户完成。</p>
+<h3 id="改变选项"><a href="#改变选项" class="headerlink" title="改变选项"></a>改变选项</h3><p>我们已经都有更新的农作物的选项。如果我们有一个插件，会接受新的选择现有的jQuery实例，那么我们就不会产生破坏和重建的插件。不幸的是，也不允许。</p>
+<p>让我们添加一个开关，改变图像是否是可缩放。<br>编辑在<code>SRC / app.vue</code> <code>模板</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">  &lt;button id=&quot;toggle&quot; @click=&quot;toggleCropper&quot;&gt;Toggle Cropper&lt;/button&gt;</div><div class="line">  &lt;img</div><div class="line">    v-if=&quot;showCropper&quot;</div><div class="line">    v-cropper=&quot;cropOptions&quot;</div><div class="line">    src=&quot;https://i.imgur.com/WcvkCxl.png&quot;</div><div class="line">    alt=&quot;Mustache&quot;&gt;</div><div class="line">  &lt;input id=&quot;zoomable&quot; type=&quot;checkbox&quot; v-model=&quot;cropOptions.zoomable&quot;&gt;</div><div class="line">  &lt;label for=&quot;zoomable&quot;&gt;Zoomable?&lt;/label&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>容易，对吗？</p>
+<h3 id="从指令中获取数据"><a href="#从指令中获取数据" class="headerlink" title="从指令中获取数据"></a>从指令中获取数据</h3><p>农作物有农作物的回调函数。每当回调将被调用时，我们将发出一个事件。<br>编辑<code>SRC</code> /<code>指令</code>/ <code>Cropper.js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">import &apos;cropper&apos;</div><div class="line"> </div><div class="line">export default &#123;</div><div class="line">  deep: true,</div><div class="line"> </div><div class="line">  bind () &#123;&#125;,</div><div class="line"> </div><div class="line">  update (options) &#123;</div><div class="line">    options.crop = (event) =&gt; &#123;</div><div class="line">      this.vm.$emit(&apos;crop&apos;, event)</div><div class="line">    &#125;</div><div class="line">    // Destroy in case it has been initialized already.</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">    // Initializing directly after destroying</div><div class="line">    // didn&apos;t work. Wrapping it in a setTimeout</div><div class="line">    // seems to do the trick.</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">      jQuery(this.el).cropper(options)</div><div class="line">    &#125;, 0)</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  unbind () &#123;</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">Edit the App component’s script to handle crop events.</div><div class="line"></div><div class="line"></div><div class="line">import Cropper from &apos;./directives/Cropper&apos;</div><div class="line"></div><div class="line">export default &#123;</div><div class="line">  directives: &#123;</div><div class="line">    Cropper</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  data () &#123;</div><div class="line">    return &#123;</div><div class="line">      cropData: &#123;&#125;,</div><div class="line">      cropOptions: &#123;</div><div class="line">        viewMode: 0,</div><div class="line">        zoomable: false</div><div class="line">      &#125;,</div><div class="line">      showCropper: false</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  events: &#123;</div><div class="line">    crop (event) &#123;</div><div class="line">      this.cropData = &#123;</div><div class="line">        x: event.x,</div><div class="line">        y: event.y,</div><div class="line">        width: event.width,</div><div class="line">        height: event.height</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  methods: &#123;</div><div class="line">    toggleCropper () &#123;</div><div class="line">      this.showCropper = !this.showCropper</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">import Cropper from &apos;./directives/Cropper&apos;</div><div class="line"> </div><div class="line">export default &#123;</div><div class="line">  directives: &#123;</div><div class="line">    Cropper</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  data () &#123;</div><div class="line">    return &#123;</div><div class="line">      cropData: &#123;&#125;,</div><div class="line">      cropOptions: &#123;</div><div class="line">        viewMode: 0,</div><div class="line">        zoomable: false</div><div class="line">      &#125;,</div><div class="line">      showCropper: false</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  events: &#123;</div><div class="line">    crop (event) &#123;</div><div class="line">      this.cropData = &#123;</div><div class="line">        x: event.x,</div><div class="line">        y: event.y,</div><div class="line">        width: event.width,</div><div class="line">        height: event.height</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  methods: &#123;</div><div class="line">    toggleCropper () &#123;</div><div class="line">      this.showCropper = !this.showCropper</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编辑    <code>应用组件的模板</code>来显示作物数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;button id=&quot;toggle&quot; @click=&quot;toggleCropper&quot;&gt;Toggle Cropper&lt;/button&gt;</div><div class="line">    &lt;img</div><div class="line">      v-if=&quot;showCropper&quot;</div><div class="line">      v-cropper=&quot;cropOptions&quot;</div><div class="line">      src=&quot;https://i.imgur.com/WcvkCxl.png&quot;</div><div class="line">      alt=&quot;Mustache&quot;&gt;</div><div class="line">    &lt;input id=&quot;zoomable&quot; type=&quot;checkbox&quot; v-model=&quot;cropOptions.zoomable&quot;&gt;</div><div class="line">    &lt;label for=&quot;zoomable&quot;&gt;Zoomable?&lt;/label&gt;</div><div class="line">    &lt;pre id=&quot;output&quot;&gt;</div><div class="line">x: &#123;&#123; cropData.x &#125;&#125;</div><div class="line">y: &#123;&#123; cropData.y &#125;&#125;</div><div class="line">width: &#123;&#123; cropData.width &#125;&#125;</div><div class="line">height: &#123;&#123; cropData.height &#125;&#125;</div><div class="line">    &lt;/pre&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<p>正如你所看到的，我选择了从指令中发射事件，并在应用程序组件中听他们的。问你自己为什么我选择这样做。我也可以选择创建一个方法在应用程序组件和使用该绑定到农作物的作物的倾听者。</p>
+<p>反模式options.crop = this.vm.handlecrop</p>
+<h3 id="唤起行动从外面"><a href="#唤起行动从外面" class="headerlink" title="唤起行动从外面"></a>唤起行动从外面</h3><p>这个最终的更改显示事件如何从一个组件流到一个指令。我们要用那把农作物的行为。让我给你展示我如何添加一个旋转按钮。</p>
+<p>编辑    <code>应用程序组件</code>的模板，并添加旋转按钮。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;button id=&quot;toggle&quot; @click=&quot;toggleCropper&quot;&gt;Toggle Cropper&lt;/button&gt;</div><div class="line">    &lt;img</div><div class="line">      v-if=&quot;showCropper&quot;</div><div class="line">      v-cropper=&quot;cropOptions&quot;</div><div class="line">      src=&quot;https://i.imgur.com/WcvkCxl.png&quot;</div><div class="line">      alt=&quot;Mustache&quot;&gt;</div><div class="line">    &lt;input id=&quot;zoomable&quot; type=&quot;checkbox&quot; v-model=&quot;cropOptions.zoomable&quot;&gt;</div><div class="line">    &lt;label for=&quot;zoomable&quot;&gt;Zoomable?&lt;/label&gt;</div><div class="line">    &lt;button @click=&quot;$emit(&apos;rotate&apos;, 90)&quot;&gt;Rotate 90°&lt;/button&gt;</div><div class="line">    &lt;pre id=&quot;output&quot;&gt;</div><div class="line">x: &#123;&#123; cropData.x &#125;&#125;</div><div class="line">y: &#123;&#123; cropData.y &#125;&#125;</div><div class="line">width: &#123;&#123; cropData.width &#125;&#125;</div><div class="line">height: &#123;&#123; cropData.height &#125;&#125;</div><div class="line">    &lt;/pre&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<p>编辑<code>SRC</code> /<code>指令</code>/ <code>cropper.js</code>添加和移除事件侦听器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">import jQuery from &apos;jquery&apos;</div><div class="line">import &apos;cropper&apos;</div><div class="line"> </div><div class="line">export default &#123;</div><div class="line">  deep: true,</div><div class="line"> </div><div class="line">  bind () &#123;</div><div class="line">    this.vm.$on(&apos;rotate&apos;, (deg) =&gt; &#123;</div><div class="line">      jQuery(this.el).cropper(&apos;rotate&apos;, deg)</div><div class="line">    &#125;)</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  update (options) &#123;</div><div class="line">    options.crop = (event) =&gt; &#123;</div><div class="line">      this.vm.$emit(&apos;crop&apos;, event)</div><div class="line">    &#125;</div><div class="line">    // Destroy in case it has been initialized already.</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">    // Initializing directly after destroying</div><div class="line">    // didn&apos;t work. Wrapping it in a setTimeout</div><div class="line">    // seems to do the trick.</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">      jQuery(this.el).cropper(options)</div><div class="line">    &#125;, 0)</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  unbind () &#123;</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">    this.vm.$off(&apos;rotate&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>等你做à圈！</p>
+<p>这个设置的美丽是，该指令是从组件解耦，可以使用每一个组件的多次。它将自动初始化后，元素被附加到DOM将之前被删除销毁。</p>
+<p>我希望你喜欢这篇文章。如果你有问题的建议，随时给我留言或发邮件给评论部分。</p>
+<p>最好的，</p>
+<p>转载自(并翻译于)：<a href="http://gambardella.info/2016/09/05/guide-how-to-use-vue-js-with-jquery-plugins" target="_blank" rel="external">http://gambardella.info/2016/09/05/guide-how-to-use-vue-js-with-jquery-plugins</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/22/Vue/" class="archive-article-date">
+  	<time datetime="2016-11-22T13:55:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/02/javascriptStorage/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">javascriptStorage</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Vue" data-title="Vue" data-url="http://yoursite.com/2016/11/22/Vue/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 lgp
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接1</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接2</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接3</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接4</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接5</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">友情链接6</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

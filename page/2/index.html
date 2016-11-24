@@ -142,6 +142,1816 @@
       <div class="body-wrap">
         
   
+    <article id="post-algorithm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/19/algorithm/">算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前端面试中的常见的算法问题"><a href="#前端面试中的常见的算法问题" class="headerlink" title="前端面试中的常见的算法问题"></a>前端面试中的常见的算法问题</h1><p>虽说我们很多时候前端很少有机会接触到算法。大多都交互性的操作，然而从各大公司面试来看，算法依旧是考察的一方面。实际上学习数据结构与算法对于工程师去理解和分析问题都是有帮助的。如果将来当我们面对较为复杂的问题，这些基础知识的积累可以帮助我们更好的优化解决思路。下面罗列在前端面试中经常撞见的几个问题吧。</p>
+<h2 id="Q1-判断一个单词是否是回文？"><a href="#Q1-判断一个单词是否是回文？" class="headerlink" title="Q1 判断一个单词是否是回文？"></a>Q1 判断一个单词是否是回文？</h2><p><code>回文是指把相同的词汇或句子，在下文中调换位置或颠倒过来，产生首尾回环的情趣，叫做回文，也叫回环。比如 mamam redivider .</code></p>
+<p>很多人拿到这样的题目非常容易想到用for 将字符串颠倒字母顺序然后匹配就行了。其实重要的考察的就是对于reverse的实现。其实我们可以利用现成的函数，将字符串转换成数组，这个思路很重要，我们可以拥有更多的自由度去进行字符串的一些操作。</p>
+<pre><code>function checkPalindrom(str) {  
+    return str == str.split(&apos;&apos;).reverse().join(&apos;&apos;);
+}
+</code></pre><h2 id="Q2-去掉一组整型数组重复的值"><a href="#Q2-去掉一组整型数组重复的值" class="headerlink" title="Q2 去掉一组整型数组重复的值"></a>Q2 去掉一组整型数组重复的值</h2><pre><code>比如输入: [1,13,24,11,11,14,1,2] 
+输出: [1,13,24,11,14,2]
+需要去掉重复的11 和 1 这两个元素。
+</code></pre><p>这道问题出现在诸多的前端面试题中，主要考察个人对Object的使用，利用key来进行筛选。<br>    let unique = function(arr) {<br>          let hashTable = {};<br>          let data = [];<br>          for(let i=0,l=arr.length;i&lt;l;i++) {<br>            if(!hashTable[arr[i]]) {<br>                  hashTable[arr[i]] = true;<br>                  data.push(arr[i]);<br>               }<br>          }<br>          return data</p>
+<pre><code>}
+
+module.exports = unique;  
+</code></pre><h2 id="Q3-统计一个字符串出现最多的字母"><a href="#Q3-统计一个字符串出现最多的字母" class="headerlink" title="Q3 统计一个字符串出现最多的字母"></a>Q3 统计一个字符串出现最多的字母</h2><p>给出一段英文连续的英文字符窜，找出重复出现次数最多的字母</p>
+<pre><code>输入 ： afjghdfraaaasdenas 
+
+输出 ： a
+</code></pre><p>前面出现过去重的算法，这里需要是统计重复次数。</p>
+<pre><code>function findMaxDuplicateChar(str) {  
+      if(str.length == 1) {
+    return str;
+      }
+      let charObj = {};
+      for(let i=0;i&lt;str.length;i++) {
+        if(!charObj[str.charAt(i)]) {
+          charObj[str.charAt(i)] = 1;
+        }else{
+          charObj[str.charAt(i)] += 1;
+    }
+  }
+      let maxChar = &apos;&apos;,
+      maxValue = 1;
+      for(var k in charObj) {
+        if(charObj[k] &gt;= maxValue) {
+              maxChar = k;
+              maxValue = charObj[k];
+            }
+      }
+      return maxChar;
+
+}
+
+module.exports = findMaxDuplicateChar;  
+</code></pre><h2 id="Q4-排序算法"><a href="#Q4-排序算法" class="headerlink" title="Q4 排序算法"></a>Q4 排序算法</h2><p>如果抽到算法题目的话，应该大多都是比较开放的题目，不限定算法的实现，但是一定要求掌握其中的几种，所以冒泡排序，这种较为基础并且便于理解记忆的算法一定需要熟记于心。冒泡排序算法就是依次比较大小，小的的大的进行位置上的交换。</p>
+<pre><code>function bubbleSort(arr) {  
+    for(let i = 0,l=arr.length;i&lt;l-1;i++) {
+           for(let j = i+1;j&lt;l;j++) { 
+              if(arr[i]&gt;arr[j]) {
+                let tem = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tem;
+            }
+        }
+    }
+    return arr;
+}
+module.exports = bubbleSort;  
+</code></pre><p>除了冒泡排序外，其实还有很多诸如 插入排序,快速排序，希尔排序等。每一种排序算法都有各自的特点。全部掌握也不需要，但是心底一定要熟悉几种算法。 比如快速排序，其效率很高，而其基本原理如图(来自wiki)：<br><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" alt=""></p>
+<p>算法参考某个元素值，将小于它的值，放到左数组中，大于它的值的元素就放到右数组中，然后递归进行上一次左右数组的操作，返回合并的数组就是已经排好顺序的数组了。</p>
+<pre><code>function quickSort(arr) {
+
+if(arr.length&lt;=1) {
+    return arr;
+}
+
+let leftArr = [];
+let rightArr = [];
+let q = arr[0];
+for(let i = 1,l=arr.length; i&lt;l; i++) {
+    if(arr[i]&gt;q) {
+        rightArr.push(arr[i]);
+    }else{
+        leftArr.push(arr[i]);
+    }
+}
+
+return [].concat(quickSort(leftArr),[q],quickSort(rightArr));
+}
+
+module.exports = quickSort;  
+</code></pre><p>安利大家一个学习的地址，通过动画演示算法的实现。</p>
+<p><a href="http://math.hws.edu/eck/jsdemo/sortlab.html" target="_blank" rel="external">HTML5 Canvas Demo: Sorting Algorithms</a></p>
+<h2 id="Q5-不借助临时变量，进行两个整数的交换"><a href="#Q5-不借助临时变量，进行两个整数的交换" class="headerlink" title="Q5 不借助临时变量，进行两个整数的交换"></a>Q5 不借助临时变量，进行两个整数的交换</h2><p>输入 a = 2, b = 4 输出 a = 4, b =2<br>这种问题非常巧妙，需要大家跳出惯有的思维，利用 a , b进行置换。</p>
+<p>主要是利用 + - 去进行运算，类似 a = a + ( b - a) 实际上等同于最后 的 a = b;</p>
+<pre><code>function swap(a , b) {  
+      b = b - a;
+      a = a + b;
+      b = a - b;
+      return [a,b];
+}
+
+module.exports = swap;  
+</code></pre><h2 id="Q6-使用canvas-绘制一个有限度的斐波那契数列的曲线？"><a href="#Q6-使用canvas-绘制一个有限度的斐波那契数列的曲线？" class="headerlink" title="Q6 使用canvas 绘制一个有限度的斐波那契数列的曲线？"></a>Q6 使用canvas 绘制一个有限度的斐波那契数列的曲线？</h2><p><img src="http://img1.vued.vanthink.cn/vued90edf7b944ec479ee8b4203cf56e158d.png" alt=""><br>数列长度限定在9.</p>
+<p><code>斐波那契数列</code>，又称黄金分割数列，指的是这样一个数列：0、1、1、2、3、5、8、13、21、34、……在数学上，斐波纳契数列主要考察递归的调用。我们一般都知道定义</p>
+<pre><code>fibo[i] = fibo[i-1]+fibo[i-2];  
+</code></pre><p>生成斐波那契数组的方法</p>
+<pre><code>function getFibonacci(n) {  
+      var fibarr = [];
+      var i = 0;
+      while(i&lt;n) {
+        if(i&lt;=1) {
+              fibarr.push(i);
+        }else{
+              fibarr.push(fibarr[i-1] + fibarr[i-2])
+        }
+        i++;
+      }
+
+      return fibarr;
+}
+</code></pre><p>剩余的工作就是利用canvas <code>arc</code>方法进行曲线绘制了</p>
+<p><a href="http://codepen.io/Jack_Pu/pen/LRaxZB" target="_blank" rel="external">DEMO</a></p>
+<h2 id="Q7-找出下列正数组的最大差值比如"><a href="#Q7-找出下列正数组的最大差值比如" class="headerlink" title="Q7 找出下列正数组的最大差值比如:"></a>Q7 找出下列正数组的最大差值比如:</h2><pre><code>输入 [10,5,11,7,8,9]
+
+输出 6
+</code></pre><p>这是通过一道题目去测试对于基本的数组的最大值的查找，很明显我们知道，最大差值肯定是一个数组中最大值与最小值的差。</p>
+<pre><code>  function getMaxProfit(arr) {
+
+       var minPrice = arr[0];
+    var maxProfit = 0;
+
+    for (var i = 0; i &lt; arr.length; i++) {
+        var currentPrice = arr[i];
+
+        minPrice = Math.min(minPrice, currentPrice);
+
+        var potentialProfit = currentPrice - minPrice;
+
+        maxProfit = Math.max(maxProfit, potentialProfit);
+    }
+
+    return maxProfit;
+}
+</code></pre><h2 id="Q8-随机生成指定长度的字符串"><a href="#Q8-随机生成指定长度的字符串" class="headerlink" title="Q8 随机生成指定长度的字符串"></a>Q8 随机生成指定长度的字符串</h2><p>实现一个算法，随机生成指制定长度的字符窜。</p>
+<pre><code>比如给定 长度 8  输出 4ldkfg9j
+function randomString(n) {  
+      let str = &apos;abcdefghijklmnopqrstuvwxyz9876543210&apos;;
+      let tmp = &apos;&apos;,
+      i = 0,
+      l = str.length;
+      for (i = 0; i &lt; n; i++) {
+            tmp += str.charAt(Math.floor(Math.random() * l));
+      }
+      return tmp;
+}
+
+module.exports = randomString;  
+</code></pre><h2 id="Q9-实现类似getElementsByClassName-的功能"><a href="#Q9-实现类似getElementsByClassName-的功能" class="headerlink" title="Q9 实现类似getElementsByClassName 的功能"></a>Q9 实现类似getElementsByClassName 的功能</h2><p>自己实现一个函数，查找某个DOM节点下面的包含某个class的所有DOM节点？不允许使用原生提供的 getElementsByClassName querySelectorAll 等原生提供DOM查找函数。</p>
+<pre><code>function queryClassName(node, name) {  
+      var starts = &apos;(^|[ \n\r\t\f])&apos;,
+       ends = &apos;([ \n\r\t\f]|$)&apos;;
+      var array = [],
+    regex = new RegExp(starts + name + ends),
+    elements = node.getElementsByTagName(&quot;*&quot;),
+    length = elements.length,
+    i = 0,
+    element;
+
+while (i &lt; length) {
+    element = elements[i];
+    if (regex.test(element.className)) {
+        array.push(element);
+    }
+
+    i += 1;
+}
+
+return array;
+</code></pre><p>}</p>
+<h2 id="Q10-使用JS-实现二叉查找树-Binary-Search-Tree"><a href="#Q10-使用JS-实现二叉查找树-Binary-Search-Tree" class="headerlink" title="Q10 使用JS 实现二叉查找树(Binary Search Tree)"></a>Q10 使用JS 实现二叉查找树(Binary Search Tree)</h2><p>一般叫全部写完的概率比较少，但是重点考察你对它的理解和一些基本特点的实现。 二叉查找树，也称二叉搜索树、有序二叉树（英语：ordered binary tree）是指一棵空树或者具有下列性质的二叉树：</p>
+<ul>
+<li>任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
+<li>任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>任意节点的左、右子树也分别为二叉查找树；</li>
+<li>没有键值相等的节点。二叉查找树相比于其他数据结构的优势在于查找、插入的时间复杂度较低。为O(log n)。二叉查找树是基础性数据结构，用于构建更为抽象的数据结构，如集合、multiset、关联数组等。<br><img src="http://img1.vued.vanthink.cn/vued95685e8f89199babd6273a93651ecd8b.png" alt=""></li>
+</ul>
+<p>在写的时候需要足够理解二叉搜素树的特点，需要先设定好每个节点的数据结构</p>
+<pre><code>class Node {  
+      constructor(data, left, right) {
+        this.data = data;
+        this.left = left;
+        this.right = right;
+      }
+
+}
+</code></pre><p>树是有节点构成，由根节点逐渐延生到各个子节点，因此它具备基本的结构就是具备一个根节点，具备添加，查找和删除节点的方法.</p>
+<pre><code>class BinarySearchTree {
+
+      constructor() {
+        this.root = null;
+      }
+
+  insert(data) {
+    let n = new Node(data, null, null);
+    if (!this.root) {
+          return this.root = n;
+    }
+    let currentNode = this.root;
+    let parent = null;
+    while (1) {
+          parent = currentNode;
+          if (data &lt; currentNode.data) {
+            currentNode = currentNode.left;
+            if (currentNode === null) {
+                  parent.left = n;
+                  break;
+            }
+      } else {
+        currentNode = currentNode.right;
+        if (currentNode === null) {
+              parent.right = n;
+              break;
+            }
+      }
+    }
+  }
+
+  remove(data) {
+    this.root = this.removeNode(this.root, data)
+  }
+
+  removeNode(node, data) {
+    if (node == null) {
+          return null;
+    }
+
+if (data == node.data) {
+  // no children node
+  if (node.left == null &amp;&amp; node.right == null) {
+    return null;
+  }
+  if (node.left == null) {
+    return node.right;
+  }
+  if (node.right == null) {
+    return node.left;
+  }
+
+  let getSmallest = function(node) {
+    if(node.left === null &amp;&amp; node.right == null) {
+      return node;
+    }
+    if(node.left != null) {
+      return node.left;
+    }
+    if(node.right !== null) {
+      return getSmallest(node.right);
+    }
+
+  }
+  let temNode = getSmallest(node.right);
+  node.data = temNode.data;
+  node.right = this.removeNode(temNode.right,temNode.data);
+  return node;
+
+} else if (data &lt; node.data) {
+  node.left = this.removeNode(node.left,data);
+  return node;
+} else {
+  node.right = this.removeNode(node.right,data);
+  return node;
+}
+</code></pre><p>  }</p>
+<pre><code>  find(data) {
+    var current = this.root;
+    while (current != null) {
+      if (data == current.data) {
+        break;
+      }
+      if (data &lt; current.data) {
+        current = current.left;
+      } else {
+        current = current.right
+      }
+    }
+    return current.data;
+  }
+
+}
+
+module.exports = BinarySearchTree;  
+</code></pre><p><a href="https://github.com/JackPu/JavaScript-Algorithm-Learning" target="_blank" rel="external">完整代码 Github</a></p>
+<p>扩展阅读<br><a href="https://www.interviewcake.com/question/javascript/rectangular-love" target="_blank" rel="external">https://www.interviewcake.com/question/javascript/rectangular-love
+</a><br><a href="http://stackoverflow.com/questions/21853967/get-elements-by-class-a-or-b-in-javascript" target="_blank" rel="external">http://stackoverflow.com/questions/21853967/get-elements-by-class-a-or-b-in-javascript</a></p>
+<p><a href="http://codepen.io/Jack_Pu/pen/EgrXBp" target="_blank" rel="external">http://codepen.io/Jack_Pu/pen/EgrXBp</a></p>
+<p><a href="http://javascript-html5-tutorial.com/algorithms-and-data-structures-in-javascript.html" target="_blank" rel="external">http://javascript-html5-tutorial.com/algorithms-and-data-structures-in-javascript.html</a></p>
+<p>引自：<a href="http://www.jackpu.com/qian-duan-mian-shi-zhong-de-chang-jian-de-suan-fa-wen-ti/" target="_blank" rel="external">http://www.jackpu.com/qian-duan-mian-shi-zhong-de-chang-jian-de-suan-fa-wen-ti/</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/09/19/algorithm/" class="archive-article-date">
+  	<time datetime="2016-09-19T06:59:13.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-19</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-jszhengze" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/29/jszhengze/">jszhengze</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><h2 id="正则表达式-语法"><a href="#正则表达式-语法" class="headerlink" title="正则表达式 - 语法"></a>正则表达式 - <code>语法</code></h2><p><code>正则表达式</code>(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。</p>
+<ul>
+<li>列目录时，　dir <em>.txt或ls </em>.txt中的<em>.txt就不是一个正则表达式,因为这里</em>与正则式的*的含义是不同的。</li>
+<li>构造正则表达式的方法和创建数学表达式的方法一样。也就是用多种元字符与运算符可以将小的表达式结合在一起来创建更大的表达式。正则表达式的组件可以是单个的字符、字符集合、字符范围、字符间的选择或者所有这些组件的任意组合。</li>
+</ul>
+<p>正则表达式是由普通字符（例如字符 a 到 z）以及特殊字符（称为”元字符”）组成的文字模式。模式描述在搜索文本时要匹配的一个或多个字符串。正则表达式作为一个模板，将某个字符模式与所搜索的字符串进行匹配。</p>
+<h3 id="普通字符"><a href="#普通字符" class="headerlink" title="普通字符"></a>普通字符</h3><p>普通字符包括没有显式指定为元字符的所有可打印和不可打印字符。这包括所有大写和小写字母、所有数字、所有标点符号和一些其他符号。</p>
+<h3 id="非打印字符"><a href="#非打印字符" class="headerlink" title="非打印字符"></a>非打印字符</h3><p>非打印字符也可以是正则表达式的组成部分。下表列出了表示非打印字符的转义序列：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\cx</td>
+<td>匹配由x指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>匹配一个换页符。等价于 \x0c 和 \cL。</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符。等价于 \x0a 和 \cJ。</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>匹配一个回车符。等价于 \x0d 和 \cM。</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符。等价于 \x09 和 \cI。</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><p>所谓特殊字符，就是一些有特殊含义的字符，如上面说的”<em>.txt”中的</em>，简单的说就是表示任何字符串的意思。如果要查找文件名中有<em>的文件，则需要对</em>进行转义，即在其前加一个\。ls *.txt。<br>许多元字符要求在试图匹配它们时特别对待。若要匹配这些特殊字符，必须首先使字符”转义”，即，将反斜杠字符 () 放在它们前面。下表列出了正则表达式中的特殊字符：</p>
+<table>
+<thead>
+<tr>
+<th>特别字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$</td>
+<td>匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline属性，则 $ 也匹配 ‘\n’ 或 ‘\r’。要匹配 $ 字符本身，请使用 \$。</td>
+</tr>
+<tr>
+<td>( )</td>
+<td>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 ( 和 )。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次。要匹配 <em> 字符，请使用 \</em>。</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 +。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 . 。</td>
+</tr>
+<tr>
+<td>[</td>
+<td>标记一个中括号表达式的开始。要匹配 [，请使用 [。</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 \?。</td>
+</tr>
+<tr>
+<td>\</td>
+<td>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ‘n’ 匹配字符 ‘n’。’\n’ 匹配换行符。序列 ‘\‘ 匹配 “\”，而 ‘(‘ 则匹配 “(“。</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配输入字符串的开始位置，除非在方括号表达式中使用，此时它表示不接受该字符集合。要匹配 ^ 字符本身，请使用 \^。</td>
+</tr>
+<tr>
+<td>{</td>
+<td>标记限定符表达式的开始。要匹配 {，请使用 {。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>指明两项之间的一个选择。要匹配</td>
+<td>，请使用 \</td>
+<td>。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h3><p>限定符用来指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。有*或+或?或{n}或{n,}或{n,m}共6种。<br>正则表达式的限定符有：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 或 “does” 中的”do” 。? 等价于 {0,1}。</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h3><p>定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。<br>定位符用来描述字符串或单词的边界，^和$分别指字符串的开始与结束，\b描述单词的前或后边界，\B表示非单词边界。<br>正则表达式的限定符有：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配。</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配输入字符串结尾的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \n 或 \r 之前的位置匹配。</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配一个字边界，即字与空格间的位置。</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>非字边界匹配。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="正则表达式-运算符优级"><a href="#正则表达式-运算符优级" class="headerlink" title="正则表达式 -运算符优级"></a>正则表达式 -<a href="">运算符优级</a></h2><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\</td>
+<td>转义符</td>
+</tr>
+<tr>
+<td>(), (?:), (?=), []</td>
+<td>圆括号和方括号</td>
+</tr>
+<tr>
+<td>*, +, ?, {n}, {n,}, {n,m}</td>
+<td>限定符</td>
+</tr>
+<tr>
+<td>^, $, \任何元字符、任何字符</td>
+<td>定位点和序列（即：位置和顺序）</td>
+</tr>
+<tr>
+<td>(或”</td>
+<td>“)</td>
+<td>替换，”或”操作字符具有高于替换运算符的优先级，使得”m</td>
+<td>food”匹配”m”或”food”。若要匹配”mood”或”food”，请使用括号创建子表达式，从而产生”(m</td>
+<td>f)ood”。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="常见正则表达式"><a href="#常见正则表达式" class="headerlink" title="常见正则表达式:"></a>常见正则表达式:</h2><h3 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h3><hr>
+<p><code>[0-9]+</code></p>
+<p><img src="http://ggbond.qiniudn.com/2016-10-13%2019:35:52.png" alt=""></p>
+<p>###逗号分隔的整数</p>
+<hr>
+<p><code>\b[0-9]{1,3}(,[0-9]{3})*\b</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:40:05.png" alt=""></p>
+<h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><hr>
+<p><code>(\+?(\d+|\.\d+|\d+\.\d+)|-?(\d+|\d+\.\d+))</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:20:37.png" alt=""></p>
+<h3 id="0-255之间的数字"><a href="#0-255之间的数字" class="headerlink" title="0-255之间的数字"></a>0-255之间的数字</h3><hr>
+<p><code>^([0-9]|[0-9]{2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</code></p>
+<p><img src="http://ggbond.qiniudn.com/255.png" alt=""></p>
+<h3 id="身份证"><a href="#身份证" class="headerlink" title="身份证"></a>身份证</h3><hr>
+<p><code>^[1-9]\d{14}(\d{2}[0-9x])?$</code></p>
+<p><img src="http://ggbond.qiniudn.com/shenfz.png" alt=""></p>
+<h3 id="邮箱"><a href="#邮箱" class="headerlink" title="邮箱"></a>邮箱</h3><hr>
+<p><code>^[-\w.]{0,64}@([a-zA-Z0-9]{1,63}\.)*[-a-zA-Z0-9]{1,63}$</code><br><img src="http://ggbond.qiniudn.com/email.png" alt=""></p>
+<h3 id="固定电话"><a href="#固定电话" class="headerlink" title="固定电话"></a>固定电话</h3><hr>
+<p><code>(\(?0[1-9]{2,3}\)?-?)?[1-9][0-9]\{6,7}(-[0-9]{1,6})?</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:46:08.png" alt=""></p>
+<h3 id="邮编"><a href="#邮编" class="headerlink" title="邮编"></a>邮编</h3><hr>
+<p><code>[1-9][0-9]{5}</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:47:35.png" alt=""></p>
+<h3 id="ISBN"><a href="#ISBN" class="headerlink" title="ISBN"></a>ISBN</h3><hr>
+<p><code>((ISBN(-13)?:?\s)?97[89][-\s]?[0-9][-\s]?[0-9]{3}[-\s]?[0-9]{5}[-\s]?[0-9]|(ISBN(-10)?:?\s)?[0-9][-\s]?[0-9]{3}[-\s]?[0-9]{5}[-\s]?[0-9x])</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:55:10.png" alt=""></p>
+<h3 id="手机号"><a href="#手机号" class="headerlink" title="手机号"></a>手机号</h3><hr>
+<p><code>(0|\+86)?(13[0-9]|15[0-356]|18[025-9])\d{8}</code><br><img src="http://ggbond.qiniudn.com/tel.png" alt=""></p>
+<h3 id="成对的html-tag"><a href="#成对的html-tag" class="headerlink" title="成对的html tag"></a>成对的html tag</h3><hr>
+<p>如<code>&lt;code&gt;test&lt;/code&gt;</code><br><code>&lt;([^&gt;]+)&gt;[\s\S]*?&lt;\/\1&gt;</code><br><img src="http://ggbond.qiniudn.com/tag.png" alt=""></p>
+<h3 id="a"><a href="#a" class="headerlink" title="a"></a>a</h3><hr>
+<p><code>&lt;a\s+href\s*=\s*[&quot;&#39;]?([^&quot;&#39;\s]+)[&quot;&#39;]?&gt;([^&lt;]+)&lt;\/a&gt;</code><br><img src="http://ggbond.qiniudn.com/a.png" alt=""></p>
+<h3 id="head"><a href="#head" class="headerlink" title="head"></a>head</h3><hr>
+<p><code>&lt;head&gt;([^&gt;]+)&lt;\/head&gt;</code><br><img src="http://ggbond.qiniudn.com/head.png" alt=""></p>
+<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><hr>
+<p><code>&lt;img\s[^&gt;]*?src=[&#39;&quot;]?([^&quot;&#39;]+)[&quot;&#39;]?[^&gt;]*&gt;</code><br><img src="http://ggbond.qiniudn.com/img11.png" alt=""></p>
+<p>附：正则指引思维导图<br><img src="http://ggbond.qiniudn.com/%E6%AD%A3%E5%88%99%E6%8C%87%E5%BC%95.png" alt=""></p>
+<p>参考文档：<a href="http://www.lixuejiang.me/2016/10/13/%E5%B8%B8%E8%A7%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_blank" rel="external">http://www.lixuejiang.me/2016/10/13/%E5%B8%B8%E8%A7%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</a></p>
+<p><a href="http://www.runoob.com/regexp/regexp-tutorial.html" target="_blank" rel="external">http://www.runoob.com/regexp/regexp-tutorial.html</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/29/jszhengze/" class="archive-article-date">
+  	<time datetime="2016-08-29T11:52:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-29</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-cssCenter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/26/cssCenter/">cssCenter</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="css"><a href="#css" class="headerlink" title="css"></a>css</h1><h2 id="CSS的垂直居中和水平居中总结"><a href="#CSS的垂直居中和水平居中总结" class="headerlink" title="CSS的垂直居中和水平居中总结"></a>CSS的垂直居中和水平居中总结</h2><p>知乎专栏&amp;&amp;简书专题：<a href="https://zhuanlan.zhihu.com/damonare" target="_blank" rel="external">前端进击者（知乎)</a> <a href="http://www.jianshu.com/collection/bbaa63e264f5" target="_blank" rel="external">前端进击者（简书）</a></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><pre><code>CSS居中一直是一个比较敏感的话题，为了以后开发的方便，楼主觉得确实需要总结一下了，总的来说，居中问题分为垂直居中和水平居中，实际上水平居中是很简单的，但垂直居中的方式和方法就千奇百怪了。
+</code></pre><h3 id="内联元素居中方案"><a href="#内联元素居中方案" class="headerlink" title="内联元素居中方案"></a>内联元素居中方案</h3><h4 id="水平居中设置："><a href="#水平居中设置：" class="headerlink" title="水平居中设置："></a>水平居中设置：</h4><ol>
+<li><p>行内元素 设置 text-align:center；</p>
+</li>
+<li><p>Flex布局 设置display:flex;justify-content:center;(灵活运用)</p>
+</li>
+</ol>
+<h4 id="垂直居中设置："><a href="#垂直居中设置：" class="headerlink" title="垂直居中设置："></a>垂直居中设置：</h4><ol>
+<li>父元素高度确定的单行文本（内联元素） 设置 height = line-height；</li>
+<li>父元素高度确定的多行文本（内联元素） a:插入 table （插入方法和水平居中一样），然后设置 vertical-align:middle； b:先设置 display:table-cell 再设置 vertical-align:middle；<h3 id="块级元素居中方案"><a href="#块级元素居中方案" class="headerlink" title="块级元素居中方案"></a>块级元素居中方案</h3></li>
+</ol>
+<h4 id="水平居中设置：-1"><a href="#水平居中设置：-1" class="headerlink" title="水平居中设置："></a>水平居中设置：</h4><ol>
+<li><p>定宽块状元素 设置 左右 margin 值为 auto；</p>
+</li>
+<li><p>不定宽块状元素 a:在元素外加入 table 标签（完整的，包括 table、tbody、tr、td），该元素写在 td 内，然后设置 margin 的值为 auto； b:给该元素设置 display:inine 方法； c:父元素设置 position:relative 和 left:50%，子元素设置 position:relative 和 left:50%；</p>
+</li>
+</ol>
+<h4 id="垂直居中设置：-1"><a href="#垂直居中设置：-1" class="headerlink" title="垂直居中设置："></a>垂直居中设置：</h4><ul>
+<li><p>1.使用position:absolute（fixed）,设置left、top、margin-left、margin-top的属性;</p>
+<pre><code>.box{
+    position:absolute;/*或fixed*/
+    top:50%;
+    left:50%;
+    margin-top:-100px;
+    margin-left:-200px;
+}
+</code></pre></li>
+<li><p>2.利用position:fixed（absolute）属性，margin:auto这个必须不要忘记了;</p>
+<pre><code>.box{
+    position: absolute;或fixed
+    top:0;
+    right:0;
+        bottom:0;
+    left:0;
+    margin: auto;
+}
+</code></pre></li>
+<li><p>3.利用display:table-cell属性使内容垂直居中;</p>
+<pre><code>.box{
+display:table-cell;
+    vertical-align:middle;
+text-align:center;
+    width:120px;
+height:120px;
+background:purple;
+}
+</code></pre></li>
+<li><p>4.使用css3的新属性transform:translate(x,y)属性;</p>
+<pre><code>.box{
+    position: absolute;
+    transform: translate(50%,50%);
+    -webkit-transform:translate(50%,50%);
+    -moz-transform:translate(50%,50%);
+    -ms-transform:translate(50%,50%);
+}
+</code></pre></li>
+<li><p>5.最高大上的一种，使用:before元素;</p>
+<pre><code>.box{
+position:fixed;
+display:block;
+background:rgba(0,0,0,.5);
+}
+.box:before{
+content:&apos;&apos;;
+display:inline-block;
+vertical-align:middle;
+   height:100%;
+}
+.box.content{
+width:60px;
+height:60px;
+line-height:60px;
+color:red;
+</code></pre></li>
+<li><p>6.Flex布局;</p>
+<pre><code>.box{
+display: -webkit-box;
+display: -webkit-flex;
+display: -moz-box;
+display: -moz-flex;
+display: -ms-flexbox;
+display: flex;
+水平居中
+-webkit-box-align: center;
+-moz-box-align: center;
+-ms-flex-pack:center;
+-webkit-justify-content: center;
+-moz-justify-content: center;
+    justify-content: center;
+ 垂直居中
+-webkit-box-pack: center;
+-moz-box-pack: center;
+    -ms-flex-align:center;
+-webkit-align-items: center;
+-moz-align-items: center;
+align-items: center;
+</code></pre><p>  }</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>  博主暂时掌握了这些居中方法，读者如果还有好方法或是觉得那个地方不对，欢迎评论，不吝感谢。<br>转载自：<a href="http://gold.xitu.io/post/582c04032f301e00594327d4?utm_source=gold_browser_extension" target="_blank" rel="external">http://gold.xitu.io/post/582c04032f301e00594327d4?utm_source=gold_browser_extension</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/26/cssCenter/" class="archive-article-date">
+  	<time datetime="2016-08-26T12:13:21.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-26</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-nodeHeartModule" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/18/nodeHeartModule/">nodeHeartModule</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Node-js-手册查询-1-核心模块方法"><a href="#Node-js-手册查询-1-核心模块方法" class="headerlink" title="Node.js 手册查询-1-核心模块方法"></a>Node.js 手册查询-1-核心模块方法</h1><h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><h3 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h3><p>核心模块是被编译成二进制代码，引用的时候只需require表示符即可</p>
+<h4 id="os-系统基本信息"><a href="#os-系统基本信息" class="headerlink" title="os 系统基本信息"></a>os 系统基本信息</h4><p>os模块可提供操作系统的一些基本信息</p>
+<p>1.返回系统临时目录</p>
+<pre><code> os.tmpdir()
+结果如: C:\Users\ADMINI~1\AppData\Local\Temp
+</code></pre><p>2.返回 CPU 的字节序，可能的是 “BE” 或 “LE”</p>
+<pre><code> os.endianness()
+结果如: LE   (inter i3)
+</code></pre><p>3.返回操作系统的主机名</p>
+<pre><code> os.hostname()
+结果如: QH-20141006HJKT
+</code></pre><p>4.返回操作系统名称</p>
+<pre><code> os.type()
+结果如: Windows_NT
+</code></pre><p>5.返回操作系统平台</p>
+<pre><code> os.platform()
+结果如: win32
+</code></pre><p>6.返回操作系统 CPU 架构，可能的值有 “x64”、“arm” 和 “ia32”</p>
+<pre><code> os.arch()
+结果如: x64
+</code></pre><p>7.返回操作系统的发行版本</p>
+<pre><code> os.release()
+结果如: 6.1.7601
+</code></pre><p>8.返回操作系统运行的时间，以秒为单位</p>
+<pre><code> os.uptime()
+结果如: 7847.6797442
+</code></pre><p>9.返回一个包含 1、5、15 分钟平均负载的数组</p>
+<pre><code> os.loadavg()
+结果如: 6.1.7601
+</code></pre><p>10.返回系统内存总量，单位为字节</p>
+<pre><code>os.totalmem()
+结果如: 3931602944
+</code></pre><p>11.返回操作系统空闲内存量，单位是字节</p>
+<pre><code> os.freemem()
+结果如: 1307422720
+</code></pre><p>12.返回一个对象数组，包含所安装的每个 CPU/内核的信息：型号、速度（单位 MHz）、时间（一个包含 user、nice、sys、idle 和 irq 所使用 CPU/内核毫秒数的对象）</p>
+<pre><code>os.cpus()
+</code></pre><p>13.获取网络接口的一个列表信息</p>
+<pre><code> os.networkInterfaces()
+结果如: 1307422720
+</code></pre><p>14.一个定义了操作系统的一行结束的标识的常量</p>
+<pre><code>os.EOL
+</code></pre><h4 id="process-进程管理"><a href="#process-进程管理" class="headerlink" title="process 进程管理"></a>process 进程管理</h4><p>process 是一个全局变量.无需 require;</p>
+<p>1.返回应用程序当前目录</p>
+<pre><code> process.cwd()
+结果如: c:\Users\Administrator\MongoDb_Test
+</code></pre><p>2.改变应用程序目录</p>
+<pre><code>process.chdir(“目录”)
+</code></pre><p>3.标准输出流.将内容打印到输出设备上.console.log就是封装了它</p>
+<pre><code>process.stdout.write(‘aa\n’)
+结果如: aa
+</code></pre><p>4.标准错误流</p>
+<pre><code> process.stderr.write(‘aa\n’)
+结果如: aa
+</code></pre><p>5.进程的输入流. 通过注册事件的方式来获取输入的内容</p>
+<pre><code> process.stdin.on(‘readable’, function() {
+var chunk = process.stdin.read();
+if (chunk !== null) {
+process.stdout.write(&apos;data: ’ + chunk);
+}
+});
+</code></pre><p>6.结束进程</p>
+<pre><code> process.exit(code);
+参数code为退出后返回的代码，如果省略则默认返回0
+</code></pre><p>7.注册事件</p>
+<pre><code> process.stdout.on(‘data’,function(data){
+console.log(data);
+});
+</code></pre><p>8.为事件循环设置一项任务,Node.js 会在下次事件循环调响应时调用 callback</p>
+<pre><code>process.nextTick(callback)
+</code></pre><p>8.设置编码, 默认 utf8. node.js编码格式只支持UTF8、ascii、base64，暂时不支持GBK、gb2312</p>
+<pre><code> process.stdin.setEncoding(编码);
+process.stdout.setEncoding(编码);
+process.stderr.setEncoding(编码);
+</code></pre><h4 id="fs-文件管理"><a href="#fs-文件管理" class="headerlink" title="fs 文件管理"></a>fs 文件管理</h4><p>fs 模块提供了异步和同步2个版本     fs.readFile()    fs.readFileSync()</p>
+<p>1.写入文件内容</p>
+<pre><code>fs.writeFile(‘test.txt’, ‘Hello Node’ , [encoding], [callback]);
+</code></pre><p>2.追加写入</p>
+<pre><code>fs.appendFile(‘test.txt’,‘Hello Node’,[encoding],[callback]);
+</code></pre><p>3.文件是否存在</p>
+<pre><code>fs.exists(‘test.txt’,[callback]);
+</code></pre><p>4.修改文件名</p>
+<pre><code>fs.rename(旧文件,新文件,[callback]);
+</code></pre><p>5.移动文件. 没有专门函数,通过修改文件名可以达到目的</p>
+<pre><code>fs.rename(oldPath,newPath,[callback]);
+</code></pre><p>6.读取文件内容</p>
+<pre><code>fs.readFile(‘test.txt’, [encoding], [callback]);
+</code></pre><p>7.删除文件</p>
+<pre><code>fs.unlink(‘test.txt’, [callback]);
+</code></pre><p>8.创建目录</p>
+<pre><code> fs.mkdir(路径, 权限, [callback]);
+路径：新创建的目录。
+权限：可选参数，只在linux下有效，表示目录的权限，默认为0777，    表示文件所有者、文件所有者所在的组的*用户、*所有用户，都有权限进行读、写、执行的操作。
+</code></pre><p>9.删除目录</p>
+<pre><code>fs.rmdir(path, [callback]);
+</code></pre><p>10.读取目录. 读取到指定目录下所有的文件</p>
+<pre><code>fs.readdir(path, [callback]);
+</code></pre><p>11.打开文件</p>
+<pre><code>fs.open(path,flags, [mode], [callback(err,fd)])
+</code></pre><p>12.关闭文件</p>
+<pre><code> fs.close(fd, [callback(err)])
+fd 是打开文件后的标示符
+</code></pre><p>13.读取文件</p>
+<pre><code>fs.read(fd,buffer,offset,length,position,[callback(err, bytesRead, buffer)])
+</code></pre><p>14.写入文件</p>
+<pre><code>fs.writeFile(filename, data,[encoding],[callback(err)])
+</code></pre><p>15.获取真实路径</p>
+<pre><code>fs.realpath(path, [callback(err,resolvedPath)])
+</code></pre><p>16.更改所有权</p>
+<pre><code>fs.chown(path, uid, gid, [callback(err)])
+</code></pre><p>17.更改权限</p>
+<pre><code>fs.fchmod(fd, mode, [callback(err)])
+</code></pre><p>18.获取文件信息</p>
+<pre><code>fs.stat(path, [callback(err, stats)])
+</code></pre><p>19.创建硬链接</p>
+<pre><code>fs.link(srcpath, dstpath, [callback(err)])
+</code></pre><p>20.读取链接</p>
+<pre><code>fs.readlink(path, [callback(err,linkString)])
+</code></pre><p>21.修改文件时间戳</p>
+<pre><code>fs.utimes(path, atime, mtime, [callback(err)])
+</code></pre><p>22.同步磁盘缓存</p>
+<pre><code>fs.fsync(fd, [callback(err)])
+</code></pre><h5 id="url-文件管理"><a href="#url-文件管理" class="headerlink" title="url 文件管理"></a>url 文件管理</h5><p>1.解析url，返回一个json格式的数组</p>
+<pre><code> url.parse(‘http://www.baidu.com’);
+结果如: { protocol: ‘http:’,
+slashes: null,
+auth: null,
+host: null,
+port: null,
+hostname: null,
+hash: null,
+search: null,
+query: null,
+pathname: ‘www.baidu.com’,
+path: ‘www.baidu.com’,
+href: ‘http://www.baidu.com’ }
+</code></pre><p>2.解析url - 条件解析</p>
+<pre><code> url.parse(‘http://www.baidu.com?page=1’,true);
+结果如: { protocol: ‘http:’,
+slashes: true,
+auth: null,
+host: ‘www.baidu.com’,
+port: null,
+hostname: ‘www.baidu.com’,
+hash: null,
+search: ‘?page=1’,
+query: { page: ‘1’ },
+pathname: ‘/’,
+path: ‘/?page=1’,
+href: ‘http://www.baidu.com/?page=1’ }
+</code></pre><p>3.解析主机</p>
+<pre><code> url.parse(‘http://www.baidu.com/news’,false,true);
+结果如:{ protocol: ‘http:’,
+slashes: true,
+auth: null,
+host: ‘www.baidu.com’,
+port: null,
+hostname: ‘www.baidu.com’,
+hash: null,
+search: null,
+query: null,
+pathname: ‘/news’,
+    path: ‘/news’,
+href: ‘http://www.baidu.com/news’ }
+</code></pre><p>4.格式化为url. 将json数组逆向成url</p>
+<pre><code> url.format({
+protocol: ‘http:’,
+hostname:‘www.baidu.com’,
+port:‘80’,
+pathname :’/news’,
+query:{page:1}
+});
+结果如: http://www.baidu.com/news?page=1
+</code></pre><p>5.封装路径</p>
+<pre><code> url.resolve(‘http://example.com/’, ‘/one’)  // &apos;http://example.com/one’
+url.resolve(‘http://example.com/one’, ‘/two’) // ‘http://example.com/two’
+</code></pre><h5 id="path-路径管理"><a href="#path-路径管理" class="headerlink" title="path 路径管理"></a>path 路径管理</h5><p>用于处理和转换文件路径的工具集,用于处理目录的对象</p>
+<p>1.格式化路径. 将不符合规范的路径经过格式化转换为标准路径,解析路径中的.与…外，还能去掉多余的斜杠</p>
+<pre><code> path.normalize(’/path///normalize/hi/…’);
+结果如: ‘/path/normalize/’ 标准化之后的路径里的斜杠在Windows系统下是，而在Linux系统下是/
+</code></pre><p>2.组合路径</p>
+<pre><code>path.join(’///you’, ‘/are’, ‘//beautiful’);
+结果如:  ‘/you/are/beautiful’
+</code></pre><p>3.返回路径中的目录名</p>
+<pre><code> path.dirname(’/foo/strong/cool/nice’);
+结果如: ‘/foo/strong/cool’
+</code></pre><p>4.返回路径最后一部分,还可以排除指定字符串</p>
+<pre><code> path.basename(’/foo/strong/basename/index.html’);
+path.basename(’/foo/strong/basename/index.html’,’.html’);
+结果如: index.html 和 index
+</code></pre><p>5.返回路径后缀</p>
+<pre><code> path.extname(‘index.html’);
+结果如: .html
+</code></pre><h4 id="Query-String-字符串转换"><a href="#Query-String-字符串转换" class="headerlink" title="Query String 字符串转换"></a>Query String 字符串转换</h4><p>用于实现URL参数字符串与参数对象之间的互相转换</p>
+<p>1.序列化对象.将对象类型转换成一个字符串类型（默认的分割符（“&amp;”）和分配符（“=”））</p>
+<pre><code> 1 querystring.stringify({foo:‘bar’,cool:[‘xux’, ‘yys’]});
+结果如: foo=bar&amp;cool=xux&amp;cool=yys
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2 重载1: querystring.stringify(&#123;foo:‘bar’,cool:[‘xux’, ‘yys’]&#125;,’*’,’$’);</div><div class="line">结果如: foo$bar*cool$xux*cool$yys</div></pre></td></tr></table></figure>
+<p>2.反序列化</p>
+<pre><code>querystring.parse(‘foo@bar$cool@xux$cool@yys’,’@’,’$’);
+结果如: { foo: ‘bar’ ,  cool: [‘xux’, ‘yys’] }
+</code></pre><h4 id="util-使用工具"><a href="#util-使用工具" class="headerlink" title="util 使用工具"></a>util 使用工具</h4><p>提供常用函数的集合，用于弥补核心JavaScript的一些功能过于精简的不足。并且还提供了一系列常用工具，用来对数据的输出和验证</p>
+<p>1.任意对象转化为字符串,用于调试输出</p>
+<pre><code>util.inspect(object,[showHidden],[depth],[colors])
+</code></pre><p>2.格式化字符串. 就像c语言的 printf函数<br>支持的占位符有：“%s(字符串)”、“%d(数字&lt;整型和浮点型&gt;)”、“%j(JSON)”、“%(单独一个百分号则不作为一个参数)”</p>
+<pre><code> util.format(’%s:%s’, ‘foo’);
+结果如: foo:%s
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">util.format(’%s:%s’, ‘foo’, ‘bar’, ‘baz’);</div><div class="line">结果如: foo:bar baz 额外的参数将会调用util.inspect()转换为	字符串连接在一起</div></pre></td></tr></table></figure>
+<pre><code>util.format(1, 2, 3);
+结果如: 1 2 3 , 第一个参数是一个非格式化字符串，则会把所有的参数转成字符串并以空格隔开拼接在一块
+</code></pre><p>3.验证函数</p>
+<pre><code> util.isArray(object);
+判断对象是否为数组类型，是则返回ture,否则为false
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">util.isDate(object);</div><div class="line">判断对象是否为日期类型，是则返回ture,否则返回false</div></pre></td></tr></table></figure>
+<pre><code>util.isRegExp(object);
+判断对象是否为正则类型，是则返回ture,否则返回false
+,util.isArray()、util.isRegExp()、util.isDate()、util.isError()  util.format()、util. debug()
+</code></pre><p>4.继承</p>
+<pre><code> util.inherits( 子类, 基类)
+实现对象间原型继承
+
+child_process 子进程
+</code></pre><p>node.js是基于单线程模型架构，这样的设计可以带来高效的CPU利用率，但是无法却利用多个核心的CPU，为了解决这个问题，node.js提供了child_process模块，通过多进程来实现对多核CPU的利用. child_process模块提供了四个创建子进程的函数，分别是spawn，exec，execFile和fork</p>
+<p>1.用给定的命令发布一个子进程，带有‘args’命令行参数</p>
+<pre><code> child_process.spawn(command, [args], [options])
+command {String}要运行的命令行
+args {Array} 字符串参数列表
+options {Object}
+cwd {String} 子进程的当前的工作目录
+stdio {Array|String} 子进程 stdio 配置. (参阅下文)
+customFds {Array} Deprecated 作为子进程 stdio 使用的 文件标示符. (参阅下文)
+env {Object} 环境变量的键值对
+detached {Boolean} 子进程将会变成一个进程组的领导者. (参阅下文)
+uid {Number} 设置用户进程的ID. (See setuid(2).)
+gid {Number} 设置进程组的ID. (See setgid(2).)
+返回: {ChildProcess object}
+</code></pre><p>2.创建子进程</p>
+<pre><code>child_process.exec(command, [options], callback)
+</code></pre><p>3.创建进程 - 直接运行指定文件</p>
+<pre><code>child_process.execFile( file);
+</code></pre><p>4.直接运行Node.js模块</p>
+<pre><code> child_process.fork( modulePath );
+fork函数只支持运行JavaScript代码
+</code></pre><h4 id="http-HTTP"><a href="#http-HTTP" class="headerlink" title="http HTTP"></a>http HTTP</h4><p>2个方法</p>
+<pre><code> http.createServer([requestListener])  创建HTTP服务器
+http.createClient([port], [host])     创建HTTP客户端
+</code></pre><h5 id="http-Server"><a href="#http-Server" class="headerlink" title="http.Server"></a>http.Server</h5><p>由 http.createServer 创建所返回的实例</p>
+<h5 id="http-Server-事件"><a href="#http-Server-事件" class="headerlink" title="http.Server 事件"></a>http.Server 事件</h5><p>request 客户端请求到来<br>提供2个参数: req, res  分别是http.ServerRequest 和  http.ServerResponse  的实例.表示请求和响应消息</p>
+<p>connection TCP建立连接时触发<br>提供1个 socket 参数 net.Socket 实例</p>
+<p>close 服务器关闭时触发<br>无参数</p>
+<p>还有checkContinue 、 upgrade 、 clientError 等事件. request 经常使用,所以包含在了 createServer函数中</p>
+<h5 id="http-ServerRequest-对象"><a href="#http-ServerRequest-对象" class="headerlink" title="http.ServerRequest 对象"></a>http.ServerRequest 对象</h5><p>HTTP请求的消息, 一般由 http.Server的 request 事件发送</p>
+<h5 id="属性"><a href="#属性" class="headerlink" title="属性:"></a>属性:</h5><p>complete          客户端请求是否已经发送完成</p>
+<p>httpVersion      HTTP 协议版本，通常是 1.0 或 1.1</p>
+<p>method          HTTP 请求方法，如 GET、POST、PUT、DELETE 等</p>
+<p>url              原始的请求路径，例如 /static/image/x.jpg 或 /user?name=byvoid</p>
+<p>headers          HTTP 请求头</p>
+<p>trailers          HTTP 请求尾（不常见）</p>
+<p>connection      当前 HTTP 连接套接字，为 net.Socket 的实例</p>
+<p>socket          connection 属性的别名</p>
+<p>client          client 属性的别名</p>
+<h5 id="GET"><a href="#GET" class="headerlink" title="GET:"></a>GET:</h5><p>的请求是直接嵌入路径中的. 解析?后面的路径就行了.  url 模块中  parse 函数提供了这个功能</p>
+<h5 id="POST"><a href="#POST" class="headerlink" title="POST:"></a>POST:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">**HTTP 请求分: 请求头.  请求体**</div><div class="line">http.ServerRequest 提供3个事件控制请求体传输</div><div class="line">data:	请求体数据来到时. 参数 chunk 表示接收到的数据</div><div class="line">end:	请求体数据传输完成时</div><div class="line">close	用户当前请求结束时</div></pre></td></tr></table></figure>
+<pre><code>var post = &apos;&apos;;
+req.on(&apos;data&apos;, function(chunk) {    post += chunk;    });
+req.on(&apos;end&apos;, function() {    post = querystring.parse(post);
+res.end(util.inspect(post));});
+</code></pre><h5 id="http-ServerResponse-对象"><a href="#http-ServerResponse-对象" class="headerlink" title="http.ServerResponse 对象"></a>http.ServerResponse 对象</h5><p>http.ServerResponse是返回给客户端的信息,决定了用户最终看到的结果. 有3个重要的成员函数. 用于响应头,响应内容以及结束请求</p>
+<p>1.向客户端发送响应头</p>
+<pre><code> res.writeHead(statusCode, [headers])
+statusCode, 是HTTP状态码. 如200,404.
+
+headers 类似数组的对象,表示响应头的每个属性
+{
+“Content-Type”: “text/html”,
+“Connection”: “keep-alive”
+}
+</code></pre><p>2.发送响应内容, 如果是字符串,需要制定编码方式, 默认 utf-8</p>
+<pre><code>res.write(data, [encoding])
+</code></pre><p>3.结束响应,告知客户端所有响应完成. 此函数必须调用一次</p>
+<pre><code>res.end([data] , [encoding] )
+</code></pre><h4 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h4><p>文件模块，则是指js文件、json文件或者是.node文件</p>
+<h6 id="无"><a href="#无" class="headerlink" title="无"></a>无</h6><h3 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h3><h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><p>挂接模块</p>
+<pre><code>var EventEmitter = require(‘events’).EventEmitter;
+</code></pre><p>1.实例化一个EventEmitter对象</p>
+<pre><code>var event = new EventEmitter();
+</code></pre><p>2.注册事件</p>
+<pre><code> emitter.on( ‘Event_Name’ , callBack_Fun )
+emitter.once( ‘Event_Name’ , callBack_Fun )    //注册一个单次监听器,触发一次后立刻解除
+</code></pre><p>3.发射事件</p>
+<pre><code>event.emit(‘Event_Name’ , 参数1,参数2);
+</code></pre><p>4.移除事件</p>
+<pre><code> emitter…removeListener(‘Event_Name’ , callBack_Fun)
+emitter.removeAllListeners(  [‘Event_Name’] )    //如果指定了事件名,就移除指定的,否则移除所有事件
+</code></pre><h4 id="模块和包"><a href="#模块和包" class="headerlink" title="模块和包"></a>模块和包</h4><pre><code>Node.js 的模块和包机制的实现参照了 CommonJS 的标准，但并未完全遵循。
+
+#### 包
+包是在模块基础上更深一步的抽象, 类似于 c/c++ 的函数库.
+Node.js 包是一个目录. 其中包含一个JSON格式的说明文件     package.json
+CommonJS 规范特征:
+-&gt;   package.json 必须在包的顶层目录下
+-&gt;   二进制文件在bin目录下
+-&gt;   JavaScript代码在lib目录下
+-&gt;   文档应该在doc目录下
+-&gt;   单元测试在test目录下
+
+
+
+
+#### require(&apos;Modile_Name&apos;)     
+功能:    加载其他模块
+说明:    不会重复加载以加载的模块
+
+
+#### exports.setName
+功能:    公开一个模块中的函数或对象
+说明:    exports 本身仅仅是一个普通的空对象，即 {}. 所以     exports.函数  就是给它加了函数
+module.exports  则是用一个对象取代 exports  对象. (不可以对 exports 直接赋值替代此功能)
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">方式1:</div><div class="line">	//使用</div><div class="line">	exports.SayName = function(thyName) &#123;console.log(thyName)&#125;; </div><div class="line">	//调用</div><div class="line">	var test = require(&apos;./fileName&apos;);</div><div class="line">	test.SayName(&apos;XueYou&apos;);</div><div class="line"></div><div class="line">方式2:</div><div class="line">	//使用</div><div class="line">	function hello()&#123;</div><div class="line">	 	var name;</div><div class="line">		this.setNam()&#123;&#125;;</div><div class="line">		this.SayName()&#123;&#125;;</div><div class="line">	&#125;</div><div class="line">	module.exports = hello;</div><div class="line">	//调用</div><div class="line">	var test = require(&apos;./fileName&apos;);</div><div class="line">	test = new test();	//注意因为是对象,所以要new</div><div class="line">	test.SayName();</div></pre></td></tr></table></figure>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><h5 id="express-与-webstorm-配置"><a href="#express-与-webstorm-配置" class="headerlink" title="express 与 webstorm 配置"></a>express 与 webstorm 配置</h5><p>Node interpreter : node.exe 路径<br>Node parameters  : ./bin/www<br>Working directory : 工作目录<br>JavaScript file  :  app.js</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/18/nodeHeartModule/" class="archive-article-date">
+  	<time datetime="2016-08-18T11:56:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mongoose" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/18/mongoose/">mongoose</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="mongo"><a href="#mongo" class="headerlink" title="mongo"></a>mongo</h1><h2 id="Mongoose全面理解"><a href="#Mongoose全面理解" class="headerlink" title="Mongoose全面理解"></a>Mongoose全面理解</h2><h3 id="一、创建schemas"><a href="#一、创建schemas" class="headerlink" title="一、创建schemas"></a>一、创建schemas</h3><p>创建schemas的方式：</p>
+<pre><code>var userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+       createdOn: Date
+});
+</code></pre><p>schemas中的数据类型有以下几种：</p>
+<ul>
+<li>String</li>
+<li>Number</li>
+<li>Date</li>
+<li>Boolean</li>
+<li>Buffer</li>
+<li>ObjectId</li>
+<li>Mixed</li>
+<li>Array</li>
+</ul>
+<p>特别需要说明一下ObjectId类型和Mixed类型以及Array类型，在schemas中声明这几种类型的方式如下：</p>
+<pre><code>1 //ObjectId就类似于唯一键值
+ 2 projectSchema.add({
+3     owner: mongoose.Schema.Types.ObjectId
+4 });
+ 5 //混合类型，顾名思义，就是说里面可以放置任意类型的数据，有两种方式创建该类型数据
+6 //方式一：直接赋予一个空的字面量对象
+7 vardjSchema= new mongoose.Schema({
+8     mixedUp: {}
+9 });
+10 //方式二：根据Schemas.Types中值来赋予
+11 vardjSchema= new mongoose.Schema({
+12     mixedUp: Schema.Types.Mixed
+13 });
+14 //Array类型数据有两种创建方式，一种是简单数组创建：
+15 var userSchema = new mongoose.Schema({
+16     name: String,
+17     emailAddresses: [String]
+18 });
+19 //第二种方式就是复杂类型数据数组，例如我们可以再数组中添加不同类型的schemas:
+20 var emailSchema = new mongoose.Schema({
+21     email: String,
+22     verified: Boolean
+23 });
+24 var userSchema = new mongoose.Schema({
+25     name: String,
+26     emailAddresses: [emailSchema]
+27 });
+28 //注意：如果定义一个空的数据的话，则会创建为一个混合类型数据的数组：
+29 var emailSchema = new mongoose.Schema({
+30     email: String,
+31     verified: Boolean
+32 });
+33 var userSchema = new mongoose.Schema({
+34     name: String,
+35     emailAddresses: [emailSchema]
+36 });
+</code></pre><p>我们可以给schema创建静态方法，这个静态方法将来会用在Model中，创建该静态方法需要在创建完成schema之后，在Model编译之前：</p>
+<pre><code>1 projectSchema.statics.findByUserID = function (userid, callback) {
+2   this.find({ createdBy: userid }, &apos;_id projectName&apos;, {sort: &apos;modifiedOn&apos;}, callback);
+3 };
+</code></pre><p>在其对应的模型创建完成并编译后，我们就可以像下面这样来调用该静态方法了：<br>Model.findByUserID(userid,callback);<br>该静态方法会返回一个JSON格式的数据，这在我们使用AJAX技术来加载网页数据的时候会比较方便，就像下面这样：</p>
+<pre><code> 1 //路由规则：app.get(&apos;/project/byuser/:userid&apos;, project.byUser);
+ 2 exports.byUser = function (req, res) {
+ 3     console.log(&quot;Getting user projects&quot;);
+ 4     if (req.params.userid){
+ 5         Project.findByUserID(req.params.userid,function (err, projects) {
+ 6             if(!err){
+ 7                 console.log(projects);
+ 8                 res.json(projects);
+ 9             }else{
+10                 console.log(err);
+11                 res.json({&quot;status&quot;:&quot;error&quot;, &quot;error&quot;:&quot;Error finding projects&quot;});
+12             }
+13         });
+14     }else{
+15         console.log(&quot;No user id supplied&quot;);
+16         res.json({&quot;status&quot;:&quot;error&quot;, &quot;error&quot;:&quot;No user     id supplied&quot;});
+17     }
+18 };
+</code></pre><h3 id="二、创建Model"><a href="#二、创建Model" class="headerlink" title="二、创建Model"></a>二、创建Model</h3><p>创建Model很简单：</p>
+<p>Mongoose.Model(‘User’, userSchema);</p>
+<p>参数一为Model的名字，参数二为生成Model所需要的schema,Model就像是schema所编译而成的一样。</p>
+<p>mongoose连接数据库是有两种方式的：</p>
+<pre><code> 1 //方式一：
+ 2 var dbURI = &apos;mongodb://localhost/mydatabase&apos;;
+ 3 mongoose.connect(dbURI);
+ 4 //方式二：
+5 var dbURI = &apos;mongodb://localhost/myadmindatabase&apos;;
+6 var adminConnection = mongoose.createConnection(dbURI);
+7 //如果需要声明端口号：
+ 8 var dbURI = &apos;mongodb://localhost:27018/mydatabase&apos;;
+ 9 //如果需要定义用户名和密码：
+10 var dbURI = &apos;mongodb://username:password@localhost/mydatabase&apos;;
+11 //也可以像下面这样传一个对象类型的参数：
+12 var dbURI = &apos;mongodb://localhost/mydatabase&apos;;
+13 var dbOptions = {&apos;user&apos;:&apos;db_username&apos;,&apos;pass&apos;:&apos;db_password&apos;};
+14 mongoose.connect(dbURI, dbOptions);
+</code></pre><p>根据连接数据库的方式，我们可以得到第二种创建Model的方式，就是使用数据库连接的引用名来创建：</p>
+<p>adminConnection.model( ‘User’, userSchema );</p>
+<p>默认情况下mongoose会根据我们传入的Model名字来生成collection名字，在上面的代码中就会生成名为users(全为小写字母)的collection(集合)；</p>
+<p>有两种方法能让我们自定义collection的名字。</p>
+<pre><code> 1 //方式一，在创建schema的时候定义collection的名字：
+ 2 var userSchema = new mongoose.Schema({
+ 3     name: String,
+ 4     email: {type: String, unique:true}
+ 5 },
+ 6 {
+ 7     collection: &apos;myuserlist&apos;
+ 8 });
+ 9 //方式二，在创建Model的时候定义collection的名字：
+10 mongoose.model( &apos;User&apos;, userSchema, &apos;myuserlist&apos; );
+</code></pre><p>创建Model实例：</p>
+<p>var user = new User({ name: ‘Simon’ });</p>
+<p>user就是模型User的一个实例，它具有mongoose中模型所具有的一些方法，例如保存实例：</p>
+<pre><code>1 user.save(function (err) {
+2     if (err) return handleError(err);
+3 });
+</code></pre><p>模型也具有一些常用的增删查改的方法：</p>
+<pre><code> 1 User.findOne({&apos;name&apos; : &apos;Sally&apos;, function(err,user) {
+ 2     if(!err){
+ 3         console.log(user);
+ 4     }
+ 5 });
+ 6 User.find({}, function(err, users) {
+ 7     if(!err){
+ 8         console.log(users);
+ 9     }
+10 });
+</code></pre><p>可以使用链式方式使用这些方法，例如：</p>
+<pre><code>1 var newUser = new User({
+2     name: &apos;Simon Holmes&apos;,
+3     email: &apos;simon@theholmesoffice.com&apos;,
+4     lastLogin : Date.now()
+5 }).save( function( err ){
+6     if(!err){
+7         console.log(&apos;User saved!&apos;);
+8     }
+9 });
+</code></pre><p>上面的代码创建了一个模型实例，然后进行保存。我们有一个更为简介的方式来完成这项工作，就是使用Model.create()方法：</p>
+<pre><code>1 User.create({
+ 2     name: &apos;Simon Holmes&apos;,
+ 3     email: &apos;simon@theholmesoffice.com&apos;,
+ 4     lastLogin : Date.now()
+ 5 }, function( err, user ){
+ 6     if(!err){
+ 7         console.log(&apos;User saved!&apos;);
+ 8         console.log(&apos;Saved user name: &apos; + user.name);
+ 9         console.log(&apos;_id of saved user: &apos; + user._id);
+10     }
+11 });
+</code></pre><h3 id="三、查找数据和读取数据的方法"><a href="#三、查找数据和读取数据的方法" class="headerlink" title="三、查找数据和读取数据的方法"></a>三、查找数据和读取数据的方法</h3><h4 id="1-使用QueryBuilder接口来查找数据"><a href="#1-使用QueryBuilder接口来查找数据" class="headerlink" title="1.使用QueryBuilder接口来查找数据"></a>1.使用QueryBuilder接口来查找数据</h4><p>先看看下面的代码：</p>
+<pre><code>1 var myQuery = User.find({&apos;name&apos; : &apos;Simon Holmes&apos;});
+2 myQuery.where(&apos;age&apos;).gt(18);
+3 myQuery.sort(&apos;-lastLogin&apos;);
+4 myQuery.select(&apos;_id name email&apos;);
+5 myQuery.exec(function (err, users){
+6     if (!err){
+7         console.log(users); // output array of users found
+8     }
+9 });
+</code></pre><p>代码中，我们查找名字为”Simon Holmes”，并且年龄大于18岁，查找结果根据lastLogin降序排列，只获取其中的_id, name, email三个字段的值，上面的代码只有在调用exec方法后才真正执行数据库的查询。</p>
+<p>当然我们可以使用链式的方式来改写上面的代码，代码会更加简洁：</p>
+<pre><code>1 User.find({&apos;name&apos; : &apos;Simon Holmes&apos;})
+2 .where(&apos;age&apos;).gt(18)
+3 .sort(&apos;-lastLogin&apos;)
+4 .select(&apos;_id name email&apos;)
+5 .exec(function (err, users){
+6     if (!err){
+7         console.log(users); // output array of users found
+8     }
+9 });
+</code></pre><p>上面代码中的第一行创建了一个queryBuilder.通过使用这个queryBuilder，我们就可以执行一些比较复杂的查找工作，</p>
+<p>在创建完成这个queryBuilder之后，查询操作并没有马上执行，而是待到执行exec方法时才会去执行数据库的查找。</p>
+<p>当然也有另外一种方式能够直接查找数据库的，就是直接在查找方法中添加回调函数，使用方式为：<br>Model.find(conditions, [fields], [options], [callback])</p>
+<p>下面举一个简单例子：</p>
+<pre><code>1 User.find({&apos;name&apos;, &apos;simon holmes&apos;}, function(err, user) {});
+</code></pre><p>另一个稍微复杂的例子：</p>
+<pre><code>1 User.find({&apos;name&apos;, &apos;simon holmes&apos;}, &apos;name email&apos;,function(err, user) {
+2     //console.log(&apos;some thing&apos;);
+3 });
+</code></pre><p>另一个更加复杂的例子，包含查询结果的排序：</p>
+<pre><code>1 User.find({&apos;name&apos; : &apos;Simon Holmes&apos;},
+2     null, // 如果使用null，则会返回所有的字段值
+3     {sort : {lastLogin : -1}}, // 降序排序
+4     function (err, users){
+5         if (!err){console.log(users);}
+6     });
+</code></pre><p>列举几个比较实用的查找方法：</p>
+<pre><code>1 Model.find(query);
+2 Model.findOne(query);//返回查找到的所有实例的第一个
+3 Model.findById(ObjectID);//根据ObjectId查找到唯一实例
+</code></pre><p>例如：</p>
+<pre><code>1 User.findOne({&apos;email&apos; : req.body.Email},
+2 &apos;_id name email&apos;,
+3 function(err, user) {
+4     //todo
+5 });
+</code></pre><h4 id="2-更新数据"><a href="#2-更新数据" class="headerlink" title="2.更新数据"></a>2.更新数据</h4><p>有三种方式来更新数据：</p>
+<p>(1)update(conditions,update,options,callback); </p>
+<p>该方法会匹配到所查找的内容进行更新，不会返回数据；</p>
+<p>(2)findOneAndUpdate(conditions,update,options,callback);</p>
+<p>该方法会根据查找去更新数据库，另外也会返回查找到的并未改变的数据；</p>
+<p>(3)findByIdAndUpdate(conditions,update,options,callback);</p>
+<p>该方法跟上面的findOneAndUpdate方法功能一样，不过他是根据ID来查找</p>
+<p>文档并更新的。</p>
+<p>三个方法都包含四个参数，一下稍微说明一下几个参数的意思：<br>conditions:查询条件</p>
+<p>update:更新的数据对象，是一个包含键值对的对象</p>
+<p>options:是一个声明操作类型的选项，这个参数在下面再详细介绍</p>
+<p>callback:回调函数</p>
+<p>对于options参数，在update方法中和findOneAndUpdate、</p>
+<p>findByIdAndUpdate两个方法中的可选设置是不同的；</p>
+<pre><code>1 //在update方法中，options的可选设置为：
+ 2 {
+ 3 safe:true|false,  //声明是否返回错误信息，默认true
+4 upsert:false|true, //声明如果查询不到需要更新的数据项，是否需要新插入一条记录，默认false
+5 multi:false|true,  //声明是否可以同时更新多条记录，默认false
+6 strict:true|false  //声明更新的数据中是否可以包含在schema定义之外的字段数据，默认true
+ 7 }
+ 8 //对于findOneAndUpdate、findByIdAndUpdate这两个方法，他们的options可选设置项为：
+9 {
+10 new:true|false, //声明返回的数据时更新后的该是更新前的，如果为true则返回更新后的，默认true
+11 upsert:false|trure, 
+12 sort:javascriptObject, //如果查询返回多个文档记录，则可以进行排序，在这里是根据传入的javascript object对象进行排序
+13 select:String //这里声明要返回的字段，值是一个字符串
+14 }
+</code></pre><p>下面举个例子：</p>
+<pre><code>User.update({_id:user._id},{$set: {lastLogin: Date.now()}},function(){});
+</code></pre><h4 id="3-数据删除"><a href="#3-数据删除" class="headerlink" title="3.数据删除"></a>3.数据删除</h4><p>跟更新数据一样，也有三种方法给我们删除数据：</p>
+<p>remove();</p>
+<p>findOneAndRemove();</p>
+<p>findByIdAndRemove();</p>
+<p>remove方法有两种使用方式，一种是用在模型上，另一种是用在模型实例上，例如：</p>
+<pre><code> 1 User.remove({ name : /Simon/ } , function (err){
+ 2     if (!err){
+ 3         // 删除名字中包含simon的所有用户
+ 4     }
+5 });
+6 
+ 7 User.findOne({ email : &apos;simon@theholmesoffice.com&apos;},function (err,user){
+ 8     if (!err){
+ 9         user.remove( function(err){
+10             // 删除匹配到该邮箱的第一个用户
+11         });
+12     }
+13 });
+</code></pre><p>接下来看一下findOneAndRemove方法：</p>
+<pre><code>1 User.findOneAndRemove({name : /Simon/},{sort : &apos;lastLogin&apos;, select : &apos;name email&apos;},function (err, user){
+2     if (!err) {
+3         console.log(user.name + &quot; removed&quot;);
+4         // Simon Holmes removed
+5     };
+6 });
+</code></pre><p>另外一个findByIdAndRemove方法则是如出一辙的。<br>    1 User.findByIdAndRemove(req.body._id,function (err, user) {<br>    2     if(err){<br>    3         console.log(err);<br>    4         return;<br>    5     }<br>    6     console.log(“User deleted:”, user);<br>    7 });</p>
+<h3 id="四、数据验证"><a href="#四、数据验证" class="headerlink" title="四、数据验证"></a>四、数据验证</h3><h5 id="1-mongoose内置数据验证"><a href="#1-mongoose内置数据验证" class="headerlink" title="1.mongoose内置数据验证"></a>1.mongoose内置数据验证</h5><p>在mongoose中，数据验证这一层是放在schema中的，mongoose已经帮我们做了很多内置的数据验证，有一些验证是针对某些数据类型的，也有一些是针对所有数据类型的。<br>】<br>能够作用在所有数据类型上的验证有require，意思就是该字段是否是必须的，例如：</p>
+<p>email: { type: String, unique: true, required: true }</p>
+<p>上面的代码就定义了一个email是必须的schema.</p>
+<p>下面再分别介绍一下mongoose内置的一些数据验证类型。</p>
+<p>数字类型schemasType,对于Number类型的数据，具有min,max提供用来界定最大最小值：</p>
+<pre><code>1 var teenSchema = new Schema({
+2     age : {type: Number, min: 13, max:19}
+3 });
+</code></pre><p>字符串类型SchemasType,对于该类型数据，mongoose提供了两种验证器：<br>match:可使用正则表达式来匹配字符串是否符合该正则表达式的规则<br>enum:枚举出字符串可使用的一些值<br>分别举例如下：</p>
+<pre><code>1 var weekdaySchema = new Schema({
+2     day : {type: String, match: /^(mon|tues|wednes|thurs|fri)day$/i}
+3 });
+4 
+5 var weekdays = [&apos;monday&apos;, &apos;tuesday&apos;, &apos;wednesday&apos;, &apos;thursday&apos;,&apos;friday&apos;];
+6 var weekdaySchema = new Schema({
+7     day : {type: String, enum: weekdays}
+8 });
+</code></pre><p>在我们进行一些数据库的时候，如果有错误，可能会返回一些错误信息，这些信息封装在一个对象中，该对象的数据格式大致如下：</p>
+<pre><code>1 { 
+2     message: &apos;Validation failed&apos;,
+ 3     name: &apos;ValidationError&apos;,
+ 4     errors:{ 
+ 5         email:{
+ 6             message: &apos;Validator &quot;required&quot; failed for path email&apos;,
+ 7             name: &apos;ValidatorError&apos;,
+ 8             path: &apos;email&apos;,
+ 9             type: &apos;required&apos; 
+10         },
+11         name:{ 
+12             message: &apos;Validator &quot;required&quot; failed for path name&apos;,
+13             name: &apos;ValidatorError&apos;,
+14             path: &apos;name&apos;,
+15             type: &apos;required&apos; 
+16         } 
+17     } 
+18 }
+</code></pre><p>知道该错误信息的具体格式之后，我们可以从中得出我们想要的信息并反馈到控制台。</p>
+<pre><code>1 if(err){
+2     Object.keys(err.errors).forEach(function(key) {
+3         var message = err.errors[key].message;
+4         console.log(&apos;Validation error for &quot;%s&quot;: %s&apos;, key, message);
+5     });
+6 }
+</code></pre><h4 id="2-自定义数据验证"><a href="#2-自定义数据验证" class="headerlink" title="2.自定义数据验证"></a>2.自定义数据验证</h4><p>最简单的自定义数据验证方式就是定义一个数据验证的函数，并将它传递给schema;</p>
+<pre><code>1 var lengthValidator = function(val) {
+2     if (val &amp;&amp; val.length &gt;= 5){
+3         return true;
+4     }
+5     return false;
+6 };
+7 //usage:
+8 name: {type: String, required: true, validate: lengthValidator }
+</code></pre><p>可以看到，我们只需要在schema中添加validate键值对即可，validate对应的值便是我们自定义的验证方法；</p>
+<p>但是该形式的数据验证无法给我们提供完整的错误信息，比如errors信息中返回的type值就会成为undefined;</p>
+<p>在此基础上如果希望错误信息中能返回一个错误描述，那我们可以稍微进行一点修改：</p>
+<pre><code>1 //code 1
+2 validate: { validator: lengthValidator, msg: &apos;Too short&apos; }
+3 
+4 //code 2
+5 var weekdaySchema = new Schema({
+6     day : {type: String, validate: {validator:/^(mon|tues|wednes|thurs|fri)day$/i, msg: &apos;Not a day&apos; }
+7 });
+将validate的值修改为一个对象，并且该对象包含验证器和错误描述。
+</code></pre><p>我们也可以使用另一种方式在写这些验证器，就是将验证器卸载schema外部，例如：</p>
+<pre><code>1 var validateLength = [lengthValidator, &apos;Too short&apos; ];
+2 var validateDay = [/^(mon|tues|wednes|thurs|fri)day$/i, &apos;Not a day&apos; ];
+3 //usage:
+4 name: {type: String, required: true, validate: validateLength }
+5 day : {type: String, validate: validateDay }
+</code></pre><p>眼睛放大，一看再看，确实没错，在validate中我们传入的是一个数组了，而不是原来的对象了。<br>其实就validateLength这个东东来说，他就是一个简写来的，你也可以改成下面这样：</p>
+<pre><code>var validateLength = [
+2     {validator: lengthValidator, msg: &apos;Too short&apos;}
+3 ];
+</code></pre><p>恩，到这里，应该能明白了，将对象改为数组之后，我们便可以传递多个验证器给我们的schema了，的确如此。</p>
+<pre><code>1 var validateUsername = [
+2     {validator: lengthValidator, msg: &apos;Too short&apos;} ,
+3     {validator: /^[a-z]+$/i, msg: &apos;Letters only&apos;}
+4 ];
+</code></pre><p>我们还有另外一种方法给我们的schema提供验证器：</p>
+<pre><code>1 userSchema.path(&apos;name&apos;).validate(lengthValidator, &apos;Too short&apos;);
+2 userSchema.path(&apos;name&apos;).validate(/^[a-z]+$/i, &apos;Letters only&apos;);
+</code></pre><h4 id="摘录至：http-www-cnblogs-com-jayruan-p-5123754-html"><a href="#摘录至：http-www-cnblogs-com-jayruan-p-5123754-html" class="headerlink" title="摘录至：http://www.cnblogs.com/jayruan/p/5123754.html"></a>摘录至：<a href="http://www.cnblogs.com/jayruan/p/5123754.html" target="_blank" rel="external">http://www.cnblogs.com/jayruan/p/5123754.html</a></h4>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/18/mongoose/" class="archive-article-date">
+  	<time datetime="2016-08-18T11:11:08.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-gulp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/gulp/">gulp</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#gulp</p>
+<h2 id="入门指南"><a href="#入门指南" class="headerlink" title="入门指南"></a>入门指南</h2><h4 id="1-全局安装-gulp："><a href="#1-全局安装-gulp：" class="headerlink" title="1. 全局安装 gulp："></a>1. 全局安装 gulp：</h4><pre><code>$ npm install --global gulp
+</code></pre><h4 id="2-作为项目的开发依赖（devDependencies）安装："><a href="#2-作为项目的开发依赖（devDependencies）安装：" class="headerlink" title="2. 作为项目的开发依赖（devDependencies）安装："></a>2. 作为项目的开发依赖（devDependencies）安装：</h4><pre><code>$ npm install --save-dev gulp
+</code></pre><h4 id="3-在项目根目录下创建一个名为-gulpfile-js-的文件："><a href="#3-在项目根目录下创建一个名为-gulpfile-js-的文件：" class="headerlink" title="3. 在项目根目录下创建一个名为 gulpfile.js 的文件："></a>3. 在项目根目录下创建一个名为 gulpfile.js 的文件：</h4><pre><code>var gulp = require(&apos;gulp&apos;);
+
+gulp.task(&apos;default&apos;, function() {
+  // 将你的默认的任务代码放在这
+});
+</code></pre><h4 id="4-运行-gulp："><a href="#4-运行-gulp：" class="headerlink" title="4. 运行 gulp："></a>4. 运行 gulp：</h4><pre><code>$ gulp
+</code></pre><p>默认的名为 default 的任务（task）将会被运行，在这里，这个任务并未做任何事情。</p>
+<p>想要单独执行特定的任务（task），请输入 gulp <task> <othertask>。</othertask></task></p>
+<h2 id="gulp-API-文档"><a href="#gulp-API-文档" class="headerlink" title="gulp API 文档"></a>gulp API 文档</h2><h4 id="gulp-src-globs-options"><a href="#gulp-src-globs-options" class="headerlink" title="gulp.src(globs[, options])"></a>gulp.src(globs[, options])</h4><p>输出（Emits）符合所提供的匹配模式（glob）或者匹配模式的数组（array of globs）的文件。 将返回一个 <a href="https://github.com/gulpjs/vinyl-fs" target="_blank" rel="external">Vinyl files</a> 的 <a href="https://nodejs.org/api/stream.html" target="_blank" rel="external">stream</a> 它可以被 <a href="https://nodejs.org/api/stream.html#stream_readable_pipe_destination_options" target="_blank" rel="external">piped</a> 到别的插件中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">gulp.src(&apos;client/templates/*.jade&apos;)</div><div class="line">  .pipe(jade())</div><div class="line">  .pipe(minify())</div><div class="line">  .pipe(gulp.dest(&apos;build/minified_templates&apos;));</div></pre></td></tr></table></figure>
+<p><code>glob</code> 请参考 <a href="https://github.com/isaacs/node-glob" target="_blank" rel="external">node-glob 语法</a> 或者，你也可以直接写文件的路径。</p>
+<h5 id="globs"><a href="#globs" class="headerlink" title="globs"></a>globs</h5><p>类型： <code>String</code> 或 <code>Array</code></p>
+<p>所要读取的 glob 或者包含 globs 的数组。</p>
+<h5 id="options"><a href="#options" class="headerlink" title="options"></a>options</h5><p>类型： Object</p>
+<p>通过 glob-stream 所传递给 node-glob 的参数。</p>
+<p>除了 node-glob 和 glob-stream 所支持的参数外，gulp 增加了一些额外的选项参数：</p>
+<h5 id="options-buffer"><a href="#options-buffer" class="headerlink" title="options.buffer"></a>options.buffer</h5><p>类型： Boolean 默认值： true</p>
+<p>如果该项被设置为 false，那么将会以 stream 方式返回 file.contents 而不是文件 buffer 的形式。这在处理一些大文件的时候将会很有用。<strong>注意：</strong>插件可能并不会实现对 stream 的支持。</p>
+<h5 id="options-read"><a href="#options-read" class="headerlink" title="options.read"></a>options.read</h5><p>类型： Boolean 默认值： true</p>
+<p>如果该项被设置为 false， 那么 file.contents 会返回空值（null），也就是并不会去读取文件。</p>
+<h5 id="options-base"><a href="#options-base" class="headerlink" title="options.base"></a>options.base</h5><p>类型： String 默认值： 将会加在 glob 之前 (请看 glob2base)</p>
+<p>如, 请想像一下在一个路径为 client/js/somedir 的目录中，有一个文件叫 somefile.js ：</p>
+<p>gulp.src(‘client/js/<em>*/</em>.js’) // 匹配 ‘client/js/somedir/somefile.js’ 并且将 <code>base</code> 解析为 <code>client/js/</code><br>  .pipe(minify())<br>  .pipe(gulp.dest(‘build’));  // 写入 ‘build/somedir/somefile.js’</p>
+<p>gulp.src(‘client/js/<em>*/</em>.js’, { base: ‘client’ })<br>  .pipe(minify())<br>  .pipe(gulp.dest(‘build’));  // 写入 ‘build/js/somedir/somefile.js’</p>
+<h4 id="gulp-dest-path-options"><a href="#gulp-dest-path-options" class="headerlink" title="gulp.dest(path[, options])"></a>gulp.dest(path[, options])</h4><p>能被 pipe 进来，并且将会写文件。并且重新输出（emits）所有数据，因此你可以将它 pipe 到多个文件夹。如果某文件夹不存在，将会自动创建它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">gulp.src(&apos;./client/templates/*.jade&apos;)</div><div class="line">  .pipe(jade())</div><div class="line">  .pipe(gulp.dest(&apos;./build/templates&apos;))</div><div class="line">  .pipe(minify())</div><div class="line">  .pipe(gulp.dest(&apos;./build/minified_templates&apos;));</div></pre></td></tr></table></figure>
+<p>文件被写入的路径是以所给的相对路径根据所给的目标目录计算而来。类似的，相对路径也可以根据所给的 base 来计算。 请查看上述的 gulp.src 来了解更多信息。</p>
+<p>#####path</p>
+<p>类型： <code>String</code> or <code>Function</code></p>
+<p>文件将被写入的路径（输出目录）。也可以传入一个函数，在函数中返回相应路径，这个函数也可以由 <a href="https://github.com/wearefractal/vinyl" target="_blank" rel="external">vinyl 文件实例</a> 来提供。</p>
+<h5 id="options-1"><a href="#options-1" class="headerlink" title="options"></a>options</h5><p>类型： <code>Object</code></p>
+<h5 id="options-cwd"><a href="#options-cwd" class="headerlink" title="options.cwd"></a>options.cwd</h5><p>类型： <code>String</code> 默认值： <code>process.cwd()</code></p>
+<p>输出目录的 cwd 参数，只在所给的输出目录是相对路径时候有效。</p>
+<h5 id="options-mode"><a href="#options-mode" class="headerlink" title="options.mode"></a>options.mode</h5><p>类型： <code>String</code> 默认值： <code>0777</code></p>
+<p>八进制权限字符，用以定义所有在输出目录中所创建的目录的权限。</p>
+<h4 id="gulp-task-name-deps-fn"><a href="#gulp-task-name-deps-fn" class="headerlink" title="gulp.task(name[, deps], fn)"></a>gulp.task(name[, deps], fn)</h4><p>定义一个使用 Orchestrator 实现的任务（task）。</p>
+<pre><code>gulp.task(&apos;somename&apos;, function() {
+  // 做一些事
+});
+</code></pre><h5 id="name"><a href="#name" class="headerlink" title="name"></a>name</h5><p>任务的名字，如果你需要在命令行中运行你的某些任务，那么，请不要在名字中使用空格。</p>
+<h5 id="deps"><a href="#deps" class="headerlink" title="deps"></a>deps</h5><p>类型： <code>Array</code></p>
+<p>一个包含任务列表的数组，这些任务会在你当前任务运行之前完成。</p>
+<pre><code>gulp.task(&apos;mytask&apos;, [&apos;array&apos;, &apos;of&apos;, &apos;task&apos;, &apos;names&apos;], function() {
+  // 做一些事
+});
+</code></pre><p><code>注意</code>： 你的任务是否在这些前置依赖的任务完成之前运行了？请一定要确保你所依赖的任务列表中的任务都使用了正确的异步执行方式：使用一个 callback，或者返回一个 promise 或 stream。</p>
+<h5 id="fn"><a href="#fn" class="headerlink" title="fn"></a>fn</h5><p>该函数定义任务所要执行的一些操作。通常来说，它会是这种形式：<code>gulp.src().pipe(someplugin())</code>。</p>
+<h6 id="异步任务支持"><a href="#异步任务支持" class="headerlink" title="异步任务支持"></a>异步任务支持</h6><p>任务可以异步执行，如果 <code>fn</code> 能做到以下其中一点：</p>
+<p>接受一个 <a href="">callback</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 在 shell 中执行一个命令</div><div class="line">var exec = require(&apos;child_process&apos;).exec;</div><div class="line">gulp.task(&apos;jekyll&apos;, function(cb) &#123;</div><div class="line">  // 编译 Jekyll</div><div class="line">  exec(&apos;jekyll build&apos;, function(err) &#123;</div><div class="line">    if (err) return cb(err); // 返回 error</div><div class="line">    cb(); // 完成 task</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>返回一个 <a href="">stream</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">gulp.task(&apos;somename&apos;, function() &#123;</div><div class="line">  var stream = gulp.src(&apos;client/**/*.js&apos;)</div><div class="line">    .pipe(minify())</div><div class="line">    .pipe(gulp.dest(&apos;build&apos;));</div><div class="line">  return stream;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>返回一个 <a href="https://github.com/wearefractal/vinyl" target="_blank" rel="external">promise</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var Q = require(&apos;q&apos;);</div><div class="line"></div><div class="line">gulp.task(&apos;somename&apos;, function() &#123;</div><div class="line">  var deferred = Q.defer();</div><div class="line"></div><div class="line">  // 执行异步的操作</div><div class="line">  setTimeout(function() &#123;</div><div class="line">    deferred.resolve();</div><div class="line">  &#125;, 1);</div><div class="line"></div><div class="line">  return deferred.promise;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><code>注意</code>： 默认的，task 将以最大的并发数执行，也就是说，gulp 会一次性运行所有的 task 并且不做任何等待。如果你想要创建一个序列化的 task 队列，并以特定的顺序执行，你需要做两件事：</p>
+<ul>
+<li>给出一个提示，来告知 task 什么时候执行完毕，</li>
+<li>并且再给出一个提示，来告知一个 task 依赖另一个 task 的完成。</li>
+</ul>
+<p>对于这个例子，让我们先假定你有两个 task，”one” 和 “two”，并且你希望它们按照这个顺序执行：</p>
+<ul>
+<li><p>在 “one” 中，你加入一个提示，来告知什么时候它会完成：可以再完成时候返回一个 callback，或者返回一个 promise 或 stream，这样系统会去等待它完成。</p>
+</li>
+<li><p>在 “two” 中，你需要添加一个提示来告诉系统它需要依赖第一个 task 完成。</p>
+</li>
+</ul>
+<p>因此，这个例子的实际代码将会是这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var gulp = require(&apos;gulp&apos;);</div><div class="line"></div><div class="line">// 返回一个 callback，因此系统可以知道它什么时候完成</div><div class="line">gulp.task(&apos;one&apos;, function(cb) &#123;</div><div class="line">    // 做一些事 -- 异步的或者其他的</div><div class="line">    cb(err); // 如果 err 不是 null 或 undefined，则会停止执行，且注意，这样代表执行失败了</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 定义一个所依赖的 task 必须在这个 task 执行之前完成</div><div class="line">gulp.task(&apos;two&apos;, [&apos;one&apos;], function() &#123;</div><div class="line">    // &apos;one&apos; 完成后</div><div class="line">&#125;);</div><div class="line"></div><div class="line">gulp.task(&apos;default&apos;, [&apos;one&apos;, &apos;two&apos;]);</div></pre></td></tr></table></figure>
+<h4 id="gulp-watch-glob-opts-tasks-或-gulp-watch-glob-opts-cb"><a href="#gulp-watch-glob-opts-tasks-或-gulp-watch-glob-opts-cb" class="headerlink" title="gulp.watch(glob [, opts], tasks) 或 gulp.watch(glob [, opts, cb])"></a>gulp.watch(glob [, opts], tasks) 或 gulp.watch(glob [, opts, cb])</h4><p>监视文件，并且可以在文件发生改动时候做一些事情。它总会返回一个 EventEmitter 来发射（emit） <code>change</code> 事件。</p>
+<h4 id="gulp-watch-glob-opts-tasks"><a href="#gulp-watch-glob-opts-tasks" class="headerlink" title="gulp.watch(glob[, opts], tasks)"></a>gulp.watch(glob[, opts], tasks)</h4><h5 id="glob"><a href="#glob" class="headerlink" title="glob"></a>glob</h5><p>类型：     <code>String</code> or <code>Array</code></p>
+<p>一个 glob 字符串，或者一个包含多个 glob 字符串的数组，用来指定具体监控哪些文件的变动。</p>
+<h5 id="opts"><a href="#opts" class="headerlink" title="opts"></a>opts</h5><p>类型： <code>Object</code></p>
+<p>传给 <a href="https://github.com/shama/gaze" target="_blank" rel="external">gaze</a> 的参数。</p>
+<h5 id="tasks"><a href="#tasks" class="headerlink" title="tasks"></a>tasks</h5><p>类型： <code>Array</code></p>
+<p>需要在文件变动后执行的一个或者多个通过 <code>gulp.task()</code> 创建的 task 的名字，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var watcher = gulp.watch(&apos;js/**/*.js&apos;, [&apos;uglify&apos;,&apos;reload&apos;]);</div><div class="line">watcher.on(&apos;change&apos;, function(event) &#123;</div><div class="line">  console.log(&apos;File &apos; + event.path + &apos; was &apos; + event.type + &apos;, running tasks...&apos;);</div><div class="line">&#125;);</div><div class="line">gulp.watch(glob[, opts, cb])</div><div class="line">`</div></pre></td></tr></table></figure>
+<h5 id="glob-1"><a href="#glob-1" class="headerlink" title="glob"></a>glob</h5><p>类型： <code>String</code> or <code>Array</code></p>
+<p>一个 glob 字符串，或者一个包含多个 glob 字符串的数组，用来指定具体监控哪些文件的变动。</p>
+<h5 id="opts-1"><a href="#opts-1" class="headerlink" title="opts"></a>opts</h5><p>类型： <code>Object</code></p>
+<p>传给 <a href="https://github.com/shama/gaze" target="_blank" rel="external">gaze</a> 的参数。</p>
+<h5 id="cb-event"><a href="#cb-event" class="headerlink" title="cb(event)"></a>cb(event)</h5><p>类型： <code>Function</code></p>
+<p>每次变动需要执行的 callback。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.watch(&apos;js/**/*.js&apos;, function(event) &#123;</div><div class="line">  console.log(&apos;File &apos; + event.path + &apos; was &apos; + event.type + &apos;, running tasks...&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>callback 会被传入一个名为 <code>event</code> 的对象。这个对象描述了所监控到的变动：</p>
+<h5 id="event-type"><a href="#event-type" class="headerlink" title="event.type"></a>event.type</h5><p>类型： <code>String</code></p>
+<p>发生的变动的类型：<code>added</code>, <code>changed</code> 或者 <code>deleted</code>。</p>
+<h5 id="event-path"><a href="#event-path" class="headerlink" title="event.path"></a>event.path</h5><p>类型： <code>String</code></p>
+<p>触发了该事件的文件的路径。</p>
+<p>引自：<a href="http://www.gulpjs.com.cn/" target="_blank" rel="external">http://www.gulpjs.com.cn/</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/14/gulp/" class="archive-article-date">
+  	<time datetime="2016-08-14T13:27:35.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-14</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-js-screen" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/js-screen/">js_screen</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JS-Jquery获取各种屏幕的宽度和高度"><a href="#JS-Jquery获取各种屏幕的宽度和高度" class="headerlink" title="JS,Jquery获取各种屏幕的宽度和高度"></a>JS,Jquery获取各种屏幕的宽度和高度</h1><h2 id="javascript"><a href="#javascript" class="headerlink" title="javascript:"></a>javascript:</h2><pre><code>document.write(
+&quot;屏幕分辨率为：&quot;+screen.width+&quot;*&quot;+screen.height
++&quot;&lt;br /&gt;&quot;+
+&quot;屏幕可用大小：&quot;+screen.availWidth+&quot;*&quot;+screen.availHeight
++&quot;&lt;br /&gt;&quot;
+
+网页可见区域宽： document.body.clientWidth
+网页可见区域高： document.body.clientHeight
+网页可见区域宽： document.body.offsetWidth (包括边线的宽)
+网页可见区域高： document.body.offsetHeight (包括边线的高)
+网页正文全文宽： document.body.scrollWidth
+网页正文全文高： document.body.scrollHeight
+网页被卷去的高： document.body.scrollTop
+网页被卷去的左： document.body.scrollLeft
+网页正文部分上： window.screenTop
+网页正文部分左： window.screenLeft
+屏幕分辨率的高： window.screen.height
+屏幕分辨率的宽： window.screen.width
+屏幕可用工作区高度： window.screen.availHeight
+屏幕可用工作区宽度： window.screen.availWidth
+</code></pre><h2 id="juery"><a href="#juery" class="headerlink" title="juery"></a>juery</h2><pre><code>$(document).ready(function(){
+alert($(window).height()); //浏览器当前窗口可视区域高度
+alert($(document).height()); //浏览器当前窗口文档的高度
+alert($(document.body).height());//浏览器当前窗口文档body的高度
+alert($(document.body).outerHeight(true));//浏览器当前窗口文档body的总高度 包括border padding margin
+
+alert($(window).width()); //浏览器当前窗口可视区域宽度
+alert($(document).width());//浏览器当前窗口文档对象宽度
+alert($(document.body).width());//浏览器当前窗口文档body的宽度
+alert($(document.body).outerWidth(true));//浏览器当前窗口文档body的总宽度 包括border padding margin
+
+})
+</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/08/14/js-screen/" class="archive-article-date">
+  	<time datetime="2016-08-14T11:14:18.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-14</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ydshipei" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/22/ydshipei/">ydshipei</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="移动适配"><a href="#移动适配" class="headerlink" title="移动适配"></a>移动适配</h1><h2 id="移动适配的几种方式"><a href="#移动适配的几种方式" class="headerlink" title="移动适配的几种方式"></a>移动适配的几种方式</h2><h3 id="1-直接利用js适配"><a href="#1-直接利用js适配" class="headerlink" title="1.直接利用js适配"></a>1.直接利用js适配</h3><pre><code>(function (doc, win) {
+var docEl = doc.documentElement,
+  resizeEvt = &apos;orientationchange&apos; in window ? &apos;orientationchange&apos; : &apos;resize&apos;,
+  recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 100 * (clientWidth / 750) + &apos;px&apos;;
+  };
+if (!doc.addEventListener) return;
+ win.addEventListener(resizeEvt, recalc, false);
+doc.addEventListener(&apos;DOMContentLoaded&apos;, recalc, false);
+})(document, window);
+</code></pre><p>例如：100px=1rem;10px=0.1rem;1px=0.01rem;    </p>
+<h3 id="2-利用js-less适配"><a href="#2-利用js-less适配" class="headerlink" title="2.利用js+less适配"></a>2.利用js+less适配</h3><pre><code>(function (win) {
+function setUnitA() {
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 10 + &quot;px&quot;;
+}
+        var h = null;
+    window.addEventListener(&quot;resize&quot;, function () { clearTimeout(h); h = setTimeout(setUnitA, 300); }, false);
+setUnitA();
+})(window);
+
+less:文件顶部定义@unit: 750/10rem，然后css全文件的单位直接用@unit。
+
+例如：100px=100/@unit;10px=10/@unit;1px=1/@unit;
+</code></pre><h3 id="3-利用less适配。"><a href="#3-利用less适配。" class="headerlink" title="3.利用less适配。"></a>3.利用less适配。</h3><pre><code>html {
+font-size: 20px;
+}
+@media only screen and (min-width: 401px) {
+        html {
+    font-size: 25px !important;
+    }
+}
+@media only screen and (min-width: 428px) {
+    html {
+    font-size: 26.75px !important;
+    }
+}
+@media only screen and (min-width: 481px) {
+    html {
+        font-size: 30px !important;
+    }
+}
+@media only screen and (min-width: 569px) {
+    html {
+        font-size: 35px !important;
+    }
+}
+@media only screen and (min-width: 641px) {
+    html {
+        font-size: 40px !important;
+    }
+}
+@unit: 40rem;
+</code></pre><p>例如：100px=100/@unit;10px=10/@unit;1px=1/@unit;</p>
+<p>作者：sky<br>链接：<a href="https://zhuanlan.zhihu.com/p/23837333" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/23837333</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/07/22/ydshipei/" class="archive-article-date">
+  	<time datetime="2016-07-22T09:26:53.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-22</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Express" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -708,696 +2518,9 @@ react-native run-ios
 
 
   
-    <article id="post-flex" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/24/flex/">flex</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Flex-布局语法教程"><a href="#Flex-布局语法教程" class="headerlink" title="Flex 布局语法教程"></a>Flex 布局语法教程</h1><p>网页布局（layout）是CSS的一个重点应用。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/7bf8bed24a17fbebd3e171f9630dbccb.gif" alt=""><br>布局的传统解决方案，基于<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model" target="_blank" rel="external">盒状模型</a>，依赖 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display" target="_blank" rel="external">display</a>属性 + <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position" target="_blank" rel="external">position</a>属性 + <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float" target="_blank" rel="external">float</a>属性。它对于那些特殊布局非常不方便，比如，<a href="https://css-tricks.com/centering-css-complete-guide/" target="_blank" rel="external">垂直居中</a>就不容易实现。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/5a7d00514af1e464221c677c15e8e990.png" alt=""><br>2009年，W3C提出了一种新的方案—-Flex布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/8712d713c7d0b884a5cb9770efc422b4.jpg" alt="">Flex布局将成为未来布局的首选方案。本文介绍Flex布局的语法。<br>以下内容主要参考了下面两篇文章：<a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="external">A Complete Guide to Flexbox</a>和 <a href="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties" target="_blank" rel="external">A Visual Guide to CSS3 Flexbox Properties</a>。</p>
-<h2 id="一、Flex布局是什么？"><a href="#一、Flex布局是什么？" class="headerlink" title="一、Flex布局是什么？"></a>一、Flex布局是什么？</h2><p>Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</p>
-<p>任何一个容器都可以指定为Flex布局</p>
-<pre><code>.box{
-      display: flex;
-}
-</code></pre><p>行内元素也可以使用Flex布局。</p>
-<pre><code>.box{
-      display: inline-flex;
-}
-</code></pre><p>Webkit内核的浏览器，必须加上-webkit前缀。</p>
-<pre><code>.box{
-      display: -webkit-flex; /* Safari */
-      display: flex;
-}
-</code></pre><p>注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。</p>
-<h2 id="二、基本概念"><a href="#二、基本概念" class="headerlink" title="二、基本概念"></a>二、基本概念</h2><p>采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目（flex item），简称”项目”。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/3791e575c48b3698be6a94ae1dbff79d.png" alt=""><br>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。<br>项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。</p>
-<h2 id="三、容器的属性"><a href="#三、容器的属性" class="headerlink" title="三、容器的属性"></a>三、容器的属性</h2><p>以下6个属性设置在容器上</p>
-<ul>
-<li>flex-direction</li>
-<li>flex-wrap</li>
-<li>flex-flow</li>
-<li>justify-content</li>
-<li>align-items</li>
-<li>align-content</li>
-</ul>
-<h3 id="3-1-flex-direction属性"><a href="#3-1-flex-direction属性" class="headerlink" title="3.1 flex-direction属性"></a>3.1 flex-direction属性</h3><p>flex-direction属性决定主轴的方向（即项目的排列方向）。</p>
-<pre><code>.box {
-      flex-direction: row | row-reverse | column |         column-reverse;
-}
-</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/0cbe5f8268121114e87d0546e53cda6e.png" alt=""><br>它可能有4个值。</p>
-<ul>
-<li>row（默认值）：主轴为水平方向，起点在左端。</li>
-<li>row-reverse：主轴为水平方向，起点在右端。</li>
-<li>column：主轴为垂直方向，起点在上沿。</li>
-<li>column-reverse：主轴为垂直方向，起点在下沿。</li>
-</ul>
-<h3 id="3-2-flex-wrap属性"><a href="#3-2-flex-wrap属性" class="headerlink" title="3.2 flex-wrap属性"></a>3.2 flex-wrap属性</h3><p>默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/903d5b7df55779c03f2687a7d4d6bcea.png" alt=""></p>
-<pre><code>.box{
-     flex-wrap: nowrap | wrap | wrap-reverse;
-}
-</code></pre><p>它可能取三个值。<br>（1）nowrap（默认）：不换行。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/9da1f23965756568b4c6ea7124db7b9a.png" alt=""><br>（2）wrap：换行，第一行在上方。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/3c6b3c8b8fe5e26bca6fb57538cf72d9.jpg" alt=""><br>（3）wrap-reverse：换行，第一行在下方。<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/fb4cf2bab8b6b744b64f6d7a99cd577c.jpg" alt=""></p>
-<h3 id="3-3-flex-flow"><a href="#3-3-flex-flow" class="headerlink" title="3.3 flex-flow"></a>3.3 flex-flow</h3><p>flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。</p>
-<pre><code>.box {
-      flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;
-}
-</code></pre><h3 id="3-4-justify-content属性"><a href="#3-4-justify-content属性" class="headerlink" title="3.4 justify-content属性"></a>3.4 justify-content属性</h3><p>justify-content属性定义了项目在主轴上的对齐方式。</p>
-<pre><code>.box {
-      justify-content: flex-start | flex-end | center | space-between | space-around;
-}
-</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/c55dfe8e3422458b50e985552ef13ba5.png" alt=""><br>它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。</p>
-<ul>
-<li>flex-start（默认值）：左对齐</li>
-<li>flex-end：右对齐</li>
-<li>center： 居中</li>
-<li>space-between：两端对齐，项目之间的间隔都相等。</li>
-<li>space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</li>
-</ul>
-<h3 id="3-5-align-items属性"><a href="#3-5-align-items属性" class="headerlink" title="3.5 align-items属性"></a>3.5 align-items属性</h3><p>align-items属性定义项目在交叉轴上如何对齐。</p>
-<pre><code>.box {
-      align-items: flex-start | flex-end | center | baseline | stretch;
-}
-</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/2b0c39c7e7a80d5a784c8c2ca63cde17.png" alt=""><br>它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。</p>
-<ul>
-<li>flex-start：交叉轴的起点对齐。</li>
-<li>flex-end：交叉轴的终点对齐。</li>
-<li>center：交叉轴的中点对齐。</li>
-<li>baseline: 项目的第一行文字的基线对齐。</li>
-<li>stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。</li>
-</ul>
-<h3 id="3-6-align-content属性"><a href="#3-6-align-content属性" class="headerlink" title="3.6 align-content属性"></a>3.6 align-content属性</h3><p>align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。<br>    .box {<br>          align-content: flex-start | flex-end | center | space-between | space-around | stretch;<br>    }<br><img src="http://www.runoob.com/wp-content/uploads/2015/07/f10918ccb8a13247c9d47715a2bd2c33.png" alt=""><br>该属性可能取6个值。</p>
-<ul>
-<li>flex-start：与交叉轴的起点对齐。</li>
-<li>flex-end：与交叉轴的终点对齐。</li>
-<li>center：与交叉轴的中点对齐。</li>
-<li>space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。</li>
-<li>space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</li>
-<li>stretch（默认值）：轴线占满整个交叉轴。</li>
-</ul>
-<h3 id="4-1-order属性"><a href="#4-1-order属性" class="headerlink" title="4.1 order属性"></a>4.1 order属性</h3><p>order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。</p>
-<pre><code>.item {
-      order: &lt;integer&gt;;
-}
-</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/59e399c72daafcfcc20ede36bf32f266.png" alt=""></p>
-<h3 id="4-2-flex-grow属性"><a href="#4-2-flex-grow属性" class="headerlink" title="4.2 flex-grow属性"></a>4.2 flex-grow属性</h3><p>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</p>
-<pre><code>.item {
-      flex-grow: &lt;number&gt;; /* default 0 */
-}
-</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/f41c08bb35962ed79e7686f735d6cd78.png" alt=""></p>
-<p>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
-<h3 id="4-3-flex-shrink属性"><a href="#4-3-flex-shrink属性" class="headerlink" title="4.3 flex-shrink属性"></a>4.3 flex-shrink属性</h3><p>flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
-<pre><code>.item {
-     flex-shrink: &lt;number&gt;; /* default 1 */
-}
-</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/240d3e960043a729bb3ff5e34987904f.jpg" alt=""></p>
-<p>如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。<br>负值对该属性无效。</p>
-<h3 id="4-4-flex-basis属性"><a href="#4-4-flex-basis属性" class="headerlink" title="4.4 flex-basis属性"></a>4.4 flex-basis属性</h3><p>flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。</p>
-<pre><code>.item {
-      flex-basis: &lt;length&gt; | auto; /* default auto */
-}
-</code></pre><p>它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。</p>
-<h3 id="4-5-flex属性"><a href="#4-5-flex属性" class="headerlink" title="4.5 flex属性"></a>4.5 flex属性</h3><p>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</p>
-<pre><code>.item {
-      flex: none | [ &lt;&apos;flex-grow&apos;&gt; &lt;&apos;flex-shrink&apos;&gt;? || &lt;&apos;flex-basis&apos;&gt; ]
-}
-</code></pre><p>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。<br>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
-<h3 id="4-6-align-self属性"><a href="#4-6-align-self属性" class="headerlink" title="4.6 align-self属性"></a>4.6 align-self属性</h3><p>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</p>
-<pre><code>.item {
-      align-self: auto | flex-start | flex-end | center | baseline | stretch;
-}
-</code></pre><p><img src="http://www.runoob.com/wp-content/uploads/2015/07/55b19171b8b6b9487d717bf2ecbba6de.png" alt=""></p>
-<p>该属性可能取6个值，除了auto，其他都与align-items属性完全一致。<br>来源：<br><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/05/24/flex/" class="archive-article-date">
-  	<time datetime="2016-05-24T12:55:57.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-05-24</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascriptObject" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/08/javascriptObject/">javascriptObject</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JavaScript面向对象核心知识归纳"><a href="#JavaScript面向对象核心知识归纳" class="headerlink" title="JavaScript面向对象核心知识归纳"></a>JavaScript面向对象核心知识归纳</h1><h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
-<li>1.面向对象就是使用对象。面向对象开发就是使用对象开发。</li>
-<li>2.面向过程就是用过程的方式进行开发。面向对象是对面向过程的封装。</li>
-</ul>
-<h3 id="三大特性"><a href="#三大特性" class="headerlink" title="三大特性"></a>三大特性</h3><h5 id="抽象性"><a href="#抽象性" class="headerlink" title="抽象性"></a>抽象性</h5><p>所谓的抽象性就是：如果需要一个对象描述数据，需要抽取这个对象的核心数据</p>
-<ul>
-<li>1.提出需要的核心属性和方法</li>
-<li>2.不在特定的环境下无法明确对象的具体意义</li>
-</ul>
-<h5 id="封装性"><a href="#封装性" class="headerlink" title="封装性"></a>封装性</h5><p>对象是将数据与功能组合到一起，即封装</p>
-<ul>
-<li>1.JS对象就是键值对的集合，键值如果是数据（基本数据、符合数据、空数据）就称为属性，如果键值是函数那么就称为方法</li>
-<li>2.对象就是将属性与方法封装起来</li>
-<li>3.方法是将过程封装起来</li>
-</ul>
-<h5 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h5><p>所谓继承性就是自己没有但是别人有，拿过来成为自己的，就是继承，继承是实现复用的一种手段</p>
-<ul>
-<li>在Java等语言中继承满足一个class的规则，类是一个class，他规定了一个对象有什么属性和方法。</li>
-<li>在这些语言中继承是class之间的继承，一个class继承另一个class，那么该class就有了另一个class的成员，那么由该class创建出来的对象就同时具有两个class的成员。</li>
-</ul>
-<p>在JS中没有明确的继承语法（ES6提供了class extend语法），一般都是按照继承的理念实现对象的成员扩充实现继承，因此JS中实现继承的方法非常对多。</p>
-<p>传统继承基于类，JS继承基于对象</p>
-<p>一个简单的继承模式：混入（mix）</p>
-<pre><code>function mix ( o1, o2 ) {
-    for ( var k in o2 ) {
-        o1[ k ] = o2[ k ];
-    }    
-}
-</code></pre><h3 id="关于面向对象的一些其他概念"><a href="#关于面向对象的一些其他概念" class="headerlink" title="关于面向对象的一些其他概念"></a>关于面向对象的一些其他概念</h3><h5 id="类class：在JS中就是构造函数"><a href="#类class：在JS中就是构造函数" class="headerlink" title="类class：在JS中就是构造函数"></a>类<code>class</code>：在<code>JS</code>中就是构造函数</h5><ul>
-<li>在传统的面向对象语言中，使用一个叫类的东西定义模板，然后使用模板创建对象。</li>
-<li>在构造方法中也具有类似的功能，因此也称其为类</li>
-</ul>
-<h5 id="实例-instance-与对象（object）"><a href="#实例-instance-与对象（object）" class="headerlink" title="实例(instance)与对象（object）"></a>实例(<code>instance</code>)与对象（<code>object</code>）</h5><ul>
-<li>实例一般是指某一个构造函数创建出来的对象，我们称为XXXX 构造函数的实例</li>
-<li>实例就是对象。对象是一个泛称</li>
-<li>实例与对象是一个近义词</li>
-</ul>
-<h5 id="键值对与属性和方法"><a href="#键值对与属性和方法" class="headerlink" title="键值对与属性和方法"></a>键值对与属性和方法</h5><ul>
-<li>在JS中键值对的集合称为对象</li>
-<li>如果值为数据（非函数），就称该键值对为属性</li>
-<li>如果值为函数（方法），就称该键值对为方法method</li>
-<li><h5 id="父类与子类（基类和派生类）"><a href="#父类与子类（基类和派生类）" class="headerlink" title="父类与子类（基类和派生类）"></a>父类与子类（基类和派生类）</h5></li>
-<li><p>传统的面向对象语言中使用类来实现继承那么就有父类、子类的概念</p>
-</li>
-<li>父类又称为基类，子类又称为派生类</li>
-<li>在JS中没有类的概念，在JS中常常称为父对象，子对象，基对象，派生对象。</li>
-</ul>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><h4 id="构造函数是干什么用的"><a href="#构造函数是干什么用的" class="headerlink" title="构造函数是干什么用的"></a>构造函数是干什么用的</h4><ul>
-<li>初始化数据的</li>
-<li>在JS中给对象添加属性用的，初始化属性值用的</li>
-</ul>
-<h4 id="创建对象的过程"><a href="#创建对象的过程" class="headerlink" title="创建对象的过程"></a>创建对象的过程</h4><ul>
-<li>1.代码：var p = new Person();</li>
-<li>2.首先运算符new创建了一个对象，类似于{}，是一个没有任何（自定义）成员的对象。<ul>
-<li>使用 new 创建对象，那么对象的类型就是创建他的构造函数名</li>
-<li>使用{}无论如何都是Object类型，相当于 new Object</li>
-</ul>
-</li>
-<li>3.然后调用构造函数，为其初始化成员<ul>
-<li>构造函数在调用的一开始，有一个赋值操作，即this = 刚刚创建出来的对象。</li>
-<li>因此在构造函数中this表示刚刚创建出来的对象。</li>
-</ul>
-</li>
-<li>4.在构造函数中 利用 对象的动态特性 为其对象添加成员。</li>
-</ul>
-<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><h4 id="什么是作用域"><a href="#什么是作用域" class="headerlink" title="什么是作用域"></a>什么是作用域</h4><p>域表示的就是范围，即作用域，就是一个名字在什么地方可以使用，什么时候不能使用。</p>
-<h4 id="JS中词法作用域的规则"><a href="#JS中词法作用域的规则" class="headerlink" title="JS中词法作用域的规则"></a>JS中词法作用域的规则</h4><ul>
-<li>1.函数允许访问函数外部的数据</li>
-<li>整个代码结构中只有函数可以限定作用域</li>
-<li>作用规则首先使用提升规则分析</li>
-<li>如果当前作用域中有了名字了，就不考虑外面的名字</li>
-</ul>
-<h4 id="属性搜索原则"><a href="#属性搜索原则" class="headerlink" title="属性搜索原则"></a>属性搜索原则</h4><ul>
-<li>所谓的属性搜索原则，就是对象在访问属性或方法的时候，首先在当前对象中查找</li>
-<li>如果当前对象中存储着属性或方法，停止查找，直接使用该属性或方法</li>
-<li>如果当前对象没有该成员，那么再在其原型对象中查找</li>
-<li>如果原型对象中含有该成员，那么停止查找，直接使用</li>
-<li>如果原型中还没有，就到原型的原型中查找</li>
-<li>如此往复，直到Object.protitype还没有，那么就返回undefined</li>
-<li>如果是调用方法就报错，该xxx不是一个函数</li>
-</ul>
-<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><h4 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h4><h5 id="什么是闭包？"><a href="#什么是闭包？" class="headerlink" title="什么是闭包？"></a>什么是闭包？</h5><p>闭包的含义就是闭合，包起来，简单的来说，就是一个具有封闭功能与包裹功能的结构。所谓的闭包就是一个具有封闭的对外不公开的，包裹结构，或空间。</p>
-<h5 id="为什么函数可以构成闭包？"><a href="#为什么函数可以构成闭包？" class="headerlink" title="为什么函数可以构成闭包？"></a>为什么函数可以构成闭包？</h5><p>闭包就是一个具有封闭与包裹功能的结构，是为了实现具有私有访问空间的函数的。函数可以构成闭包。函数内部定义的数据函数外部无法访问，即函数具有封闭性；函数可以封装代码即具有包裹性，所以函数可以构成闭包。</p>
-<h4 id="闭包有什么用"><a href="#闭包有什么用" class="headerlink" title="闭包有什么用"></a>闭包有什么用</h4><p>闭包不允许外部访问，要解决的问题就是让外部间接访问函数内部的数据。事实上，通过使用闭包，我们可以做很多事情。比如模拟面向对象的代码风格；更优雅，更简洁的表达出代码；在某些方面提升代码的执行效率。利用闭包可以实现如下需求：</p>
-<ul>
-<li>1.匿名自执行函数一个匿名的函数，并立即执行它，由于外部无法引用它内部的变量，因此在执行完后很快就会被释放，关键是这种机制不会污染全局对象。</li>
-<li>2.缓存闭包正是可以做到这一点，因为它不会释放外部的引用，从而函数内部的值可以得以保留。</li>
-<li>3.实现封装</li>
-<li>4.模拟面向对象的代码风格</li>
-</ul>
-<h4 id="闭包的基本模型"><a href="#闭包的基本模型" class="headerlink" title="闭包的基本模型"></a>闭包的基本模型</h4><ul>
-<li>1.对象模式函数内部定义个一个对象，对象中绑定多个函数（方法），返回对象，利用对象的方法访问函数内的数据</li>
-<li>2.函数模式函数内部定义一个新函数，返回新函数，用新函数获得函数内的数据</li>
-<li>3.沙箱模式沙箱模式就是一个自调用函数，代码写到函数中一样会执行，但是不会与外界有任何的影响</li>
-</ul>
-<h4 id="闭包的作用举例"><a href="#闭包的作用举例" class="headerlink" title="闭包的作用举例"></a>闭包的作用举例</h4><ul>
-<li>1.获得超过一个数据，返回一个对象</li>
-<li>2.完成读取一个数据和修改这个数据，对象里面的getset方法</li>
-</ul>
-<h4 id="闭包的性能问题"><a href="#闭包的性能问题" class="headerlink" title="闭包的性能问题"></a>闭包的性能问题</h4><p>函数执行需要内存，那么函数中定义的变量，会在函数执行结束后自动回收，凡是因为闭包结构的，被引出的数据，如果还有变量引用这些数据的话，那么这些数据就不会被回收。因此在使用闭包的时候如果不使用某些数据了，一定要赋值一个null</p>
-<pre><code>var f = (function () {
-    var num = 123;
-    return function () {
-        return num;
-    };
-})();
-// f 引用着函数，函数引用着变量num
-// 因此在不使用该数据的时候，最好写上
-f = null;
-</code></pre><h3 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h3><h4 id="什么是原型"><a href="#什么是原型" class="headerlink" title="什么是原型"></a>什么是原型</h4><p>一句话说明什么是原型：原型能存储我们的方法，构造函数创建出来的实例对象能够引用原型中的方法。</p>
-<p>JS中一切皆对象，而每个对象都有一个原型（Object除外），这个原型，大概就像Java中的父类，所以，基本上你可以认为原型就是这个对象的父对象，即每一个对象（Object除外）内部都保存了它自己的父对象，这个父对象就是原型。一般创建的对象如果没有特别指定原型，那么它的原型就是Object(这就很类似Java中所有的类默认继承自Object类)。</p>
-<p>ES6通过引入class ,extends等关键字，以一种语法糖的形式把构造函数包装成类的概念，更便于大家理解。是希望开发者不再花精力去关注原型以及原型链，也充分说明原型的设计意图和类是一样的。</p>
-<h4 id="查看对象的原型"><a href="#查看对象的原型" class="headerlink" title="查看对象的原型"></a>查看对象的原型</h4><p>当对象被创建之后，查看它们的原型的方法不止一种，以前一般使用对象的<strong>proto</strong>属性，ES6推出后，推荐用 Object.getPrototypeOf()方法来获取对象的原型.</p>
-<pre><code>function A(){
-    this.name=&apos;lala&apos;;
-}
-var a=new A();
-console.log(a.__proto__) 
-//输出：Object {}
-
-//推荐使用这种方式获取对象的原型
-console.log(Object.getPrototypeOf(a)) 
-//输出：Object {}
-</code></pre><p>无论对象是如何创建的，默认原型都是Object，在这里需要提及的比较特殊的一点就是，通过构造函数来创建对象，函数A本身也是一个对象，而A有两个指向表示原型的属性，分别是proto和prototype，而且两个属性并不相同</p>
-<pre><code>function A(){
-       this.name=&apos;lala&apos;;
-}
-var a=new A();
-console.log(A.prototype) 
-//输出：Object {}
-
-console.log(A.__proto__) 
-//输出：function () {}
-console.log(Object.getPrototypeOf(A))
-//输出：function () {}
-</code></pre><p>函数的的prototype属性只有在当作构造函数创建的时候，把自身的prototype属性值赋给对象的原型。而实际上，作为函数本身，它的原型应该是function对象，然后function对象的原型才是Object。</p>
-<p>总之，建议使用<code>ES6</code>推荐的查看原型和设置原型的方法。</p>
-<h3 id="原型的用法"><a href="#原型的用法" class="headerlink" title="原型的用法"></a>原型的用法</h3><p>其实原型和类的继承的用法是一致的：当你想用某个对象的属性时，将当前对象的原型指向该对象，你就拥有了该对象的使用权了。</p>
-<pre><code>function A(){
-    this.name=&apos;world &apos;;
-}
-function B(){
-    this.bb=&quot;hello&quot;
-}
-var a=new A();
-var b=new B();
-
-//将b设置为a的原型,此处有一个问题，即a的constructor也指向了B构造函数，可能需要纠正 
-Object.setPrototypeOf(a,b);
-a.constructor=A;
-console.log(a.bb);    //hello
-</code></pre><p>如果使用ES6来做的话则简单许多，甚至不涉及到prototype这个属性</p>
-<pre><code>class B{
-     constructor(){
-        this.bb=&apos;hello&apos;
-     }
-}
-class A  extends B{
-     constructor(){
-        super();
-        this.name=&apos;world&apos;;
-     }
-}
-
-var a=new A();
-console.log(a.bb+&quot; &quot;+a.name);    //hello world
-console.log(typeof(A))                //&quot;function&quot;
-</code></pre><p>怎么样？是不是已经完全看不到原型的影子了？活脱脱就是类继承，但是你也看得到实际上类A 的类型是function，所以说，本质上class在JS中是一种语法糖，JS继承的本质依然是原型，不过，ES6引入class，extends 来掩盖原型的概念也是一个很友好的举动，对于长期学习那些类继承为基础的面对对象编程语言的程序员而言。</p>
-<p>我的建议是，尽可能理解原型，尽可能用class这种语法糖。</p>
-<p>好了，问自己两个问题：</p>
-<ul>
-<li>1.为什么要使用原型？——提高函数的复用性。</li>
-<li><p>2.为什么属性不放在原型上而方法要放在原型上？</p>
-<ul>
-<li>利用对象的动态特性：构造函数.prototype.xxxx = vvv</li>
-<li><p>利用直接替换</p>
-<p>Student.prototype = {<br>  sayHello : function(){},<br>  study : function(){}<br>};</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><h5 id="什么是原型链？"><a href="#什么是原型链？" class="headerlink" title="什么是原型链？"></a>什么是原型链？</h5><p>凡是对象就有原型，那么原型又是对象，因此凡是给定一个对象，那么就可以找到他的原型，原型还有原型，那么如此下去，就构成一个对象的序列，称该结构为原型链。</p>
-<p>这个概念其实也变得比较简单，可以类比类的继承链条，即每个对象的原型往上追溯，一直到Object为止，这组成了一个链条，将其中的对象串联起来，当查找当前对象的属性时，如果没找到，就会沿着这个链条去查找，一直到Object，如果还没发现，就会报undefined。</p>
-<h5 id="原型链的结构"><a href="#原型链的结构" class="headerlink" title="原型链的结构"></a>原型链的结构</h5><p>凡是使用构造函数，创建出对象，并且没有利用赋值的方式修改原型，就说该对象保留默认的原型链。<br>默认原型链结构是什么样子呢？</p>
-<pre><code>function Person(){}
-var p = new Person();
-//p 具有默认的原型链
-</code></pre><p>默认的原型链结构就是：<code>当前对象 -&gt; 构造函数.prototype -&gt; Object.prototype -&gt; null</code></p>
-<p>在实现继承的时候，有时候会利用替换原型链结构的方式实现原型继承，那么原型链结构就会发生改变</p>
-<pre><code>function DunizbCollection(){}
-DunizbCollection.prototype = [];
-var arr = new DunizbCollection();
-</code></pre><p>此时arr对象的原型链结构被指向了数组对象的原型链结构了：<code>arr -&gt; [] -&gt; Array.prototype -&gt; Object.prototype -&gt; null</code></p>
-<h5 id="用图形表示对象的原型链结构"><a href="#用图形表示对象的原型链结构" class="headerlink" title="用图形表示对象的原型链结构"></a>用图形表示对象的原型链结构</h5><p>以如下代码为例绘制原型链结构</p>
-<pre><code>function Person(){}
-var p = new Person();
-</code></pre><p>原型链结构图为：<br><img src="https://segmentfault.com/img/remote/1460000007269207?w=652&amp;h=439" alt=""><br>使用原型需要注意两点：</p>
-<ul>
-<li>1.原型继承链条不要太长，否则会出现效率问题。</li>
-<li>2.指定原型时，注意constructor也会改变。<h5 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h5>实现继承有两种常见方式：</li>
-</ul>
-<p><code>混合式继承</code>：最简单的继承就是将别的对象的属性强加到我身上，那么我就有这个成员了。<br>混合式继承的简单描述：</p>
-<pre><code>var Person = function () {};
-Person.prototype.extend = function ( o ) {
-     for ( var k in o ) {
-          this[ k ] = o[ k ];
-     }
-};
-Person.prototype.extend({
-      run: function () { console.log( &apos;我能跑了&apos; ); },
-      eat: function () { console.log( &apos;我可以吃了&apos; ); },
-      sayHello: function () { console.log( &apos;我吃饱    了&apos; ); }
-});
-</code></pre><p><code>原型继承</code>：利用原型也可以实现继承，不需要在我身上添加任何成员，只要原型有了我就有了。</p>
-<h5 id="借用构造函数继承"><a href="#借用构造函数继承" class="headerlink" title="借用构造函数继承"></a>借用构造函数继承</h5><p>这种技术的基本思想相当简单，即在子类型构造函数的内部调用超类型构造函数，而函数只不过是在特定环境中执行代码的对象，因此通过使用apply()和call()方法也可以在（将来）新创建的对象上执行构造函数</p>
-<pre><code>function Person ( name, age, gender ) {
-    this.name = name;
-    this.age = age;
-    this.gender = gender;
-}
-// 需要提供一个 Student 的构造函数创建学生对象
-// 学生也应该有 name, age, gender, 同时还需要有 course 课程
-function Student ( name, age, gender, course ) {
-    Person.call( this, name, age, gender )；
-    this.course = course;
-}
-</code></pre><p>在《<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" target="_blank" rel="external">JavaScript</a>高级程序设计（第三版）》中详细介绍了继承的6种方式</p>
-<h3 id="函数的四种调用模式"><a href="#函数的四种调用模式" class="headerlink" title="函数的四种调用模式"></a>函数的四种调用模式</h3><h4 id="函数模式"><a href="#函数模式" class="headerlink" title="函数模式"></a>函数模式</h4><p>就是一个简单的函数调用。函数名的前面没有任何引导内容。</p>
-<h4 id="方法模式"><a href="#方法模式" class="headerlink" title="方法模式"></a>方法模式</h4><p>方法一定式依附与一个对象，将函数赋值给对象的一个属性，那么就成为了方法。</p>
-<h4 id="构造器调用模式"><a href="#构造器调用模式" class="headerlink" title="构造器调用模式"></a>构造器调用模式</h4><p>创建对象的时候构造函数做了什么？由于构造函数只是给 this 添加成员，没有做其他事情。而方法也可以完成这个操作，就是 this 而言，构造函数与方法没有本质的区别。</p>
-<p><code>特征</code></p>
-<ul>
-<li>1.使用 new 关键字，来引导构造函数。</li>
-<li>2.构造函数中的 this 与方法中的一样，表示对象，但是构造函数中的对象是刚刚创建出来的对象<ul>
-<li>3.构造函数中不需要 return ，就会默认的 return this。</li>
-<li>如果手动添加return ，就相当于 return this</li>
-<li>如果手动的添加 return 基本类型，无效，还是保留原来 返回 this</li>
-<li>如果手动添加的 return null，或 return undefined ，无效</li>
-<li>如果手动添加 return 对象类型，那么原来创建的 this 就会被丢掉，返回的是 return 后面的对象</li>
-</ul>
-</li>
-</ul>
-<h5 id="创建对象的模式"><a href="#创建对象的模式" class="headerlink" title="创建对象的模式"></a>创建对象的模式</h5><ul>
-<li>1.工厂方法，工厂就是用来生产的，因此如果函数创建对象并返回，就称该函数为工厂函数</li>
-<li>2.构造方法</li>
-<li>3.寄生式创建</li>
-<li>4.混合式创建</li>
-</ul>
-<h4 id="上下文调用模式"><a href="#上下文调用模式" class="headerlink" title="上下文调用模式"></a>上下文调用模式</h4><p>上下文就是环境。就是自己定义设置 this 的含义。</p>
-<p><code>语法</code></p>
-<ul>
-<li>函数名.apply( 对象, [ 参数 ] );</li>
-<li>函数名.call( 对象, 参数 );</li>
-</ul>
-<p><code>描述</code></p>
-<ul>
-<li>1.函数名就是表示函数本身，使用函数进行调用的时候默认 this 是全局变量</li>
-<li>2.函数名也可以是方法提供，使用方法调用的时候，this 是指向当前对象</li>
-<li>3.使用 apply 进行调用后，无论是函数还是方法都无效了，我们的 this ，由 apply 的第一个参数决定</li>
-</ul>
-<p><code>参数问题</code></p>
-<p>无论是 call 还是 apply 在没有后面的参数的情况下（函数无参数，方法五参数）是完全一致的</p>
-<pre><code>function foo(){
-    console.log( this );
-}
-foo.apply( obj );
-foo.call( obj );
-</code></pre><p>第一个参数的使用也是有规则的:</p>
-<ul>
-<li>1.如果传入的是一个对象，那么就相当于设置该函数中的 this 为参数</li>
-<li><p>2.如果不传入参数，或传入 null 、undefined 等，那么相当于 this 默认为 window</p>
-<pre><code>foo();
-foo.apply();
-foo.apply( null );
-foo.call( undefined );
-</code></pre></li>
-<li><p>3.如果传入的是基本类型，那么 this 就是基本类型对应的包装类型的引用<br>在使用上下文调用的时候，原函数（方法）可能会带有参数，那么这个参数再上下文调用中使用 第二个（第 n 个）参数来表示</p>
-<pre><code>function foo( num ) {
-    console.log( num );
-}
-foo.apply( null, [ 123 ] );
-// 等价于
-foo( 123 );
-</code></pre><p>参考资料</p>
-</li>
-<li>本文原型部分部分引用自<a href="http://www.admin10000.com/document/9336.html" target="_blank" rel="external">《JavaScript原型详解》</a>，版权归原作者所有</li>
-<li><a href="http://blog.csdn.net/sunlylorn/article/details/6534610" target="_blank" rel="external">js闭包的用途</a></li>
-</ul>
-<p>摘自：<a href="http://www.imooc.com/u/173711/articles" target="_blank" rel="external">慕课网</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/04/08/javascriptObject/" class="archive-article-date">
-  	<time datetime="2016-04-08T01:26:24.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-08</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-about-javascript-gif" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/07/about-javascript-gif/">javascript gif</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h1><h4 id="javaScript总结"><a href="#javaScript总结" class="headerlink" title="javaScript总结"></a>javaScript总结</h4><p>javascript变量.gif</p>
-<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/TzogpE6Jx**lSkTamX0*oCdcEyUHWR3lQfwB0Rt9Z8U!/m/dHcBAAAAAAAA&amp;bo=8gORBgAAAAABB0Y!&amp;rf=photolist" alt=""></p>
-<p>javascript函数基础.gif</p>
-<p><img src="http://a2.qpic.cn/psb?/V114g1aN2g6PRw/H7UKcZ2DkURk6fUgLskz9chzAoWw7d1EM.BZ0v9FxYI!/m/dAkBAAAAAAAA&amp;bo=hgM0BgAAAAABB5c!&amp;rf=photolist" alt=""></p>
-<p>javascript流程控制.gif</p>
-<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/.D2wdl9wbOkaH0Gfwof7kh2C3DXNgKBaW4URL2a.yfE!/m/dAoBAAAAAAAA&amp;bo=gAIkBgAAAAABB4A!&amp;rf=photolist" alt=""></p>
-<p>javascript数据类型.gif</p>
-<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/tGqgTyic9FedB0MX93NZujWzuhqy6P*uteJRYfX96rs!/m/dAoBAAAAAAAA&amp;bo=gAIQCAAAAAABB7o!&amp;rf=photolist" alt=""></p>
-<p>javascript 数组.gif</p>
-<p><img src="http://a1.qpic.cn/psb?/V114g1aN2g6PRw/nCyxujKEXJdNXlotZCbO0QkVniIzeSQGI3RTGB2oRV0!/m/dHwBAAAAAAAA&amp;bo=gAJXBAAAAAABB*E!&amp;rf=photolist" alt=""></p>
-<p>javascript 运算符.gif</p>
-<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/ial92bpUZCz.sJLxTtlal9yzbJQu3sew2dgJ8qrA5Jg!/m/dI8AAAAAAAAA&amp;bo=gALBCgAAAAABB2k!&amp;rf=photolist" alt=""></p>
-<p>javascript 正则表达式.gif</p>
-<p><img src="http://a4.qpic.cn/psb?/V114g1aN2g6PRw/bsuh9gTiXx8E3fJbguj3UwR.m9775VlLTyD177PaWLk!/m/dHcBAAAAAAAA&amp;bo=gAINBgAAAAABB6k!&amp;rf=photolist" alt=""></p>
-<p>javascript 字符串函数.gif</p>
-<p><img src="http://a1.qpic.cn/psb?/V114g1aN2g6PRw/TNNJBCpKSPV*N1JlJFJEJGXX9N4p*WUNLLmywT2NoYg!/m/dHABAAAAAAAA&amp;bo=gALaBQAAAAABB30!&amp;rf=photolist" alt=""></p>
-<p>javascript Window对象.gif</p>
-<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/DTXRqVU1w8dsiW*leCv4hyG81Qi4FwkQUwOnvINpb7o!/m/dAoBAAAAAAAA&amp;bo=gAISBQAAAAABB7U!&amp;rf=photolist" alt=""></p>
-<p>javascript DOM基本操作.gif</p>
-<p><img src="http://a3.qpic.cn/psb?/V114g1aN2g6PRw/4L4mRVbRqLEBBB6lmXU0rDfdr0NSM87mDXFOgs6x0IQ!/m/dH4BAAAAAAAA&amp;bo=gALSCgAAAAABB3o!&amp;rf=photolist" alt=""></p>
-<p>希望这几张图能对你有所帮助</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/03/07/about-javascript-gif/" class="archive-article-date">
-  	<time datetime="2016-03-07T03:33:29.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-03-07</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-blog-building" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/04/blog-building/">blog building</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="GitHub博客搭建"><a href="#GitHub博客搭建" class="headerlink" title="GitHub博客搭建"></a>GitHub博客搭建</h1><p><strong>GitHub</strong>，上传<em>hexo</em>博客搭建过程</p>
-<h2 id="安装-nodeJS"><a href="#安装-nodeJS" class="headerlink" title="安装  nodeJS"></a>安装  nodeJS</h2><p>nodeJS官网网址:<a href="http://nodejs.org/en/" target="_blank" rel="external">http://nodejs.org/en/</a></p>
-<p>测试nodeJS是否安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node -v</div></pre></td></tr></table></figure></p>
-<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装  hexo"></a>安装  hexo</h2><h4 id="安装命令："><a href="#安装命令：" class="headerlink" title="安装命令："></a>安装命令：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo -g</div></pre></td></tr></table></figure>
-<h4 id="测试nodeJS是否安装成功："><a href="#测试nodeJS是否安装成功：" class="headerlink" title="测试nodeJS是否安装成功："></a>测试nodeJS是否安装成功：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo</div></pre></td></tr></table></figure>
-<h4 id="创建目录并进入"><a href="#创建目录并进入" class="headerlink" title="创建目录并进入"></a>创建目录并进入</h4><p>初始化hexo目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init</div></pre></td></tr></table></figure></p>
-<p>启动本地服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
-<h2 id="GitGub账号一枚"><a href="#GitGub账号一枚" class="headerlink" title="GitGub账号一枚"></a>GitGub账号一枚</h2><h4 id="配置ssh-key"><a href="#配置ssh-key" class="headerlink" title="配置ssh-key"></a>配置ssh-key</h4><p>连续三次回测<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen</div></pre></td></tr></table></figure></p>
-<p>复制ssh-key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim~/.ssh/id rsa.pub</div></pre></td></tr></table></figure></p>
-<p>github设置ssh黏贴</p>
-<h4 id="配置github与本地机器验证"><a href="#配置github与本地机器验证" class="headerlink" title="配置github与本地机器验证"></a>配置github与本地机器验证</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;&quot;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global user.name &quot;&quot;</div></pre></td></tr></table></figure>
-<h4 id="新建博客域名仓库"><a href="#新建博客域名仓库" class="headerlink" title="新建博客域名仓库"></a>新建博客域名仓库</h4><p>用户名 .github.io</p>
-<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><p>deplay字段</p>
-<p>type:git</p>
-<p>repo:域名仓库https地址</p>
-<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deplayer-git --save</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
-<h2 id="新建项目标题"><a href="#新建项目标题" class="headerlink" title="新建项目标题"></a>新建项目标题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bolog $ hexo project</div></pre></td></tr></table></figure>
-<p>进入source中找到该文件夹，进去Mou中书写格式（偏好设置）</p>
-<h2 id="在博客中设置主题背景"><a href="#在博客中设置主题背景" class="headerlink" title="在博客中设置主题背景"></a>在博客中设置主题背景</h2><p>网址：<a href="http://www.zhihu.com/question/24422335/answer/46357100" target="_blank" rel="external">http://www.zhihu.com/question/24422335/answer/46357100</a></p>
-<h4 id="具体操作："><a href="#具体操作：" class="headerlink" title="具体操作："></a>具体操作：</h4><ul>
-<li>命令终端找到themes文件</li>
-<li>终端命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone 主题网址</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>例：git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="external">https://github.com/A-limon/pacman.git</a></p>
-<ul>
-<li>命令：<pre><code>ls
-</code></pre>找到下载的文件夹，将其复制到_config.yml中，themes:复制名</li>
-<li><p>启动终端命令</p>
-<p>  hexo server</p>
-</li>
-</ul>
-<p>回到[发布]流程重新输入命令</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/02/04/blog-building/" class="archive-article-date">
-  	<time datetime="2016-02-04T03:17:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-02-04</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/19/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/01/19/hello-world/" class="archive-article-date">
-  	<time datetime="2016-01-19T03:17:19.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-01-19</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 

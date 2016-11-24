@@ -142,6 +142,826 @@
       <div class="body-wrap">
         
   
+    <article id="post-Vue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/22/Vue/">Vue</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="指南：如何使用vue-js-jQuery插件"><a href="#指南：如何使用vue-js-jQuery插件" class="headerlink" title="指南：如何使用vue.js jQuery插件"></a>指南：如何使用vue.js jQuery插件</h1><p>使用Vue可真棒。但你知道，它也可以让你头痛，当你试图将它与jQuery插件或其他图书馆。</p>
+<p>问题是，jQuery的作品比Vue根本不同。Vue渲染基于组件的核心数据的一切。jQuery是大多是做简单的点击操作，具有强大的能力操纵DOM。<br>当我寻找帮助我发现一些不令人满意的解决方案组件做所有的初始化工作。<br>让我告诉你我是如何将vue.js jQuery。</p>
+<h2 id="目标是什么？"><a href="#目标是什么？" class="headerlink" title="目标是什么？"></a>目标是什么？</h2><p>在大多数情况下，你可以省去使用jQuery和找到一个简单的基于Vue对你的问题的解决方案。情态动词、滑块等相当简单与Vue组件和CSS。</p>
+<h6 id="所以我们的目标是使用强大的jQuery插件，不能写很快在Vue。"><a href="#所以我们的目标是使用强大的jQuery插件，不能写很快在Vue。" class="headerlink" title="所以我们的目标是使用强大的jQuery插件，不能写很快在Vue。"></a>所以我们的目标是使用强大的jQuery插件，不能写很快在Vue。</h6><p>我们将…</p>
+<ul>
+<li><p>…使用VUE指令建立一个桥梁，jQuery。</p>
+</li>
+<li><p>……当元素被连接时初始化这个插件。</p>
+</li>
+<li><p>当元素被分离时，破坏它。</p>
+</li>
+<li><p>……发送事件通知组件。</p>
+</li>
+<li><p>……从组件中接收事件并将它们传递给插件。</p>
+</li>
+</ul>
+<h2 id="教程的时间"><a href="#教程的时间" class="headerlink" title="教程的时间"></a>教程的时间</h2><p>我拿起冯元辰的<a href="https://fengyuanchen.github.io/cropper/" target="_blank" rel="external">农作物的插件</a>，因为它是一个写得很好的jQuery插件，你可能不能改写接下来的60分钟。vue.js单独使用。<br>它的复杂和演示了如何vue.js可以与它进行交互。<br>演示：<a href="https://vue-jquery-cropper-demo.firebaseapp.com/" target="_blank" rel="external">https://vue-jquery-cropper-demo.firebaseapp.com/</a><br>我要描述如何从一开始就开始工作。跳过你已经做的部分。</p>
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># install vue-cli</div><div class="line">$ npm install -g vue-cli</div><div class="line"># create a new project using the &quot;webpack&quot; boilerplate</div><div class="line">$ vue init webpack vue-cropper</div><div class="line"> </div><div class="line">? Project name &quot;vue-cropper&quot;</div><div class="line">? Project description &quot;A Vue.js project&quot;</div><div class="line">? Author &quot;Christian Gambardella &lt;christian@gambardella.info&gt;&quot;</div><div class="line">? Use ESLint to lint your code? &quot;Yes&quot;</div><div class="line">? Pick an ESLint preset &quot;Standard&quot;</div><div class="line">? Setup unit tests with Karma + Mocha? &quot;No&quot;</div><div class="line">? Setup e2e tests with Nightwatch? &quot;No&quot;</div><div class="line"> </div><div class="line">$ cd vue-cropper</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
+<p>恭喜你有一个vue.js项目。</p>
+<h3 id="安装jQuery和cropper-js"><a href="#安装jQuery和cropper-js" class="headerlink" title="安装jQuery和cropper.js"></a>安装jQuery和cropper.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># install jQuery &amp; cropper</div><div class="line">$ npm install jquery cropper --save</div></pre></td></tr></table></figure>
+<h3 id="配置WebPACK-jQuery和Vue指令"><a href="#配置WebPACK-jQuery和Vue指令" class="headerlink" title="配置WebPACK jQuery和Vue指令"></a>配置WebPACK jQuery和Vue指令</h3><p>添加jQuery源和指令到WebPACK别名地图文件夹。<br>通常会包括WebPACK的编译版本的jQuery。建议是有源码包括而不是。<br>你可以看到，Vue WebPACK模板添加组件的文件夹。我通常添加其他文件夹一样的指令，混入，等这个例子中我们只需要添加指令。</p>
+<p>这将有助于我们导入依赖关系，而不必知道确切的路径。这也有利于当你重构你的应用程序的路上。你不需要管理相对路径。<br>编辑<code>生成/ webpack.base.conf.js</code>添加高亮线。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">resolve: &#123;</div><div class="line">  extensions: [&apos;&apos;, &apos;.js&apos;, &apos;.vue&apos;],</div><div class="line">  fallback: [path.join(__dirname, &apos;../node_modules&apos;)],</div><div class="line">  alias: &#123;</div><div class="line">    &apos;src&apos;: path.resolve(__dirname, &apos;../src&apos;),</div><div class="line">    &apos;assets&apos;: path.resolve(__dirname, &apos;../src/assets&apos;),</div><div class="line">    &apos;components&apos;: path.resolve(__dirname, &apos;../src/components&apos;),</div><div class="line">    &apos;jquery&apos;: path.resolve(__dirname, &apos;../node_modules/jquery/src/jquery&apos;),</div><div class="line">    &apos;directives&apos;: path.resolve(__dirname, &apos;../src/directives&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<p>别忘了在组件线的末端加一个逗号。</p>
+<h3 id="准备应用程序组件"><a href="#准备应用程序组件" class="headerlink" title="准备应用程序组件"></a>准备应用程序组件</h3><p>我将开始与组件，因为我相信这是更容易理解的美丽和简单的组件。你可以立即开始写指令，因为你知道如何在组件中使用它们。<br>在<code>SRC / app.vue</code>更换<code>模板</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;img</div><div class="line">      v-cropper=&quot;cropOptions&quot;</div><div class="line">      src=&quot;https://i.imgur.com/WcvkCxl.png&quot;</div><div class="line">      alt=&quot;jQuery Meme&quot;&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<p>在<code>SRC / app.vue</code>更换<code>模板</code></p>
+<pre><code>&lt;script&gt;
+import Cropper from &apos;./directives/Cropper&apos;
+
+export default {
+  directives: {
+    Cropper
+  },
+
+  data () {
+    return {
+      cropOptions: {
+        viewMode: 0,
+        zoomable: false
+      }
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre><p>这里有几个重要的事情要注意。</p>
+<ul>
+<li>我们不进口jQuery也没有处理组件的初始化。</li>
+<li>农作物的可供选择的原始数据。</li>
+<li>农作物将被初始化时，这个被渲染，将当视图不可见了破坏。</li>
+<li>该指令的名字将在模板中可作为一个串精装版。mycropper会成为我的割草机。初始化，我们已经添加v-my-cropper在构件的模板的一个元素。<h3 id="创建农作物指令"><a href="#创建农作物指令" class="headerlink" title="创建农作物指令"></a>创建农作物指令</h3>这是本教程的核心。我们要创建一个农作物的指令，与较低的DOM操作的交易代码。在这种情况下我们要初始化的农作物。<br>  自定义指令提供测绘数据的变化任意DOM的行为机制。<br>  <a href="http://vuejs.org/guide/custom-directive.html" target="_blank" rel="external">http://vuejs.org/guide/custom-directive.html</a></li>
+</ul>
+<h5 id="创建src-指令-Cropper-js"><a href="#创建src-指令-Cropper-js" class="headerlink" title="创建src /指令/ Cropper.js"></a>创建src /指令/ Cropper.js</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">JavaScript</div><div class="line"></div><div class="line">import jQuery from &apos;jquery&apos;</div><div class="line">import &apos;cropper&apos;</div><div class="line"></div><div class="line">export default &#123;</div><div class="line">  deep: true,</div><div class="line"></div><div class="line">  bind () &#123;&#125;,</div><div class="line"></div><div class="line">  update (options) &#123;</div><div class="line">    // Destroy in case it has been initialized already.</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">    // Initializing directly after destroying</div><div class="line">    // didn&apos;t work. Wrapping it in a setTimeout</div><div class="line">    // seems to do the trick.</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">      jQuery(this.el).cropper(options)</div><div class="line">    &#125;, 0)</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  unbind () &#123;</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">import jQuery from &apos;jquery&apos;</div><div class="line">import &apos;cropper&apos;</div><div class="line"> </div><div class="line">export default &#123;</div><div class="line">  deep: true,</div><div class="line"> </div><div class="line">  bind () &#123;&#125;,</div><div class="line"> </div><div class="line">  update (options) &#123;</div><div class="line">    // Destroy in case it has been initialized already.</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">    // Initializing directly after destroying</div><div class="line">    // didn&apos;t work. Wrapping it in a setTimeout</div><div class="line">    // seems to do the trick.</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">      jQuery(this.el).cropper(options)</div><div class="line">    &#125;, 0)</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  unbind () &#123;</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>每一vue.js指令的核心是一个绑定<code>更新</code>、<code>绑定</code>功能简单的对象。</p>
+<ul>
+<li>绑定：一旦元素被连接到文档上，将被调用。</li>
+<li>更新：绑定后调用一次，每次当有线数据改变时。在这种情况下cropoptions是一个对象。的vue.js指令需要知道它是一个对象。这就是为什么我们需要加深：在这种情况下，真的。</li>
+<li>取消绑定：当DOM元素将被删除。我们在这里摧毁一切，并删除所有的事件侦听器。<br>会有一对夫妇在<code>Vue 2</code>的变化。</li>
+</ul>
+<p>的虚拟机实例将作为函数参数传递，不会被设置为。</p>
+<p>指令的更新功能只会被调用在更新，而不是最初绑定后。</p>
+<h3 id="第一次运行"><a href="#第一次运行" class="headerlink" title="第一次运行"></a>第一次运行</h3><p>我们只是做了最低限度的。让我们看看它是否工作到目前为止。</p>
+<p>只有一个快速的东西失踪。我们没有增加农作物的样式呢。让我们这样做，并运行应用程序。</p>
+<p>添加第一，强调线的<code>SRC / main.js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">import &apos;../node_modules/cropper/dist/cropper.css&apos;</div><div class="line">import Vue from &apos;vue&apos;</div><div class="line">import App from &apos;./App&apos;</div><div class="line"> </div><div class="line">/* eslint-disable no-new */</div><div class="line">new Vue(&#123;</div><div class="line">  el: &apos;body&apos;,</div><div class="line">  components: &#123; App &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h5 id="启动服务器。"><a href="#启动服务器。" class="headerlink" title="启动服务器。"></a>启动服务器。</h5><pre><code>$ npm run dev
+</code></pre><p><img src="http://gambardella.info/wp-content/uploads/2016/08/cropper-v1-700x647.jpg" alt=""></p>
+<h3 id="拨动开关"><a href="#拨动开关" class="headerlink" title="拨动开关"></a>拨动开关</h3><p>从这里开始一切都会很容易。我们将通过它的情况下。但每一个都会几乎太简单。<br>让我们来启用和禁用农作物与按钮。想从网页或打开农作物在用户选择了一个文件。这表明，农作物可以在任何时间进行初始化。<br>编辑在<code>SRC / app.vue</code> <code>脚本</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">import Cropper from &apos;./directives/Cropper&apos;</div><div class="line"> </div><div class="line">export default &#123;</div><div class="line">  directives: &#123;</div><div class="line">    Cropper</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  data () &#123;</div><div class="line">    return &#123;</div><div class="line">      cropOptions: &#123;</div><div class="line">        viewMode: 0,</div><div class="line">        zoomable: false</div><div class="line">      &#125;,</div><div class="line">      showCropper: false</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  methods: &#123;</div><div class="line">    toggleCropper () &#123;</div><div class="line">      this.showCropper = !this.showCropper</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>添加showcropper：虚假数据。</li>
+<li>添加一个方法来切换showcropper。</li>
+</ul>
+<p>编辑在<code>SRC / app.vue</code> <code>模板</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">  &lt;button id=&quot;toggle&quot; @click=&quot;toggleCropper&quot;&gt;Toggle Cropper&lt;/button&gt;</div><div class="line">  &lt;img</div><div class="line">    v-if=&quot;showCropper&quot;</div><div class="line">    v-cropper=&quot;cropOptions&quot;</div><div class="line">    src=&quot;https://i.imgur.com/WcvkCxl.png&quot;</div><div class="line">    alt=&quot;Mustache&quot;&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>添加一个“单击处理程序”按钮。</p>
+</li>
+<li><p>添加一个v-if指令img标签。</p>
+</li>
+</ul>
+<p>每一次的图像显示了自定义指令的结合收割机和<code>更新</code>功能将被称为。</p>
+<p>当showcropper设置为false农作物的绑定函数将被调用。</p>
+<p>没有太多我们可以从这里搞砸了。</p>
+<p>农作物将装在需要卸载后用户完成。</p>
+<h3 id="改变选项"><a href="#改变选项" class="headerlink" title="改变选项"></a>改变选项</h3><p>我们已经都有更新的农作物的选项。如果我们有一个插件，会接受新的选择现有的jQuery实例，那么我们就不会产生破坏和重建的插件。不幸的是，也不允许。</p>
+<p>让我们添加一个开关，改变图像是否是可缩放。<br>编辑在<code>SRC / app.vue</code> <code>模板</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;app&quot;&gt;</div><div class="line">  &lt;button id=&quot;toggle&quot; @click=&quot;toggleCropper&quot;&gt;Toggle Cropper&lt;/button&gt;</div><div class="line">  &lt;img</div><div class="line">    v-if=&quot;showCropper&quot;</div><div class="line">    v-cropper=&quot;cropOptions&quot;</div><div class="line">    src=&quot;https://i.imgur.com/WcvkCxl.png&quot;</div><div class="line">    alt=&quot;Mustache&quot;&gt;</div><div class="line">  &lt;input id=&quot;zoomable&quot; type=&quot;checkbox&quot; v-model=&quot;cropOptions.zoomable&quot;&gt;</div><div class="line">  &lt;label for=&quot;zoomable&quot;&gt;Zoomable?&lt;/label&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>容易，对吗？</p>
+<h3 id="从指令中获取数据"><a href="#从指令中获取数据" class="headerlink" title="从指令中获取数据"></a>从指令中获取数据</h3><p>农作物有农作物的回调函数。每当回调将被调用时，我们将发出一个事件。<br>编辑<code>SRC</code> /<code>指令</code>/ <code>Cropper.js</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">import &apos;cropper&apos;</div><div class="line"> </div><div class="line">export default &#123;</div><div class="line">  deep: true,</div><div class="line"> </div><div class="line">  bind () &#123;&#125;,</div><div class="line"> </div><div class="line">  update (options) &#123;</div><div class="line">    options.crop = (event) =&gt; &#123;</div><div class="line">      this.vm.$emit(&apos;crop&apos;, event)</div><div class="line">    &#125;</div><div class="line">    // Destroy in case it has been initialized already.</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">    // Initializing directly after destroying</div><div class="line">    // didn&apos;t work. Wrapping it in a setTimeout</div><div class="line">    // seems to do the trick.</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">      jQuery(this.el).cropper(options)</div><div class="line">    &#125;, 0)</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  unbind () &#123;</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">Edit the App component’s script to handle crop events.</div><div class="line"></div><div class="line"></div><div class="line">import Cropper from &apos;./directives/Cropper&apos;</div><div class="line"></div><div class="line">export default &#123;</div><div class="line">  directives: &#123;</div><div class="line">    Cropper</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  data () &#123;</div><div class="line">    return &#123;</div><div class="line">      cropData: &#123;&#125;,</div><div class="line">      cropOptions: &#123;</div><div class="line">        viewMode: 0,</div><div class="line">        zoomable: false</div><div class="line">      &#125;,</div><div class="line">      showCropper: false</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  events: &#123;</div><div class="line">    crop (event) &#123;</div><div class="line">      this.cropData = &#123;</div><div class="line">        x: event.x,</div><div class="line">        y: event.y,</div><div class="line">        width: event.width,</div><div class="line">        height: event.height</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  methods: &#123;</div><div class="line">    toggleCropper () &#123;</div><div class="line">      this.showCropper = !this.showCropper</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">import Cropper from &apos;./directives/Cropper&apos;</div><div class="line"> </div><div class="line">export default &#123;</div><div class="line">  directives: &#123;</div><div class="line">    Cropper</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  data () &#123;</div><div class="line">    return &#123;</div><div class="line">      cropData: &#123;&#125;,</div><div class="line">      cropOptions: &#123;</div><div class="line">        viewMode: 0,</div><div class="line">        zoomable: false</div><div class="line">      &#125;,</div><div class="line">      showCropper: false</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  events: &#123;</div><div class="line">    crop (event) &#123;</div><div class="line">      this.cropData = &#123;</div><div class="line">        x: event.x,</div><div class="line">        y: event.y,</div><div class="line">        width: event.width,</div><div class="line">        height: event.height</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  methods: &#123;</div><div class="line">    toggleCropper () &#123;</div><div class="line">      this.showCropper = !this.showCropper</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编辑    <code>应用组件的模板</code>来显示作物数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;button id=&quot;toggle&quot; @click=&quot;toggleCropper&quot;&gt;Toggle Cropper&lt;/button&gt;</div><div class="line">    &lt;img</div><div class="line">      v-if=&quot;showCropper&quot;</div><div class="line">      v-cropper=&quot;cropOptions&quot;</div><div class="line">      src=&quot;https://i.imgur.com/WcvkCxl.png&quot;</div><div class="line">      alt=&quot;Mustache&quot;&gt;</div><div class="line">    &lt;input id=&quot;zoomable&quot; type=&quot;checkbox&quot; v-model=&quot;cropOptions.zoomable&quot;&gt;</div><div class="line">    &lt;label for=&quot;zoomable&quot;&gt;Zoomable?&lt;/label&gt;</div><div class="line">    &lt;pre id=&quot;output&quot;&gt;</div><div class="line">x: &#123;&#123; cropData.x &#125;&#125;</div><div class="line">y: &#123;&#123; cropData.y &#125;&#125;</div><div class="line">width: &#123;&#123; cropData.width &#125;&#125;</div><div class="line">height: &#123;&#123; cropData.height &#125;&#125;</div><div class="line">    &lt;/pre&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<p>正如你所看到的，我选择了从指令中发射事件，并在应用程序组件中听他们的。问你自己为什么我选择这样做。我也可以选择创建一个方法在应用程序组件和使用该绑定到农作物的作物的倾听者。</p>
+<p>反模式options.crop = this.vm.handlecrop</p>
+<h3 id="唤起行动从外面"><a href="#唤起行动从外面" class="headerlink" title="唤起行动从外面"></a>唤起行动从外面</h3><p>这个最终的更改显示事件如何从一个组件流到一个指令。我们要用那把农作物的行为。让我给你展示我如何添加一个旋转按钮。</p>
+<p>编辑    <code>应用程序组件</code>的模板，并添加旋转按钮。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;div id=&quot;app&quot;&gt;</div><div class="line">    &lt;button id=&quot;toggle&quot; @click=&quot;toggleCropper&quot;&gt;Toggle Cropper&lt;/button&gt;</div><div class="line">    &lt;img</div><div class="line">      v-if=&quot;showCropper&quot;</div><div class="line">      v-cropper=&quot;cropOptions&quot;</div><div class="line">      src=&quot;https://i.imgur.com/WcvkCxl.png&quot;</div><div class="line">      alt=&quot;Mustache&quot;&gt;</div><div class="line">    &lt;input id=&quot;zoomable&quot; type=&quot;checkbox&quot; v-model=&quot;cropOptions.zoomable&quot;&gt;</div><div class="line">    &lt;label for=&quot;zoomable&quot;&gt;Zoomable?&lt;/label&gt;</div><div class="line">    &lt;button @click=&quot;$emit(&apos;rotate&apos;, 90)&quot;&gt;Rotate 90°&lt;/button&gt;</div><div class="line">    &lt;pre id=&quot;output&quot;&gt;</div><div class="line">x: &#123;&#123; cropData.x &#125;&#125;</div><div class="line">y: &#123;&#123; cropData.y &#125;&#125;</div><div class="line">width: &#123;&#123; cropData.width &#125;&#125;</div><div class="line">height: &#123;&#123; cropData.height &#125;&#125;</div><div class="line">    &lt;/pre&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div></pre></td></tr></table></figure>
+<p>编辑<code>SRC</code> /<code>指令</code>/ <code>cropper.js</code>添加和移除事件侦听器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">import jQuery from &apos;jquery&apos;</div><div class="line">import &apos;cropper&apos;</div><div class="line"> </div><div class="line">export default &#123;</div><div class="line">  deep: true,</div><div class="line"> </div><div class="line">  bind () &#123;</div><div class="line">    this.vm.$on(&apos;rotate&apos;, (deg) =&gt; &#123;</div><div class="line">      jQuery(this.el).cropper(&apos;rotate&apos;, deg)</div><div class="line">    &#125;)</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  update (options) &#123;</div><div class="line">    options.crop = (event) =&gt; &#123;</div><div class="line">      this.vm.$emit(&apos;crop&apos;, event)</div><div class="line">    &#125;</div><div class="line">    // Destroy in case it has been initialized already.</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">    // Initializing directly after destroying</div><div class="line">    // didn&apos;t work. Wrapping it in a setTimeout</div><div class="line">    // seems to do the trick.</div><div class="line">    setTimeout(() =&gt; &#123;</div><div class="line">      jQuery(this.el).cropper(options)</div><div class="line">    &#125;, 0)</div><div class="line">  &#125;,</div><div class="line"> </div><div class="line">  unbind () &#123;</div><div class="line">    jQuery(this.el).cropper(&apos;destroy&apos;)</div><div class="line">    this.vm.$off(&apos;rotate&apos;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>等你做à圈！</p>
+<p>这个设置的美丽是，该指令是从组件解耦，可以使用每一个组件的多次。它将自动初始化后，元素被附加到DOM将之前被删除销毁。</p>
+<p>我希望你喜欢这篇文章。如果你有问题的建议，随时给我留言或发邮件给评论部分。</p>
+<p>最好的，</p>
+<p>转载自(并翻译于)：<a href="http://gambardella.info/2016/09/05/guide-how-to-use-vue-js-with-jquery-plugins" target="_blank" rel="external">http://gambardella.info/2016/09/05/guide-how-to-use-vue-js-with-jquery-plugins</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/22/Vue/" class="archive-article-date">
+  	<time datetime="2016-11-22T13:55:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-22</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-javascriptStorage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/02/javascriptStorage/">javascriptStorage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Javascript-本地存储小结"><a href="#Javascript-本地存储小结" class="headerlink" title="Javascript 本地存储小结"></a>Javascript 本地存储小结</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><pre><code>总括：详细讲述Cookie,LocalStorge,SesstionStorge的区别和用法。
+</code></pre><h5 id="人生如画，岁月如歌。"><a href="#人生如画，岁月如歌。" class="headerlink" title="人生如画，岁月如歌。"></a>人生如画，岁月如歌。</h5><p>原文博客地址：<a href="http://damonare.github.io/2016/11/16/Javascript%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E5%B0%8F%E7%BB%93/#more" target="_blank" rel="external">Javascript本地存储小结</a></p>
+<p>知乎专栏&amp;&amp;简书专题：<a href="https://zhuanlan.zhihu.com/damonare" target="_blank" rel="external">前端进击者</a>（知乎）&amp;&amp;<a href="http://www.jianshu.com/collection/bbaa63e264f5" target="_blank" rel="external">前端进击者</a>（简书）</p>
+<h3 id="1-各种存储方案的简单对比"><a href="#1-各种存储方案的简单对比" class="headerlink" title="1. 各种存储方案的简单对比"></a>1. 各种存储方案的简单对比</h3><ul>
+<li>Cookies：浏览器均支持，容量为4KB</li>
+<li>UserData：仅IE支持，容量为64KB</li>
+<li>Flash：100KB，非HTML原生，需要插件支持</li>
+<li>Google Gears SQLite ：需要插件支持，容量无限制</li>
+<li>LocalStorage：HTML5，容量为5M</li>
+<li>SesstionStorage：HTML5，容量为5M</li>
+<li><p>globalStorage：Firefox独有的，Firefox13开始就不再支持这个方法</p>
+<pre><code>UserData仅IE支持， Google Gears SQLite需要插件，Flash已经伴随着HTML5的出现渐渐退出了历史舞台，因此今天我们的主角只有他们三个：Cookie,LocalStorge,SesstionStorge;
+</code></pre></li>
+</ul>
+<h3 id="2-Cookie"><a href="#2-Cookie" class="headerlink" title="2. Cookie"></a>2. Cookie</h3><p>作为一个前端和Cookie打交道的次数肯定不会少了，Cookie算是比较古老的技术了<br>1993 年，网景公司雇员 Lou Montulli 为了让用户在访问某网站时，进一步提高访问速度，同时也为了进一步实现个人化网络，发明了今天广泛使用的 Cookie。</p>
+<h4 id="2-1-Cookie的特点"><a href="#2-1-Cookie的特点" class="headerlink" title="2.1 Cookie的特点"></a>2.1 Cookie的特点</h4><h5 id="我们先来看下Cookie的特点"><a href="#我们先来看下Cookie的特点" class="headerlink" title="我们先来看下Cookie的特点:"></a>我们先来看下Cookie的特点:</h5><ul>
+<li><p>1）cookie的大小受限制，cookie大小被限制在4KB，不能接受像大文件或邮件那样的大数据。</p>
+</li>
+<li><p>2）只要有请求涉及cookie，cookie就要在服务器和浏览器之间来回传送（这解释为什么本地文件不能测试cookie）。而且cookie数据始终在同源的http请求中携带（即使不需要），这也是Cookie不能太大的重要原因。正统的cookie分发是通过扩展HTTP协议来实现的，服务器通过在HTTP的响应头中加上一行特殊的指示以提示浏览器按照指示生成相应的cookie。</p>
+</li>
+<li><p>3）用户每请求一次服务器数据，cookie则会随着这些请求发送到服务器，服务器脚本语言如PHP等能够处理cookie发送的数据，可以说是非常方便的。当然前端也是可以生成Cookie的，用js对cookie的操作相当的繁琐，浏览器只提供document.cookie这样一个对象，对cookie的赋值，获取都比较麻烦。而在PHP中，我们可以通过setcookie()来设置cookie，通过$_COOKIE这个超全局数组来获取cookie。</p>
+<pre><code>cookie的内容主要包括：名字，值，过期时间，路径和域。路径与域一起构成cookie的作用范围。若不设置过期时间，则表示这个cookie的生命期为浏览器会话期间，关闭浏览器窗口，cookie就消失。这种生命期为浏览器会话期的cookie被称为会话cookie。会话cookie一般不存储在硬盘上而是保存在内存里，当然这种行为并不是规范规定的。若设置了过期时间，浏览器就会把cookie保存到硬盘上，关闭后再次打开浏览器，这些cookie仍然有效直到超过设定的过期时间。存储在硬盘上的cookie可以在不同的浏览器进程间共享，比如两个IE窗口。而对于保存在内存里的cookie，不同的浏览器有不同的处理方式。
+</code></pre></li>
+</ul>
+<h4 id="2-2-Session"><a href="#2-2-Session" class="headerlink" title="2.2 Session"></a>2.2 Session</h4><p>说到Cookie就不能不说Session。</p>
+<pre><code>Session机制。session机制是一种服务器端的机制，服务器使用一种类似于散列表的结构（也可能就是使用散列表）来保存信息。当程序需要为某个客户端的请求创建一个session时，服务器首先检查这个客户端的请求里是否已包含了一个session标识（称为session id），如果已包含则说明以前已经为此客户端创建过session，服务器就按照session id把这个session检索出来使用（检索不到，会新建一个），如果客户端请求不包含session id，则为此客户端创建一个session并且生成一个与此session相关联的session id，session id的值应该是一个既不会重复，又不容易被找到规律以仿造的字符串，这个session id将被在本次响应中返回给客户端保存。保存这个session id的方式可以采用cookie，这样在交互过程中浏览器可以自动的按照规则把这个标识发送给服务器。一般这个cookie的名字都是类似于SEEESIONID。但cookie可以被人为的禁止，则必须有其他机制以便在cookie被禁止时仍然能够把session id传递回服务器。经常被使用的一种技术叫做URL重写，就是把session id直接附加在URL路径的后面。比如：http://damonare.cn?sessionid=123456还有一种技术叫做表单隐藏字段。就是服务器会自动修改表单，添加一个隐藏字段，以便在表单提交时能够把session id传递回服务器。比如：
+</code></pre><p><img src="" alt="">输入框</p>
+<p>实际上这种技术可以简单的用对action应用URL重写来代替。</p>
+<h4 id="2-3-Cookie和Session简单对比"><a href="#2-3-Cookie和Session简单对比" class="headerlink" title="2.3 Cookie和Session简单对比"></a>2.3 Cookie和Session简单对比</h4><h5 id="Cookie和Session-的区别："><a href="#Cookie和Session-的区别：" class="headerlink" title="Cookie和Session 的区别："></a>Cookie和Session 的区别：</h5><ul>
+<li><p>1）cookie数据存放在客户的浏览器上，session数据放在服务器上。</p>
+</li>
+<li><p>2）cookie不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗，考虑到安全应当使用session。</p>
+</li>
+<li><p>3）session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能考虑到减轻服务器性能方面，应当使用cookie。</p>
+</li>
+<li><p>4）单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。</p>
+</li>
+<li>5）所以建议：<br>将登陆信息等重要信息存放为SESSION<br>其他信息如果需要保留，可以放在cookie中<h4 id="2-4-document-cookie的属性"><a href="#2-4-document-cookie的属性" class="headerlink" title="2.4 document.cookie的属性"></a>2.4 document.cookie的属性</h4></li>
+</ul>
+<h5 id="expires属性"><a href="#expires属性" class="headerlink" title="expires属性"></a>expires属性</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">指定了coolie的生存期，默认情况下coolie是暂时存在的，他们存储的值只在浏览器会话期间存在，当用户推出浏览器后这些值也会丢失，如果想让cookie存在一段时间，就要为expires属性设置为未来的一个过期日期。现在已经被max-age属性所取代，max-age用秒来设置cookie的生存期。</div></pre></td></tr></table></figure>
+<h5 id="path属性"><a href="#path属性" class="headerlink" title="path属性"></a>path属性</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">它指定与cookie关联在一起的网页。在默认的情况下cookie会与创建它的网页，该网页处于同一目录下的网页以及与这个网页所在目录下的子目录下的网页关联。</div></pre></td></tr></table></figure>
+<h5 id="domain属性"><a href="#domain属性" class="headerlink" title="domain属性"></a>domain属性</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">domain属性可以使多个web服务器共享cookie。domain属性的默认值是创建cookie的网页所在服务器的主机名。不能将一个cookie的域设置成服务器所在的域之外的域。例如让位于order.damonare.cn的服务器能够读取catalog.damonare.cn设置的cookie值。如果catalog.damonare.cn的页面创建的cookie把自己的path属性设置为“/”，把domain属性设置成“.damonare.cn”，那么所有位于catalog.damonare.cn的网页和所有位于orlders.damonare.cn的网页，以及位于damonare.cn域的其他服务器上的网页都可以访问这个cookie。</div></pre></td></tr></table></figure>
+<h5 id="secure属性"><a href="#secure属性" class="headerlink" title="secure属性"></a>secure属性</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">它是一个布尔值，指定在网络上如何传输cookie，默认是不安全的，通过一个普通的http连接传输</div></pre></td></tr></table></figure>
+<h4 id="2-5-cookie实战"><a href="#2-5-cookie实战" class="headerlink" title="2.5 cookie实战"></a>2.5 cookie实战</h4><pre><code>这里我们使用javascript来写一段cookie,借用w3cschool的demo:
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">function getCookie(c_name)&#123;</div><div class="line">    if (document.cookie.length&gt;0)&#123;</div><div class="line">        c_start=document.cookie.indexOf(c_name + &quot;=&quot;)</div><div class="line">        if (c_start!=-1)&#123;</div><div class="line">            c_start=c_start + c_name.length+1</div><div class="line">            c_end=document.cookie.indexOf(&quot;;&quot;,c_start)</div><div class="line">            if (c_end==-1) c_end=document.cookie.length</div><div class="line">            return unescape(document.cookie.substring(c_start,c_end))</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return &quot;&quot;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function setCookie(c_name,value,expiredays)&#123;</div><div class="line">    var exdate=new Date()</div><div class="line">    exdate.setDate(exdate.getDate()+expiredays)</div><div class="line">    document.cookie=c_name+ &quot;=&quot; +escape(value)+</div><div class="line">            ((expiredays==null) ? &quot;&quot; : &quot;; expires=&quot;+exdate.toUTCString())</div><div class="line">&#125;</div><div class="line">function checkCookie()&#123;</div><div class="line">    username=getCookie(&apos;username&apos;)</div><div class="line">    if(username!=null &amp;&amp; username!=&quot;&quot;)&#123;alert(&apos;Welcome again &apos;+username+&apos;!&apos;)&#125;</div><div class="line">    else&#123;</div><div class="line">        username=prompt(&apos;Please enter your name:&apos;,&quot;&quot;)</div><div class="line">        if (username!=null &amp;&amp; username!=&quot;&quot;)&#123;</div><div class="line">            setCookie(&apos;username&apos;,username,355)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<pre><code>注意这里对Cookie的生存期进行了定义，也就是355天
+</code></pre><h3 id="3-localStorage"><a href="#3-localStorage" class="headerlink" title="3. localStorage"></a>3. localStorage</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">这是一种持久化的存储方式，也就是说如果不手动清除，数据就永远不会过期。</div><div class="line">它也是采用Key - Value的方式存储数据，底层数据接口是sqlite，按域名将数据分别保存到对应数据库文件里。它能保存更大的数据（IE8上是10MB，Chrome是5MB），同时保存的数据不会再发送给服务器，避免带宽浪费。</div></pre></td></tr></table></figure>
+<h4 id="3-1-localStorage的属性方法"><a href="#3-1-localStorage的属性方法" class="headerlink" title="3.1 localStorage的属性方法"></a>3.1 localStorage的属性方法</h4><p>下表是localStorge的一些属性和方法</p>
+<table>
+<thead>
+<tr>
+<th>属性方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>localStorage.length</td>
+<td>获得storage中的个数</td>
+</tr>
+<tr>
+<td>localStorage.key(n)</td>
+<td>获得storage中第n个元素对的键值（第一个元素是0）</td>
+</tr>
+<tr>
+<td>localStorage.getItem(key)</td>
+<td>获取键值key对应的值</td>
+</tr>
+<tr>
+<td>localStorage.key</td>
+<td>获取键值key对应的值</td>
+</tr>
+<tr>
+<td>localStorage.setItem(key, value)</td>
+<td>添加数据，键值为key，值为value</td>
+</tr>
+<tr>
+<td>localStorage.removeItem(key)</td>
+<td>移除键值为key的数据</td>
+</tr>
+<tr>
+<td>localStorage.clear()</td>
+<td>清除所有数据</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-2-localStorage的缺点"><a href="#3-2-localStorage的缺点" class="headerlink" title="3.2 localStorage的缺点"></a>3.2 localStorage的缺点</h4><ul>
+<li>① localStorage大小限制在500万字符左右，各个浏览器不一致</li>
+<li>② localStorage在隐私模式下不可读取</li>
+<li>③ localStorage本质是在读写文件，数据多的话会比较卡（firefox会一次性将数据导入内存，想想就觉得吓人啊）</li>
+<li>④ localStorage不能被爬虫爬取，不要用它完全取代URL传参</li>
+</ul>
+<h3 id="4-sessionStorage"><a href="#4-sessionStorage" class="headerlink" title="4. sessionStorage"></a>4. sessionStorage</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">和服务器端使用的session类似，是一种会话级别的缓存，关闭浏览器会数据会被清除。不过有点特别的是它的作用域是窗口级别的，也就是说不同窗口间的sessionStorage数据不能共享的。使用方法（和localStorage完全相同）：</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>属性方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sessionStorage.length</td>
+<td>获得storage中的个数</td>
+</tr>
+<tr>
+<td>sessionStorage.key(n)</td>
+<td>获得storage中第n个元素对的键值（第一个元素是0）</td>
+</tr>
+<tr>
+<td>sessionStorage.getItem(key)</td>
+<td>获取键值key对应的值</td>
+</tr>
+<tr>
+<td>sessionStorage.key</td>
+<td>获取键值key对应的值</td>
+</tr>
+<tr>
+<td>sessionStorage.setItem(key, value)</td>
+<td>添加数据，键值为key，值为value</td>
+</tr>
+<tr>
+<td>sessionStorage.removeItem(key)</td>
+<td>移除键值为key的数据</td>
+</tr>
+<tr>
+<td>sessionStorage.clear()</td>
+<td>清除所有数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-sessionStorage和localStorage的区别"><a href="#5-sessionStorage和localStorage的区别" class="headerlink" title="5. sessionStorage和localStorage的区别"></a>5. sessionStorage和localStorage的区别</h3><ul>
+<li><p>sessionStorage用于本地存储一个会话（session）中的数据，这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。当用户关闭浏览器窗口后，数据立马会被删除。</p>
+</li>
+<li><p>localStorage用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。第二天、第二周或下一年之后，数据依然可用。</p>
+</li>
+</ul>
+<h4 id="5-1-测试"><a href="#5-1-测试" class="headerlink" title="5.1 测试"></a>5.1 测试</h4><h6 id="sessionStorage"><a href="#sessionStorage" class="headerlink" title="sessionStorage:"></a>sessionStorage:</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if (sessionStorage.pagecount)&#123;</div><div class="line">    sessionStorage.pagecount=Number(sessionStorage.pagecount) +1;</div><div class="line">&#125;else&#123;</div><div class="line">      sessionStorage.pagecount=1;</div><div class="line">&#125;</div><div class="line">console.log(&quot;Visits &quot;+ sessionStorage.pagecount + &quot; time(s).&quot;);</div></pre></td></tr></table></figure>
+<h5 id="测试过程：我们在控制台输入上述代码查看打印结果"><a href="#测试过程：我们在控制台输入上述代码查看打印结果" class="headerlink" title="测试过程：我们在控制台输入上述代码查看打印结果"></a>测试过程：我们在控制台输入上述代码查看打印结果</h5><h5 id="控制台首次输入代码："><a href="#控制台首次输入代码：" class="headerlink" title="控制台首次输入代码："></a>控制台首次输入代码：</h5><p><img src="http://ac-myg6wstv.clouddn.com/34ec5d30041c0ead9c6c" alt=""></p>
+<p>sessionStorage测试结果</p>
+<h6 id="关闭窗口，控制台再次输入代码："><a href="#关闭窗口，控制台再次输入代码：" class="headerlink" title="关闭窗口，控制台再次输入代码："></a>关闭窗口，控制台再次输入代码：</h6><p><img src="http://ac-myg6wstv.clouddn.com/34ec5d30041c0ead9c6c" alt=""></p>
+<p>sessionStorage测试结果</p>
+<h5 id="所谓的关闭窗口即销毁，就是这样，关闭窗口重新打开输入代码输出结果还是上面图片的样子，也就是说关闭窗口后sessionStorage-pagecount即被销毁，除非重心创建。或者从历史记录进入才会相关数据才会存在。好的，我们再来看下localStorge表现："><a href="#所谓的关闭窗口即销毁，就是这样，关闭窗口重新打开输入代码输出结果还是上面图片的样子，也就是说关闭窗口后sessionStorage-pagecount即被销毁，除非重心创建。或者从历史记录进入才会相关数据才会存在。好的，我们再来看下localStorge表现：" class="headerlink" title="所谓的关闭窗口即销毁，就是这样，关闭窗口重新打开输入代码输出结果还是上面图片的样子，也就是说关闭窗口后sessionStorage.pagecount即被销毁，除非重心创建。或者从历史记录进入才会相关数据才会存在。好的，我们再来看下localStorge表现："></a>所谓的关闭窗口即销毁，就是这样，关闭窗口重新打开输入代码输出结果还是上面图片的样子，也就是说关闭窗口后sessionStorage.pagecount即被销毁，除非重心创建。或者从历史记录进入才会相关数据才会存在。好的，我们再来看下localStorge表现：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if (localStorage.pagecount)&#123;</div><div class="line">    localStorage.pagecount=Number(localStorage.pagecount) +1;</div><div class="line">&#125;else&#123;</div><div class="line">    localStorage.pagecount=1;</div><div class="line"> &#125;</div><div class="line">console.log(&quot;Visits &quot;+ localStorage.pagecount + &quot; time(s).&quot;);</div></pre></td></tr></table></figure>
+<h5 id="控制台首次输入代码：-1"><a href="#控制台首次输入代码：-1" class="headerlink" title="控制台首次输入代码："></a>控制台首次输入代码：</h5><p><img src="http://ac-myg6wstv.clouddn.com/7228ef55d946a6e5a715" alt=""></p>
+<p>localStorage测试结果1</p>
+<h5 id="关闭窗口，控制台再次输入代码：-1"><a href="#关闭窗口，控制台再次输入代码：-1" class="headerlink" title="关闭窗口，控制台再次输入代码："></a>关闭窗口，控制台再次输入代码：</h5><p><img src="http://ac-myg6wstv.clouddn.com/d81641bc27deaf3b3191" alt=""></p>
+<p>localStorage测试结果2</p>
+<h3 id="6-web-Storage和cookie的区别"><a href="#6-web-Storage和cookie的区别" class="headerlink" title="6. web Storage和cookie的区别"></a>6. web Storage和cookie的区别</h3><p>Web Storage(localStorage和sessionStorage)的概念和cookie相似，区别是它是为了更大容量存储设计的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。</p>
+<p>除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，不像cookie需要前端开发者自己封装setCookie，getCookie。</p>
+<p>但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><pre><code>博主尽可能思路清晰的理了一遍cookie，session，localStorage，sessionStorage之间的区别和联系，希望可以帮到大家。
+</code></pre><p>转载自：<a href="http://gold.xitu.io/post/582c7d330ce463006ce33838?utm_source=gold_browser_extension" target="_blank" rel="external">http://gold.xitu.io/post/582c7d330ce463006ce33838?utm_source=gold_browser_extension</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/02/javascriptStorage/" class="archive-article-date">
+  	<time datetime="2016-11-02T12:53:23.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-02</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-dataChain" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/26/dataChain/">dataChain</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>人生总是直向前行走，从不留下什么。</p>
+<p>原文地址：<a href="http://damonare.github.io/2016/11/09/%E5%AD%A6%E4%B9%A0javascript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E9%93%BE%E8%A1%A8/#more" target="_blank" rel="external">学习javascript数据结构(二)——链表</a></p>
+<p>博主博客地址：[Damonare的个人博客]<a href="http://damonare.cn/" target="_blank" rel="external">http://damonare.cn/</a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="链表简介"><a href="#链表简介" class="headerlink" title="链表简介"></a>链表简介</h3><pre><code>上一篇博客-学习javascript数据结构(一)——栈和队列说了栈和队列在javascript中的实现,我们运用javascript提供的API很容易的实现了栈和队列，但这种数据结构有一个很明显的缺点，因为数组大小是固定的所以我们在移除或是添加一项数据的时候成本很高，基本都需要吧数据重排一次。(javascript的Array类方法虽然很方便但背后的原理同样是这样的)
+
+相比数组我们今天主角——链表就要来的随性的多，简单的理解可以是这样：在内存中，栈和队列（数组）的存在就是一个整体，如果想要对她内部某一个元素进行移除或是添加一个新元素就要动她内部所有的元素，所谓牵一发而动全身；而链表则不一样，每一个元素都是由元素本身数据和指向下一个元素的指针构成，所以添加或是移除某一个元素不需要对链表整体进行操作，只需要改变相关元素的指针指向就可以了。
+
+链表在实际生活中的例子也有很多，比如自行车的链条，环环相扣，但添加或是移除某一个环节只需要对症下药，对相关环节进行操作就OK。再比如：火车，火车就是一个链表，每一节车厢就是元素，想要移除或是添加某一节车厢，只需要把连接车厢的链条改变一下就好了。那么，在javascript中又该怎么去实现链表结构呢？
+</code></pre><h3 id="链表的创建"><a href="#链表的创建" class="headerlink" title="链表的创建"></a>链表的创建</h3><p>首先我们要创建一个链表类：</p>
+<pre><code>function LinkedList(){
+    //各种属性和方法的声明
+}
+</code></pre><p>然后我们需要一种数据结构来保存链表里面的数据：</p>
+<pre><code>var Node=function(element){
+    this.element=element;
+    this.next=null;
+}
+</code></pre><p>//Node类表示要添加的元素，他有两个属性，一个是element，表示添加到链表中的具体的值；另一个是next,表示要指向链表中下一个元素的指针。<br>接下来，我们需要给链表声明一些方法：</p>
+<ul>
+<li>append(element):向链表尾部添加一个新的元素;</li>
+<li>insert(position,element):向链表特定位置插入元素；</li>
+<li>remove(element):从链表移除一项；</li>
+<li>indexOf(element):返回链表中某元素的索引，如果没有返回-1；</li>
+<li>removeAt(position):从特定位置移除一项；</li>
+<li>isEmpty():判断链表是否为空，如果为空返回true,否则返回false;</li>
+<li>size():返回链表包含的元素个数；</li>
+<li>toString():重写继承自Object类的toString()方法，因为我们使用了Node类；</li>
+<li><h3 id="链表的完整代码："><a href="#链表的完整代码：" class="headerlink" title="链表的完整代码："></a>链表的完整代码：</h3><pre><code>function LinkedList() {
+
+//Node类声明
+
+let Node = function(element){
+
+this.element = element;
+
+this.next = null;
+
+    };
+    //初始化链表长度
+
+let length = 0;
+
+//初始化第一个元素
+
+    let head = null;
+
+this.append = function(element){
+    //初始化添加的Node实例
+    let node = new Node(element),
+        current;
+    if (head === null){
+        //第一个Node实例进入链表，之后在这个LinkedList实例中head就不再是null了
+        head = node;
+    } else {
+        current = head;
+        //循环链表知道找到最后一项，循环结束current指向链表最后一项元素
+        while(current.next){
+            current = current.next;
+        }
+        //找到最后一项元素后，将他的next属性指向新元素node,j建立链接
+        current.next = node;
+    }
+        //更新链表长度
+        length++;
+};
+this.insert = function(position, element){
+    //检查是否越界，超过链表长度或是小于0肯定不符合逻辑的
+    if (position &gt;= 0 &amp;&amp; position &lt;= length){
+        let node = new Node(element),
+            current = head,
+            previous,
+               index = 0;
+        if (position === 0){
+            //在第一个位置添加
+            node.next = current;
+            head = node;
+        } else {
+            //循环链表，找到正确位置，循环完毕，previous，current分别是被添加元素的前一个和后一个元素
+            while (index++ &lt; position){
+                previous = current;
+                current = current.next;
+            }
+            node.next = current;
+            previous.next = node;
+        }
+        //更新链表长度
+        length++;
+        return true;
+       } else {
+        return false;
+    }
+};
+this.removeAt = function(position){
+    //检查是否越界，超过链表长度或是小于0肯定不符合逻辑的
+    if (position &gt; -1 &amp;&amp; position &lt; length){
+        let current = head,
+            previous,
+            index = 0;
+        //移除第一个元素
+        if (position === 0){
+            //移除第一项，相当于head=null;
+            head = current.next;
+        } else {
+                //循环链表，找到正确位置，循环完毕，previous，current分别是被添加元素的前一个和后一个元素
+                while (index++ &lt; position){
+                previous = current;
+                current = current.next;
+            }
+            //链接previous和current的下一个元素，也就是把current移除了
+            previous.next = current.next;
+        }
+        length--;
+        return current.element;
+    } else {
+        return null;
+    }
+};
+this.indexOf = function(element){
+    let current = head,
+    index = 0;
+//循环链表找到元素位置
+    while (current) {
+        if (element === current.element) {
+                return index;
+        }
+        index++;
+        current = current.next;
+    }
+    return -1;
+};
+this.remove = function(element){
+    //调用已经声明过的indexOf和removeAt方法
+    let index = this.indexOf(element);
+    return this.removeAt(index);
+};
+this.isEmpty = function() {
+        return length === 0;
+};
+this.size = function() {
+        return length;
+   };
+this.getHead = function(){
+    return head;
+};
+this.toString = function(){
+    let current = head,
+        string = &apos;&apos;;
+    while (current) {
+        string += current.element + (current.next ? &apos;, &apos; : &apos;&apos;);
+        current = current.next;
+       }
+    return string;
+};
+this.print = function(){
+    console.log(this.toString());
+    };
+}//
+</code></pre></li>
+</ul>
+<p>一个实例化后的链表，里面是添加的数个Node类的实例</p>
+<p>ES6版本:</p>
+<pre><code>    let LinkedList2 = (function () {
+class Node {
+    constructor(element){
+        this.element = element;
+        this.next = null;
+    }
+}
+//这里我们使用WeakMap对象来记录长度状态
+const length = new WeakMap();
+const head = new WeakMap();
+class LinkedList2 {
+    constructor () {
+        length.set(this, 0);
+        head.set(this, null);
+    }
+    append(element) {
+        let node = new Node(element),
+            current;
+        if (this.getHead() === null) {
+            head.set(this, node);
+        } else {
+            current = this.getHead();
+            while (current.next) {
+                current = current.next;
+            }
+            current.next = node;
+        }
+        let l = this.size();
+        l++;
+        length.set(this, l);
+    }
+    insert(position, element) {
+        if (position &gt;= 0 &amp;&amp; position &lt;= this.size()) {
+
+            let node = new Node(element),
+                current = this.getHead(),
+                previous,
+                index = 0;
+            if (position === 0) {
+                node.next = current;
+                head.set(this, node);
+            } else {
+                while (index++ &lt; position) {
+                    previous = current;
+                    current = current.next;
+                }
+                node.next = current;
+                previous.next = node;
+            }
+            let l = this.size();
+            l++;
+            length.set(this, l);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    removeAt(position) {
+        if (position &gt; -1 &amp;&amp; position &lt; this.size()) {
+            let current = this.getHead(),
+                previous,
+                index = 0;
+            if (position === 0) {
+                head.set(this, current.next);
+            } else {
+                while (index++ &lt; position) {
+                    previous = current;
+                    current = current.next;
+                }
+                previous.next = current.next;
+            }
+            let l = this.size();
+            l--;
+            length.set(this, l);
+            return current.element;
+        } else {
+            return null;
+        }
+    }
+    remove(element) {
+        let index = this.indexOf(element);
+        return this.removeAt(index);
+    }
+    indexOf(element) {
+        let current = this.getHead(),
+            index = 0;
+        while (current) {
+            if (element === current.element) {
+                return index;
+            }
+            index++;
+            current = current.next;
+        }
+        return -1;
+    }
+    isEmpty() {
+        return this.size() === 0;
+    }
+    size() {
+        return length.get(this);
+    }
+    getHead() {
+        return head.get(this);
+    }
+    toString() {
+        let current = this.getHead(),
+            string = &apos;&apos;;
+        while (current) {
+            string += current.element + (current.next ? &apos;, &apos; : &apos;&apos;);
+            current = current.next;
+        }
+        return string;
+
+    }
+    print() {
+        console.log(this.toString());
+    }
+}
+return LinkedList2;
+})();
+</code></pre><h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><pre><code>function DoublyLinkedList() {
+let Node = function(element){
+    this.element = element;
+    this.next = null;
+    this.prev = null; //NEW
+};
+let length = 0;
+let head = null;
+let tail = null; //NEW
+this.append = function(element){
+    let node = new Node(element),
+        current;
+    if (head === null){
+        head = node;
+        tail = node; //NEW
+    } else {
+        //NEW
+        tail.next = node;
+        node.prev = tail;
+        tail = node;
+    }
+    length++;
+};
+this.insert = function(position, element){
+    if (position &gt;= 0 &amp;&amp; position &lt;= length){
+        let node = new Node(element),
+            current = head,
+            previous,
+            index = 0;
+        if (position === 0){
+            if (!head){       //NEW
+                head = node;
+                tail = node;
+            } else {
+                node.next = current;
+                current.prev = node; //NEW
+                head = node;
+            }
+        } else  if (position === length) { ////NEW
+            current = tail;   
+            current.next = node;
+            node.prev = current;
+            tail = node;
+        } else {
+            while (index++ &lt; position){
+                previous = current;
+                current = current.next;
+            }
+            node.next = current;
+            previous.next = node;
+            current.prev = node; //NEW
+            node.prev = previous; //NEW
+        }
+        length++;
+        return true;
+    } else {
+        return false;
+    }
+};
+this.removeAt = function(position){
+    if (position &gt; -1 &amp;&amp; position &lt; length){
+        let current = head,
+            previous,
+            index = 0;
+        if (position === 0){ //NEW
+            if (length === 1){ //
+                tail = null;
+            } else {
+                head.prev = null;
+            }
+        } else if (position === length-1){  //NEW
+            current = tail;
+            tail = current.prev;
+            tail.next = null;
+        } else {
+            while (index++ &lt; position){
+                previous = current;
+                current = current.next;
+            }
+            previous.next = current.next;
+            current.next.prev = previous; //NEW
+        }
+        length--;
+        return current.element;
+    } else {
+        return null;
+    }
+};
+this.remove = function(element){
+    let index = this.indexOf(element);
+    return this.removeAt(index);
+};
+this.indexOf = function(element){
+    let current = head,
+        index = -1;
+    if (element == current.element){
+        return 0;
+    }
+    index++;
+    while(current.next){
+        if (element == current.element){
+            return index;
+        }
+        current = current.next;
+        index++;
+    }
+    //check last item
+    if (element == current.element){
+        return index;
+    }
+    return -1;
+};
+this.isEmpty = function() {
+    return length === 0;
+};
+this. size = function() {
+    return length;
+};
+this.toString = function(){
+    let current = head,
+        s = current ? current.element : &apos;&apos;;
+    while(current &amp;&amp; current.next){
+        current = current.next;
+        s += &apos;, &apos; + current.element;
+    }
+    return s;
+};
+this.inverseToString = function() {
+    let current = tail,
+        s = current ? current.element : &apos;&apos;;
+    while(current &amp;&amp; current.prev){
+        current = current.prev;
+        s += &apos;, &apos; + current.element;
+    }
+    return s;
+};
+this.print = function(){
+    console.log(this.toString());
+};
+this.printInverse = function(){
+    console.log(this.inverseToString());
+};
+this.getHead = function(){
+    return head;
+};
+this.getTail = function(){
+    return tail;
+}
+}
+</code></pre><p>   双向链表和单项比起来就是Node类多了一个prev属性，也就是每一个node不仅仅有一个指向它后面元素的指针也有一个指向它前面的指针。</p>
+<h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><pre><code>明白了前面的基础链表和双向链表之后这个肯定不在话下了，循环，其实就是整个链表实例变成了一个圈，在单项链表中最后一个元素的next属性为null,现在让它指向第一个元素也就是head，那么他就成了单向循环链表。在双向链表中最后一个元素的next属性为null,现在让它指向第一个元素也就是head，那么他就成了双向循环链表。就那么回事...
+</code></pre>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/26/dataChain/" class="archive-article-date">
+  	<time datetime="2016-10-26T12:12:47.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-26</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-javascript" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -384,6 +1204,104 @@ MyObject.prototype.publicMethod = function() {
       
       <a href="/2016/10/19/javascript/" class="archive-article-date">
   	<time datetime="2016-10-19T08:44:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-19</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-SubmitText" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/16/SubmitText/">SubmitText</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Sublime Text 3插件安装<br>作为前端人员，要找一个很顺手的编辑器真的不容易，以前我用同事推荐的netbeans，很好用，但是它主要是用于php开发，且软件太大，运行起来比较慢，后来又用前端开发的webStrom,也不错，很好用，他的历史记录等功能比较强大，但是还是有一个缺点，就是软件有点大，运行起来有点慢。</p>
+<p>我在我向大家推荐一款实用的前端开发神器，不但占地小，且插件很多，很强大。下面我向大家介绍一下它的安装及插件的使用方法。</p>
+<h2 id="一、安装及安装emmet插件"><a href="#一、安装及安装emmet插件" class="headerlink" title="一、安装及安装emmet插件"></a>一、安装及安装emmet插件</h2><p>首先,去sublime官网下载软件：<a href="http://www.sublimetext.com/" target="_blank" rel="external">http://www.sublimetext.com/</a> ，</p>
+<p>软件很小，我用的是最新版的text3，大家可以用目前稳定版text2。打开它的官网，我们就可以看到几个动画，演示sublime的强大功能。</p>
+<p>其次，软件安装好了之后，我们来安装一个插件，推荐使用package control组件来安装插件，很方便。</p>
+<p>安装方法如下：</p>
+<p>按快捷键ctrl+~ 调出命名控制行：然后如果是text2输入如下命令：</p>
+<pre><code>import urllib2,os,hashlib; h = &apos;7183a2d3e96f11eeadd761d777e62404&apos; + &apos;e330c659d4bb41d3bdf022e94cab3cd0&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( &apos;http://sublime.wbond.net/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), &apos;wb&apos; ).write(by) if dh == h else None; print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h) if dh != h else &apos;Please restart Sublime Text to finish installation&apos;)
+</code></pre><p>如果是text3输入如下命令：</p>
+<pre><code>import urllib.request,os,hashlib; h = &apos;7183a2d3e96f11eeadd761d777e62404&apos; + &apos;e330c659d4bb41d3bdf022e94cab3cd0&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://sublime.wbond.net/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)
+</code></pre><p>具体安装您也可以查看：<a href="https://sublime.wbond.net/installation#st3" target="_blank" rel="external">https://sublime.wbond.net/installation#st3</a></p>
+<p>安装好了之后，在Preferences会看到package control，如下如：<br><img src="http://www.haorooms.com/uploads/images/sublime.jpg" alt=""><br>用Package Control安装插件的方法：</p>
+<ul>
+<li>按下Ctrl+Shift+P调出命令面板</li>
+<li>输入install 调出 Install Package 选项并回车，然后在列表中选中要安装的插件!很简单，sublime下面有很多插件，一般编辑器有的，sublime都会以插件的形式出现，下面我们最先介绍<a href="http://www.haorooms.com/" target="_blank" rel="external">Emmet</a>。</li>
+</ul>
+<p>打开package control 输入install package 然后找到emmet，点击安装，重启sublime就可以了，具体请看：<a href="https://github.com/sergeche/emmet-sublime#readme" target="_blank" rel="external">https://github.com/sergeche/emmet-sublime#readme</a></p>
+<p><a href="http://www.haorooms.com/post/emmet_s" target="_blank" rel="external">sublime Emmet的用法请点击！</a></p>
+<p>第二，sublime常用插件：</p>
+<p><code>ZenCoding</code></p>
+<p>不得不用的一款前端开发方面的插件，Write less , show more.安装后可直接使用，Tab键触发，Alt+Shift+W是个代码机器。</p>
+<p><code>Alignment</code></p>
+<p>代码对齐，如写几个变量，选中这几行，Ctrl+Alt+A，哇，齐了。</p>
+<p><code>Prefixr</code></p>
+<p>写 CSS可自动添加 -webkit 等私有词缀，Ctrl+Alt+X触发。</p>
+<p><code>Tag</code></p>
+<p>Html格式化，右键Auto-Format Tags on Ducument。一般是用ctrl +Alt +F 触发，若触发不了，查看是不是html文件，是否选中，是否有快捷键冲突！</p>
+<p><code>Clipboard History</code></p>
+<p>剪贴板历史记录，显示更多历史复制，Ctrl+Shift+V触发。</p>
+<p><code>SideBarEnhancements</code></p>
+<p>侧栏右键功能增强，非常实用</p>
+<p><code>Theme – Soda</code></p>
+<p>完美的编码主题，用过的都说好，Setting user里面添加”theme”: “Soda Dark.sublime-theme”</p>
+<p><code>GBK to UTF8</code></p>
+<p>将文件编码从GBK转黄成UTF8，菜单 – File里面找</p>
+<p><code>SFTP</code></p>
+<p>直接编辑 FTP 或 SFTP 服务器上的文件，绝对FTP浮云</p>
+<p><code>WordPress</code></p>
+<p>集成一些WordPress的函数，对于像我这种经常要写WP模版和插件的人特别有用</p>
+<p><code>PHPTools</code></p>
+<p>整理排版PHP代码</p>
+<p><code>YUI Compressor</code></p>
+<p>压缩JS和CSS文件</p>
+<p><code>Ctags</code></p>
+<p>函数跳转，我的电脑上是Alt+点击 函数名称，会跳转到相应的函数</p>
+<p><code>Doc​Blockr</code></p>
+<p>注释插件，生成幽美的注释。标准的注释，包括函数名、参数、返回值等，并以多行显示，省去手动编写。</p>
+<p><code>ftpsync</code></p>
+<p>FTP ssh上传配置，安装成功配置一下host等就可以了！<br><code>Placeholders</code></p>
+<p>故名思意，占位用，包括一些占位文字和HTML代码片段，实用。<br><code>JS Format</code></p>
+<p>一个JS代码格式化插件。<br><code>jQuery Package for sublime Text</code></p>
+<p>如果你离不开jQuery的话，这个必备～～<br>`Sublime Prefixr</p>
+<p>Prefixr，CSS3 私有前缀自动补全插件，显然也很有用哇`</p>
+<p>参考网站：<a href="http://www.haorooms.com/post/sublime_use" target="_blank" rel="external">http://www.haorooms.com/post/sublime_use</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/10/16/SubmitText/" class="archive-article-date">
+  	<time datetime="2016-10-16T12:11:40.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-16</time>
 </a>
       
       
@@ -1178,6 +2096,1032 @@ req.session.cookie.maxAge = hour
 
 
   
+    <article id="post-javascript一" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/22/javascript一/">javascript一</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#javascript</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><hr>
+<h3 id="对象使用和属性"><a href="#对象使用和属性" class="headerlink" title="对象使用和属性"></a>对象使用和属性</h3><p>JavaScript 中所有变量都可以当作对象使用，除了两个例外 <a href="http://bonsaiden.github.io/JavaScript-Garden/zh/#core.undefined" target="_blank" rel="external">null</a> 和 <a href="http://bonsaiden.github.io/JavaScript-Garden/zh/#core.undefined" target="_blank" rel="external">undefined</a>。</p>
+<pre><code>false.toString(); // &apos;false&apos;
+[1, 2, 3].toString(); // &apos;1,2,3&apos;
+
+function Foo(){}
+Foo.bar = 1;
+Foo.bar; // 1
+</code></pre><p>一个常见的误解是数字的字面值（literal）不能当作对象使用。这是因为 JavaScript 解析器的一个错误， 它试图将点操作符解析为浮点数字面值的一部分。</p>
+<pre><code>2.toString(); // 出错：SyntaxError
+</code></pre><p>有很多变通方法可以让数字的字面值看起来像对象。</p>
+<pre><code>2..toString(); // 第二个点号可以正常解析
+2 .toString(); // 注意点号前面的空格
+(2).toString(); // 2先被计算
+</code></pre><h4 id="对象作为数据类型"><a href="#对象作为数据类型" class="headerlink" title="对象作为数据类型"></a>对象作为数据类型</h4><p>JavaScript 的对象可以作为<a href="https://en.wikipedia.org/wiki/Hash_table" target="_blank" rel="external">哈希表</a>使用，主要用来保存命名的键与值的对应关系。</p>
+<p>使用对象的字面语法 - <code>{}</code> - 可以创建一个简单对象。这个新创建的对象从 <code>Object.prototype</code> <a href="">继承</a>下面，没有任何<a href="">自定义属性</a>。</p>
+<pre><code>var foo = {}; // 一个空对象
+
+// 一个新对象，拥有一个值为12的自定义属性&apos;test&apos;
+var bar = {test: 12}; 
+</code></pre><h4 id="访问属性"><a href="#访问属性" class="headerlink" title="访问属性"></a>访问属性</h4><p>有两种方式来访问对象的属性，点操作符或者中括号操作符。</p>
+<pre><code>var foo = {name: &apos;kitten&apos;}
+foo.name; // kitten
+foo[&apos;name&apos;]; // kitten
+
+var get = &apos;name&apos;;
+foo[get]; // kitten
+
+foo.1234; // SyntaxError
+foo[&apos;1234&apos;]; // works
+</code></pre><p>两种语法是等价的，但是中括号操作符在下面两种情况下依然有效</p>
+<ul>
+<li>动态设置属性</li>
+<li>属性名不是一个有效的变量名（<a href="http://www.cnblogs.com/sanshi/" target="_blank" rel="external">译者注</a>：比如属性名中包含空格，或者属性名是 JS 的关键词）<br>译者注：在 JSLint 语法检测工具中，点操作符是推荐做法。<h4 id="删除属性"><a href="#删除属性" class="headerlink" title="删除属性"></a>删除属性</h4></li>
+</ul>
+<p>删除属性的唯一方法是使用 <code>delete</code> 操作符；设置属性为 <code>undefined</code> 或者 <code>null</code> 并不能真正的删除属性， 而仅仅是移除了属性和值的关联。</p>
+<pre><code>var obj = {
+    bar: 1,
+    foo: 2,
+    baz: 3
+};
+obj.bar = undefined;
+obj.foo = null;
+delete obj.baz;
+
+for(var i in obj) {
+    if (obj.hasOwnProperty(i)) {
+        console.log(i, &apos;&apos; + obj[i]);
+    }
+}
+</code></pre><p>上面的输出结果有 <code>bar undefined</code>和 <code>foo null</code> - 只有 baz 被真正的删除了，所以从输出结果中消失。</p>
+<h4 id="属性名的语法"><a href="#属性名的语法" class="headerlink" title="属性名的语法"></a>属性名的语法</h4><pre><code>var test = {
+    &apos;case&apos;: &apos;I am a keyword so I must be notated as a string&apos;,
+    delete: &apos;I am a keyword too so me&apos; // 出错：SyntaxError
+};
+</code></pre><p>对象的属性名可以使用字符串或者普通字符声明。但是由于 JavaScript 解析器的另一个错误设计， 上面的第二种声明方式在 ECMAScript 5 之前会抛出 <code>SyntaxError</code> 的错误。</p>
+<p>这个错误的原因是 <code>delete</code> 是 JavaScript 语言的一个关键词；因此为了在更低版本的 JavaScript 引擎下也能正常运行， 必须使用字符串字面值声明方式。</p>
+<hr>
+<h3 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h3><p>JavaScript 不包含传统的类继承模型，而是使用 prototype 原型模型。</p>
+<p>虽然这经常被当作是 JavaScript 的缺点被提及，其实基于原型的继承模型比传统的类继承还要强大。 实现传统的类继承模型是很简单，但是实现 JavaScript 中的原型继承则要困难的多。 (It is for example fairly trivial to build a classic model on top of it, while the other way around is a far more difficult task.)</p>
+<p>由于 JavaScript 是唯一一个被广泛使用的基于原型继承的语言，所以理解两种继承模式的差异是需要一定时间的。</p>
+<p>第一个不同之处在于 JavaScript 使用原型链的继承方式。</p>
+<p>注意: 简单的使用 Bar.prototype = Foo.prototype 将会导致两个对象共享相同的原型。 因此，改变任意一个对象的原型都会影响到另一个对象的原型，在大多数情况下这不是希望的结果。</p>
+<pre><code>function Foo() {
+    this.value = 42;
+}
+Foo.prototype = {
+        method: function() {}
+};
+
+function Bar() {}
+
+// 设置Bar的prototype属性为Foo的实例对象
+Bar.prototype = new Foo();
+Bar.prototype.foo = &apos;Hello World&apos;;
+
+// 修正Bar.prototype.constructor为Bar本身
+Bar.prototype.constructor = Bar;
+
+var test = new Bar() // 创建Bar的一个新实例
+
+// 原型链
+test [Bar的实例]
+    Bar.prototype [Foo的实例] 
+        { foo: &apos;Hello World&apos; }
+        Foo.prototype
+            {method: ...};
+            Object.prototype
+                {toString: ... /* etc. */};
+</code></pre><p>上面的例子中，<code>test</code> 对象从 <code>Bar.prototype</code> 和 <code>Foo.prototype</code> 继承下来；因此， 它能访问 <code>Foo</code> 的原型方法 <code>method</code>。同时，它也能够访问那个定义在原型上的 <code>Foo</code> 实例属性 <code>value</code>。 需要注意的是 <code>new Bar()</code> 不会创造出一个新的 <code>Foo</code>实例，而是 重复使用它原型上的那个实例；因此，所有的 <code>Bar</code> 实例都会共享相同的 <code>value</code> 属性。</p>
+<p><code>注意</code>: 不要使用 <code>Bar.prototype = Foo</code>，因为这不会执行 <code>Foo</code> 的原型，而是指向函数 <code>Foo</code>。 因此原型链将会回溯到 <code>Function.prototype</code> 而不是<code>Foo.prototype</code>，因此 <code>method</code> 将不会在 <code>Bar</code> 的原型链上。<br>属性查找</p>
+<p>当查找一个对象的属性时，<code>JavaScript</code> 会向上遍历原型链，直到找到给定名称的属性为止。</p>
+<p>到查找到达原型链的顶部 - 也就是 <code>Object.prototype</code> - 但是仍然没有找到指定的属性，就会返回 <a href="http://bonsaiden.github.io/JavaScript-Garden/zh/#core.undefined" target="_blank" rel="external">undefined</a>。</p>
+<h4 id="原型属性"><a href="#原型属性" class="headerlink" title="原型属性"></a>原型属性</h4><p>当原型属性用来创建原型链时，可以把任何类型的值赋给它（prototype）。 然而将原子类型赋给 prototype 的操作将会被忽略。</p>
+<pre><code>function Foo() {}
+Foo.prototype = 1; // 无效
+</code></pre><p>而将对象赋值给 prototype，正如上面的例子所示，将会动态的创建原型链。</p>
+<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>如果一个属性在原型链的上端，则对于查找时间将带来不利影响。特别的，试图获取一个不存在的属性将会遍历整个原型链。</p>
+<p>并且，当使用 <a href="">for in</a> 循环遍历对象的属性时，原型链上的所有属性都将被访问。</p>
+<h4 id="扩展内置类型的原型"><a href="#扩展内置类型的原型" class="headerlink" title="扩展内置类型的原型"></a>扩展内置类型的原型</h4><p>一个错误特性被经常使用，那就是扩展 <code>Object.prototype</code> 或者其他内置类型的原型对象。</p>
+<p>这种技术被称之为 <a href="https://en.wikipedia.org/wiki/Monkey_patch" target="_blank" rel="external">monkey patching</a> 并且会破坏封装。虽然它被广泛的应用到一些 JavaScript 类库中比如 <a href="http://prototypejs.org/" target="_blank" rel="external">Prototype</a>, 但是我仍然不认为为内置类型添加一些非标准的函数是个好主意。</p>
+<p>扩展内置类型的唯一理由是为了和新的 JavaScript 保持一致，比如 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" target="_blank" rel="external">Array.forEach</a>。</p>
+<p>译者注：这是编程领域常用的一种方式，称之为 Backport，也就是将新的补丁添加到老版本中。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>在写复杂的 JavaScript 应用之前，充分理解原型链继承的工作方式是每个 JavaScript 程序员必修的功课。 要提防原型链过长带来的性能问题，并知道如何通过缩短原型链来提高性能。 更进一步，绝对不要扩展内置类型的原型，除非是为了和新的 JavaScript 引擎兼容。</p>
+<h3 id="hasOwnProperty-函数"><a href="#hasOwnProperty-函数" class="headerlink" title="hasOwnProperty 函数"></a>hasOwnProperty 函数</h3><p>为了判断一个对象是否包含自定义属性而不是<a href="">原型链</a>上的属性， 我们需要使用继承自 <code>Object.prototype</code> 的 <code>hasOwnProperty</code> 方法。</p>
+<p>注意: 通过判断一个属性是否 <code>undefined</code>是不够的。 因为一个属性可能确实存在，只不过它的值被设置为<code>undefined</code>。<br><code>hasOwnProperty</code> 是 JavaScript 中唯一一个处理属性但是不查找原型链的函数。</p>
+<pre><code>// 修改Object.prototype
+Object.prototype.bar = 1; 
+var foo = {goo: undefined};
+
+foo.bar; // 1
+&apos;bar&apos; in foo; // true
+
+foo.hasOwnProperty(&apos;bar&apos;); // false
+foo.hasOwnProperty(&apos;goo&apos;); // true
+</code></pre><p>只有 <code>hasOwnProperty</code> 可以给出正确和期望的结果，这在遍历对象的属性时会很有用。 没有其它方法可以用来排除原型链上的属性，而不是定义在对象自身上的属性。</p>
+<h4 id="hasOwnProperty-作为属性"><a href="#hasOwnProperty-作为属性" class="headerlink" title="hasOwnProperty 作为属性"></a>hasOwnProperty 作为属性</h4><p>JavaScript 不会保护     hasOwnProperty     被非法占用，因此如果一个对象碰巧存在这个属性， 就需要使用外部的<code>hasOwnProperty</code> 函数来获取正确的结果。</p>
+<pre><code>var foo = {
+    hasOwnProperty: function() {
+            return false;
+    },
+    bar: &apos;Here be dragons&apos;
+};
+
+foo.hasOwnProperty(&apos;bar&apos;); // 总是返回 false
+
+// 使用其它对象的 hasOwnProperty，并将其上下文设置为foo
+({}).hasOwnProperty.call(foo, &apos;bar&apos;); // true
+</code></pre><h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>当检查对象上某个属性是否存在时，hasOwnProperty 是唯一可用的方法。 同时在使用 <a href="">for in loop</a> 遍历对象时，推荐总是使用 <code>hasOwnProperty</code> 方法， 这将会避免<a href="">原型</a>对象扩展带来的干扰。</p>
+<h3 id="for-in-循环"><a href="#for-in-循环" class="headerlink" title="for in 循环"></a>for in 循环</h3><p>和 <code>in</code> 操作符一样，<code>for in</code> 循环同样在查找对象属性时遍历原型链上的所有属性。</p>
+<p><code>注意</code>: for in 循环不会遍历那些 enumerable 设置为 false 的属性；比如数组的 length 属性。<br>    // 修改 Object.prototype<br>    Object.prototype.bar = 1;</p>
+<pre><code>var foo = {moo: 2};
+for(var i in foo) {
+    console.log(i); // 输出两个属性：bar 和 moo
+}
+</code></pre><p>由于不可能改变 <code>for in</code> 自身的行为，因此有必要过滤出那些不希望出现在循环体中的属性， 这可以通过 <code>Object.prototype</code> 原型上的 <code>hasOwnProperty</code> 函数来完成。</p>
+<p><code>注意</code>: 由于 <code>for in</code> 总是要遍历整个原型链，因此如果一个对象的继承层次太深的话会影响性能。<br>使用 <code>hasOwnProperty</code> 过滤</p>
+<pre><code>// foo 变量是上例中的
+for(var i in foo) {
+    if (foo.hasOwnProperty(i)) {
+        console.log(i);
+    }
+}
+</code></pre><p>这个版本的代码是唯一正确的写法。由于我们使用了 <code>hasOwnProperty</code>，所以这次只输出<code>moo</code>。 如果不使用 <code>hasOwnProperty</code>，则这段代码在原生对象原型（比如 <code>Object.prototype</code>）被扩展时可能会出错。</p>
+<p>一个广泛使用的类库 <code>Prototype</code> 就扩展了原生的 JavaScript 对象。 因此，当这个类库被包含在页面中时，不使用 <code>hasOwnProperty</code> 过滤的 <code>for in</code> 循环难免会出问题。</p>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><p>推荐总是使用 hasOwnProperty。不要对代码运行的环境做任何假设，不要假设原生对象是否已经被扩展了。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><hr>
+<h3 id="函数声明与表达式"><a href="#函数声明与表达式" class="headerlink" title="函数声明与表达式"></a>函数声明与表达式</h3><p>函数是JavaScript中的一等对象，这意味着可以把函数像其它值一样传递。 一个常见的用法是把匿名函数作为回调函数传递到异步函数中。</p>
+<h4 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h4><pre><code>function foo() {}
+</code></pre><p>上面的方法会在执行前被 <a href="">解析(hoisted)</a>，因此它存在于当前上下文的任意一个地方， 即使在函数定义体的上面被调用也是对的。</p>
+<pre><code>foo(); // 正常运行，因为foo在代码运行前已经被创建
+function foo() {}
+</code></pre><h4 id="函数赋值表达式"><a href="#函数赋值表达式" class="headerlink" title="函数赋值表达式"></a>函数赋值表达式</h4><pre><code>var foo = function() {};
+这个例子把一个匿名的函数赋值给变量 foo。
+
+foo; // &apos;undefined&apos;
+foo(); // 出错：TypeError
+var foo = function() {};
+</code></pre><p>由于 <code>var</code> 定义了一个声明语句，对变量 <code>foo</code> 的解析是在代码运行之前，因此<code>foo</code> 变量在代码运行时已经被定义过了。</p>
+<p>但是由于赋值语句只在运行时执行，因此在相应代码执行之前， foo 的值缺省为 <a href="">undefined</a>。</p>
+<h4 id="命名函数的赋值表达式"><a href="#命名函数的赋值表达式" class="headerlink" title="命名函数的赋值表达式"></a>命名函数的赋值表达式</h4><p>另外一个特殊的情况是将命名函数赋值给一个变量。</p>
+<pre><code>var foo = function bar() {
+    bar(); // 正常运行
+}
+bar(); // 出错：ReferenceError
+</code></pre><p><code>bar</code> 函数声明外是不可见的，这是因为我们已经把函数赋值给了 <code>foo</code>； 然而在 <code>bar</code> 内部依然可见。这是由于 JavaScript 的 命名处理 所致， 函数名在函数内总是可见的。</p>
+<p><code>注意</code>:在IE8及IE8以下版本浏览器bar在外部也是可见的，是因为浏览器对命名函数赋值表达式进行了错误的解析， 解析成两个函数 <code>foo</code> 和 <code>bar</code></p>
+<hr>
+<h3 id="this-的工作原理"><a href="#this-的工作原理" class="headerlink" title="this 的工作原理"></a>this 的工作原理</h3><p>JavaScript 有一套完全不同于其它语言的对 <code>this</code> 的处理机制。 在五种不同的情况下 ，<code>this</code> 指向的各不相同。</p>
+<h4 id="全局范围内"><a href="#全局范围内" class="headerlink" title="全局范围内"></a>全局范围内</h4><pre><code>this;
+</code></pre><p>当在全部范围内使用 <code>this</code>，它将会指向全局对象。</p>
+<p><a href="">译者注</a>：浏览器中运行的 JavaScript 脚本，这个全局对象是 <code>window</code>。</p>
+<h4 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h4><pre><code>foo();
+</code></pre><p>这里 <code>this</code> 也会指向全局对象。</p>
+<p><code>ES5 注意</code>: 在严格模式下（strict mode），不存在全局变量。 这种情况下 <code>this</code> 将会是 <code>undefined</code>。</p>
+<h4 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h4><pre><code>test.foo(); 
+</code></pre><p>这个例子中，<code>this</code> 指向 <code>test</code> 对象。</p>
+<h4 id="调用构造函数"><a href="#调用构造函数" class="headerlink" title="调用构造函数"></a>调用构造函数</h4><pre><code>new foo(); 
+</code></pre><p>如果函数倾向于和 <code>new</code> 关键词一块使用，则我们称这个函数是 构造函数。 在函数内部，<code>this</code> 指向新创建的对象。</p>
+<h4 id="显式的设置-this"><a href="#显式的设置-this" class="headerlink" title="显式的设置 this"></a>显式的设置 <code>this</code></h4><pre><code>function foo(a, b, c) {}
+
+var bar = {};
+foo.apply(bar, [1, 2, 3]); // 数组将会被扩展，如下所示
+foo.call(bar, 1, 2, 3); // 传递到foo的参数是：a = 1, b = 2, c = 3
+</code></pre><p>当使用 <code>Function.prototype</code> 上的 <code>call</code> 或者 <code>apply</code> 方法时，函数内的 <code>this</code> 将会被 显式设置为函数调用的第一个参数。</p>
+<p>因此函数调用的规则在上例中已经不适用了，在<code>foo</code> 函数内 <code>this</code> 被设置成了 <code>bar</code>。</p>
+<p><code>注意</code>: 在对象的字面声明语法中，<code>this</code> 不能用来指向对象本身。 因此 <code>var obj = {me: this}</code> 中的 <code>me</code> 不会指向 <code>obj</code>，因为 <code>this</code> 只可能出现在上述的五种情况中。 译者注：这个例子中，如果是在浏览器中运行，<code>obj.me</code> 等于 <code>window</code> 对象。<br>常见误解</p>
+<p>尽管大部分的情况都说的过去，不过第一个规则（译者注：这里指的应该是第二个规则，也就是直接调用函数时，this 指向全局对象） 被认为是JavaScript语言另一个错误设计的地方，因为它从来就没有实际的用途。</p>
+<pre><code>Foo.method = function() {
+    function test() {
+        // this 将会被设置为全局对象（译者注：浏览器环境中也就是 window 对象）
+    }
+    test();
+}
+</code></pre><p>一个常见的误解是 <code>test</code> 中的 <code>this</code> 将会指向 <code>Foo</code> 对象，实际上不是这样子的。</p>
+<p>为了在 <code>test</code> 中获取对 <code>Foo</code> 对象的引用，我们需要在 method 函数内部创建一个局部变量指向 <code>Foo</code> 对象。</p>
+<pre><code>Foo.method = function() {
+    var that = this;
+    function test() {
+            // 使用 that 来指向 Foo 对象
+    }
+    test();
+}
+</code></pre><p><code>that</code> 只是我们随意起的名字，不过这个名字被广泛的用来指向外部的 this 对象。 在 闭包 一节，我们可以看到 that 可以作为参数传递。</p>
+<h4 id="方法的赋值表达式"><a href="#方法的赋值表达式" class="headerlink" title="方法的赋值表达式"></a>方法的赋值表达式</h4><p>另一个看起来奇怪的地方是函数别名，也就是将一个方法赋值给一个变量。</p>
+<pre><code>var test = someObject.methodTest;
+test();
+</code></pre><p>上例中，<code>test</code> 就像一个普通的函数被调用；因此，函数内的 this 将不再被指向到 <code>someObject</code> 对象。</p>
+<p>虽然 <code>this</code> 的晚绑定特性似乎并不友好，但这确实是基于原型继承赖以生存的土壤。</p>
+<pre><code>function Foo() {}
+Foo.prototype.method = function() {};
+
+function Bar() {}
+Bar.prototype = Foo.prototype;
+
+new Bar().method();
+</code></pre><p>当 <code>method</code> 被调用时，<code>this</code> 将会指向 <code>Bar</code> 的实例对象。</p>
+<h3 id="闭包和引用"><a href="#闭包和引用" class="headerlink" title="闭包和引用"></a>闭包和引用</h3><p>闭包是 JavaScript 一个非常重要的特性，这意味着当前作用域总是能够访问外部作用域中的变量。 因为 <a href="">函数</a> 是 JavaScript 中唯一拥有自身作用域的结构，因此闭包的创建依赖于函数。</p>
+<h4 id="模拟私有变量"><a href="#模拟私有变量" class="headerlink" title="模拟私有变量"></a>模拟私有变量</h4><pre><code>function Counter(start) {
+    var count = start;
+    return {
+        increment: function() {
+            count++;
+        },
+
+        get: function() {
+            return count;
+        }
+        }
+}
+
+var foo = Counter(4);
+foo.increment();
+foo.get(); // 5
+</code></pre><p>这里，<code>Counter</code> 函数返回两个闭包，函数 <code>increment</code>和函数 <code>get</code>。 这两个函数都维持着 对外部作用域 <code>Counter</code> 的引用，因此总可以访问此作用域内定义的变量 <code>count</code>.</p>
+<h4 id="为什么不可以在外部访问私有变量"><a href="#为什么不可以在外部访问私有变量" class="headerlink" title="为什么不可以在外部访问私有变量"></a>为什么不可以在外部访问私有变量</h4><p>因为 JavaScript 中不可以对作用域进行引用或赋值，因此没有办法在外部访问 <code>count</code> 变量。 唯一的途径就是通过那两个闭包。</p>
+<pre><code>var foo = new Counter(4);
+foo.hack = function() {
+    count = 1337;
+};
+</code></pre><p>上面的代码不会改变定义在 <code>Counter</code> 作用域中的 <code>count</code> 变量的值，因为 <code>foo.hack</code> 没有 定义在那个作用域内。它将会创建或者覆盖全局变量 <code>count</code>。</p>
+<h4 id="循环中的闭包"><a href="#循环中的闭包" class="headerlink" title="循环中的闭包"></a>循环中的闭包</h4><p>一个常见的错误出现在循环中使用闭包，假设我们需要在每次循环中调用循环序号</p>
+<pre><code>for(var i = 0; i &lt; 10; i++) {
+    setTimeout(function() {
+            console.log(i);  
+    }, 1000);
+}
+</code></pre><p>上面的代码不会输出数字 <code>0</code> 到 <code>9</code>，而是会输出数字 <code>10</code> 十次。</p>
+<p>当 <code>console.log</code>被调用的时候，匿名函数保持对外部变量 <code>i</code> 的引用，此时<code>for</code>循环已经结束， <code>i</code> 的值被修改成了 <code>10</code>.</p>
+<p>为了得到想要的结果，需要在每次循环中创建变量 i 的拷贝。</p>
+<h4 id="避免引用错误"><a href="#避免引用错误" class="headerlink" title="避免引用错误"></a>避免引用错误</h4><p>为了正确的获得循环序号，最好使用 <a href="">匿名包装器</a>（译者注：其实就是我们通常说的自执行匿名函数）。</p>
+<pre><code>for(var i = 0; i &lt; 10; i++) {
+    (function(e) {
+        setTimeout(function() {
+            console.log(e);  
+        }, 1000);
+    })(i);
+}
+</code></pre><p>外部的匿名函数会立即执行，并把 <code>i</code> 作为它的参数，此时函数内 <code>e</code>变量就拥有了 <code>i</code> 的一个拷贝。</p>
+<p>当传递给 <code>setTimeout</code> 的匿名函数执行时，它就拥有了对 <code>e</code> 的引用，而这个值是不会被循环改变的。</p>
+<p>有另一个方法完成同样的工作，那就是从匿名包装器中返回一个函数。这和上面的代码效果一样。</p>
+<pre><code>for(var i = 0; i &lt; 10; i++) {
+    setTimeout((function(e) {
+        return function() {
+            console.log(e);
+        }
+    })(i), 1000)
+}
+</code></pre><h3 id="arguments-对象"><a href="#arguments-对象" class="headerlink" title="arguments 对象"></a>arguments 对象</h3><p>JavaScript 中每个函数内都能访问一个特别变量 <code>arguments</code>。这个变量维护着所有传递到这个函数中的参数列表。</p>
+<p>注意: 由于 <code>arguments</code> 已经被定义为函数内的一个变量。 因此通过 var 关键字定义 <code>arguments</code> 或者将 <code>arguments</code> 声明为一个形式参数， 都将导致原生的 <code>arguments</code> 不会被创建。<br><code>arguments</code> 变量不是一个数组（<code>Array</code>）。 尽管在语法上它有数组相关的属性 <code>length</code>，但它不从 <code>Array.prototype</code> 继承，实际上它是一个对象（<code>Object</code>）。</p>
+<p>因此，无法对 <code>arguments</code> 变量使用标准的数组方法，比如 <code>push</code>, <code>pop</code> 或者 <code>slice</code>。 虽然使用 <code>for</code> 循环遍历也是可以的，但是为了更好的使用数组方法，最好把它转化为一个真正的数组。</p>
+<h4 id="转化为数组"><a href="#转化为数组" class="headerlink" title="转化为数组"></a>转化为数组</h4><p>下面的代码将会创建一个新的数组，包含所有 <code>arguments</code> 对象中的元素。</p>
+<pre><code>Array.prototype.slice.call(arguments);
+</code></pre><p>这个转化比较慢，在性能不好的代码中不推荐这种做法。</p>
+<h4 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h4><p>下面是将参数从一个函数传递到另一个函数的推荐做法。</p>
+<pre><code>function foo() {
+    bar.apply(null, arguments);
+}
+function bar(a, b, c) {
+    // 干活
+}
+</code></pre><p>另一个技巧是同时使用 <code>call</code> 和 <code>apply</code>，创建一个快速的解绑定包装器。</p>
+<pre><code>function Foo() {}
+
+Foo.prototype.method = function(a, b, c) {
+    console.log(this, a, b, c);
+};
+
+// 创建一个解绑定的 &quot;method&quot;
+// 输入参数为: this, arg1, arg2...argN
+Foo.method = function() {
+
+    // 结果: Foo.prototype.method.call(this, arg1, arg2... argN)
+    Function.call.apply(Foo.prototype.method, arguments);
+};
+译者注：上面的 Foo.method 函数和下面代码的效果是一样的:
+
+Foo.method = function() {
+var args = Array.prototype.slice.call(arguments);
+Foo.prototype.method.apply(args[0], args.slice(1));
+};
+</code></pre><h4 id="自动更新"><a href="#自动更新" class="headerlink" title="自动更新"></a>自动更新</h4><p><code>arguments</code> 对象为其内部属性以及函数形式参数创建 <code>getter</code> 和 <code>setter</code> 方法。</p>
+<p>因此，改变形参的值会影响到 <code>arguments</code> 对象的值，反之亦然。</p>
+<pre><code>function foo(a, b, c) {
+    arguments[0] = 2;
+    a; // 2                                                           
+
+    b = 4;
+    arguments[1]; // 4
+
+    var d = c;
+    d = 9;
+    c; // 3
+}
+foo(1, 2, 3);
+</code></pre><h4 id="性能真相"><a href="#性能真相" class="headerlink" title="性能真相"></a>性能真相</h4><p>不管它是否有被使用，<code>arguments</code> 对象总会被创建，除了两个特殊情况 - 作为局部变量声明和作为形式参数。</p>
+<p><code>arguments</code> 的 <code>getters</code> 和 <code>setters</code> 方法总会被创建；因此使用 arguments 对性能不会有什么影响。 除非是需要对 <code>arguments</code> 对象的属性进行多次访问。</p>
+<p><code>ES5 提示</code>: 这些 <code>getters</code>和 <code>setters</code> 在严格模式下（strict mode）不会被创建。<br><a href="">译者注</a>：在 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode" target="_blank" rel="external">MDC</a> 中对 strict mode 模式下 arguments 的描述有助于我们的理解，请看下面代码：</p>
+<pre><code>// 阐述在 ES5 的严格模式下 arguments 的特性
+function f(a) {
+      &quot;use strict&quot;;
+      a = 42;
+      return [a, arguments[0]];
+    }
+var pair = f(17);
+console.assert(pair[0] === 42);
+console.assert(pair[1] === 17);
+</code></pre><p>然而，的确有一种情况会显著的影响现代 JavaScript 引擎的性能。这就是使用 arguments.callee。</p>
+<pre><code>function foo() {
+    arguments.callee; // do something with this function object
+    arguments.callee.caller; // and the calling function object
+}
+
+function bigLoop() {
+    for(var i = 0; i &lt; 100000; i++) {
+        foo(); // Would normally be inlined...
+    }
+}
+</code></pre><p>上面代码中，<code>foo</code> 不再是一个单纯的内联函数 <code>inlining</code>（译者注：这里指的是解析器可以做内联处理）， 因为它需要知道它自己和它的调用者。 这不仅抵消了内联函数带来的性能提升，而且破坏了封装，因此现在函数可能要依赖于特定的上下文。</p>
+<p>因此强烈建议大家不要使用 <code>arguments.callee</code> 和它的属性。</p>
+<p>ES5 提示: 在严格模式下，<code>arguments.callee</code> 会报错 TypeError，因为它已经被废除了。</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>JavaScript 中的构造函数和其它语言中的构造函数是不同的。 通过 new 关键字方式调用的函数都被认为是构造函数。</p>
+<p>在构造函数内部 - 也就是被调用的函数内 - this 指向新创建的对象 Object。 这个新创建的对象的 prototype 被指向到构造函数的 prototype。</p>
+<p>如果被调用的函数没有显式的 return 表达式，则隐式的会返回 this 对象 - 也就是新创建的对象。</p>
+<pre><code>function Foo() {
+    this.bla = 1;
+}
+
+Foo.prototype.test = function() {
+    console.log(this.bla);
+};
+
+var test = new Foo();
+</code></pre><p>上面代码把 Foo 作为构造函数调用，并设置新创建对象的 prototype 为 Foo.prototype。</p>
+<p>显式的 return 表达式将会影响返回结果，但仅限于返回的是一个对象。</p>
+<pre><code>function Bar() {
+    return 2;
+    }
+new Bar(); // 返回新创建的对象
+
+function Test() {
+    this.value = 2;
+
+return {
+    foo: 1
+};
+}
+new Test(); // 返回的对象
+</code></pre><p>译者注：new Bar() 返回的是新创建的对象，而不是数字的字面值 2。 因此 new Bar().constructor === Bar，但是如果返回的是数字对象，结果就不同了，如下所示</p>
+<pre><code>function Bar() {
+    return new Number(2);
+}
+new Bar().constructor === Number
+</code></pre><p>译者注：这里得到的 new Test()是函数返回的对象，而不是通过new关键字新创建的对象，因此：</p>
+<pre><code>(new Test()).value === undefined
+(new Test()).foo === 1
+</code></pre><p>如果 new 被遗漏了，则函数不会返回新创建的对象。</p>
+<pre><code>function Foo() {
+    this.bla = 1; // 获取设置全局参数
+}
+Foo(); // undefined
+</code></pre><p>虽然上例在有些情况下也能正常运行，但是由于 JavaScript 中 this 的工作原理， 这里的 this 指向全局对象。</p>
+<h4 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h4><p>为了不使用 new 关键字，构造函数必须显式的返回一个值。</p>
+<pre><code>function Bar() {
+    var value = 1;
+    return {
+        method: function() {
+            return value;
+        }
+    }
+}
+Bar.prototype = {
+    foo: function() {}
+};
+
+new Bar();
+Bar();
+</code></pre><p>上面两种对 Bar 函数的调用返回的值完全相同，一个新创建的拥有 method 属性的对象被返回， 其实这里创建了一个闭包。</p>
+<p>还需要注意， new Bar() 并不会改变返回对象的原型（译者注：也就是返回对象的原型不会指向 Bar.prototype）。 因为构造函数的原型会被指向到刚刚创建的新对象，而这里的 Bar 没有把这个新对象返回（译者注：而是返回了一个包含 method 属性的自定义对象）。</p>
+<p>在上面的例子中，使用或者不使用 new 关键字没有功能性的区别。</p>
+<p>译者注：上面两种方式创建的对象不能访问 Bar 原型链上的属性，如下所示：</p>
+<pre><code>var bar1 = new Bar();
+typeof(bar1.method); // &quot;function&quot;
+typeof(bar1.foo); // &quot;undefined&quot;
+
+var bar2 = Bar();
+typeof(bar2.method); // &quot;function&quot;
+typeof(bar2.foo); // &quot;undefined&quot;
+</code></pre><h4 id="通过工厂模式创建新对象"><a href="#通过工厂模式创建新对象" class="headerlink" title="通过工厂模式创建新对象"></a>通过工厂模式创建新对象</h4><p>我们常听到的一条忠告是不要使用 new 关键字来调用函数，因为如果忘记使用它就会导致错误。</p>
+<p>为了创建新对象，我们可以创建一个工厂方法，并且在方法内构造一个新对象。</p>
+<pre><code>function Foo() {
+var obj = {};
+obj.value = &apos;blub&apos;;
+
+var private = 2;
+obj.someMethod = function(value) {
+    this.value = value;
+}
+
+obj.getPrivate = function() {
+    return private;
+}
+return obj;
+}
+</code></pre><p>虽然上面的方式比起 new 的调用方式不容易出错，并且可以充分利用私有变量带来的便利， 但是随之而来的是一些不好的地方。</p>
+<p>会占用更多的内存，因为新创建的对象不能共享原型上的方法。<br>为了实现继承，工厂方法需要从另外一个对象拷贝所有属性，或者把一个对象作为新创建对象的原型。<br>放弃原型链仅仅是因为防止遗漏 new 带来的问题，这似乎和语言本身的思想相违背。<br>总结</p>
+<p>虽然遗漏 new 关键字可能会导致问题，但这并不是放弃使用原型链的借口。 最终使用哪种方式取决于应用程序的需求，选择一种代码书写风格并坚持下去才是最重要的。</p>
+<hr>
+<h3 id="作用域与命名空间"><a href="#作用域与命名空间" class="headerlink" title="作用域与命名空间"></a>作用域与命名空间</h3><p>尽管 JavaScript 支持一对花括号创建的代码段，但是并不支持块级作用域； 而仅仅支持 函数作用域。</p>
+<pre><code>function test() { // 一个作用域
+    for(var i = 0; i &lt; 10; i++) { // 不是一个作用域
+        // count
+    }
+    console.log(i); // 10
+}
+</code></pre><p><code>注意</code>: 如果不是在赋值语句中，而是在 return 表达式或者函数参数中，{…} 将会作为代码段解析， 而不是作为对象的字面语法解析。如果考虑到 自动分号插入，这可能会导致一些不易察觉的错误。<br>译者注：如果 return 对象的左括号和 return 不在一行上就会出错。</p>
+<pre><code>// 译者注：下面输出 undefined
+function add(a, b) {
+    return 
+        a + b;
+}
+console.log(add(1, 2));
+</code></pre><p>JavaScript 中没有显式的命名空间定义，这就意味着所有对象都定义在一个全局共享的命名空间下面。</p>
+<p>每次引用一个变量，JavaScript 会向上遍历整个作用域直到找到这个变量为止。 如果到达全局作用域但是这个变量仍未找到，则会抛出 ReferenceError 异常。</p>
+<h4 id="隐式的全局变量"><a href="#隐式的全局变量" class="headerlink" title="隐式的全局变量"></a>隐式的全局变量</h4><pre><code>// 脚本 A
+foo = &apos;42&apos;;
+
+// 脚本 B
+var foo = &apos;42&apos;
+</code></pre><p>上面两段脚本效果不同。脚本 A 在全局作用域内定义了变量 foo，而脚本 B 在当前作用域内定义变量 foo。</p>
+<p>再次强调，上面的效果完全不同，不使用 var 声明变量将会导致隐式的全局变量产生。</p>
+<pre><code>// 全局作用域
+var foo = 42;
+function test() {
+    // 局部作用域
+    foo = 21;
+}
+test();
+foo; // 21
+</code></pre><p>在函数 test 内不使用 var 关键字声明 foo 变量将会覆盖外部的同名变量。 起初这看起来并不是大问题，但是当有成千上万行代码时，不使用 var 声明变量将会带来难以跟踪的 BUG。</p>
+<pre><code>// 全局作用域
+var items = [/* 数组 */];
+for(var i = 0; i &lt; 10; i++) {
+    subLoop();
+}
+
+function subLoop() {
+        // subLoop 函数作用域
+    for(i = 0; i &lt; 10; i++) { // 没有使用 var 声明变量
+        // 干活
+    }
+}
+</code></pre><p>外部循环在第一次调用 subLoop 之后就会终止，因为 subLoop 覆盖了全局变量 i。 在第二个 for 循环中使用 var 声明变量可以避免这种错误。 声明变量时绝对不要遗漏 var 关键字，除非这就是期望的影响外部作用域的行为。</p>
+<h4 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h4><p>JavaScript 中局部变量只可能通过两种方式声明，一个是作为函数参数，另一个是通过 var 关键字声明。</p>
+<pre><code>// 全局变量
+var foo = 1;
+var bar = 2;
+var i = 2;
+
+function test(i) {
+    // 函数 test 内的局部作用域
+    i = 5;
+
+    var foo = 3;
+    bar = 4;
+}
+test(10);
+</code></pre><p><code>foo</code> 和 <code>i</code> 是函数 test 内的局部变量，而对 bar 的赋值将会覆盖全局作用域内的同名变量。</p>
+<h4 id="变量声明提升（Hoisting）"><a href="#变量声明提升（Hoisting）" class="headerlink" title="变量声明提升（Hoisting）"></a>变量声明提升（Hoisting）</h4><p>JavaScript 会提升变量声明。这意味着 var 表达式和 function 声明都将会被提升到当前作用域的顶部。</p>
+<pre><code>bar();
+var bar = function() {};
+var someValue = 42;
+
+test();
+function test(data) {
+if (false) {
+    goo = 1;
+
+} else {
+    var goo = 2;
+}
+for(var i = 0; i &lt; 100; i++) {
+    var e = data[i];
+}
+}
+</code></pre><p>上面代码在运行之前将会被转化。JavaScript 将会把 var 表达式和 function 声明提升到当前作用域的顶部。</p>
+<pre><code>// var 表达式被移动到这里
+var bar, someValue; // 缺省值是 &apos;undefined&apos;
+
+// 函数声明也会提升
+function test(data) {
+var goo, i, e; // 没有块级作用域，这些变量被移动到函数顶部
+if (false) {
+    goo = 1;
+
+} else {
+    goo = 2;
+}
+for(i = 0; i &lt; 100; i++) {
+    e = data[i];
+}
+}
+
+bar(); // 出错：TypeError，因为 bar 依然是 &apos;undefined&apos;
+someValue = 42; // 赋值语句不会被提升规则（hoisting）影响
+bar = function() {};
+
+test();
+</code></pre><p>没有块级作用域不仅导致 var 表达式被从循环内移到外部，而且使一些 if 表达式更难看懂。</p>
+<p>在原来代码中，if 表达式看起来修改了全局变量 goo，实际上在提升规则被应用后，却是在修改局部变量。</p>
+<p>如果没有提升规则（hoisting）的知识，下面的代码看起来会抛出异常 ReferenceError。</p>
+<pre><code>// 检查 SomeImportantThing 是否已经被初始化
+if (!SomeImportantThing) {
+        var SomeImportantThing = {};
+}
+</code></pre><p>实际上，上面的代码正常运行，因为 var 表达式会被提升到全局作用域的顶部。</p>
+<pre><code>var SomeImportantThing;
+
+// 其它一些代码，可能会初始化 SomeImportantThing，也可能不会
+
+// 检查是否已经被初始化
+if (!SomeImportantThing) {
+    SomeImportantThing = {};
+</code></pre><p>}<br>译者注：在 Nettuts+ 网站有一篇介绍 hoisting 的文章，其中的代码很有启发性。</p>
+<p>// 译者注：来自 Nettuts+ 的一段代码，生动的阐述了 JavaScript 中变量声明提升规则</p>
+<pre><code>    var myvar = &apos;my value&apos;;  
+
+(function() {  
+alert(myvar); // undefined  
+var myvar = &apos;local value&apos;;  
+})();  
+</code></pre><h4 id="名称解析顺序"><a href="#名称解析顺序" class="headerlink" title="名称解析顺序"></a>名称解析顺序</h4><p>JavaScript 中的所有作用域，包括全局作用域，都有一个特别的名称 this 指向当前对象。</p>
+<p>函数作用域内也有默认的变量 arguments，其中包含了传递到函数中的参数。</p>
+<p>比如，当访问函数内的 foo 变量时，JavaScript 会按照下面顺序查找：</p>
+<ol>
+<li>当前作用域内是否有 var foo 的定义。</li>
+<li>函数形式参数是否有使用 foo 名称的。</li>
+<li>函数自身是否叫做 foo。</li>
+<li>回溯到上一级作用域，然后从 #1 重新开始。<br><code>注意</code>: 自定义 arguments 参数将会阻止原生的 arguments 对象的创建。<h4 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h4></li>
+</ol>
+<p>只有一个全局作用域导致的常见错误是命名冲突。在 JavaScript中，这可以通过 匿名包装器 轻松解决。</p>
+<pre><code>(function() {
+// 函数创建一个命名空间
+
+window.foo = function() {
+    // 对外公开的函数，创建了闭包
+};
+
+})(); // 立即执行此匿名函数
+</code></pre><p>匿名函数被认为是 表达式；因此为了可调用性，它们首先会被执行。</p>
+<pre><code>( // 小括号内的函数首先被执行
+function() {}
+) // 并且返回函数对象
+() // 调用上面的执行结果，也就是函数对象
+</code></pre><p>有一些其他的调用函数表达式的方法，比如下面的两种方式语法不同，但是效果一模一样。</p>
+<pre><code>// 另外两种方式
++function(){}();
+(function(){}());
+</code></pre><h4 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h4><p>推荐使用匿名包装器（译者注：也就是自执行的匿名函数）来创建命名空间。这样不仅可以防止命名冲突， 而且有利于程序的模块化。</p>
+<p>另外，使用全局变量被认为是不好的习惯。这样的代码容易产生错误并且维护成本较高。</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><hr>
+<h3 id="数组遍历与属性"><a href="#数组遍历与属性" class="headerlink" title="数组遍历与属性"></a>数组遍历与属性</h3><p>虽然在 JavaScript 中数组是对象，但是没有好的理由去使用 for in 循环 遍历数组。 相反，有一些好的理由不去使用 <code>for in</code> 遍历数组。</p>
+<p>注意: JavaScript 中数组不是 关联数组。 JavaScript 中只有对象 来管理键值的对应关系。但是关联数组是保持顺序的，而对象不是。<br>由于 for in 循环会枚举原型链上的所有属性，唯一过滤这些属性的方式是使用 <code>hasOwnProperty</code> 函数， 因此会比普通的 for 循环慢上好多倍。</p>
+<p>遍历</p>
+<p>为了达到遍历数组的最佳性能，推荐使用经典的 for 循环。</p>
+<pre><code>var list = [1, 2, 3, 4, 5, ...... 100000000];
+for(var i = 0, l = list.length; i &lt; l; i++) {
+    console.log(list[i]);
+}
+</code></pre><p>上面代码有一个处理，就是通过 l = list.length 来缓存数组的长度。</p>
+<p>虽然 length 是数组的一个属性，但是在每次循环中访问它还是有性能开销。 可能最新的 JavaScript 引擎在这点上做了优化，但是我们没法保证自己的代码是否运行在这些最近的引擎之上。</p>
+<p>实际上，不使用缓存数组长度的方式比缓存版本要慢很多。</p>
+<h4 id="length-属性"><a href="#length-属性" class="headerlink" title="length 属性"></a>length 属性</h4><p>length 属性的 getter 方式会简单的返回数组的长度，而 setter 方式会截断数组。</p>
+<pre><code>var foo = [1, 2, 3, 4, 5, 6];
+foo.length = 3;
+foo; // [1, 2, 3]
+
+foo.length = 6;
+foo; // [1, 2, 3]
+</code></pre><p><code>译者注</code>： 在 Firebug 中查看此时 foo 的值是： [1, 2, 3, undefined, undefined, undefined] 但是这个结果并不准确，如果你在 Chrome 的控制台查看 foo 的结果，你会发现是这样的： [1, 2, 3] 因为在 JavaScript 中 undefined 是一个变量，注意是变量不是关键字，因此上面两个结果的意义是完全不相同的。</p>
+<p><code>// 译者注</code>：为了验证，我们来执行下面代码，看序号 5 是否存在于 foo 中。<br>5 in foo; // 不管在 Firebug 或者 Chrome 都返回 false<br>foo[5] = undefined;<br>5 in foo; // 不管在 Firebug 或者 Chrome 都返回 true<br>为 length 设置一个更小的值会截断数组，但是增大 length 属性值不会对数组产生影响。</p>
+<h4 id="结论-2"><a href="#结论-2" class="headerlink" title="结论"></a>结论</h4><p>为了更好的性能，推荐使用普通的 for 循环并缓存数组的 length 属性。 使用 for in 遍历数组被认为是不好的代码习惯并倾向于产生错误和导致性能问题。</p>
+<h3 id="Array-构造函数"><a href="#Array-构造函数" class="headerlink" title="Array 构造函数"></a>Array 构造函数</h3><p>由于 Array 的构造函数在如何处理参数时有点模棱两可，因此总是推荐使用数组的字面语法 - [] - 来创建数组。</p>
+<pre><code>[1, 2, 3]; // 结果: [1, 2, 3]
+new Array(1, 2, 3); // 结果: [1, 2, 3]
+
+[3]; // 结果: [3]
+new Array(3); // 结果: [] 
+new Array(&apos;3&apos;) // 结果: [&apos;3&apos;]
+
+// 译者注：因此下面的代码将会使人很迷惑
+new Array(3, 4, 5); // 结果: [3, 4, 5] 
+new Array(3) // 结果: []，此数组长度为 3
+</code></pre><p><code>译者注</code>：这里的模棱两可指的是数组的两种构造函数语法<br>由于只有一个参数传递到构造函数中（译者注：指的是 new Array(3); 这种调用方式），并且这个参数是数字，构造函数会返回一个 length 属性被设置为此参数的空数组。 需要特别注意的是，此时只有 length 属性被设置，真正的数组并没有生成。</p>
+<p><code>译者注</code>：在 Firebug 中，你会看到 [undefined, undefined, undefined]，这其实是不对的。在上一节有详细的分析。</p>
+<pre><code>var arr = new Array(3);
+arr[1]; // undefined
+1 in arr; // false, 数组还没有生成
+</code></pre><p>这种优先于设置数组长度属性的做法只在少数几种情况下有用，比如需要循环字符串，可以避免 for 循环的麻烦。</p>
+<pre><code>new Array(count + 1).join(stringToRepeat);
+</code></pre><p><code>译者注</code>： new Array(3).join(‘#’) 将会返回 ##</p>
+<h4 id="结论-3"><a href="#结论-3" class="headerlink" title="结论"></a>结论</h4><p>应该尽量避免使用数组构造函数创建新数组。推荐使用数组的字面语法。它们更加短小和简洁，因此增加了代码的可读性。</p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><h3 id="相等与比较"><a href="#相等与比较" class="headerlink" title="相等与比较"></a>相等与比较</h3><p>JavaScript 有两种方式判断两个值是否相等。</p>
+<h4 id="等于操作符"><a href="#等于操作符" class="headerlink" title="等于操作符"></a>等于操作符</h4><p>等于操作符由两个等号组成：==</p>
+<p>JavaScript 是弱类型语言，这就意味着，等于操作符会为了比较两个值而进行强制类型转换。</p>
+<pre><code>&quot;&quot;           ==   &quot;0&quot;           // false
+0            ==   &quot;&quot;            // true
+0            ==   &quot;0&quot;           // true
+false        ==   &quot;false&quot;       // false
+false        ==   &quot;0&quot;           // true
+false        ==   undefined     // false
+false        ==   null          // false
+null         ==   undefined     // true
+&quot; \t\r\n&quot;    ==   0             // true
+</code></pre><p>上面的表格展示了强制类型转换，这也是使用 == 被广泛认为是不好编程习惯的主要原因， 由于它的复杂转换规则，会导致难以跟踪的问题。</p>
+<p>此外，强制类型转换也会带来性能消耗，比如一个字符串为了和一个数字进行比较，必须事先被强制转换为数字。</p>
+<h4 id="严格等于操作符"><a href="#严格等于操作符" class="headerlink" title="严格等于操作符"></a>严格等于操作符</h4><p>严格等于操作符由三个等号组成：===</p>
+<p>不像普通的等于操作符，严格等于操作符不会进行强制类型转换。</p>
+<pre><code>&quot;&quot;           ===   &quot;0&quot;           // false
+0            ===   &quot;&quot;            // false
+0            ===   &quot;0&quot;           // false
+false        ===   &quot;false&quot;       // false
+false        ===   &quot;0&quot;           // false
+false        ===   undefined     // false
+false        ===   null          // false
+null         ===   undefined     // false
+&quot; \t\r\n&quot;    ===   0             // false
+</code></pre><p>上面的结果更加清晰并有利于代码的分析。如果两个操作数类型不同就肯定不相等也有助于性能的提升。</p>
+<h4 id="比较对象"><a href="#比较对象" class="headerlink" title="比较对象"></a>比较对象</h4><p>虽然 == 和 === 操作符都是等于操作符，但是当其中有一个操作数为对象时，行为就不同了。</p>
+<pre><code>{} === {};                   // false
+new String(&apos;foo&apos;) === &apos;foo&apos;; // false
+new Number(10) === 10;       // false
+var foo = {};
+foo === foo;                 // true
+</code></pre><p>这里等于操作符比较的不是值是否相等，而是是否属于同一个身份；也就是说，只有对象的同一个实例才被认为是相等的。 这有点像 Python 中的 is 和 C 中的指针比较。</p>
+<p><code>注意</code>:为了更直观的看到==和===的区别,可以参见JavaScript Equality Table<br>结论</p>
+<p>强烈推荐使用严格等于操作符。如果类型需要转换，应该在比较之前显式的转换， 而不是使用语言本身复杂的强制转换规则。</p>
+<hr>
+<h3 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h3><p>typeof 操作符（和 instanceof 一起）或许是 JavaScript 中最大的设计缺陷， 因为几乎不可能从它们那里得到想要的结果。</p>
+<p>尽管 instanceof 还有一些极少数的应用场景，typeof 只有一个实际的应用（译者注：这个实际应用是用来检测一个对象是否已经定义或者是否已经赋值）， 而这个应用却不是用来检查对象的类型。</p>
+<p>注意: 由于 typeof 也可以像函数的语法被调用，比如 typeof(obj)，但这并不是一个函数调用。 那两个小括号只是用来计算一个表达式的值，这个返回值会作为 typeof 操作符的一个操作数。 实际上不存在名为 typeof 的函数。<br>JavaScript 类型表格</p>
+<pre><code>Value               Class      Type
+</code></pre><hr>
+<pre><code>&quot;foo&quot;               String     string
+new String(&quot;foo&quot;)   String     object
+1.2                 Number     number
+new Number(1.2)     Number     object
+true                Boolean    boolean
+new Boolean(true)   Boolean    object
+new Date()          Date       object
+new Error()         Error      object
+[1,2,3]             Array      object
+new Array(1, 2, 3)  Array      object
+new Function(&quot;&quot;)    Function   function
+/abc/g              RegExp     object (function in Nitro/V8)
+new RegExp(&quot;meow&quot;)  RegExp     object (function in Nitro/V8)
+{}                  Object     object
+new Object()        Object     object
+</code></pre><p>上面表格中，Type 一列表示 typeof 操作符的运算结果。可以看到，这个值在大多数情况下都返回 “object”。</p>
+<p>Class 一列表示对象的内部属性 [[Class]] 的值。</p>
+<p>JavaScript 标准文档中定义: [[Class]] 的值只可能是下面字符串中的一个： Arguments, Array, Boolean, Date, Error, Function, JSON, Math, Number, Object, RegExp, String.<br>为了获取对象的 [[Class]]，我们需要使用定义在 Object.prototype 上的方法 toString。</p>
+<h4 id="对象的类定义"><a href="#对象的类定义" class="headerlink" title="对象的类定义"></a>对象的类定义</h4><p>JavaScript 标准文档只给出了一种获取 [[Class]] 值的方法，那就是使用 Object.prototype.toString。</p>
+<pre><code>function is(type, obj) {
+var clas = Object.prototype.toString.call(obj).slice(8, -1);
+return obj !== undefined &amp;&amp; obj !== null &amp;&amp; clas ===     type;
+}
+
+is(&apos;String&apos;, &apos;test&apos;); // true
+is(&apos;String&apos;, new String(&apos;test&apos;)); // true
+</code></pre><p>上面例子中，Object.prototype.toString 方法被调用，this 被设置为了需要获取 [[Class]] 值的对象。</p>
+<p><code>译者注</code>：Object.prototype.toString 返回一种标准格式字符串，所以上例可以通过 slice 截取指定位置的字符串，如下所示：</p>
+<pre><code>Object.prototype.toString.call([])    // &quot;[object Array]&quot;
+Object.prototype.toString.call({})    // &quot;[object Object]&quot;
+Object.prototype.toString.call(2)    // &quot;[object Number]&quot;
+</code></pre><p>ES5 提示: 在 ECMAScript 5 中，为了方便，对 null 和 undefined 调用 Object.prototype.toString 方法， 其返回值由 Object 变成了 Null 和 Undefined。<br>译者注：这种变化可以从 IE8 和 Firefox 4 中看出区别，如下所示：</p>
+<pre><code>// IE8
+Object.prototype.toString.call(null)    // &quot;[object Object]&quot;
+Object.prototype.toString.call(undefined)    //     &quot;[object Object]&quot;
+
+// Firefox 4
+Object.prototype.toString.call(null)    // &quot;[object Null]&quot;
+Object.prototype.toString.call(undefined)    // &quot;[object Undefined]&quot;
+</code></pre><h3 id="测试为定义变量"><a href="#测试为定义变量" class="headerlink" title="测试为定义变量"></a>测试为定义变量</h3><pre><code>typeof foo !== &apos;undefined&apos;
+</code></pre><p>上面代码会检测 foo 是否已经定义；如果没有定义而直接使用会导致 ReferenceError 的异常。 这是 typeof 唯一有用的地方。</p>
+<h4 id="结论-4"><a href="#结论-4" class="headerlink" title="结论"></a>结论</h4><p>为了检测一个对象的类型，强烈推荐使用 Object.prototype.toString 方法； 因为这是唯一一个可依赖的方式。正如上面表格所示，typeof 的一些返回值在标准文档中并未定义， 因此不同的引擎实现可能不同。</p>
+<p>除非为了检测一个变量是否已经定义，我们应尽量避免使用 typeof 操作符。</p>
+<h3 id="instanceof-操作符"><a href="#instanceof-操作符" class="headerlink" title="instanceof 操作符"></a>instanceof 操作符</h3><p>instanceof 操作符用来比较两个操作数的构造函数。只有在比较自定义的对象时才有意义。 如果用来比较内置类型，将会和 typeof 操作符 一样用处不大。</p>
+<p>比较自定义对象</p>
+<pre><code>function Foo() {}
+function Bar() {}
+Bar.prototype = new Foo();
+
+new Bar() instanceof Bar; // true
+new Bar() instanceof Foo; // true
+
+// 如果仅仅设置 Bar.prototype 为函数 Foo 本身，而不是 Foo 构造函数的一个实例
+Bar.prototype = Foo;
+new Bar() instanceof Foo; // false
+</code></pre><p>instanceof 比较内置类型</p>
+<pre><code>new String(&apos;foo&apos;) instanceof String; // true
+new String(&apos;foo&apos;) instanceof Object; // true
+
+&apos;foo&apos; instanceof String; // false
+&apos;foo&apos; instanceof Object; // false
+</code></pre><p>有一点需要注意，instanceof 用来比较属于不同 JavaScript 上下文的对象（比如，浏览器中不同的文档结构）时将会出错， 因为它们的构造函数不会是同一个对象。</p>
+<h4 id="结论-5"><a href="#结论-5" class="headerlink" title="结论"></a>结论</h4><p>instanceof 操作符应该仅仅用来比较来自同一个 JavaScript 上下文的自定义对象。 正如 typeof 操作符一样，任何其它的用法都应该是避免的。</p>
+<hr>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>JavaScript 是弱类型语言，所以会在任何可能的情况下应用强制类型转换。</p>
+<pre><code>// 下面的比较结果是：true
+new Number(10) == 10; // Number.toString() 返回的字符串被再次转换为数字
+
+10 == &apos;10&apos;;           // 字符串被转换为数字
+10 == &apos;+10 &apos;;         // 同上
+10 == &apos;010&apos;;          // 同上 
+isNaN(null) == false; // null 被转换为数字 0
+                  // 0 当然不是一个 NaN（译者注：否定之否定）
+
+// 下面的比较结果是：false
+10 == 010;
+10 == &apos;-10&apos;;
+</code></pre><p>ES5 提示: 以 0 开头的数字字面值会被作为八进制数字解析。 而在 ECMAScript 5 严格模式下，这个特性被移除了。<br>为了避免上面复杂的强制类型转换，强烈推荐使用严格的等于操作符。 虽然这可以避免大部分的问题，但 JavaScript 的弱类型系统仍然会导致一些其它问题。</p>
+<h4 id="内置类型的构造函数"><a href="#内置类型的构造函数" class="headerlink" title="内置类型的构造函数"></a>内置类型的构造函数</h4><p>内置类型（比如 Number 和 String）的构造函数在被调用时，使用或者不使用 new 的结果完全不同。</p>
+<pre><code>new Number(10) === 10;     // False, 对象与数字的比较
+Number(10) === 10;         // True, 数字与数字的比较
+new Number(10) + 0 === 10; // True, 由于隐式的类型转换
+</code></pre><p>使用内置类型 Number 作为构造函数将会创建一个新的 Number 对象， 而在不使用 new 关键字的 Number 函数更像是一个数字转换器。</p>
+<p>另外，在比较中引入对象的字面值将会导致更加复杂的强制类型转换。</p>
+<p>最好的选择是把要比较的值显式的转换为三种可能的类型之一。</p>
+<h4 id="转换为字符串"><a href="#转换为字符串" class="headerlink" title="转换为字符串"></a>转换为字符串</h4><pre><code>&apos;&apos; + 10 === &apos;10&apos;; // true
+</code></pre><p>将一个值加上空字符串可以轻松转换为字符串类型。</p>
+<h4 id="转换为数字"><a href="#转换为数字" class="headerlink" title="转换为数字"></a>转换为数字</h4><pre><code>+&apos;10&apos; === 10; // true
+</code></pre><p>使用一元的加号操作符，可以把字符串转换为数字。</p>
+<p><code>译者注</code>：字符串转换为数字的常用方法：</p>
+<pre><code>+&apos;010&apos; === 10
+Number(&apos;010&apos;) === 10
+parseInt(&apos;010&apos;, 10) === 10  // 用来转换为整数
+
++&apos;010.2&apos; === 10.2
+Number(&apos;010.2&apos;) === 10.2
+parseInt(&apos;010.2&apos;, 10) === 10
+</code></pre><h4 id="转换为布尔型"><a href="#转换为布尔型" class="headerlink" title="转换为布尔型"></a>转换为布尔型</h4><p>通过使用 否 操作符两次，可以把一个值转换为布尔型。</p>
+<pre><code>!!&apos;foo&apos;;   // true
+!!&apos;&apos;;      // false
+!!&apos;0&apos;;     // true
+!!&apos;1&apos;;     // true
+!!&apos;-1&apos;     // true
+!!{};      // true
+!!true;    // true
+</code></pre><h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><hr>
+<h3 id="为什么不要使用-eval"><a href="#为什么不要使用-eval" class="headerlink" title="为什么不要使用 eval"></a>为什么不要使用 eval</h3><p>eval 函数会在当前作用域中执行一段 JavaScript 代码字符串。</p>
+<pre><code>var foo = 1;
+function test() {
+    var foo = 2;
+        eval(&apos;foo = 3&apos;);
+    return foo;
+}
+test(); // 3
+foo; // 1
+</code></pre><p>但是 eval 只在被直接调用并且调用函数就是 eval 本身时，才在当前作用域中执行。</p>
+<pre><code>var foo = 1;
+function test() {
+    var foo = 2;
+    var bar = eval;
+    bar(&apos;foo = 3&apos;);
+    return foo;
+}
+    test(); // 2
+    foo; // 3
+</code></pre><p><code>译者注</code>：上面的代码等价于在全局作用域中调用 eval，和下面两种写法效果一样：</p>
+<pre><code>// 写法一：直接调用全局作用域下的 foo 变量
+var foo = 1;
+function test() {
+    var foo = 2;
+    window.foo = 3;
+    return foo;
+}
+test(); // 2
+foo; // 3
+
+// 写法二：使用 call 函数修改 eval 执行的上下文为全局作用域
+var foo = 1;
+function test() {
+    var foo = 2;
+        eval.call(window, &apos;foo = 3&apos;);
+    return foo;
+    }
+test(); // 2
+foo; // 3
+</code></pre><p>在任何情况下我们都应该避免使用 eval 函数。99.9% 使用 eval 的场景都有不使用 eval 的解决方案。</p>
+<h4 id="伪装的-eval"><a href="#伪装的-eval" class="headerlink" title="伪装的 eval"></a>伪装的 eval</h4><p>定时函数 setTimeout 和 setInterval 都可以接受字符串作为它们的第一个参数。 这个字符串总是在全局作用域中执行，因此 eval 在这种情况下没有被直接调用。</p>
+<h4 id="安全问题"><a href="#安全问题" class="headerlink" title="安全问题"></a>安全问题</h4><p>eval 也存在安全问题，因为它会执行任意传给它的代码， 在代码字符串未知或者是来自一个不信任的源时，绝对不要使用 eval 函数。</p>
+<h4 id="结论-6"><a href="#结论-6" class="headerlink" title="结论"></a>结论</h4><p>绝对不要使用 eval，任何使用它的代码都会在它的工作方式，性能和安全性方面受到质疑。 如果一些情况必须使用到 eval 才能正常工作，首先它的设计会受到质疑，这不应该是首选的解决方案， 一个更好的不使用 eval 的解决方案应该得到充分考虑并优先采用。</p>
+<h3 id="undefined-和-null"><a href="#undefined-和-null" class="headerlink" title="undefined 和 null"></a>undefined 和 null</h3><p>JavaScript 有两个表示‘空’的值，其中比较有用的是 undefined。</p>
+<h4 id="undefined-的值"><a href="#undefined-的值" class="headerlink" title="undefined 的值"></a>undefined 的值</h4><p>undefined 是一个值为 undefined 的类型。</p>
+<p>这个语言也定义了一个全局变量，它的值是 undefined，这个变量也被称为 undefined。 但是这个变量不是一个常量，也不是一个关键字。这意味着它的值可以轻易被覆盖。</p>
+<p>ES5 提示: 在 ECMAScript 5 的严格模式下，undefined 不再是 可写的了。 但是它的名称仍然可以被隐藏，比如定义一个函数名为 undefined。<br>下面的情况会返回 undefined 值：</p>
+<ul>
+<li>访问未修改的全局变量 undefined。</li>
+<li>由于没有定义 return 表达式的函数隐式返回。</li>
+<li>return 表达式没有显式的返回任何内容。</li>
+<li>访问不存在的属性。</li>
+<li>函数参数没有被显式的传递值。</li>
+<li>任何被设置为 undefined 值的变量。<br>  处理 <code>undefined</code> 值的改变</li>
+</ul>
+<p>由于全局变量 <code>undefined</code> 只是保存了 <code>undefined</code> 类型实际值的副本， 因此对它赋新值不会改变类型 <code>undefined</code> 的值。</p>
+<p>然而，为了方便其它变量和 <code>undefined</code> 做比较，我们需要事先获取类型 <code>undefined</code> 的值。</p>
+<p>为了避免可能对 undefined 值的改变，一个常用的技巧是使用一个传递到匿名包装器的额外参数。 在调用时，这个参数不会获取任何值。</p>
+<pre><code>var undefined = 123;
+(function(something, foo, undefined) {
+// 局部作用域里的 undefined 变量重新获得了 `undefined` 值
+
+})(&apos;Hello World&apos;, 42);
+</code></pre><p>另外一种达到相同目的方法是在函数内使用变量声明。</p>
+<pre><code>var undefined = 123;
+(function(something, foo) {
+    var undefined;
+...
+
+})(&apos;Hello World&apos;, 42);
+</code></pre><p>这里唯一的区别是，在压缩后并且函数内没有其它需要使用 var 声明变量的情况下，这个版本的代码会多出 4 个字节的代码。</p>
+<p><code>译者注</code>：这里有点绕口，其实很简单。如果此函数内没有其它需要声明的变量，那么 var 总共 4 个字符（包含一个空白字符） 就是专门为 undefined 变量准备的，相比上个例子多出了 4 个字节。</p>
+<h4 id="null-的用处"><a href="#null-的用处" class="headerlink" title="null 的用处"></a>null 的用处</h4><p>JavaScript 中的 undefined 的使用场景类似于其它语言中的 null，实际上 JavaScript 中的 null 是另外一种数据类型。</p>
+<p>它在 JavaScript 内部有一些使用场景（比如声明原型链的终结 Foo.prototype = null），但是大多数情况下都可以使用 undefined 来代替。</p>
+<hr>
+<h3 id="自动分号插入"><a href="#自动分号插入" class="headerlink" title="自动分号插入"></a>自动分号插入</h3><p>尽管 JavaScript 有 C 的代码风格，但是它不强制要求在代码中使用分号，实际上可以省略它们。</p>
+<p>JavaScript 不是一个没有分号的语言，恰恰相反上它需要分号来就解析源代码。 因此 JavaScript 解析器在遇到由于缺少分号导致的解析错误时，会自动在源代码中插入分号。</p>
+<pre><code>var foo = function() {
+} // 解析错误，分号丢失
+test()
+</code></pre><p>自动插入分号，解析器重新解析。</p>
+<pre><code>var foo = function() {
+}; // 没有错误，解析继续
+test()
+</code></pre><p>自动的分号插入被认为是 JavaScript 语言最大的设计缺陷之一，因为它能改变代码的行为。</p>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>下面的代码没有分号，因此解析器需要自己判断需要在哪些地方插入分号。</p>
+<pre><code>(function(window, undefined) {
+        function test(options) {
+        log(&apos;testing!&apos;)
+
+    (options.list || []).forEach(function(i) {
+
+    })
+
+    options.value.test(
+        &apos;long string to pass here&apos;,
+        &apos;and another long string to pass&apos;
+    )
+
+    return
+    {
+        foo: function() {}
+    }
+}
+window.test = test
+
+})(window)
+
+(function(window) {
+window.someLibrary = {}
+})(window)
+</code></pre><p>下面是解析器”猜测”的结果。</p>
+<pre><code>(function(window, undefined) {
+function test(options) {
+
+    // 没有插入分号，两行被合并为一行
+    log(&apos;testing!&apos;)(options.list || []).forEach(function(i) {
+
+    }); // &lt;- 插入分号
+
+    options.value.test(
+        &apos;long string to pass here&apos;,
+        &apos;and another long string to pass&apos;
+    ); // &lt;- 插入分号
+
+    return; // &lt;- 插入分号, 改变了 return 表达式的行为
+    { // 作为一个代码段处理
+        foo: function() {} 
+    }; // &lt;- 插入分号
+}
+window.test = test; // &lt;- 插入分号
+
+// 两行又被合并了
+})(window)(function(window) {
+window.someLibrary = {}; // &lt;- 插入分号
+})(window); //&lt;- 插入分号
+</code></pre><p>注意: JavaScript 不能正确的处理 return 表达式紧跟换行符的情况， 虽然这不能算是自动分号插入的错误，但这确实是一种不希望的副作用。<br>解析器显著改变了上面代码的行为，在另外一些情况下也会做出错误的处理。</p>
+<h4 id="前置括号"><a href="#前置括号" class="headerlink" title="前置括号"></a>前置括号</h4><p>在前置括号的情况下，解析器不会自动插入分号。</p>
+<pre><code>log(&apos;testing!&apos;)
+(options.list || []).forEach(function(i) {})
+</code></pre><p>上面代码被解析器转换为一行。</p>
+<pre><code>log(&apos;testing!&apos;)(options.list || []).forEach(function(i) {})
+</code></pre><p>log 函数的执行结果极大可能不是函数；这种情况下就会出现 TypeError 的错误，详细错误信息可能是 undefined is not a function。</p>
+<h4 id="结论-7"><a href="#结论-7" class="headerlink" title="结论"></a>结论</h4><p>建议绝对不要省略分号，同时也提倡将花括号和相应的表达式放在一行， 对于只有一行代码的 if 或者 else 表达式，也不应该省略花括号。 这些良好的编程习惯不仅可以提到代码的一致性，而且可以防止解析器改变代码行为的错误处理。</p>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><hr>
+<h3 id="setTimeout-和-setInterval"><a href="#setTimeout-和-setInterval" class="headerlink" title="setTimeout 和 setInterval"></a>setTimeout 和 setInterval</h3><p>由于 JavaScript 是异步的，可以使用 setTimeout 和 setInterval 来计划执行函数。</p>
+<p><code>注意</code>: 定时处理不是 ECMAScript 的标准，它们在 DOM (文档对象模型) 被实现。<br>    function foo() {}<br>    var id = setTimeout(foo, 1000); // 返回一个大于零的数字<br>当 setTimeout 被调用时，它会返回一个 ID 标识并且计划在将来大约 1000 毫秒后调用 foo 函数。 foo 函数只会被执行一次。</p>
+<p>基于 JavaScript 引擎的计时策略，以及本质上的单线程运行方式，所以其它代码的运行可能会阻塞此线程。 因此没法确保函数会在 setTimeout 指定的时刻被调用。</p>
+<p>作为第一个参数的函数将会在全局作用域中执行，因此函数内的 this 将会指向这个全局对象。</p>
+<pre><code>function Foo() {
+this.value = 42;
+this.method = function() {
+    // this 指向全局对象
+    console.log(this.value); // 输出：undefined
+};
+setTimeout(this.method, 500);
+}
+new Foo();
+</code></pre><p>注意: setTimeout 的第一个参数是函数对象，一个常犯的错误是这样的 setTimeout(foo(), 1000)， 这里回调函数是 foo 的返回值，而不是foo本身。 大部分情况下，这是一个潜在的错误，因为如果函数返回 undefined，setTimeout 也不会报错。<br>setInterval 的堆调用</p>
+<p>setTimeout 只会执行回调函数一次，不过 setInterval - 正如名字建议的 - 会每隔 X 毫秒执行函数一次。 但是却不鼓励使用这个函数。</p>
+<p>当回调函数的执行被阻塞时，setInterval 仍然会发布更多的回调指令。在很小的定时间隔情况下，这会导致回调函数被堆积起来。</p>
+<pre><code>function foo(){
+    // 阻塞执行 1 秒
+}
+setInterval(foo, 100);
+</code></pre><p>上面代码中，foo 会执行一次随后被阻塞了一秒钟。</p>
+<p>在 foo 被阻塞的时候，setInterval 仍然在组织将来对回调函数的调用。 因此，当第一次 foo 函数调用结束时，已经有 10 次函数调用在等待执行。</p>
+<h4 id="处理可能的阻塞调用"><a href="#处理可能的阻塞调用" class="headerlink" title="处理可能的阻塞调用"></a>处理可能的阻塞调用</h4><p>最简单也是最容易控制的方案，是在回调函数内部使用 setTimeout 函数。</p>
+<pre><code>function foo(){
+// 阻塞执行 1 秒
+    setTimeout(foo, 100);
+}
+foo();
+</code></pre><p>这样不仅封装了 setTimeout 回调函数，而且阻止了调用指令的堆积，可以有更多的控制。 foo 函数现在可以控制是否继续执行还是终止执行。</p>
+<h4 id="手工清空定时器"><a href="#手工清空定时器" class="headerlink" title="手工清空定时器"></a>手工清空定时器</h4><p>可以通过将定时时产生的 ID 标识传递给 clearTimeout 或者 clearInterval 函数来清除定时， 至于使用哪个函数取决于调用的时候使用的是 setTimeout 还是 setInterval。</p>
+<pre><code>var id = setTimeout(foo, 1000);
+clearTimeout(id);
+</code></pre><p>清除所有定时器</p>
+<p>由于没有内置的清除所有定时器的方法，可以采用一种暴力的方式来达到这一目的。</p>
+<pre><code>// 清空&quot;所有&quot;的定时器
+for(var i = 1; i &lt; 1000; i++) {
+    clearTimeout(i);
+}
+</code></pre><p>可能还有些定时器不会在上面代码中被清除（译者注：如果定时器调用时返回的 ID 值大于 1000）， 因此我们可以事先保存所有的定时器 ID，然后一把清除。</p>
+<h4 id="隐藏使用-eval"><a href="#隐藏使用-eval" class="headerlink" title="隐藏使用 eval"></a>隐藏使用 eval</h4><p>setTimeout 和 setInterval 也接受第一个参数为字符串的情况。 这个特性绝对不要使用，因为它在内部使用了 eval。</p>
+<p>注意: 由于定时器函数不是 ECMAScript 的标准，如何解析字符串参数在不同的 JavaScript 引擎实现中可能不同。 事实上，微软的 JScript 会使用 Function 构造函数来代替 eval 的使用。</p>
+<pre><code>function foo() {
+    // 将会被调用
+}
+
+function bar() {
+    function foo() {
+        // 不会被调用
+    }
+    setTimeout(&apos;foo()&apos;, 1000);
+}
+bar();
+</code></pre><p>由于 eval 在这种情况下不是被直接调用，因此传递到 setTimeout 的字符串会自全局作用域中执行； 因此，上面的回调函数使用的不是定义在 bar 作用域中的局部变量 foo。</p>
+<p>建议不要在调用定时器函数时，为了向回调函数传递参数而使用字符串的形式。</p>
+<pre><code>function foo(a, b, c) {}
+
+// 不要这样做
+setTimeout(&apos;foo(1,2, 3)&apos;, 1000)
+
+// 可以使用匿名函数完成相同功能
+setTimeout(function() {
+    foo(1, 2, 3);
+}, 1000)
+</code></pre><p><code>注意:</code> 虽然也可以使用这样的语法 setTimeout(foo, 1000, 1, 2, 3)， 但是不推荐这么做，因为在使用对象的属性方法时可能会出错。 （译者注：这里说的是属性方法内，this 的指向错误）</p>
+<h4 id="结论-8"><a href="#结论-8" class="headerlink" title="结论"></a>结论</h4><p>绝对不要使用字符串作为 setTimeout 或者 setInterval 的第一个参数， 这么写的代码明显质量很差。当需要向回调函数传递参数时，可以创建一个匿名函数，在函数内执行真实的回调函数。</p>
+<p>另外，应该避免使用 setInterval，因为它的定时执行不会被 JavaScript 阻塞</p>
+<p>转载自：[<a href="http://bonsaiden.github.io/JavaScript-Garden/zh/#object.prototype]（http://bonsaiden.github.io/JavaScript-Garden/zh/#object.prototype）" target="_blank" rel="external">http://bonsaiden.github.io/JavaScript-Garden/zh/#object.prototype]（http://bonsaiden.github.io/JavaScript-Garden/zh/#object.prototype）</a></p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/09/22/javascript一/" class="archive-article-date">
+  	<time datetime="2016-09-22T12:10:54.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-22</time>
+</a>
+      
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Interview" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1887,1438 +3831,9 @@ D.unshift方法用于向数组删除第一个元素.
 
 
   
-    <article id="post-algorithm" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/19/algorithm/">算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="前端面试中的常见的算法问题"><a href="#前端面试中的常见的算法问题" class="headerlink" title="前端面试中的常见的算法问题"></a>前端面试中的常见的算法问题</h1><p>虽说我们很多时候前端很少有机会接触到算法。大多都交互性的操作，然而从各大公司面试来看，算法依旧是考察的一方面。实际上学习数据结构与算法对于工程师去理解和分析问题都是有帮助的。如果将来当我们面对较为复杂的问题，这些基础知识的积累可以帮助我们更好的优化解决思路。下面罗列在前端面试中经常撞见的几个问题吧。</p>
-<h2 id="Q1-判断一个单词是否是回文？"><a href="#Q1-判断一个单词是否是回文？" class="headerlink" title="Q1 判断一个单词是否是回文？"></a>Q1 判断一个单词是否是回文？</h2><p><code>回文是指把相同的词汇或句子，在下文中调换位置或颠倒过来，产生首尾回环的情趣，叫做回文，也叫回环。比如 mamam redivider .</code></p>
-<p>很多人拿到这样的题目非常容易想到用for 将字符串颠倒字母顺序然后匹配就行了。其实重要的考察的就是对于reverse的实现。其实我们可以利用现成的函数，将字符串转换成数组，这个思路很重要，我们可以拥有更多的自由度去进行字符串的一些操作。</p>
-<pre><code>function checkPalindrom(str) {  
-    return str == str.split(&apos;&apos;).reverse().join(&apos;&apos;);
-}
-</code></pre><h2 id="Q2-去掉一组整型数组重复的值"><a href="#Q2-去掉一组整型数组重复的值" class="headerlink" title="Q2 去掉一组整型数组重复的值"></a>Q2 去掉一组整型数组重复的值</h2><pre><code>比如输入: [1,13,24,11,11,14,1,2] 
-输出: [1,13,24,11,14,2]
-需要去掉重复的11 和 1 这两个元素。
-</code></pre><p>这道问题出现在诸多的前端面试题中，主要考察个人对Object的使用，利用key来进行筛选。<br>    let unique = function(arr) {<br>          let hashTable = {};<br>          let data = [];<br>          for(let i=0,l=arr.length;i&lt;l;i++) {<br>            if(!hashTable[arr[i]]) {<br>                  hashTable[arr[i]] = true;<br>                  data.push(arr[i]);<br>               }<br>          }<br>          return data</p>
-<pre><code>}
-
-module.exports = unique;  
-</code></pre><h2 id="Q3-统计一个字符串出现最多的字母"><a href="#Q3-统计一个字符串出现最多的字母" class="headerlink" title="Q3 统计一个字符串出现最多的字母"></a>Q3 统计一个字符串出现最多的字母</h2><p>给出一段英文连续的英文字符窜，找出重复出现次数最多的字母</p>
-<pre><code>输入 ： afjghdfraaaasdenas 
-
-输出 ： a
-</code></pre><p>前面出现过去重的算法，这里需要是统计重复次数。</p>
-<pre><code>function findMaxDuplicateChar(str) {  
-      if(str.length == 1) {
-    return str;
-      }
-      let charObj = {};
-      for(let i=0;i&lt;str.length;i++) {
-        if(!charObj[str.charAt(i)]) {
-          charObj[str.charAt(i)] = 1;
-        }else{
-          charObj[str.charAt(i)] += 1;
-    }
-  }
-      let maxChar = &apos;&apos;,
-      maxValue = 1;
-      for(var k in charObj) {
-        if(charObj[k] &gt;= maxValue) {
-              maxChar = k;
-              maxValue = charObj[k];
-            }
-      }
-      return maxChar;
-
-}
-
-module.exports = findMaxDuplicateChar;  
-</code></pre><h2 id="Q4-排序算法"><a href="#Q4-排序算法" class="headerlink" title="Q4 排序算法"></a>Q4 排序算法</h2><p>如果抽到算法题目的话，应该大多都是比较开放的题目，不限定算法的实现，但是一定要求掌握其中的几种，所以冒泡排序，这种较为基础并且便于理解记忆的算法一定需要熟记于心。冒泡排序算法就是依次比较大小，小的的大的进行位置上的交换。</p>
-<pre><code>function bubbleSort(arr) {  
-    for(let i = 0,l=arr.length;i&lt;l-1;i++) {
-           for(let j = i+1;j&lt;l;j++) { 
-              if(arr[i]&gt;arr[j]) {
-                let tem = arr[i];
-                arr[i] = arr[j];
-                arr[j] = tem;
-            }
-        }
-    }
-    return arr;
-}
-module.exports = bubbleSort;  
-</code></pre><p>除了冒泡排序外，其实还有很多诸如 插入排序,快速排序，希尔排序等。每一种排序算法都有各自的特点。全部掌握也不需要，但是心底一定要熟悉几种算法。 比如快速排序，其效率很高，而其基本原理如图(来自wiki)：<br><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" alt=""></p>
-<p>算法参考某个元素值，将小于它的值，放到左数组中，大于它的值的元素就放到右数组中，然后递归进行上一次左右数组的操作，返回合并的数组就是已经排好顺序的数组了。</p>
-<pre><code>function quickSort(arr) {
-
-if(arr.length&lt;=1) {
-    return arr;
-}
-
-let leftArr = [];
-let rightArr = [];
-let q = arr[0];
-for(let i = 1,l=arr.length; i&lt;l; i++) {
-    if(arr[i]&gt;q) {
-        rightArr.push(arr[i]);
-    }else{
-        leftArr.push(arr[i]);
-    }
-}
-
-return [].concat(quickSort(leftArr),[q],quickSort(rightArr));
-}
-
-module.exports = quickSort;  
-</code></pre><p>安利大家一个学习的地址，通过动画演示算法的实现。</p>
-<p><a href="http://math.hws.edu/eck/jsdemo/sortlab.html" target="_blank" rel="external">HTML5 Canvas Demo: Sorting Algorithms</a></p>
-<h2 id="Q5-不借助临时变量，进行两个整数的交换"><a href="#Q5-不借助临时变量，进行两个整数的交换" class="headerlink" title="Q5 不借助临时变量，进行两个整数的交换"></a>Q5 不借助临时变量，进行两个整数的交换</h2><p>输入 a = 2, b = 4 输出 a = 4, b =2<br>这种问题非常巧妙，需要大家跳出惯有的思维，利用 a , b进行置换。</p>
-<p>主要是利用 + - 去进行运算，类似 a = a + ( b - a) 实际上等同于最后 的 a = b;</p>
-<pre><code>function swap(a , b) {  
-      b = b - a;
-      a = a + b;
-      b = a - b;
-      return [a,b];
-}
-
-module.exports = swap;  
-</code></pre><h2 id="Q6-使用canvas-绘制一个有限度的斐波那契数列的曲线？"><a href="#Q6-使用canvas-绘制一个有限度的斐波那契数列的曲线？" class="headerlink" title="Q6 使用canvas 绘制一个有限度的斐波那契数列的曲线？"></a>Q6 使用canvas 绘制一个有限度的斐波那契数列的曲线？</h2><p><img src="http://img1.vued.vanthink.cn/vued90edf7b944ec479ee8b4203cf56e158d.png" alt=""><br>数列长度限定在9.</p>
-<p><code>斐波那契数列</code>，又称黄金分割数列，指的是这样一个数列：0、1、1、2、3、5、8、13、21、34、……在数学上，斐波纳契数列主要考察递归的调用。我们一般都知道定义</p>
-<pre><code>fibo[i] = fibo[i-1]+fibo[i-2];  
-</code></pre><p>生成斐波那契数组的方法</p>
-<pre><code>function getFibonacci(n) {  
-      var fibarr = [];
-      var i = 0;
-      while(i&lt;n) {
-        if(i&lt;=1) {
-              fibarr.push(i);
-        }else{
-              fibarr.push(fibarr[i-1] + fibarr[i-2])
-        }
-        i++;
-      }
-
-      return fibarr;
-}
-</code></pre><p>剩余的工作就是利用canvas <code>arc</code>方法进行曲线绘制了</p>
-<p><a href="http://codepen.io/Jack_Pu/pen/LRaxZB" target="_blank" rel="external">DEMO</a></p>
-<h2 id="Q7-找出下列正数组的最大差值比如"><a href="#Q7-找出下列正数组的最大差值比如" class="headerlink" title="Q7 找出下列正数组的最大差值比如:"></a>Q7 找出下列正数组的最大差值比如:</h2><pre><code>输入 [10,5,11,7,8,9]
-
-输出 6
-</code></pre><p>这是通过一道题目去测试对于基本的数组的最大值的查找，很明显我们知道，最大差值肯定是一个数组中最大值与最小值的差。</p>
-<pre><code>  function getMaxProfit(arr) {
-
-       var minPrice = arr[0];
-    var maxProfit = 0;
-
-    for (var i = 0; i &lt; arr.length; i++) {
-        var currentPrice = arr[i];
-
-        minPrice = Math.min(minPrice, currentPrice);
-
-        var potentialProfit = currentPrice - minPrice;
-
-        maxProfit = Math.max(maxProfit, potentialProfit);
-    }
-
-    return maxProfit;
-}
-</code></pre><h2 id="Q8-随机生成指定长度的字符串"><a href="#Q8-随机生成指定长度的字符串" class="headerlink" title="Q8 随机生成指定长度的字符串"></a>Q8 随机生成指定长度的字符串</h2><p>实现一个算法，随机生成指制定长度的字符窜。</p>
-<pre><code>比如给定 长度 8  输出 4ldkfg9j
-function randomString(n) {  
-      let str = &apos;abcdefghijklmnopqrstuvwxyz9876543210&apos;;
-      let tmp = &apos;&apos;,
-      i = 0,
-      l = str.length;
-      for (i = 0; i &lt; n; i++) {
-            tmp += str.charAt(Math.floor(Math.random() * l));
-      }
-      return tmp;
-}
-
-module.exports = randomString;  
-</code></pre><h2 id="Q9-实现类似getElementsByClassName-的功能"><a href="#Q9-实现类似getElementsByClassName-的功能" class="headerlink" title="Q9 实现类似getElementsByClassName 的功能"></a>Q9 实现类似getElementsByClassName 的功能</h2><p>自己实现一个函数，查找某个DOM节点下面的包含某个class的所有DOM节点？不允许使用原生提供的 getElementsByClassName querySelectorAll 等原生提供DOM查找函数。</p>
-<pre><code>function queryClassName(node, name) {  
-      var starts = &apos;(^|[ \n\r\t\f])&apos;,
-       ends = &apos;([ \n\r\t\f]|$)&apos;;
-      var array = [],
-    regex = new RegExp(starts + name + ends),
-    elements = node.getElementsByTagName(&quot;*&quot;),
-    length = elements.length,
-    i = 0,
-    element;
-
-while (i &lt; length) {
-    element = elements[i];
-    if (regex.test(element.className)) {
-        array.push(element);
-    }
-
-    i += 1;
-}
-
-return array;
-</code></pre><p>}</p>
-<h2 id="Q10-使用JS-实现二叉查找树-Binary-Search-Tree"><a href="#Q10-使用JS-实现二叉查找树-Binary-Search-Tree" class="headerlink" title="Q10 使用JS 实现二叉查找树(Binary Search Tree)"></a>Q10 使用JS 实现二叉查找树(Binary Search Tree)</h2><p>一般叫全部写完的概率比较少，但是重点考察你对它的理解和一些基本特点的实现。 二叉查找树，也称二叉搜索树、有序二叉树（英语：ordered binary tree）是指一棵空树或者具有下列性质的二叉树：</p>
-<ul>
-<li>任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
-<li>任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
-<li>任意节点的左、右子树也分别为二叉查找树；</li>
-<li>没有键值相等的节点。二叉查找树相比于其他数据结构的优势在于查找、插入的时间复杂度较低。为O(log n)。二叉查找树是基础性数据结构，用于构建更为抽象的数据结构，如集合、multiset、关联数组等。<br><img src="http://img1.vued.vanthink.cn/vued95685e8f89199babd6273a93651ecd8b.png" alt=""></li>
-</ul>
-<p>在写的时候需要足够理解二叉搜素树的特点，需要先设定好每个节点的数据结构</p>
-<pre><code>class Node {  
-      constructor(data, left, right) {
-        this.data = data;
-        this.left = left;
-        this.right = right;
-      }
-
-}
-</code></pre><p>树是有节点构成，由根节点逐渐延生到各个子节点，因此它具备基本的结构就是具备一个根节点，具备添加，查找和删除节点的方法.</p>
-<pre><code>class BinarySearchTree {
-
-      constructor() {
-        this.root = null;
-      }
-
-  insert(data) {
-    let n = new Node(data, null, null);
-    if (!this.root) {
-          return this.root = n;
-    }
-    let currentNode = this.root;
-    let parent = null;
-    while (1) {
-          parent = currentNode;
-          if (data &lt; currentNode.data) {
-            currentNode = currentNode.left;
-            if (currentNode === null) {
-                  parent.left = n;
-                  break;
-            }
-      } else {
-        currentNode = currentNode.right;
-        if (currentNode === null) {
-              parent.right = n;
-              break;
-            }
-      }
-    }
-  }
-
-  remove(data) {
-    this.root = this.removeNode(this.root, data)
-  }
-
-  removeNode(node, data) {
-    if (node == null) {
-          return null;
-    }
-
-if (data == node.data) {
-  // no children node
-  if (node.left == null &amp;&amp; node.right == null) {
-    return null;
-  }
-  if (node.left == null) {
-    return node.right;
-  }
-  if (node.right == null) {
-    return node.left;
-  }
-
-  let getSmallest = function(node) {
-    if(node.left === null &amp;&amp; node.right == null) {
-      return node;
-    }
-    if(node.left != null) {
-      return node.left;
-    }
-    if(node.right !== null) {
-      return getSmallest(node.right);
-    }
-
-  }
-  let temNode = getSmallest(node.right);
-  node.data = temNode.data;
-  node.right = this.removeNode(temNode.right,temNode.data);
-  return node;
-
-} else if (data &lt; node.data) {
-  node.left = this.removeNode(node.left,data);
-  return node;
-} else {
-  node.right = this.removeNode(node.right,data);
-  return node;
-}
-</code></pre><p>  }</p>
-<pre><code>  find(data) {
-    var current = this.root;
-    while (current != null) {
-      if (data == current.data) {
-        break;
-      }
-      if (data &lt; current.data) {
-        current = current.left;
-      } else {
-        current = current.right
-      }
-    }
-    return current.data;
-  }
-
-}
-
-module.exports = BinarySearchTree;  
-</code></pre><p><a href="https://github.com/JackPu/JavaScript-Algorithm-Learning" target="_blank" rel="external">完整代码 Github</a></p>
-<p>扩展阅读<br><a href="https://www.interviewcake.com/question/javascript/rectangular-love" target="_blank" rel="external">https://www.interviewcake.com/question/javascript/rectangular-love
-</a><br><a href="http://stackoverflow.com/questions/21853967/get-elements-by-class-a-or-b-in-javascript" target="_blank" rel="external">http://stackoverflow.com/questions/21853967/get-elements-by-class-a-or-b-in-javascript</a></p>
-<p><a href="http://codepen.io/Jack_Pu/pen/EgrXBp" target="_blank" rel="external">http://codepen.io/Jack_Pu/pen/EgrXBp</a></p>
-<p><a href="http://javascript-html5-tutorial.com/algorithms-and-data-structures-in-javascript.html" target="_blank" rel="external">http://javascript-html5-tutorial.com/algorithms-and-data-structures-in-javascript.html</a></p>
-<p>引自：<a href="http://www.jackpu.com/qian-duan-mian-shi-zhong-de-chang-jian-de-suan-fa-wen-ti/" target="_blank" rel="external">http://www.jackpu.com/qian-duan-mian-shi-zhong-de-chang-jian-de-suan-fa-wen-ti/</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/09/19/algorithm/" class="archive-article-date">
-  	<time datetime="2016-09-19T06:59:13.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-19</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-jszhengze" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/29/jszhengze/">jszhengze</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><h2 id="正则表达式-语法"><a href="#正则表达式-语法" class="headerlink" title="正则表达式 - 语法"></a>正则表达式 - <code>语法</code></h2><p><code>正则表达式</code>(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。</p>
-<ul>
-<li>列目录时，　dir <em>.txt或ls </em>.txt中的<em>.txt就不是一个正则表达式,因为这里</em>与正则式的*的含义是不同的。</li>
-<li>构造正则表达式的方法和创建数学表达式的方法一样。也就是用多种元字符与运算符可以将小的表达式结合在一起来创建更大的表达式。正则表达式的组件可以是单个的字符、字符集合、字符范围、字符间的选择或者所有这些组件的任意组合。</li>
-</ul>
-<p>正则表达式是由普通字符（例如字符 a 到 z）以及特殊字符（称为”元字符”）组成的文字模式。模式描述在搜索文本时要匹配的一个或多个字符串。正则表达式作为一个模板，将某个字符模式与所搜索的字符串进行匹配。</p>
-<h3 id="普通字符"><a href="#普通字符" class="headerlink" title="普通字符"></a>普通字符</h3><p>普通字符包括没有显式指定为元字符的所有可打印和不可打印字符。这包括所有大写和小写字母、所有数字、所有标点符号和一些其他符号。</p>
-<h3 id="非打印字符"><a href="#非打印字符" class="headerlink" title="非打印字符"></a>非打印字符</h3><p>非打印字符也可以是正则表达式的组成部分。下表列出了表示非打印字符的转义序列：</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>\cx</td>
-<td>匹配由x指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。</td>
-</tr>
-<tr>
-<td>\f</td>
-<td>匹配一个换页符。等价于 \x0c 和 \cL。</td>
-</tr>
-<tr>
-<td>\n</td>
-<td>匹配一个换行符。等价于 \x0a 和 \cJ。</td>
-</tr>
-<tr>
-<td>\r</td>
-<td>匹配一个回车符。等价于 \x0d 和 \cM。</td>
-</tr>
-<tr>
-<td>\s</td>
-<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。</td>
-</tr>
-<tr>
-<td>\S</td>
-<td>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</td>
-</tr>
-<tr>
-<td>\t</td>
-<td>匹配一个制表符。等价于 \x09 和 \cI。</td>
-</tr>
-<tr>
-<td>\v</td>
-<td>匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><p>所谓特殊字符，就是一些有特殊含义的字符，如上面说的”<em>.txt”中的</em>，简单的说就是表示任何字符串的意思。如果要查找文件名中有<em>的文件，则需要对</em>进行转义，即在其前加一个\。ls *.txt。<br>许多元字符要求在试图匹配它们时特别对待。若要匹配这些特殊字符，必须首先使字符”转义”，即，将反斜杠字符 () 放在它们前面。下表列出了正则表达式中的特殊字符：</p>
-<table>
-<thead>
-<tr>
-<th>特别字符</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$</td>
-<td>匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline属性，则 $ 也匹配 ‘\n’ 或 ‘\r’。要匹配 $ 字符本身，请使用 \$。</td>
-</tr>
-<tr>
-<td>( )</td>
-<td>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 ( 和 )。</td>
-</tr>
-<tr>
-<td>*</td>
-<td>匹配前面的子表达式零次或多次。要匹配 <em> 字符，请使用 \</em>。</td>
-</tr>
-<tr>
-<td>+</td>
-<td>匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 +。</td>
-</tr>
-<tr>
-<td>.</td>
-<td>匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 . 。</td>
-</tr>
-<tr>
-<td>[</td>
-<td>标记一个中括号表达式的开始。要匹配 [，请使用 [。</td>
-</tr>
-<tr>
-<td>?</td>
-<td>匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 \?。</td>
-</tr>
-<tr>
-<td>\</td>
-<td>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ‘n’ 匹配字符 ‘n’。’\n’ 匹配换行符。序列 ‘\‘ 匹配 “\”，而 ‘(‘ 则匹配 “(“。</td>
-</tr>
-<tr>
-<td>^</td>
-<td>匹配输入字符串的开始位置，除非在方括号表达式中使用，此时它表示不接受该字符集合。要匹配 ^ 字符本身，请使用 \^。</td>
-</tr>
-<tr>
-<td>{</td>
-<td>标记限定符表达式的开始。要匹配 {，请使用 {。</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>指明两项之间的一个选择。要匹配</td>
-<td>，请使用 \</td>
-<td>。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h3><p>限定符用来指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。有*或+或?或{n}或{n,}或{n,m}共6种。<br>正则表达式的限定符有：</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>*</td>
-<td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
-</tr>
-<tr>
-<td>+</td>
-<td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
-</tr>
-<tr>
-<td>?</td>
-<td>匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 或 “does” 中的”do” 。? 等价于 {0,1}。</td>
-</tr>
-<tr>
-<td>{n}</td>
-<td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
-</tr>
-<tr>
-<td>{n,}</td>
-<td>n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>
-</tr>
-<tr>
-<td>{n,m}</td>
-<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h3><p>定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。<br>定位符用来描述字符串或单词的边界，^和$分别指字符串的开始与结束，\b描述单词的前或后边界，\B表示非单词边界。<br>正则表达式的限定符有：</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>^</td>
-<td>匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配。</td>
-</tr>
-<tr>
-<td>$</td>
-<td>匹配输入字符串结尾的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \n 或 \r 之前的位置匹配。</td>
-</tr>
-<tr>
-<td>\b</td>
-<td>匹配一个字边界，即字与空格间的位置。</td>
-</tr>
-<tr>
-<td>\B</td>
-<td>非字边界匹配。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="正则表达式-运算符优级"><a href="#正则表达式-运算符优级" class="headerlink" title="正则表达式 -运算符优级"></a>正则表达式 -<a href="">运算符优级</a></h2><table>
-<thead>
-<tr>
-<th>字符</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>\</td>
-<td>转义符</td>
-</tr>
-<tr>
-<td>(), (?:), (?=), []</td>
-<td>圆括号和方括号</td>
-</tr>
-<tr>
-<td>*, +, ?, {n}, {n,}, {n,m}</td>
-<td>限定符</td>
-</tr>
-<tr>
-<td>^, $, \任何元字符、任何字符</td>
-<td>定位点和序列（即：位置和顺序）</td>
-</tr>
-<tr>
-<td>(或”</td>
-<td>“)</td>
-<td>替换，”或”操作字符具有高于替换运算符的优先级，使得”m</td>
-<td>food”匹配”m”或”food”。若要匹配”mood”或”food”，请使用括号创建子表达式，从而产生”(m</td>
-<td>f)ood”。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="常见正则表达式"><a href="#常见正则表达式" class="headerlink" title="常见正则表达式:"></a>常见正则表达式:</h2><h3 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h3><hr>
-<p><code>[0-9]+</code></p>
-<p><img src="http://ggbond.qiniudn.com/2016-10-13%2019:35:52.png" alt=""></p>
-<p>###逗号分隔的整数</p>
-<hr>
-<p><code>\b[0-9]{1,3}(,[0-9]{3})*\b</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:40:05.png" alt=""></p>
-<h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><hr>
-<p><code>(\+?(\d+|\.\d+|\d+\.\d+)|-?(\d+|\d+\.\d+))</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:20:37.png" alt=""></p>
-<h3 id="0-255之间的数字"><a href="#0-255之间的数字" class="headerlink" title="0-255之间的数字"></a>0-255之间的数字</h3><hr>
-<p><code>^([0-9]|[0-9]{2}|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</code></p>
-<p><img src="http://ggbond.qiniudn.com/255.png" alt=""></p>
-<h3 id="身份证"><a href="#身份证" class="headerlink" title="身份证"></a>身份证</h3><hr>
-<p><code>^[1-9]\d{14}(\d{2}[0-9x])?$</code></p>
-<p><img src="http://ggbond.qiniudn.com/shenfz.png" alt=""></p>
-<h3 id="邮箱"><a href="#邮箱" class="headerlink" title="邮箱"></a>邮箱</h3><hr>
-<p><code>^[-\w.]{0,64}@([a-zA-Z0-9]{1,63}\.)*[-a-zA-Z0-9]{1,63}$</code><br><img src="http://ggbond.qiniudn.com/email.png" alt=""></p>
-<h3 id="固定电话"><a href="#固定电话" class="headerlink" title="固定电话"></a>固定电话</h3><hr>
-<p><code>(\(?0[1-9]{2,3}\)?-?)?[1-9][0-9]\{6,7}(-[0-9]{1,6})?</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:46:08.png" alt=""></p>
-<h3 id="邮编"><a href="#邮编" class="headerlink" title="邮编"></a>邮编</h3><hr>
-<p><code>[1-9][0-9]{5}</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:47:35.png" alt=""></p>
-<h3 id="ISBN"><a href="#ISBN" class="headerlink" title="ISBN"></a>ISBN</h3><hr>
-<p><code>((ISBN(-13)?:?\s)?97[89][-\s]?[0-9][-\s]?[0-9]{3}[-\s]?[0-9]{5}[-\s]?[0-9]|(ISBN(-10)?:?\s)?[0-9][-\s]?[0-9]{3}[-\s]?[0-9]{5}[-\s]?[0-9x])</code><br><img src="http://ggbond.qiniudn.com/2016-10-13%2019:55:10.png" alt=""></p>
-<h3 id="手机号"><a href="#手机号" class="headerlink" title="手机号"></a>手机号</h3><hr>
-<p><code>(0|\+86)?(13[0-9]|15[0-356]|18[025-9])\d{8}</code><br><img src="http://ggbond.qiniudn.com/tel.png" alt=""></p>
-<h3 id="成对的html-tag"><a href="#成对的html-tag" class="headerlink" title="成对的html tag"></a>成对的html tag</h3><hr>
-<p>如<code>&lt;code&gt;test&lt;/code&gt;</code><br><code>&lt;([^&gt;]+)&gt;[\s\S]*?&lt;\/\1&gt;</code><br><img src="http://ggbond.qiniudn.com/tag.png" alt=""></p>
-<h3 id="a"><a href="#a" class="headerlink" title="a"></a>a</h3><hr>
-<p><code>&lt;a\s+href\s*=\s*[&quot;&#39;]?([^&quot;&#39;\s]+)[&quot;&#39;]?&gt;([^&lt;]+)&lt;\/a&gt;</code><br><img src="http://ggbond.qiniudn.com/a.png" alt=""></p>
-<h3 id="head"><a href="#head" class="headerlink" title="head"></a>head</h3><hr>
-<p><code>&lt;head&gt;([^&gt;]+)&lt;\/head&gt;</code><br><img src="http://ggbond.qiniudn.com/head.png" alt=""></p>
-<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><hr>
-<p><code>&lt;img\s[^&gt;]*?src=[&#39;&quot;]?([^&quot;&#39;]+)[&quot;&#39;]?[^&gt;]*&gt;</code><br><img src="http://ggbond.qiniudn.com/img11.png" alt=""></p>
-<p>附：正则指引思维导图<br><img src="http://ggbond.qiniudn.com/%E6%AD%A3%E5%88%99%E6%8C%87%E5%BC%95.png" alt=""></p>
-<p>参考文档：<a href="http://www.lixuejiang.me/2016/10/13/%E5%B8%B8%E8%A7%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_blank" rel="external">http://www.lixuejiang.me/2016/10/13/%E5%B8%B8%E8%A7%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</a></p>
-<p><a href="http://www.runoob.com/regexp/regexp-tutorial.html" target="_blank" rel="external">http://www.runoob.com/regexp/regexp-tutorial.html</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/08/29/jszhengze/" class="archive-article-date">
-  	<time datetime="2016-08-29T11:52:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-29</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-nodeHeartModule" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/18/nodeHeartModule/">nodeHeartModule</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Node-js-手册查询-1-核心模块方法"><a href="#Node-js-手册查询-1-核心模块方法" class="headerlink" title="Node.js 手册查询-1-核心模块方法"></a>Node.js 手册查询-1-核心模块方法</h1><h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><h3 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h3><p>核心模块是被编译成二进制代码，引用的时候只需require表示符即可</p>
-<h4 id="os-系统基本信息"><a href="#os-系统基本信息" class="headerlink" title="os 系统基本信息"></a>os 系统基本信息</h4><p>os模块可提供操作系统的一些基本信息</p>
-<p>1.返回系统临时目录</p>
-<pre><code> os.tmpdir()
-结果如: C:\Users\ADMINI~1\AppData\Local\Temp
-</code></pre><p>2.返回 CPU 的字节序，可能的是 “BE” 或 “LE”</p>
-<pre><code> os.endianness()
-结果如: LE   (inter i3)
-</code></pre><p>3.返回操作系统的主机名</p>
-<pre><code> os.hostname()
-结果如: QH-20141006HJKT
-</code></pre><p>4.返回操作系统名称</p>
-<pre><code> os.type()
-结果如: Windows_NT
-</code></pre><p>5.返回操作系统平台</p>
-<pre><code> os.platform()
-结果如: win32
-</code></pre><p>6.返回操作系统 CPU 架构，可能的值有 “x64”、“arm” 和 “ia32”</p>
-<pre><code> os.arch()
-结果如: x64
-</code></pre><p>7.返回操作系统的发行版本</p>
-<pre><code> os.release()
-结果如: 6.1.7601
-</code></pre><p>8.返回操作系统运行的时间，以秒为单位</p>
-<pre><code> os.uptime()
-结果如: 7847.6797442
-</code></pre><p>9.返回一个包含 1、5、15 分钟平均负载的数组</p>
-<pre><code> os.loadavg()
-结果如: 6.1.7601
-</code></pre><p>10.返回系统内存总量，单位为字节</p>
-<pre><code>os.totalmem()
-结果如: 3931602944
-</code></pre><p>11.返回操作系统空闲内存量，单位是字节</p>
-<pre><code> os.freemem()
-结果如: 1307422720
-</code></pre><p>12.返回一个对象数组，包含所安装的每个 CPU/内核的信息：型号、速度（单位 MHz）、时间（一个包含 user、nice、sys、idle 和 irq 所使用 CPU/内核毫秒数的对象）</p>
-<pre><code>os.cpus()
-</code></pre><p>13.获取网络接口的一个列表信息</p>
-<pre><code> os.networkInterfaces()
-结果如: 1307422720
-</code></pre><p>14.一个定义了操作系统的一行结束的标识的常量</p>
-<pre><code>os.EOL
-</code></pre><h4 id="process-进程管理"><a href="#process-进程管理" class="headerlink" title="process 进程管理"></a>process 进程管理</h4><p>process 是一个全局变量.无需 require;</p>
-<p>1.返回应用程序当前目录</p>
-<pre><code> process.cwd()
-结果如: c:\Users\Administrator\MongoDb_Test
-</code></pre><p>2.改变应用程序目录</p>
-<pre><code>process.chdir(“目录”)
-</code></pre><p>3.标准输出流.将内容打印到输出设备上.console.log就是封装了它</p>
-<pre><code>process.stdout.write(‘aa\n’)
-结果如: aa
-</code></pre><p>4.标准错误流</p>
-<pre><code> process.stderr.write(‘aa\n’)
-结果如: aa
-</code></pre><p>5.进程的输入流. 通过注册事件的方式来获取输入的内容</p>
-<pre><code> process.stdin.on(‘readable’, function() {
-var chunk = process.stdin.read();
-if (chunk !== null) {
-process.stdout.write(&apos;data: ’ + chunk);
-}
-});
-</code></pre><p>6.结束进程</p>
-<pre><code> process.exit(code);
-参数code为退出后返回的代码，如果省略则默认返回0
-</code></pre><p>7.注册事件</p>
-<pre><code> process.stdout.on(‘data’,function(data){
-console.log(data);
-});
-</code></pre><p>8.为事件循环设置一项任务,Node.js 会在下次事件循环调响应时调用 callback</p>
-<pre><code>process.nextTick(callback)
-</code></pre><p>8.设置编码, 默认 utf8. node.js编码格式只支持UTF8、ascii、base64，暂时不支持GBK、gb2312</p>
-<pre><code> process.stdin.setEncoding(编码);
-process.stdout.setEncoding(编码);
-process.stderr.setEncoding(编码);
-</code></pre><h4 id="fs-文件管理"><a href="#fs-文件管理" class="headerlink" title="fs 文件管理"></a>fs 文件管理</h4><p>fs 模块提供了异步和同步2个版本     fs.readFile()    fs.readFileSync()</p>
-<p>1.写入文件内容</p>
-<pre><code>fs.writeFile(‘test.txt’, ‘Hello Node’ , [encoding], [callback]);
-</code></pre><p>2.追加写入</p>
-<pre><code>fs.appendFile(‘test.txt’,‘Hello Node’,[encoding],[callback]);
-</code></pre><p>3.文件是否存在</p>
-<pre><code>fs.exists(‘test.txt’,[callback]);
-</code></pre><p>4.修改文件名</p>
-<pre><code>fs.rename(旧文件,新文件,[callback]);
-</code></pre><p>5.移动文件. 没有专门函数,通过修改文件名可以达到目的</p>
-<pre><code>fs.rename(oldPath,newPath,[callback]);
-</code></pre><p>6.读取文件内容</p>
-<pre><code>fs.readFile(‘test.txt’, [encoding], [callback]);
-</code></pre><p>7.删除文件</p>
-<pre><code>fs.unlink(‘test.txt’, [callback]);
-</code></pre><p>8.创建目录</p>
-<pre><code> fs.mkdir(路径, 权限, [callback]);
-路径：新创建的目录。
-权限：可选参数，只在linux下有效，表示目录的权限，默认为0777，    表示文件所有者、文件所有者所在的组的*用户、*所有用户，都有权限进行读、写、执行的操作。
-</code></pre><p>9.删除目录</p>
-<pre><code>fs.rmdir(path, [callback]);
-</code></pre><p>10.读取目录. 读取到指定目录下所有的文件</p>
-<pre><code>fs.readdir(path, [callback]);
-</code></pre><p>11.打开文件</p>
-<pre><code>fs.open(path,flags, [mode], [callback(err,fd)])
-</code></pre><p>12.关闭文件</p>
-<pre><code> fs.close(fd, [callback(err)])
-fd 是打开文件后的标示符
-</code></pre><p>13.读取文件</p>
-<pre><code>fs.read(fd,buffer,offset,length,position,[callback(err, bytesRead, buffer)])
-</code></pre><p>14.写入文件</p>
-<pre><code>fs.writeFile(filename, data,[encoding],[callback(err)])
-</code></pre><p>15.获取真实路径</p>
-<pre><code>fs.realpath(path, [callback(err,resolvedPath)])
-</code></pre><p>16.更改所有权</p>
-<pre><code>fs.chown(path, uid, gid, [callback(err)])
-</code></pre><p>17.更改权限</p>
-<pre><code>fs.fchmod(fd, mode, [callback(err)])
-</code></pre><p>18.获取文件信息</p>
-<pre><code>fs.stat(path, [callback(err, stats)])
-</code></pre><p>19.创建硬链接</p>
-<pre><code>fs.link(srcpath, dstpath, [callback(err)])
-</code></pre><p>20.读取链接</p>
-<pre><code>fs.readlink(path, [callback(err,linkString)])
-</code></pre><p>21.修改文件时间戳</p>
-<pre><code>fs.utimes(path, atime, mtime, [callback(err)])
-</code></pre><p>22.同步磁盘缓存</p>
-<pre><code>fs.fsync(fd, [callback(err)])
-</code></pre><h5 id="url-文件管理"><a href="#url-文件管理" class="headerlink" title="url 文件管理"></a>url 文件管理</h5><p>1.解析url，返回一个json格式的数组</p>
-<pre><code> url.parse(‘http://www.baidu.com’);
-结果如: { protocol: ‘http:’,
-slashes: null,
-auth: null,
-host: null,
-port: null,
-hostname: null,
-hash: null,
-search: null,
-query: null,
-pathname: ‘www.baidu.com’,
-path: ‘www.baidu.com’,
-href: ‘http://www.baidu.com’ }
-</code></pre><p>2.解析url - 条件解析</p>
-<pre><code> url.parse(‘http://www.baidu.com?page=1’,true);
-结果如: { protocol: ‘http:’,
-slashes: true,
-auth: null,
-host: ‘www.baidu.com’,
-port: null,
-hostname: ‘www.baidu.com’,
-hash: null,
-search: ‘?page=1’,
-query: { page: ‘1’ },
-pathname: ‘/’,
-path: ‘/?page=1’,
-href: ‘http://www.baidu.com/?page=1’ }
-</code></pre><p>3.解析主机</p>
-<pre><code> url.parse(‘http://www.baidu.com/news’,false,true);
-结果如:{ protocol: ‘http:’,
-slashes: true,
-auth: null,
-host: ‘www.baidu.com’,
-port: null,
-hostname: ‘www.baidu.com’,
-hash: null,
-search: null,
-query: null,
-pathname: ‘/news’,
-    path: ‘/news’,
-href: ‘http://www.baidu.com/news’ }
-</code></pre><p>4.格式化为url. 将json数组逆向成url</p>
-<pre><code> url.format({
-protocol: ‘http:’,
-hostname:‘www.baidu.com’,
-port:‘80’,
-pathname :’/news’,
-query:{page:1}
-});
-结果如: http://www.baidu.com/news?page=1
-</code></pre><p>5.封装路径</p>
-<pre><code> url.resolve(‘http://example.com/’, ‘/one’)  // &apos;http://example.com/one’
-url.resolve(‘http://example.com/one’, ‘/two’) // ‘http://example.com/two’
-</code></pre><h5 id="path-路径管理"><a href="#path-路径管理" class="headerlink" title="path 路径管理"></a>path 路径管理</h5><p>用于处理和转换文件路径的工具集,用于处理目录的对象</p>
-<p>1.格式化路径. 将不符合规范的路径经过格式化转换为标准路径,解析路径中的.与…外，还能去掉多余的斜杠</p>
-<pre><code> path.normalize(’/path///normalize/hi/…’);
-结果如: ‘/path/normalize/’ 标准化之后的路径里的斜杠在Windows系统下是，而在Linux系统下是/
-</code></pre><p>2.组合路径</p>
-<pre><code>path.join(’///you’, ‘/are’, ‘//beautiful’);
-结果如:  ‘/you/are/beautiful’
-</code></pre><p>3.返回路径中的目录名</p>
-<pre><code> path.dirname(’/foo/strong/cool/nice’);
-结果如: ‘/foo/strong/cool’
-</code></pre><p>4.返回路径最后一部分,还可以排除指定字符串</p>
-<pre><code> path.basename(’/foo/strong/basename/index.html’);
-path.basename(’/foo/strong/basename/index.html’,’.html’);
-结果如: index.html 和 index
-</code></pre><p>5.返回路径后缀</p>
-<pre><code> path.extname(‘index.html’);
-结果如: .html
-</code></pre><h4 id="Query-String-字符串转换"><a href="#Query-String-字符串转换" class="headerlink" title="Query String 字符串转换"></a>Query String 字符串转换</h4><p>用于实现URL参数字符串与参数对象之间的互相转换</p>
-<p>1.序列化对象.将对象类型转换成一个字符串类型（默认的分割符（“&amp;”）和分配符（“=”））</p>
-<pre><code> 1 querystring.stringify({foo:‘bar’,cool:[‘xux’, ‘yys’]});
-结果如: foo=bar&amp;cool=xux&amp;cool=yys
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2 重载1: querystring.stringify(&#123;foo:‘bar’,cool:[‘xux’, ‘yys’]&#125;,’*’,’$’);</div><div class="line">结果如: foo$bar*cool$xux*cool$yys</div></pre></td></tr></table></figure>
-<p>2.反序列化</p>
-<pre><code>querystring.parse(‘foo@bar$cool@xux$cool@yys’,’@’,’$’);
-结果如: { foo: ‘bar’ ,  cool: [‘xux’, ‘yys’] }
-</code></pre><h4 id="util-使用工具"><a href="#util-使用工具" class="headerlink" title="util 使用工具"></a>util 使用工具</h4><p>提供常用函数的集合，用于弥补核心JavaScript的一些功能过于精简的不足。并且还提供了一系列常用工具，用来对数据的输出和验证</p>
-<p>1.任意对象转化为字符串,用于调试输出</p>
-<pre><code>util.inspect(object,[showHidden],[depth],[colors])
-</code></pre><p>2.格式化字符串. 就像c语言的 printf函数<br>支持的占位符有：“%s(字符串)”、“%d(数字&lt;整型和浮点型&gt;)”、“%j(JSON)”、“%(单独一个百分号则不作为一个参数)”</p>
-<pre><code> util.format(’%s:%s’, ‘foo’);
-结果如: foo:%s
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">util.format(’%s:%s’, ‘foo’, ‘bar’, ‘baz’);</div><div class="line">结果如: foo:bar baz 额外的参数将会调用util.inspect()转换为	字符串连接在一起</div></pre></td></tr></table></figure>
-<pre><code>util.format(1, 2, 3);
-结果如: 1 2 3 , 第一个参数是一个非格式化字符串，则会把所有的参数转成字符串并以空格隔开拼接在一块
-</code></pre><p>3.验证函数</p>
-<pre><code> util.isArray(object);
-判断对象是否为数组类型，是则返回ture,否则为false
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">util.isDate(object);</div><div class="line">判断对象是否为日期类型，是则返回ture,否则返回false</div></pre></td></tr></table></figure>
-<pre><code>util.isRegExp(object);
-判断对象是否为正则类型，是则返回ture,否则返回false
-,util.isArray()、util.isRegExp()、util.isDate()、util.isError()  util.format()、util. debug()
-</code></pre><p>4.继承</p>
-<pre><code> util.inherits( 子类, 基类)
-实现对象间原型继承
-
-child_process 子进程
-</code></pre><p>node.js是基于单线程模型架构，这样的设计可以带来高效的CPU利用率，但是无法却利用多个核心的CPU，为了解决这个问题，node.js提供了child_process模块，通过多进程来实现对多核CPU的利用. child_process模块提供了四个创建子进程的函数，分别是spawn，exec，execFile和fork</p>
-<p>1.用给定的命令发布一个子进程，带有‘args’命令行参数</p>
-<pre><code> child_process.spawn(command, [args], [options])
-command {String}要运行的命令行
-args {Array} 字符串参数列表
-options {Object}
-cwd {String} 子进程的当前的工作目录
-stdio {Array|String} 子进程 stdio 配置. (参阅下文)
-customFds {Array} Deprecated 作为子进程 stdio 使用的 文件标示符. (参阅下文)
-env {Object} 环境变量的键值对
-detached {Boolean} 子进程将会变成一个进程组的领导者. (参阅下文)
-uid {Number} 设置用户进程的ID. (See setuid(2).)
-gid {Number} 设置进程组的ID. (See setgid(2).)
-返回: {ChildProcess object}
-</code></pre><p>2.创建子进程</p>
-<pre><code>child_process.exec(command, [options], callback)
-</code></pre><p>3.创建进程 - 直接运行指定文件</p>
-<pre><code>child_process.execFile( file);
-</code></pre><p>4.直接运行Node.js模块</p>
-<pre><code> child_process.fork( modulePath );
-fork函数只支持运行JavaScript代码
-</code></pre><h4 id="http-HTTP"><a href="#http-HTTP" class="headerlink" title="http HTTP"></a>http HTTP</h4><p>2个方法</p>
-<pre><code> http.createServer([requestListener])  创建HTTP服务器
-http.createClient([port], [host])     创建HTTP客户端
-</code></pre><h5 id="http-Server"><a href="#http-Server" class="headerlink" title="http.Server"></a>http.Server</h5><p>由 http.createServer 创建所返回的实例</p>
-<h5 id="http-Server-事件"><a href="#http-Server-事件" class="headerlink" title="http.Server 事件"></a>http.Server 事件</h5><p>request 客户端请求到来<br>提供2个参数: req, res  分别是http.ServerRequest 和  http.ServerResponse  的实例.表示请求和响应消息</p>
-<p>connection TCP建立连接时触发<br>提供1个 socket 参数 net.Socket 实例</p>
-<p>close 服务器关闭时触发<br>无参数</p>
-<p>还有checkContinue 、 upgrade 、 clientError 等事件. request 经常使用,所以包含在了 createServer函数中</p>
-<h5 id="http-ServerRequest-对象"><a href="#http-ServerRequest-对象" class="headerlink" title="http.ServerRequest 对象"></a>http.ServerRequest 对象</h5><p>HTTP请求的消息, 一般由 http.Server的 request 事件发送</p>
-<h5 id="属性"><a href="#属性" class="headerlink" title="属性:"></a>属性:</h5><p>complete          客户端请求是否已经发送完成</p>
-<p>httpVersion      HTTP 协议版本，通常是 1.0 或 1.1</p>
-<p>method          HTTP 请求方法，如 GET、POST、PUT、DELETE 等</p>
-<p>url              原始的请求路径，例如 /static/image/x.jpg 或 /user?name=byvoid</p>
-<p>headers          HTTP 请求头</p>
-<p>trailers          HTTP 请求尾（不常见）</p>
-<p>connection      当前 HTTP 连接套接字，为 net.Socket 的实例</p>
-<p>socket          connection 属性的别名</p>
-<p>client          client 属性的别名</p>
-<h5 id="GET"><a href="#GET" class="headerlink" title="GET:"></a>GET:</h5><p>的请求是直接嵌入路径中的. 解析?后面的路径就行了.  url 模块中  parse 函数提供了这个功能</p>
-<h5 id="POST"><a href="#POST" class="headerlink" title="POST:"></a>POST:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">**HTTP 请求分: 请求头.  请求体**</div><div class="line">http.ServerRequest 提供3个事件控制请求体传输</div><div class="line">data:	请求体数据来到时. 参数 chunk 表示接收到的数据</div><div class="line">end:	请求体数据传输完成时</div><div class="line">close	用户当前请求结束时</div></pre></td></tr></table></figure>
-<pre><code>var post = &apos;&apos;;
-req.on(&apos;data&apos;, function(chunk) {    post += chunk;    });
-req.on(&apos;end&apos;, function() {    post = querystring.parse(post);
-res.end(util.inspect(post));});
-</code></pre><h5 id="http-ServerResponse-对象"><a href="#http-ServerResponse-对象" class="headerlink" title="http.ServerResponse 对象"></a>http.ServerResponse 对象</h5><p>http.ServerResponse是返回给客户端的信息,决定了用户最终看到的结果. 有3个重要的成员函数. 用于响应头,响应内容以及结束请求</p>
-<p>1.向客户端发送响应头</p>
-<pre><code> res.writeHead(statusCode, [headers])
-statusCode, 是HTTP状态码. 如200,404.
-
-headers 类似数组的对象,表示响应头的每个属性
-{
-“Content-Type”: “text/html”,
-“Connection”: “keep-alive”
-}
-</code></pre><p>2.发送响应内容, 如果是字符串,需要制定编码方式, 默认 utf-8</p>
-<pre><code>res.write(data, [encoding])
-</code></pre><p>3.结束响应,告知客户端所有响应完成. 此函数必须调用一次</p>
-<pre><code>res.end([data] , [encoding] )
-</code></pre><h4 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h4><p>文件模块，则是指js文件、json文件或者是.node文件</p>
-<h6 id="无"><a href="#无" class="headerlink" title="无"></a>无</h6><h3 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h3><h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><p>挂接模块</p>
-<pre><code>var EventEmitter = require(‘events’).EventEmitter;
-</code></pre><p>1.实例化一个EventEmitter对象</p>
-<pre><code>var event = new EventEmitter();
-</code></pre><p>2.注册事件</p>
-<pre><code> emitter.on( ‘Event_Name’ , callBack_Fun )
-emitter.once( ‘Event_Name’ , callBack_Fun )    //注册一个单次监听器,触发一次后立刻解除
-</code></pre><p>3.发射事件</p>
-<pre><code>event.emit(‘Event_Name’ , 参数1,参数2);
-</code></pre><p>4.移除事件</p>
-<pre><code> emitter…removeListener(‘Event_Name’ , callBack_Fun)
-emitter.removeAllListeners(  [‘Event_Name’] )    //如果指定了事件名,就移除指定的,否则移除所有事件
-</code></pre><h4 id="模块和包"><a href="#模块和包" class="headerlink" title="模块和包"></a>模块和包</h4><pre><code>Node.js 的模块和包机制的实现参照了 CommonJS 的标准，但并未完全遵循。
-
-#### 包
-包是在模块基础上更深一步的抽象, 类似于 c/c++ 的函数库.
-Node.js 包是一个目录. 其中包含一个JSON格式的说明文件     package.json
-CommonJS 规范特征:
--&gt;   package.json 必须在包的顶层目录下
--&gt;   二进制文件在bin目录下
--&gt;   JavaScript代码在lib目录下
--&gt;   文档应该在doc目录下
--&gt;   单元测试在test目录下
-
-
-
-
-#### require(&apos;Modile_Name&apos;)     
-功能:    加载其他模块
-说明:    不会重复加载以加载的模块
-
-
-#### exports.setName
-功能:    公开一个模块中的函数或对象
-说明:    exports 本身仅仅是一个普通的空对象，即 {}. 所以     exports.函数  就是给它加了函数
-module.exports  则是用一个对象取代 exports  对象. (不可以对 exports 直接赋值替代此功能)
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">方式1:</div><div class="line">	//使用</div><div class="line">	exports.SayName = function(thyName) &#123;console.log(thyName)&#125;; </div><div class="line">	//调用</div><div class="line">	var test = require(&apos;./fileName&apos;);</div><div class="line">	test.SayName(&apos;XueYou&apos;);</div><div class="line"></div><div class="line">方式2:</div><div class="line">	//使用</div><div class="line">	function hello()&#123;</div><div class="line">	 	var name;</div><div class="line">		this.setNam()&#123;&#125;;</div><div class="line">		this.SayName()&#123;&#125;;</div><div class="line">	&#125;</div><div class="line">	module.exports = hello;</div><div class="line">	//调用</div><div class="line">	var test = require(&apos;./fileName&apos;);</div><div class="line">	test = new test();	//注意因为是对象,所以要new</div><div class="line">	test.SayName();</div></pre></td></tr></table></figure>
-<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><h5 id="express-与-webstorm-配置"><a href="#express-与-webstorm-配置" class="headerlink" title="express 与 webstorm 配置"></a>express 与 webstorm 配置</h5><p>Node interpreter : node.exe 路径<br>Node parameters  : ./bin/www<br>Working directory : 工作目录<br>JavaScript file  :  app.js</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/08/18/nodeHeartModule/" class="archive-article-date">
-  	<time datetime="2016-08-18T11:56:36.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-mongoose" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/18/mongoose/">mongoose</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="mongo"><a href="#mongo" class="headerlink" title="mongo"></a>mongo</h1><h2 id="Mongoose全面理解"><a href="#Mongoose全面理解" class="headerlink" title="Mongoose全面理解"></a>Mongoose全面理解</h2><h3 id="一、创建schemas"><a href="#一、创建schemas" class="headerlink" title="一、创建schemas"></a>一、创建schemas</h3><p>创建schemas的方式：</p>
-<pre><code>var userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-       createdOn: Date
-});
-</code></pre><p>schemas中的数据类型有以下几种：</p>
-<ul>
-<li>String</li>
-<li>Number</li>
-<li>Date</li>
-<li>Boolean</li>
-<li>Buffer</li>
-<li>ObjectId</li>
-<li>Mixed</li>
-<li>Array</li>
-</ul>
-<p>特别需要说明一下ObjectId类型和Mixed类型以及Array类型，在schemas中声明这几种类型的方式如下：</p>
-<pre><code>1 //ObjectId就类似于唯一键值
- 2 projectSchema.add({
-3     owner: mongoose.Schema.Types.ObjectId
-4 });
- 5 //混合类型，顾名思义，就是说里面可以放置任意类型的数据，有两种方式创建该类型数据
-6 //方式一：直接赋予一个空的字面量对象
-7 vardjSchema= new mongoose.Schema({
-8     mixedUp: {}
-9 });
-10 //方式二：根据Schemas.Types中值来赋予
-11 vardjSchema= new mongoose.Schema({
-12     mixedUp: Schema.Types.Mixed
-13 });
-14 //Array类型数据有两种创建方式，一种是简单数组创建：
-15 var userSchema = new mongoose.Schema({
-16     name: String,
-17     emailAddresses: [String]
-18 });
-19 //第二种方式就是复杂类型数据数组，例如我们可以再数组中添加不同类型的schemas:
-20 var emailSchema = new mongoose.Schema({
-21     email: String,
-22     verified: Boolean
-23 });
-24 var userSchema = new mongoose.Schema({
-25     name: String,
-26     emailAddresses: [emailSchema]
-27 });
-28 //注意：如果定义一个空的数据的话，则会创建为一个混合类型数据的数组：
-29 var emailSchema = new mongoose.Schema({
-30     email: String,
-31     verified: Boolean
-32 });
-33 var userSchema = new mongoose.Schema({
-34     name: String,
-35     emailAddresses: [emailSchema]
-36 });
-</code></pre><p>我们可以给schema创建静态方法，这个静态方法将来会用在Model中，创建该静态方法需要在创建完成schema之后，在Model编译之前：</p>
-<pre><code>1 projectSchema.statics.findByUserID = function (userid, callback) {
-2   this.find({ createdBy: userid }, &apos;_id projectName&apos;, {sort: &apos;modifiedOn&apos;}, callback);
-3 };
-</code></pre><p>在其对应的模型创建完成并编译后，我们就可以像下面这样来调用该静态方法了：<br>Model.findByUserID(userid,callback);<br>该静态方法会返回一个JSON格式的数据，这在我们使用AJAX技术来加载网页数据的时候会比较方便，就像下面这样：</p>
-<pre><code> 1 //路由规则：app.get(&apos;/project/byuser/:userid&apos;, project.byUser);
- 2 exports.byUser = function (req, res) {
- 3     console.log(&quot;Getting user projects&quot;);
- 4     if (req.params.userid){
- 5         Project.findByUserID(req.params.userid,function (err, projects) {
- 6             if(!err){
- 7                 console.log(projects);
- 8                 res.json(projects);
- 9             }else{
-10                 console.log(err);
-11                 res.json({&quot;status&quot;:&quot;error&quot;, &quot;error&quot;:&quot;Error finding projects&quot;});
-12             }
-13         });
-14     }else{
-15         console.log(&quot;No user id supplied&quot;);
-16         res.json({&quot;status&quot;:&quot;error&quot;, &quot;error&quot;:&quot;No user     id supplied&quot;});
-17     }
-18 };
-</code></pre><h3 id="二、创建Model"><a href="#二、创建Model" class="headerlink" title="二、创建Model"></a>二、创建Model</h3><p>创建Model很简单：</p>
-<p>Mongoose.Model(‘User’, userSchema);</p>
-<p>参数一为Model的名字，参数二为生成Model所需要的schema,Model就像是schema所编译而成的一样。</p>
-<p>mongoose连接数据库是有两种方式的：</p>
-<pre><code> 1 //方式一：
- 2 var dbURI = &apos;mongodb://localhost/mydatabase&apos;;
- 3 mongoose.connect(dbURI);
- 4 //方式二：
-5 var dbURI = &apos;mongodb://localhost/myadmindatabase&apos;;
-6 var adminConnection = mongoose.createConnection(dbURI);
-7 //如果需要声明端口号：
- 8 var dbURI = &apos;mongodb://localhost:27018/mydatabase&apos;;
- 9 //如果需要定义用户名和密码：
-10 var dbURI = &apos;mongodb://username:password@localhost/mydatabase&apos;;
-11 //也可以像下面这样传一个对象类型的参数：
-12 var dbURI = &apos;mongodb://localhost/mydatabase&apos;;
-13 var dbOptions = {&apos;user&apos;:&apos;db_username&apos;,&apos;pass&apos;:&apos;db_password&apos;};
-14 mongoose.connect(dbURI, dbOptions);
-</code></pre><p>根据连接数据库的方式，我们可以得到第二种创建Model的方式，就是使用数据库连接的引用名来创建：</p>
-<p>adminConnection.model( ‘User’, userSchema );</p>
-<p>默认情况下mongoose会根据我们传入的Model名字来生成collection名字，在上面的代码中就会生成名为users(全为小写字母)的collection(集合)；</p>
-<p>有两种方法能让我们自定义collection的名字。</p>
-<pre><code> 1 //方式一，在创建schema的时候定义collection的名字：
- 2 var userSchema = new mongoose.Schema({
- 3     name: String,
- 4     email: {type: String, unique:true}
- 5 },
- 6 {
- 7     collection: &apos;myuserlist&apos;
- 8 });
- 9 //方式二，在创建Model的时候定义collection的名字：
-10 mongoose.model( &apos;User&apos;, userSchema, &apos;myuserlist&apos; );
-</code></pre><p>创建Model实例：</p>
-<p>var user = new User({ name: ‘Simon’ });</p>
-<p>user就是模型User的一个实例，它具有mongoose中模型所具有的一些方法，例如保存实例：</p>
-<pre><code>1 user.save(function (err) {
-2     if (err) return handleError(err);
-3 });
-</code></pre><p>模型也具有一些常用的增删查改的方法：</p>
-<pre><code> 1 User.findOne({&apos;name&apos; : &apos;Sally&apos;, function(err,user) {
- 2     if(!err){
- 3         console.log(user);
- 4     }
- 5 });
- 6 User.find({}, function(err, users) {
- 7     if(!err){
- 8         console.log(users);
- 9     }
-10 });
-</code></pre><p>可以使用链式方式使用这些方法，例如：</p>
-<pre><code>1 var newUser = new User({
-2     name: &apos;Simon Holmes&apos;,
-3     email: &apos;simon@theholmesoffice.com&apos;,
-4     lastLogin : Date.now()
-5 }).save( function( err ){
-6     if(!err){
-7         console.log(&apos;User saved!&apos;);
-8     }
-9 });
-</code></pre><p>上面的代码创建了一个模型实例，然后进行保存。我们有一个更为简介的方式来完成这项工作，就是使用Model.create()方法：</p>
-<pre><code>1 User.create({
- 2     name: &apos;Simon Holmes&apos;,
- 3     email: &apos;simon@theholmesoffice.com&apos;,
- 4     lastLogin : Date.now()
- 5 }, function( err, user ){
- 6     if(!err){
- 7         console.log(&apos;User saved!&apos;);
- 8         console.log(&apos;Saved user name: &apos; + user.name);
- 9         console.log(&apos;_id of saved user: &apos; + user._id);
-10     }
-11 });
-</code></pre><h3 id="三、查找数据和读取数据的方法"><a href="#三、查找数据和读取数据的方法" class="headerlink" title="三、查找数据和读取数据的方法"></a>三、查找数据和读取数据的方法</h3><h4 id="1-使用QueryBuilder接口来查找数据"><a href="#1-使用QueryBuilder接口来查找数据" class="headerlink" title="1.使用QueryBuilder接口来查找数据"></a>1.使用QueryBuilder接口来查找数据</h4><p>先看看下面的代码：</p>
-<pre><code>1 var myQuery = User.find({&apos;name&apos; : &apos;Simon Holmes&apos;});
-2 myQuery.where(&apos;age&apos;).gt(18);
-3 myQuery.sort(&apos;-lastLogin&apos;);
-4 myQuery.select(&apos;_id name email&apos;);
-5 myQuery.exec(function (err, users){
-6     if (!err){
-7         console.log(users); // output array of users found
-8     }
-9 });
-</code></pre><p>代码中，我们查找名字为”Simon Holmes”，并且年龄大于18岁，查找结果根据lastLogin降序排列，只获取其中的_id, name, email三个字段的值，上面的代码只有在调用exec方法后才真正执行数据库的查询。</p>
-<p>当然我们可以使用链式的方式来改写上面的代码，代码会更加简洁：</p>
-<pre><code>1 User.find({&apos;name&apos; : &apos;Simon Holmes&apos;})
-2 .where(&apos;age&apos;).gt(18)
-3 .sort(&apos;-lastLogin&apos;)
-4 .select(&apos;_id name email&apos;)
-5 .exec(function (err, users){
-6     if (!err){
-7         console.log(users); // output array of users found
-8     }
-9 });
-</code></pre><p>上面代码中的第一行创建了一个queryBuilder.通过使用这个queryBuilder，我们就可以执行一些比较复杂的查找工作，</p>
-<p>在创建完成这个queryBuilder之后，查询操作并没有马上执行，而是待到执行exec方法时才会去执行数据库的查找。</p>
-<p>当然也有另外一种方式能够直接查找数据库的，就是直接在查找方法中添加回调函数，使用方式为：<br>Model.find(conditions, [fields], [options], [callback])</p>
-<p>下面举一个简单例子：</p>
-<pre><code>1 User.find({&apos;name&apos;, &apos;simon holmes&apos;}, function(err, user) {});
-</code></pre><p>另一个稍微复杂的例子：</p>
-<pre><code>1 User.find({&apos;name&apos;, &apos;simon holmes&apos;}, &apos;name email&apos;,function(err, user) {
-2     //console.log(&apos;some thing&apos;);
-3 });
-</code></pre><p>另一个更加复杂的例子，包含查询结果的排序：</p>
-<pre><code>1 User.find({&apos;name&apos; : &apos;Simon Holmes&apos;},
-2     null, // 如果使用null，则会返回所有的字段值
-3     {sort : {lastLogin : -1}}, // 降序排序
-4     function (err, users){
-5         if (!err){console.log(users);}
-6     });
-</code></pre><p>列举几个比较实用的查找方法：</p>
-<pre><code>1 Model.find(query);
-2 Model.findOne(query);//返回查找到的所有实例的第一个
-3 Model.findById(ObjectID);//根据ObjectId查找到唯一实例
-</code></pre><p>例如：</p>
-<pre><code>1 User.findOne({&apos;email&apos; : req.body.Email},
-2 &apos;_id name email&apos;,
-3 function(err, user) {
-4     //todo
-5 });
-</code></pre><h4 id="2-更新数据"><a href="#2-更新数据" class="headerlink" title="2.更新数据"></a>2.更新数据</h4><p>有三种方式来更新数据：</p>
-<p>(1)update(conditions,update,options,callback); </p>
-<p>该方法会匹配到所查找的内容进行更新，不会返回数据；</p>
-<p>(2)findOneAndUpdate(conditions,update,options,callback);</p>
-<p>该方法会根据查找去更新数据库，另外也会返回查找到的并未改变的数据；</p>
-<p>(3)findByIdAndUpdate(conditions,update,options,callback);</p>
-<p>该方法跟上面的findOneAndUpdate方法功能一样，不过他是根据ID来查找</p>
-<p>文档并更新的。</p>
-<p>三个方法都包含四个参数，一下稍微说明一下几个参数的意思：<br>conditions:查询条件</p>
-<p>update:更新的数据对象，是一个包含键值对的对象</p>
-<p>options:是一个声明操作类型的选项，这个参数在下面再详细介绍</p>
-<p>callback:回调函数</p>
-<p>对于options参数，在update方法中和findOneAndUpdate、</p>
-<p>findByIdAndUpdate两个方法中的可选设置是不同的；</p>
-<pre><code>1 //在update方法中，options的可选设置为：
- 2 {
- 3 safe:true|false,  //声明是否返回错误信息，默认true
-4 upsert:false|true, //声明如果查询不到需要更新的数据项，是否需要新插入一条记录，默认false
-5 multi:false|true,  //声明是否可以同时更新多条记录，默认false
-6 strict:true|false  //声明更新的数据中是否可以包含在schema定义之外的字段数据，默认true
- 7 }
- 8 //对于findOneAndUpdate、findByIdAndUpdate这两个方法，他们的options可选设置项为：
-9 {
-10 new:true|false, //声明返回的数据时更新后的该是更新前的，如果为true则返回更新后的，默认true
-11 upsert:false|trure, 
-12 sort:javascriptObject, //如果查询返回多个文档记录，则可以进行排序，在这里是根据传入的javascript object对象进行排序
-13 select:String //这里声明要返回的字段，值是一个字符串
-14 }
-</code></pre><p>下面举个例子：</p>
-<pre><code>User.update({_id:user._id},{$set: {lastLogin: Date.now()}},function(){});
-</code></pre><h4 id="3-数据删除"><a href="#3-数据删除" class="headerlink" title="3.数据删除"></a>3.数据删除</h4><p>跟更新数据一样，也有三种方法给我们删除数据：</p>
-<p>remove();</p>
-<p>findOneAndRemove();</p>
-<p>findByIdAndRemove();</p>
-<p>remove方法有两种使用方式，一种是用在模型上，另一种是用在模型实例上，例如：</p>
-<pre><code> 1 User.remove({ name : /Simon/ } , function (err){
- 2     if (!err){
- 3         // 删除名字中包含simon的所有用户
- 4     }
-5 });
-6 
- 7 User.findOne({ email : &apos;simon@theholmesoffice.com&apos;},function (err,user){
- 8     if (!err){
- 9         user.remove( function(err){
-10             // 删除匹配到该邮箱的第一个用户
-11         });
-12     }
-13 });
-</code></pre><p>接下来看一下findOneAndRemove方法：</p>
-<pre><code>1 User.findOneAndRemove({name : /Simon/},{sort : &apos;lastLogin&apos;, select : &apos;name email&apos;},function (err, user){
-2     if (!err) {
-3         console.log(user.name + &quot; removed&quot;);
-4         // Simon Holmes removed
-5     };
-6 });
-</code></pre><p>另外一个findByIdAndRemove方法则是如出一辙的。<br>    1 User.findByIdAndRemove(req.body._id,function (err, user) {<br>    2     if(err){<br>    3         console.log(err);<br>    4         return;<br>    5     }<br>    6     console.log(“User deleted:”, user);<br>    7 });</p>
-<h3 id="四、数据验证"><a href="#四、数据验证" class="headerlink" title="四、数据验证"></a>四、数据验证</h3><h5 id="1-mongoose内置数据验证"><a href="#1-mongoose内置数据验证" class="headerlink" title="1.mongoose内置数据验证"></a>1.mongoose内置数据验证</h5><p>在mongoose中，数据验证这一层是放在schema中的，mongoose已经帮我们做了很多内置的数据验证，有一些验证是针对某些数据类型的，也有一些是针对所有数据类型的。<br>】<br>能够作用在所有数据类型上的验证有require，意思就是该字段是否是必须的，例如：</p>
-<p>email: { type: String, unique: true, required: true }</p>
-<p>上面的代码就定义了一个email是必须的schema.</p>
-<p>下面再分别介绍一下mongoose内置的一些数据验证类型。</p>
-<p>数字类型schemasType,对于Number类型的数据，具有min,max提供用来界定最大最小值：</p>
-<pre><code>1 var teenSchema = new Schema({
-2     age : {type: Number, min: 13, max:19}
-3 });
-</code></pre><p>字符串类型SchemasType,对于该类型数据，mongoose提供了两种验证器：<br>match:可使用正则表达式来匹配字符串是否符合该正则表达式的规则<br>enum:枚举出字符串可使用的一些值<br>分别举例如下：</p>
-<pre><code>1 var weekdaySchema = new Schema({
-2     day : {type: String, match: /^(mon|tues|wednes|thurs|fri)day$/i}
-3 });
-4 
-5 var weekdays = [&apos;monday&apos;, &apos;tuesday&apos;, &apos;wednesday&apos;, &apos;thursday&apos;,&apos;friday&apos;];
-6 var weekdaySchema = new Schema({
-7     day : {type: String, enum: weekdays}
-8 });
-</code></pre><p>在我们进行一些数据库的时候，如果有错误，可能会返回一些错误信息，这些信息封装在一个对象中，该对象的数据格式大致如下：</p>
-<pre><code>1 { 
-2     message: &apos;Validation failed&apos;,
- 3     name: &apos;ValidationError&apos;,
- 4     errors:{ 
- 5         email:{
- 6             message: &apos;Validator &quot;required&quot; failed for path email&apos;,
- 7             name: &apos;ValidatorError&apos;,
- 8             path: &apos;email&apos;,
- 9             type: &apos;required&apos; 
-10         },
-11         name:{ 
-12             message: &apos;Validator &quot;required&quot; failed for path name&apos;,
-13             name: &apos;ValidatorError&apos;,
-14             path: &apos;name&apos;,
-15             type: &apos;required&apos; 
-16         } 
-17     } 
-18 }
-</code></pre><p>知道该错误信息的具体格式之后，我们可以从中得出我们想要的信息并反馈到控制台。</p>
-<pre><code>1 if(err){
-2     Object.keys(err.errors).forEach(function(key) {
-3         var message = err.errors[key].message;
-4         console.log(&apos;Validation error for &quot;%s&quot;: %s&apos;, key, message);
-5     });
-6 }
-</code></pre><h4 id="2-自定义数据验证"><a href="#2-自定义数据验证" class="headerlink" title="2.自定义数据验证"></a>2.自定义数据验证</h4><p>最简单的自定义数据验证方式就是定义一个数据验证的函数，并将它传递给schema;</p>
-<pre><code>1 var lengthValidator = function(val) {
-2     if (val &amp;&amp; val.length &gt;= 5){
-3         return true;
-4     }
-5     return false;
-6 };
-7 //usage:
-8 name: {type: String, required: true, validate: lengthValidator }
-</code></pre><p>可以看到，我们只需要在schema中添加validate键值对即可，validate对应的值便是我们自定义的验证方法；</p>
-<p>但是该形式的数据验证无法给我们提供完整的错误信息，比如errors信息中返回的type值就会成为undefined;</p>
-<p>在此基础上如果希望错误信息中能返回一个错误描述，那我们可以稍微进行一点修改：</p>
-<pre><code>1 //code 1
-2 validate: { validator: lengthValidator, msg: &apos;Too short&apos; }
-3 
-4 //code 2
-5 var weekdaySchema = new Schema({
-6     day : {type: String, validate: {validator:/^(mon|tues|wednes|thurs|fri)day$/i, msg: &apos;Not a day&apos; }
-7 });
-将validate的值修改为一个对象，并且该对象包含验证器和错误描述。
-</code></pre><p>我们也可以使用另一种方式在写这些验证器，就是将验证器卸载schema外部，例如：</p>
-<pre><code>1 var validateLength = [lengthValidator, &apos;Too short&apos; ];
-2 var validateDay = [/^(mon|tues|wednes|thurs|fri)day$/i, &apos;Not a day&apos; ];
-3 //usage:
-4 name: {type: String, required: true, validate: validateLength }
-5 day : {type: String, validate: validateDay }
-</code></pre><p>眼睛放大，一看再看，确实没错，在validate中我们传入的是一个数组了，而不是原来的对象了。<br>其实就validateLength这个东东来说，他就是一个简写来的，你也可以改成下面这样：</p>
-<pre><code>var validateLength = [
-2     {validator: lengthValidator, msg: &apos;Too short&apos;}
-3 ];
-</code></pre><p>恩，到这里，应该能明白了，将对象改为数组之后，我们便可以传递多个验证器给我们的schema了，的确如此。</p>
-<pre><code>1 var validateUsername = [
-2     {validator: lengthValidator, msg: &apos;Too short&apos;} ,
-3     {validator: /^[a-z]+$/i, msg: &apos;Letters only&apos;}
-4 ];
-</code></pre><p>我们还有另外一种方法给我们的schema提供验证器：</p>
-<pre><code>1 userSchema.path(&apos;name&apos;).validate(lengthValidator, &apos;Too short&apos;);
-2 userSchema.path(&apos;name&apos;).validate(/^[a-z]+$/i, &apos;Letters only&apos;);
-</code></pre><h4 id="摘录至：http-www-cnblogs-com-jayruan-p-5123754-html"><a href="#摘录至：http-www-cnblogs-com-jayruan-p-5123754-html" class="headerlink" title="摘录至：http://www.cnblogs.com/jayruan/p/5123754.html"></a>摘录至：<a href="http://www.cnblogs.com/jayruan/p/5123754.html" target="_blank" rel="external">http://www.cnblogs.com/jayruan/p/5123754.html</a></h4>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/08/18/mongoose/" class="archive-article-date">
-  	<time datetime="2016-08-18T11:11:08.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-18</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-js-screen" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/14/js-screen/">js_screen</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JS-Jquery获取各种屏幕的宽度和高度"><a href="#JS-Jquery获取各种屏幕的宽度和高度" class="headerlink" title="JS,Jquery获取各种屏幕的宽度和高度"></a>JS,Jquery获取各种屏幕的宽度和高度</h1><h2 id="javascript"><a href="#javascript" class="headerlink" title="javascript:"></a>javascript:</h2><pre><code>document.write(
-&quot;屏幕分辨率为：&quot;+screen.width+&quot;*&quot;+screen.height
-+&quot;&lt;br /&gt;&quot;+
-&quot;屏幕可用大小：&quot;+screen.availWidth+&quot;*&quot;+screen.availHeight
-+&quot;&lt;br /&gt;&quot;
-
-网页可见区域宽： document.body.clientWidth
-网页可见区域高： document.body.clientHeight
-网页可见区域宽： document.body.offsetWidth (包括边线的宽)
-网页可见区域高： document.body.offsetHeight (包括边线的高)
-网页正文全文宽： document.body.scrollWidth
-网页正文全文高： document.body.scrollHeight
-网页被卷去的高： document.body.scrollTop
-网页被卷去的左： document.body.scrollLeft
-网页正文部分上： window.screenTop
-网页正文部分左： window.screenLeft
-屏幕分辨率的高： window.screen.height
-屏幕分辨率的宽： window.screen.width
-屏幕可用工作区高度： window.screen.availHeight
-屏幕可用工作区宽度： window.screen.availWidth
-</code></pre><h2 id="juery"><a href="#juery" class="headerlink" title="juery"></a>juery</h2><pre><code>$(document).ready(function(){
-alert($(window).height()); //浏览器当前窗口可视区域高度
-alert($(document).height()); //浏览器当前窗口文档的高度
-alert($(document.body).height());//浏览器当前窗口文档body的高度
-alert($(document.body).outerHeight(true));//浏览器当前窗口文档body的总高度 包括border padding margin
-
-alert($(window).width()); //浏览器当前窗口可视区域宽度
-alert($(document).width());//浏览器当前窗口文档对象宽度
-alert($(document.body).width());//浏览器当前窗口文档body的宽度
-alert($(document.body).outerWidth(true));//浏览器当前窗口文档body的总宽度 包括border padding margin
-
-})
-</code></pre>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/08/14/js-screen/" class="archive-article-date">
-  	<time datetime="2016-08-14T11:14:18.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-08-14</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
